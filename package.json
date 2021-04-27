@@ -13,7 +13,7 @@
   "author": "Wikimedia Foundation",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wikimedia/wikipediapreview-wordpress/issues"
+    "url": "https://phabricator.wikimedia.org/project/profile/4393/"
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
