@@ -8,12 +8,12 @@
 function wikipediapreview_enqueue_scripts() {
     wp_enqueue_script(
         'wikipedia-preview', 
-        plugin_dir_url( __FILE__ ) . 'node_modules/wikipedia-preview/dist/wikipedia-preview.development.js', [], false, true 
+        plugin_dir_url( __FILE__ ) . 'assets/js/wikipedia-preview.production.js', [], false, true 
     );
 
     wp_enqueue_style(
         'wmf-wp-format-css',
-        plugin_dir_url( __FILE__ ) . 'node_modules/wikipedia-preview/dist/wikipedia-preview.css', [], false, true 
+        plugin_dir_url( __FILE__ ) . 'assets/css/wikipedia-preview.css', [], false, true 
     );
 
     wp_enqueue_script( 'wikipedia-preview-init', plugin_dir_url( __FILE__ ) . 'init.js', [], false, true );	
