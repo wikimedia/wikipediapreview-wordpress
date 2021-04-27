@@ -1,0 +1,22 @@
+{
+  "name": "wikipediapreview-wordpress",
+  "version": "1.0.0",
+  "description": "WordPress plugin for Wikipedia Preview",
+  "main": "init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wikimedia/wikipediapreview-wordpress.git"
+  },
+  "author": "Wikimedia Foundation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wikimedia/wikipediapreview-wordpress/issues"
+  },
+  "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
+  "dependencies": {
+    "wikipedia-preview": "^1.1.1"
+  }
+}
