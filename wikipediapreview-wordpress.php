@@ -16,10 +16,15 @@ function wikipediapreview_enqueue_scripts() {
 
 // record the option of detect links feature enabled in this version,
 // detect links feature may disable by default in the next version
-function record_options() {
-    $options = array( 'auto_detects' => true );
-    add_option( 'wikipedia_preview_options', $options );
+function wikipediapreview_detect_true() {
+    add_option( 'wikipediapreview_options_detect_links', true );
 }
 
-add_action( 'init', 'record_options' );
+function wikipediapreview_detect_deletion() {
+    delete_option( 'wikipediapreview_options_detect_links' );
+}
+
+register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
+register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
+register_uninstall_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
