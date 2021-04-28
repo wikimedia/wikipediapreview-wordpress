@@ -1,6 +1,6 @@
 === Wikipedia Preview ===
 Contributors: Wikimedia Foundation
-Donate link: 
+Donate link: https://donate.wikimedia.org/wiki/Ways_to_Give
 Tags: wikipedia, facts, popup, card, wiki
 Stable tag: trunk
 License: MIT
