@@ -5,7 +5,7 @@
  * Version: 0.1.0
  */
 function wikipediapreview_enqueue_scripts() {
-    $assets_dir = plugin_dir_url( __FILE__ ) .'assets/';
+    $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
     
     wp_enqueue_script(
         'wikipedia-preview', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true 
