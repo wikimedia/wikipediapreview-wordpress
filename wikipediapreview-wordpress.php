@@ -4,14 +4,16 @@
  * Description: Add Wikipedia Preview to your articles
  * Version: 0.1.0
  */
-
 function wikipediapreview_enqueue_scripts() {
+    $assets_dir = plugin_dir_url( __FILE__ ) .'assets/';
+    
     wp_enqueue_script(
-        'wikipedia-preview', 
-        plugin_dir_url( __FILE__ ) . 'assets/js/wikipedia-preview.production.js', [], false, true 
+        'wikipedia-preview', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true 
     );
 
-    wp_enqueue_script( 'wikipedia-preview-init', plugin_dir_url( __FILE__ ) . 'init.js', [], false, true );	
+    wp_enqueue_script( 
+        'wikipedia-preview-init', $assets_dir . 'js/init.js', [], false, true 
+    );	
 }
 
 // record the option of detect links feature enabled in this version,
