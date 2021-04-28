@@ -11,11 +11,6 @@ function wikipediapreview_enqueue_scripts() {
         plugin_dir_url( __FILE__ ) . 'assets/js/wikipedia-preview.production.js', [], false, true 
     );
 
-    wp_enqueue_style(
-        'wmf-wp-format-css',
-        plugin_dir_url( __FILE__ ) . 'assets/css/wikipedia-preview.css', [], false, true 
-    );
-
     wp_enqueue_script( 'wikipedia-preview-init', plugin_dir_url( __FILE__ ) . 'init.js', [], false, true );	
 }
 
