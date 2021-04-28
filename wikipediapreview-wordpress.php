@@ -28,5 +28,4 @@ function wikipediapreview_detect_deletion() {
 
 register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
-register_uninstall_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
