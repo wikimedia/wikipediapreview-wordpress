@@ -15,12 +15,16 @@ function wikipediapreview_enqueue_scripts() {
     $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
     
     wp_enqueue_script(
-        'wikipedia-preview', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true 
+        'wikipedia-preview-script', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true 
     );
 
     wp_enqueue_script( 
         'wikipedia-preview-init', $assets_dir . 'js/init.js', [], false, true 
     );	
+
+    wp_enqueue_style(
+        'wikipedia-preview-style', $assets_dir . 'styles/wikipedia-preview.production.css', [], false, 'all'
+    );
 }
 
 // record the option of detect links feature enabled in this version,
