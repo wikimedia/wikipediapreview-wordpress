@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # preparing compiled js and css file
+git submodule update
 cd wikipedia-preview
 git reset --hard
 npm i
