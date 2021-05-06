@@ -12,8 +12,8 @@ sed -i "/import '.*\/style\/.*'/d" src/**/*.js
 npm run build
 
 # compiled css
-sed -i "s/inline-svg( '..\/images\/\(.*\)' )/url( \/wp-content\/plugins\/wikipediapreview-wordpress\/assets\/images\/\1 )/g" style/*.less
-sed -i "s/url( '\(.*\)' )/url( \1 )/g" style/*.less
+sed -i "s|inline-svg( '../images/\(.*\)' )|url( /wp-content/plugins/wikipediapreview-wordpress/assets/images/\1 )|g" style/*.less
+sed -i "s|url( '\(.*\)' )|url( \1 )|g" style/*.less
 echo '@import "gallery.less";@import "popup.less";@import "preview.less";' > style/index.less
 node node_modules/less/bin/lessc style/index.less dist/wikipedia-preview.production.css
 
