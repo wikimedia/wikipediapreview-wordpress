@@ -14,7 +14,7 @@
 function wikipediapreview_enqueue_scripts() {
     $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
     $enqueue_script_in_footer = true;
-    $enqueue_ver_value = false; // version number is automatically added equal to current installed WordPress version
+    $enqueue_ver_value = '1.0.0';
     $stylesheet_media_type = 'all';
 
     wp_enqueue_script(
