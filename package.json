@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://phabricator.wikimedia.org/project/profile/4393/"
   },
-  "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
-  "dependencies": {
-    "wikipedia-preview": "^1.1.1"
-  }
+  "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme"
 }

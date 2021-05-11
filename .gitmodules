@@ -1,0 +1,3 @@
+[submodule "wikipedia-preview"]
+	path = wikipedia-preview
+	url = https://github.com/wikimedia/wikipedia-preview.git
