@@ -30,7 +30,7 @@ function wikipediapreview_enqueue_scripts() {
     );	
 
     wp_enqueue_style(
-        'wikipedia-preview-style', $assets_dir . 'styles/wikipedia-preview.production.css', [], 
+        'wikipedia-preview-style', $assets_dir . 'styles/wikipedia-preview-style.css', [], 
         $enqueue_ver_value, 
         $stylesheet_media_type
     );

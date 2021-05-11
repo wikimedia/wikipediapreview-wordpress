@@ -1,4 +1,4 @@
 node_modules
 wikipedia-preview
-assets/images/*.svg
+assets/styles
 assets/js/wikipedia-preview.production.js
