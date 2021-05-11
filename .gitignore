@@ -2,4 +2,3 @@ node_modules
 wikipedia-preview
 assets/images/*.svg
 assets/js/wikipedia-preview.production.js
-assets/styles/wikipedia-preview.production.css
