@@ -13,18 +13,18 @@
  */
 function wikipediapreview_enqueue_scripts() {
     $assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
-    
+
     wp_enqueue_script(
-        'wikipedia-preview', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true 
+        'wikipedia-preview', $assets_dir . 'js/wikipedia-preview.production.js', [], false, true
     );
 
-    wp_enqueue_script( 
-        'wikipedia-preview-init', $assets_dir . 'js/init.js', [], false, true 
-    );	
+    wp_enqueue_script(
+        'wikipedia-preview-init', $assets_dir . 'js/init.js', [], false, true
+    );
 }
 
-// record the option of detect links feature enabled in this version,
-// detect links feature may disable by default in the next version
+// Record the option of detect links feature enabled in this version,
+// detect links feature may be disabled by default in the next version
 function wikipediapreview_detect_true() {
     add_option( 'wikipediapreview_options_detect_links', true );
 }
