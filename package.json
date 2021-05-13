@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
-    "wikipedia-preview": "^1.1.1"
+    "wikipedia-preview": "1.2.0"
   }
 }
