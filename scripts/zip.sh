@@ -6,4 +6,5 @@ zip -r wikipediapreview.zip \
 	assets \
 	readme.txt \
 	LICENSE \
-	README.md
+	README.md \
+	--exclude assets/banner-*
