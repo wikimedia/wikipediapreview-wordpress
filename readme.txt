@@ -12,7 +12,7 @@ Wikipedia Preview allows you to show a popup card with a short summary from Wiki
 == Description ==
 Wikipedia Preview is a plugin that brings free knowledge to your site in the form of an Wikipedia article preview popup. Your readers will be able to simply click or hover over a word and directly see a short summary from the linked Wikipedia article. Wikipedia Preview is an official plugin developed and supported by the Wikimedia Foundation.
 
-This plugin complies with the Wikimedia Foundation (privacy policy)[https://foundation.wikimedia.org/wiki/Privacy_policy].
+This plugin complies with the Wikimedia Foundation [privacy policy](https://foundation.wikimedia.org/wiki/Privacy_policy).
 
 **Features**
 
@@ -22,7 +22,7 @@ This plugin complies with the Wikimedia Foundation (privacy policy)[https://foun
 
 **How to use**
 
-As a site owner, after you (download and install)[https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins] the Wikipedia Preview plugin, you can simply (add a link)[https://wordpress.com/support/links/] in your site content to any Wikipedia article URL and it will be turned into a preview.
+As a site owner, after you [download and install](https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins) the Wikipedia Preview plugin, you can simply [add a link](https://wordpress.com/support/links/) in your site content to any Wikipedia article URL and it will be turned into a preview.
 
 == Screenshots ==
 
