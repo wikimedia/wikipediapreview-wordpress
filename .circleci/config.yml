@@ -28,6 +28,9 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn
       - run:
+          name: Linter
+          command: npm run lint
+      - run:
           name: Zip
           command: ./scripts/zip.sh
       - store_artifacts:
