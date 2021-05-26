@@ -5,6 +5,8 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint assets/js/**.js",
+    "fix-lint": "eslint assets/js/**.js --fix",
     "postinstall": "sh scripts/postinstall.sh"
   },
   "repository": {
@@ -19,5 +21,9 @@
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
     "wikipedia-preview": "1.2.0"
+  },
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^9.0.5",
+    "eslint": "^7.27.0"
   }
 }
