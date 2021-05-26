@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint assets/js/**.js",
-    "fix-lint": "eslint assets/js/**.js --fix",
+    "lint:fix": "eslint assets/js/**.js --fix",
     "postinstall": "sh scripts/postinstall.sh"
   },
   "repository": {

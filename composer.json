@@ -5,6 +5,6 @@
     },
     "scripts": {
         "lint": "phpcs wikipediapreview.php",
-        "fix-lint": "phpcbf wikipediapreview.php"
+        "lint:fix": "phpcbf wikipediapreview.php"
     }
 }
