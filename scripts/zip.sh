@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm wikipediapreview.zip
+rm -f wikipediapreview.zip
 zip -r wikipediapreview.zip \
 	wikipediapreview.php \
 	assets \
