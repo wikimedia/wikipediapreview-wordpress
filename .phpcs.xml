@@ -9,6 +9,9 @@
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
+    <rule ref="WordPress">
+        <exclude name="WordPress-Docs"/>
+    </rule>
     <rule ref="PHPCompatibilityWP"/>
 
 </ruleset>
