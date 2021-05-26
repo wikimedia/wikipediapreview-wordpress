@@ -1,3 +1,5 @@
 node_modules
 assets/js/wikipedia-preview.production.js
 wikipediapreview.zip
+
+/vendor/

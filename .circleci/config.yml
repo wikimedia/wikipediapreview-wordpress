@@ -29,7 +29,9 @@ jobs:
       #     pkg-manager: yarn
       - run:
           name: Linter
-          command: npm run lint
+          command: |
+            npm run lint
+            composer run lint
       - run:
           name: Zip
           command: ./scripts/zip.sh
