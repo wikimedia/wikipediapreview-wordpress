@@ -1,10 +1,12 @@
 {
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.6",
-        "wp-coding-standards/wpcs": "^2.3"
+        "wp-coding-standards/wpcs": "^2.3",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7"
     },
     "scripts": {
-        "lint": "phpcs wikipediapreview.php",
-        "lint:fix": "phpcbf wikipediapreview.php"
+        "lint": "phpcs",
+        "lint:fix": "phpcbf"
     }
 }
