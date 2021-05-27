@@ -11,15 +11,17 @@
  * License: MIT
  * License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
  */
+
+DEFINE('WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.2');
+
 function wikipediapreview_enqueue_scripts() {
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
-	$version    = '1.0.2';
 
 	wp_enqueue_script(
 		'wikipedia-preview',
 		$assets_dir . 'js/wikipedia-preview.production.js',
 		array(),
-		$version,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
 	);
 
@@ -27,7 +29,7 @@ function wikipediapreview_enqueue_scripts() {
 		'wikipedia-preview-init',
 		$assets_dir . 'js/init.js',
 		array(),
-		$version,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
 	);
 }
