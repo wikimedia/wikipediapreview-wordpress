@@ -12,7 +12,7 @@
  * License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
  */
 
-DEFINE('WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.2');
+DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.2' );
 
 function wikipediapreview_enqueue_scripts() {
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
