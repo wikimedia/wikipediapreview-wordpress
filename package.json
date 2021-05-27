@@ -5,7 +5,9 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "sh scripts/postinstall.sh"
+    "postinstall": "sh scripts/postinstall.sh",
+    "version": "sh scripts/version.sh",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
