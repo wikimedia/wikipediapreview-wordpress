@@ -10,7 +10,7 @@ License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
 Wikipedia Preview allows you to show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link
 
 == Description ==
-Wikipedia Preview brings free knowledge to your site in the form of a Wikipedia article preview popup.  With Wikipedia Preview, a reader can see a short summary of an unknown word or concept in your content by hovering or tapping on the preview popup, without ever leaving your content page.
+Wikipedia Preview brings free knowledge to your site in the form of a Wikipedia article preview popup. With Wikipedia Preview, a reader can see a short summary of an unknown word or concept in your content by hovering or tapping on the preview popup, without ever leaving your content page.
 Wikipedia Preview is an official plugin developed and supported by the [Wikimedia Foundation.](https://wikimediafoundation.org/)
 
 **Benefits**
