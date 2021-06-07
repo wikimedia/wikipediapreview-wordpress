@@ -1,4 +1,7 @@
 // @todo code from wpwpp, update for this project
+
+// start with the modification of "Link" format
+// https://github.com/WordPress/gutenberg/blob/trunk/packages/format-library/src/link/index.js
 ( function( wp ) {
 	var h = wp.element.createElement;
 	var formatType = 'wmf/wp-format';
