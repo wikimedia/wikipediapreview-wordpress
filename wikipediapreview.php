@@ -49,3 +49,16 @@ function wikipediapreview_detect_deletion() {
 register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
+
+// @todo code from wpwpp, update for this project
+function myguten_enqueue() {
+	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
+	wp_enqueue_script(
+		'wmf-wp-format',
+		$assets_dir . '/js/wmf-wp-format.js',
+		array(),
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
