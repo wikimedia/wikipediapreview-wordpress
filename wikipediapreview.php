@@ -52,10 +52,10 @@ add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 
 // @todo code from wpwpp, update for this project
 function myguten_enqueue() {
-	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
+	$build_dir = plugin_dir_url( __FILE__ ) . 'build/';
 	wp_enqueue_script(
 		'wmf-wp-format',
-		$assets_dir . '/js/wmf-wp-format.js',
+		$build_dir . 'index.js',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
