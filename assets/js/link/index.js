@@ -1,18 +1,26 @@
-const { WmfWpPopover } = require( './modal.js' );
-const h = wp.element.createElement;
-const { Fragment, useState } = wp.element;
-const { RichTextToolbarButton } = wp.blockEditor;
-const { registerFormatType, useAnchorRef, toggleFormat } = wp.richText;
+import { WmfWpPopover } from './modal.js';
+import { useState } from '@wordpress/element';
+import { RichTextToolbarButton } from '@wordpress/block-editor';
+import {
+	registerFormatType,
+	useAnchorRef,
+	toggleFormat,
+} from '@wordpress/rich-text';
+
 const formatType = 'wmf/wp-format';
 const formatTitle = 'Wikipedia Preview';
 
 const WmfWpButton = function ( { isActive, onClick } ) {
-	return h( RichTextToolbarButton, {
-		icon: 'editor-code',
-		title: formatTitle + ( isActive ? ' (ON)' : ' (OFF)' ),
-		isActive,
-		onClick,
-	} );
+	const icon = 'editor-code';
+	const title = formatTitle + ( isActive ? ' (ON)' : ' (OFF)' );
+	return (
+		<RichTextToolbarButton
+			icon={ icon }
+			title={ title }
+			isActive={ isActive }
+			onClick={ onClick }
+		/>
+	);
 };
 
 const Edit = function ( { isActive, contentRef, value, onChange } ) {
@@ -36,15 +44,14 @@ const Edit = function ( { isActive, contentRef, value, onChange } ) {
 			} )
 		);
 	};
-	let popover = null;
-	if ( isEditingWP || isActive ) {
-		popover = WmfWpPopover( { anchorRef } );
-	}
-	return h(
-		Fragment,
-		null,
-		WmfWpButton( { isActive, onClick: toggleWP } ),
-		popover
+
+	return (
+		<>
+			<WmfWpButton isActive={ isActive } onClick={ toggleWP } />
+			{ ( isEditingWP || isActive ) && (
+				<WmfWpPopover anchorRef={ anchorRef } />
+			) }
+		</>
 	);
 };
 
