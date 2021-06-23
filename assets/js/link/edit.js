@@ -1,5 +1,4 @@
-import { WmfWpPopover } from './modal';
-import { useState } from '@wordpress/element';
+import { EditForm } from './form';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import { decodeEntities } from '@wordpress/html-entities';
 import {
@@ -12,7 +11,7 @@ import {
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview';
 
-const WmfWpButton = function ( { isActive, onClick } ) {
+const ToggleButton = ( { isActive, onClick } ) => {
 	const icon = 'editor-code';
 	const title = formatTitle + ( isActive ? ' (ON)' : ' (OFF)' );
 	return (
@@ -25,15 +24,14 @@ const WmfWpButton = function ( { isActive, onClick } ) {
 	);
 };
 
-const Edit = function ( { isActive, contentRef, value, onChange } ) {
-	const [ isEditingWP ] = useState( false );
+const Edit = ( { isActive, contentRef, value, onChange } ) => {
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
 		settings,
 	} );
 
-	const toggleWP = function () {
+	const toggleWP = () => {
 		const text = value.text.substr( value.start, value.end - value.start );
 		onChange(
 			toggleFormat( value, {
@@ -49,10 +47,8 @@ const Edit = function ( { isActive, contentRef, value, onChange } ) {
 
 	return (
 		<>
-			<WmfWpButton isActive={ isActive } onClick={ toggleWP } />
-			{ ( isEditingWP || isActive ) && (
-				<WmfWpPopover anchorRef={ anchorRef } />
-			) }
+			<ToggleButton isActive={ isActive } onClick={ toggleWP } />
+			{ isActive && <EditForm anchorRef={ anchorRef } /> }
 		</>
 	);
 };
@@ -64,7 +60,7 @@ export const settings = {
 	className: 'wmf-wp-with-preview', // class name from wikipedia preview item
 	edit: Edit,
 
-	// paste rule script copied from link format
+	// paste rule script copied from core/link format
 	__unstablePasteRule( value, { html, plainText } ) {
 		if ( isCollapsed( value ) ) {
 			return value;
