@@ -1,9 +1,15 @@
 import { WmfWpPopover } from './modal';
 import { useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
-import { useAnchorRef, toggleFormat } from '@wordpress/rich-text';
+import { decodeEntities } from '@wordpress/html-entities';
+import {
+	useAnchorRef,
+	toggleFormat,
+	isCollapsed,
+	applyFormat,
+} from '@wordpress/rich-text';
 
-const formatType = 'wmf/wikipedia-preview';
+const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview';
 
 const WmfWpButton = function ( { isActive, onClick } ) {
@@ -57,4 +63,22 @@ export const settings = {
 	tagName: 'span',
 	className: 'wmf-wp-with-preview', // class name from wikipedia preview item
 	edit: Edit,
+
+	// paste rule script copied from link format
+	__unstablePasteRule( value, { html, plainText } ) {
+		if ( isCollapsed( value ) ) {
+			return value;
+		}
+
+		const pastedText = ( html || plainText )
+			.replace( /<[^>]+>/g, '' )
+			.trim();
+
+		return applyFormat( value, {
+			type: name,
+			attributes: {
+				url: decodeEntities( pastedText ),
+			},
+		} );
+	},
 };
