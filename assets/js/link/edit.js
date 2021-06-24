@@ -1,6 +1,7 @@
-import { EditForm } from './form';
+import { useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
-import { useAnchorRef, toggleFormat } from '@wordpress/rich-text';
+import { useAnchorRef, toggleFormat, applyFormat } from '@wordpress/rich-text';
+import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview';
@@ -18,7 +19,9 @@ const ToggleButton = ( { isActive, onClick } ) => {
 	);
 };
 
-const Edit = ( { isActive, contentRef, value, onChange } ) => {
+const Edit = ( e ) => {
+	const [ isFormVisible, setFormVisible ] = useState( true );
+	const { isActive, contentRef, value, onChange } = e;
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
@@ -39,10 +42,33 @@ const Edit = ( { isActive, contentRef, value, onChange } ) => {
 		);
 	};
 
+	const updateAttributes = ( title, lang ) => {
+		onChange(
+			applyFormat( value, {
+				type: formatType,
+				attributes: {
+					'data-wikipedia-preview': '',
+					'data-wp-title': title,
+					'data-wp-lang': lang,
+				},
+			} )
+		);
+		setFormVisible( false );
+	};
 	return (
 		<>
 			<ToggleButton isActive={ isActive } onClick={ toggleWP } />
-			{ isActive && <EditForm anchorRef={ anchorRef } /> }
+			{ isFormVisible && isActive && (
+				<InlineEditUI
+					anchorRef={ anchorRef }
+					onChange={ updateAttributes }
+					lang={ 'en' }
+					title={ value.text.substr(
+						value.start,
+						value.end - value.start
+					) }
+				/>
+			) }
 		</>
 	);
 };
