@@ -59,22 +59,4 @@ export const settings = {
 	tagName: 'span',
 	className: 'wmf-wp-with-preview', // class name from wikipedia preview item
 	edit: Edit,
-
-	// paste rule script copied from core/link format
-	__unstablePasteRule( value, { html, plainText } ) {
-		if ( isCollapsed( value ) ) {
-			return value;
-		}
-
-		const pastedText = ( html || plainText )
-			.replace( /<[^>]+>/g, '' )
-			.trim();
-
-		return applyFormat( value, {
-			type: name,
-			attributes: {
-				url: decodeEntities( pastedText ),
-			},
-		} );
-	},
 };
