@@ -1,12 +1,6 @@
 import { EditForm } from './form';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
-import { decodeEntities } from '@wordpress/html-entities';
-import {
-	useAnchorRef,
-	toggleFormat,
-	isCollapsed,
-	applyFormat,
-} from '@wordpress/rich-text';
+import { useAnchorRef, toggleFormat } from '@wordpress/rich-text';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview';
