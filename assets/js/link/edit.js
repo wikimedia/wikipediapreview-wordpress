@@ -6,19 +6,6 @@ import { InlineEditUI } from './inline';
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview';
 
-const ToggleButton = ( { isActive, onClick } ) => {
-	const icon = 'editor-code';
-	const title = formatTitle + ( isActive ? ' (ON)' : ' (OFF)' );
-	return (
-		<RichTextToolbarButton
-			icon={ icon }
-			title={ title }
-			isActive={ isActive }
-			onClick={ onClick }
-		/>
-	);
-};
-
 const Edit = ( e ) => {
 	const [ isFormVisible, setFormVisible ] = useState( true );
 	const { isActive, contentRef, value, onChange } = e;
@@ -57,7 +44,12 @@ const Edit = ( e ) => {
 	};
 	return (
 		<>
-			<ToggleButton isActive={ isActive } onClick={ toggleWP } />
+			<RichTextToolbarButton
+				icon="editor-code"
+				title={ `formatTitle (${ isActive ? 'ON' : 'OFF' })` }
+				isActive={ isActive }
+				onClick={ toggleWP }
+			/>
 			{ isFormVisible && isActive && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
