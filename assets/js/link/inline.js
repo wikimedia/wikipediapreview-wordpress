@@ -1,4 +1,9 @@
-import { Popover, TextControl, Button } from '@wordpress/components';
+import {
+	Popover,
+	TextControl,
+	SelectControl,
+	Button,
+} from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
 export const InlineEditUI = ( {
@@ -7,6 +12,7 @@ export const InlineEditUI = ( {
 	onClose,
 	onChange,
 	onRemove,
+	value,
 	lang,
 	title,
 } ) => {
@@ -22,9 +28,13 @@ export const InlineEditUI = ( {
 				expandOnMobile={ true }
 			>
 				<div className="wikipediapreview-edit-inline-container">
-					<TextControl
-						label="lang"
+					<SelectControl
+						label="Size"
 						value={ newLang }
+						options={ [
+							{ label: 'en', value: 'en' },
+							{ label: 'fr', value: 'fr' },
+						] }
 						onChange={ setNewLang }
 					/>
 					<TextControl
@@ -35,7 +45,7 @@ export const InlineEditUI = ( {
 					<Button
 						variant="link"
 						onClick={ () => {
-							onChange( newTitle, newLang );
+							onChange( value, newTitle, newLang );
 						} }
 					>
 						Click me!

@@ -5,6 +5,7 @@ import {
 	toggleFormat,
 	applyFormat,
 	removeFormat,
+	getActiveFormat,
 } from '@wordpress/rich-text';
 import { InlineEditUI } from './inline';
 
@@ -13,6 +14,11 @@ const formatTitle = 'Wikipedia Preview'; // @todo i18n
 
 const Edit = ( { isActive, contentRef, value, onChange } ) => {
 	const [ isFormVisible, setFormVisible ] = useState( true );
+	const activeAttributes = getActiveFormat( value, formatType )?.attributes;
+	const selectedTitle = isActive
+		? activeAttributes[ 'data-wp-title' ]
+		: value.text.substr( value.start, value.end - value.start );
+	const selectedLang = isActive ? activeAttributes[ 'data-wp-lang' ] : 'fr'; // default lang of wordpress site
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
@@ -20,23 +26,22 @@ const Edit = ( { isActive, contentRef, value, onChange } ) => {
 	} );
 
 	const toggleWP = () => {
-		const text = value.text.substr( value.start, value.end - value.start );
 		onChange(
 			toggleFormat( value, {
 				type: formatType,
 				attributes: {
 					'data-wikipedia-preview': '',
-					'data-wp-title': text,
-					'data-wp-lang': 'fr',
+					'data-wp-title': selectedTitle,
+					'data-wp-lang': selectedLang,
 				},
 			} )
 		);
 		setFormVisible( ! isActive );
 	};
 
-	const updateAttributes = ( title, lang ) => {
+	const updateAttributes = ( selectedValue, title, lang ) => {
 		onChange(
-			applyFormat( value, {
+			applyFormat( selectedValue, {
 				type: formatType,
 				attributes: {
 					'data-wikipedia-preview': '',
@@ -66,11 +71,9 @@ const Edit = ( { isActive, contentRef, value, onChange } ) => {
 					anchorRef={ anchorRef }
 					onChange={ updateAttributes }
 					onRemove={ removeAttributes }
-					lang={ 'en' }
-					title={ value.text.substr(
-						value.start,
-						value.end - value.start
-					) }
+					lang={ selectedLang }
+					title={ selectedTitle }
+					value={ value }
 				/>
 			) }
 		</>
