@@ -17,8 +17,8 @@ export const InlineEditUI = ( {
 	activeAttributes,
 } ) => {
 	const selectedTitle =
-		activeAttributes[ 'data-wp-title' ] || getTextContent( slice( value ) );
-	const selectedLang = activeAttributes[ 'data-wp-lang' ] || 'fr'; // default lang of wordpress site
+		activeAttributes.title || getTextContent( slice( value ) );
+	const selectedLang = activeAttributes.lang || 'fr'; // default lang of wordpress site
 	const [ newTitle, setNewTitle ] = useState( selectedTitle );
 	const [ newLang, setNewLang ] = useState( selectedLang );
 	return (

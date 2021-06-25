@@ -39,9 +39,9 @@ const Edit = ( {
 			applyFormat( selectedValue, {
 				type: formatType,
 				attributes: {
-					'data-wikipedia-preview': '',
-					'data-wp-title': title,
-					'data-wp-lang': lang,
+					preview: '',
+					title,
+					lang,
 				},
 			} )
 		);
@@ -79,5 +79,10 @@ export const settings = {
 	title: formatTitle,
 	tagName: 'span',
 	className: 'wmf-wp-with-preview', // class name from wikipedia preview item
+	attributes: {
+		title: 'data-wp-title',
+		lang: 'data-wp-lang',
+		preview: 'data-wikipedia-preview',
+	},
 	edit: Edit,
 };
