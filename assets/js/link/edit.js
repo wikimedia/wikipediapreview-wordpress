@@ -5,16 +5,20 @@ import {
 	toggleFormat,
 	applyFormat,
 	removeFormat,
-	getActiveFormat,
 } from '@wordpress/rich-text';
 import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview'; // @todo i18n
 
-const Edit = ( { isActive, contentRef, value, onChange } ) => {
+const Edit = ( {
+	isActive,
+	activeAttributes,
+	contentRef,
+	value,
+	onChange,
+} ) => {
 	const [ isFormVisible, setFormVisible ] = useState( true );
-	const activeAttributes = getActiveFormat( value, formatType )?.attributes;
 	const selectedTitle = isActive
 		? activeAttributes[ 'data-wp-title' ]
 		: value.text.substr( value.start, value.end - value.start );
