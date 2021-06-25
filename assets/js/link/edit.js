@@ -31,6 +31,7 @@ const Edit = ( { isActive, contentRef, value, onChange } ) => {
 				},
 			} )
 		);
+		setFormVisible( ! isActive );
 	};
 
 	const updateAttributes = ( title, lang ) => {
