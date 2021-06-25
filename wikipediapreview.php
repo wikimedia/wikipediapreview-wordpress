@@ -33,6 +33,14 @@ function wikipediapreview_enqueue_scripts() {
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
 	);
+
+	wp_enqueue_style(
+		'wikipedia-preview-link-style',
+		$assets_dir . 'styles/wikipedia-preview-link.css',
+		array(),
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		STYLESHEET_MEDIA_TYPE
+	);
 }
 
 /**
@@ -53,7 +61,8 @@ add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 
 // @todo code from wpwpp, update for this project
 function myguten_enqueue() {
-	$build_dir = plugin_dir_url( __FILE__ ) . 'build/';
+	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
+	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 	wp_enqueue_script(
 		'wmf-wp-format',
 		$build_dir . 'index.js',
@@ -65,6 +74,14 @@ function myguten_enqueue() {
 	wp_enqueue_style(
 		'wikipedia-preview-style',
 		$build_dir . 'styles.scss.css',
+		array(),
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		STYLESHEET_MEDIA_TYPE
+	);
+
+	wp_enqueue_style(
+		'wikipedia-preview-link-style',
+		$assets_dir . 'styles/wikipedia-preview-link.css',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		STYLESHEET_MEDIA_TYPE
