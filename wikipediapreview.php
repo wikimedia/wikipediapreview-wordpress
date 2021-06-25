@@ -13,6 +13,7 @@
  */
 
 DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.3' );
+DEFINE( 'STYLESHEET_MEDIA_TYPE', 'all' );
 
 function wikipediapreview_enqueue_scripts() {
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
@@ -59,6 +60,14 @@ function myguten_enqueue() {
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
+	);
+
+	wp_enqueue_style(
+		'wikipedia-preview-style',
+		$build_dir . 'styles.scss.css',
+		array(),
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		STYLESHEET_MEDIA_TYPE
 	);
 }
 add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );

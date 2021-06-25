@@ -20,25 +20,26 @@ export const InlineEditUI = ( {
 				position="bottom center"
 				expandOnMobile={ true }
 			>
-				{ /* @todo styling */ }
-				<TextControl
-					label="lang"
-					value={ newLang }
-					onChange={ ( val ) => setNewLang( val ) }
-				/>
-				<TextControl
-					label="title"
-					value={ newTitle }
-					onChange={ ( val ) => setNewTitle( val ) }
-				/>
-				<Button
-					variant="link"
-					onClick={ () => {
-						onChange( newTitle, newLang );
-					} }
-				>
-					Click me!
-				</Button>
+				<div className="wikipediapreview-edit-inline-container">
+					<TextControl
+						label="lang"
+						value={ newLang }
+						onChange={ ( val ) => setNewLang( val ) }
+					/>
+					<TextControl
+						label="title"
+						value={ newTitle }
+						onChange={ ( val ) => setNewTitle( val ) }
+					/>
+					<Button
+						variant="link"
+						onClick={ () => {
+							onChange( newTitle, newLang );
+						} }
+					>
+						Click me!
+					</Button>
+				</div>
 			</Popover>
 		</>
 	);

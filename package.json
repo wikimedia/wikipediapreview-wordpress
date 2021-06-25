@@ -5,9 +5,11 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "wp-scripts start assets/js/link/index.js",
-    "lint": "eslint assets/js",
-    "lint:fix": "eslint assets/js --fix",
+    "start": "wp-scripts start assets/js/link/index.js assets/styles/styles.scss",
+    "lint:js": "eslint assets/js",
+    "lint:js:fix": "eslint assets/js --fix",
+    "lint:css": "wp-scripts lint-style",
+    "lint:css:fix": "wp-scripts lint-style --fix",
     "postinstall": "sh scripts/postinstall.sh",
     "version": "sh scripts/version.sh",
     "postversion": "git push && git push --tags"
