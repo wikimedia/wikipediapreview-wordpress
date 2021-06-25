@@ -4,6 +4,7 @@ import {
 	SelectControl,
 	Button,
 } from '@wordpress/components';
+import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState } from '@wordpress/element';
 
 export const InlineEditUI = ( {
@@ -16,8 +17,7 @@ export const InlineEditUI = ( {
 	activeAttributes,
 } ) => {
 	const selectedTitle =
-		activeAttributes[ 'data-wp-title' ] ||
-		value.text.substr( value.start, value.end - value.start );
+		activeAttributes[ 'data-wp-title' ] || getTextContent( slice( value ) );
 	const selectedLang = activeAttributes[ 'data-wp-lang' ] || 'fr'; // default lang of wordpress site
 	const [ newTitle, setNewTitle ] = useState( selectedTitle );
 	const [ newLang, setNewLang ] = useState( selectedLang );
