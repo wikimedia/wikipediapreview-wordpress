@@ -1,14 +1,18 @@
 import { useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
-import { useAnchorRef, toggleFormat, applyFormat } from '@wordpress/rich-text';
+import {
+	useAnchorRef,
+	toggleFormat,
+	applyFormat,
+	removeFormat,
+} from '@wordpress/rich-text';
 import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
-const formatTitle = 'Wikipedia Preview';
+const formatTitle = 'Wikipedia Preview'; // @todo i18n
 
-const Edit = ( e ) => {
+const Edit = ( { isActive, contentRef, value, onChange } ) => {
 	const [ isFormVisible, setFormVisible ] = useState( true );
-	const { isActive, contentRef, value, onChange } = e;
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
@@ -42,11 +46,17 @@ const Edit = ( e ) => {
 		);
 		setFormVisible( false );
 	};
+
+	const removeAttributes = () => {
+		onChange( removeFormat( value, formatType ) );
+		setFormVisible( false );
+	};
+
 	return (
 		<>
 			<RichTextToolbarButton
 				icon="editor-code"
-				title={ `formatTitle (${ isActive ? 'ON' : 'OFF' })` }
+				title={ `${ formatTitle } (${ isActive ? 'ON' : 'OFF' })` }
 				isActive={ isActive }
 				onClick={ toggleWP }
 			/>
@@ -54,6 +64,7 @@ const Edit = ( e ) => {
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onChange={ updateAttributes }
+					onRemove={ removeAttributes }
 					lang={ 'en' }
 					title={ value.text.substr(
 						value.start,

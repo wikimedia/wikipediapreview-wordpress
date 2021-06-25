@@ -6,6 +6,7 @@ export const InlineEditUI = ( {
 	focusOnMount = 'firstElement',
 	onClose,
 	onChange,
+	onRemove,
 	lang,
 	title,
 } ) => {
@@ -24,12 +25,12 @@ export const InlineEditUI = ( {
 					<TextControl
 						label="lang"
 						value={ newLang }
-						onChange={ ( val ) => setNewLang( val ) }
+						onChange={ setNewLang }
 					/>
 					<TextControl
 						label="title"
 						value={ newTitle }
-						onChange={ ( val ) => setNewTitle( val ) }
+						onChange={ setNewTitle }
 					/>
 					<Button
 						variant="link"
@@ -38,6 +39,9 @@ export const InlineEditUI = ( {
 						} }
 					>
 						Click me!
+					</Button>
+					<Button variant="link" onClick={ onRemove }>
+						Remove
 					</Button>
 				</div>
 			</Popover>
