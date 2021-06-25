@@ -13,11 +13,14 @@ export const InlineEditUI = ( {
 	onChange,
 	onRemove,
 	value,
-	lang,
-	title,
+	activeAttributes,
 } ) => {
-	const [ newTitle, setNewTitle ] = useState( title );
-	const [ newLang, setNewLang ] = useState( lang );
+	const selectedTitle =
+		activeAttributes[ 'data-wp-title' ] ||
+		value.text.substr( value.start, value.end - value.start );
+	const selectedLang = activeAttributes[ 'data-wp-lang' ] || 'fr'; // default lang of wordpress site
+	const [ newTitle, setNewTitle ] = useState( selectedTitle );
+	const [ newLang, setNewLang ] = useState( selectedLang );
 	return (
 		<>
 			<Popover

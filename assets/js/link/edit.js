@@ -19,10 +19,6 @@ const Edit = ( {
 	onChange,
 } ) => {
 	const [ isFormVisible, setFormVisible ] = useState( true );
-	const selectedTitle = isActive
-		? activeAttributes[ 'data-wp-title' ]
-		: value.text.substr( value.start, value.end - value.start );
-	const selectedLang = isActive ? activeAttributes[ 'data-wp-lang' ] : 'fr'; // default lang of wordpress site
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
@@ -33,11 +29,6 @@ const Edit = ( {
 		onChange(
 			toggleFormat( value, {
 				type: formatType,
-				attributes: {
-					'data-wikipedia-preview': '',
-					'data-wp-title': selectedTitle,
-					'data-wp-lang': selectedLang,
-				},
 			} )
 		);
 		setFormVisible( ! isActive );
@@ -75,9 +66,8 @@ const Edit = ( {
 					anchorRef={ anchorRef }
 					onChange={ updateAttributes }
 					onRemove={ removeAttributes }
-					lang={ selectedLang }
-					title={ selectedTitle }
 					value={ value }
+					activeAttributes={ activeAttributes }
 				/>
 			) }
 		</>
