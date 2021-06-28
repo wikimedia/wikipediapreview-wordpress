@@ -5,7 +5,8 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "wp-scripts start assets/js/link/index.js assets/styles/styles.scss",
+    "start": "wp-scripts start assets/js/init.js assets/js/link/index.js assets/styles/styles.scss",
+    "build": "wp-scripts build assets/js/init.js assets/js/link/index.js assets/styles/styles.scss",
     "lint:js": "eslint assets/js",
     "lint:js:fix": "eslint assets/js --fix",
     "lint:css": "wp-scripts lint-style",

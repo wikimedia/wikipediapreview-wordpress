@@ -12,6 +12,7 @@ VER=`./scripts/getversion.js`
 cp ./wikipediapreview.php $1/trunk/
 cp ./readme.txt $1/trunk/
 cp ./assets/js/* $1/trunk/assets/js/
+cp ./build $1/build/
 
 cd $1
 svn cp trunk tags/$VER
