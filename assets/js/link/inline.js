@@ -5,7 +5,7 @@ import {
 	Button,
 } from '@wordpress/components';
 import { getTextContent, slice } from '@wordpress/rich-text';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -16,11 +16,14 @@ export const InlineEditUI = ( {
 	value,
 	activeAttributes,
 } ) => {
-	const selectedTitle =
-		activeAttributes.title || getTextContent( slice( value ) );
-	const selectedLang = activeAttributes.lang || 'fr'; // default lang of wordpress site
-	const [ newTitle, setNewTitle ] = useState( selectedTitle );
-	const [ newLang, setNewLang ] = useState( selectedLang );
+	const [ title, setTitle ] = useState( activeAttributes.title );
+	const [ lang, setLang ] = useState( activeAttributes.lang );
+
+	useEffect( () => {
+		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
+		setLang( activeAttributes.lang || 'fr' );
+	}, [ activeAttributes ] );
+
 	return (
 		<>
 			<Popover
@@ -33,22 +36,22 @@ export const InlineEditUI = ( {
 				<div className="wikipediapreview-edit-inline-container">
 					<SelectControl
 						label="Size"
-						value={ newLang }
+						value={ lang }
 						options={ [
 							{ label: 'en', value: 'en' },
 							{ label: 'fr', value: 'fr' },
 						] }
-						onChange={ setNewLang }
+						onChange={ setLang }
 					/>
 					<TextControl
 						label="title"
-						value={ newTitle }
-						onChange={ setNewTitle }
+						value={ title }
+						onChange={ setTitle }
 					/>
 					<Button
 						variant="link"
 						onClick={ () => {
-							onChange( value, newTitle, newLang );
+							onChange( value, title, lang );
 						} }
 					>
 						Click me!
