@@ -49,14 +49,19 @@ export const InlineEditUI = ( {
 						onChange={ setTitle }
 					/>
 					<Button
-						variant="link"
+						variant="secondary"
+						className="is-primary"
 						onClick={ () => {
 							onChange( value, title, lang );
 						} }
 					>
-						Click me!
-					</Button>
-					<Button variant="link" onClick={ onRemove }>
+						Add
+					</Button>{ ' ' }
+					<Button
+						variant="link"
+						className="is-secondary"
+						onClick={ onRemove }
+					>
 						Remove
 					</Button>
 				</div>
