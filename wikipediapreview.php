@@ -55,16 +55,11 @@ function wikipediapreview_detect_deletion() {
 	delete_option( 'wikipediapreview_options_detect_links' );
 }
 
-register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
-register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
-add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
-
-// @todo code from wpwpp, update for this project
-function myguten_enqueue() {
+function wikipediapreview_guten_enqueue() {
 	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 	wp_enqueue_script(
-		'wmf-wp-format',
+		'wikipedia-preview-edit-link',
 		$build_dir . 'index.js',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
@@ -87,4 +82,8 @@ function myguten_enqueue() {
 		STYLESHEET_MEDIA_TYPE
 	);
 }
-add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
+
+register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
+register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
+add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
+add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
