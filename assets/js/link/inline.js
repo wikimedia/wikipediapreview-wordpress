@@ -11,7 +11,7 @@ export const InlineEditUI = ( {
 	anchorRef,
 	focusOnMount = 'firstElement',
 	onClose,
-	onChange,
+	onApply,
 	onRemove,
 	value,
 	activeAttributes,
@@ -52,7 +52,7 @@ export const InlineEditUI = ( {
 						variant="secondary"
 						className="is-primary"
 						onClick={ () => {
-							onChange( value, title, lang );
+							onApply( value, title, lang );
 						} }
 					>
 						Add

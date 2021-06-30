@@ -1,6 +1,8 @@
 import { useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
+	create,
+	insert,
 	useAnchorRef,
 	toggleFormat,
 	applyFormat,
@@ -34,6 +36,23 @@ const Edit = ( {
 		setFormVisible( ! isActive );
 	};
 
+	const insertText = ( selectedValue, title, lang ) => {
+		const toInsert = applyFormat(
+			create( { text: title } ),
+			{
+				type: formatType,
+				attributes: {
+					preview: '',
+					title,
+					lang,
+				},
+			},
+			0,
+			title.length
+		);
+		onChange( insert( value, toInsert ) );
+	};
+
 	const updateAttributes = ( selectedValue, title, lang ) => {
 		onChange(
 			applyFormat( selectedValue, {
@@ -64,7 +83,11 @@ const Edit = ( {
 			{ isFormVisible && isActive && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
-					onChange={ updateAttributes }
+					onApply={
+						value.start !== value.end
+							? updateAttributes
+							: insertText
+					}
 					onRemove={ removeAttributes }
 					value={ value }
 					activeAttributes={ activeAttributes }
