@@ -1,11 +1,7 @@
-import {
-	Popover,
-	TextControl,
-	SelectControl,
-	Button,
-} from '@wordpress/components';
+import { Popover, TextControl, Button } from '@wordpress/components';
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
+import { getSiteLanguage } from './utils';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -21,7 +17,7 @@ export const InlineEditUI = ( {
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
-		setLang( activeAttributes.lang || 'fr' );
+		setLang( activeAttributes.lang || getSiteLanguage() );
 	}, [ activeAttributes ] );
 
 	return (
@@ -34,15 +30,6 @@ export const InlineEditUI = ( {
 				expandOnMobile={ true }
 			>
 				<div className="wikipediapreview-edit-inline-container">
-					<SelectControl
-						label="Size"
-						value={ lang }
-						options={ [
-							{ label: 'en', value: 'en' },
-							{ label: 'fr', value: 'fr' },
-						] }
-						onChange={ setLang }
-					/>
 					<TextControl
 						label="title"
 						value={ title }
