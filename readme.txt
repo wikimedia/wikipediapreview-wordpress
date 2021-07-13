@@ -35,3 +35,33 @@ After you [download and install](https://wordpress.org/support/article/managing-
 
 1. Desktop view on hover
 2. Mobile view on touch
+
+== Frequently Asked Questions ==
+
+= Is Wikipedia Preview free? =
+
+Yes, Wikipedia Preview is free. It has been made available to you by Wikimedia Foundation, the nonprofit that powers Wikipedia with a mission of free knowledge equity.
+
+= Does Wikipedia Preview work on any word? =
+
+The Wikipedia Preview works with any word or phrase that has an article on Wikipedia, in any of the available languages.
+
+= What is the flow for implementing the Wikipedia Preview links in a post? =
+
+When writing articles, decide which words show a Wikipedia popup on a particular post. The process of enabling the Wikipedia popup on a specific word is identical to [adding a hyperlink](https://wordpress.com/support/links/#add-links-to-posts-pages-and-widgets).
+
+= After the implementation of Wikipedia Preview will there be any impact on the size of the page? Will it get laggy? =
+
+The words that will have a Wikipedia Preview popup on your site need to be annotated. Those annotations add to the page size but not more than the regular hyperlinks you already use.
+
+= Is it compatible with all the browsers? =
+
+The Wikipedia Preview is compatible with the following browsers: Chrome, Firefox, Opera, Edge (Current and previous version), Safari 5.1+, iOS 6.1+ and Android 4.1+
+
+= How can we share our experience with Wikipedia Preview with you? =
+
+Please leave reviews on our Wikipedia Preview plugin page
+
+= How else can I work with the Wikimedia Foundation? =
+
+If you would like to explore a collaboration opportunity beyond Wikipedia Preview, please contact partnerships@wikimedia.org
