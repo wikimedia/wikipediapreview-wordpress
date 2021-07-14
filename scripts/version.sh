@@ -19,3 +19,8 @@ sed "s/^Stable tag:.*$/Stable tag: $VER/" readme.txt > readme.txt.new
 mv readme.txt.new readme.txt
 
 git add readme.txt
+
+# package.json
+npm i
+git add package.json
+git add package-lock.json
