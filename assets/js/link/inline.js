@@ -27,6 +27,7 @@ export const InlineEditUI = ( {
 				focusOnMount={ focusOnMount }
 				onClose={ onClose }
 				position="bottom center"
+				noArrow={ false }
 				expandOnMobile={ true }
 			>
 				<div className="wikipediapreview-edit-inline-container">
