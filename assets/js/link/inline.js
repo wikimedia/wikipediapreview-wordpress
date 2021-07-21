@@ -5,7 +5,6 @@ import { getSiteLanguage } from './utils';
 
 export const InlineEditUI = ( {
 	anchorRef,
-	focusOnMount = 'firstElement',
 	onClose,
 	onApply,
 	onRemove,
@@ -23,7 +22,6 @@ export const InlineEditUI = ( {
 	return (
 		<Popover
 			anchorRef={ anchorRef }
-			focusOnMount={ focusOnMount }
 			onClose={ onClose }
 			position="bottom center"
 			noArrow={ false }
