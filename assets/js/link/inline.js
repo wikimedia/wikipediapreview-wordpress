@@ -21,39 +21,37 @@ export const InlineEditUI = ( {
 	}, [ activeAttributes ] );
 
 	return (
-		<>
-			<Popover
-				anchorRef={ anchorRef }
-				focusOnMount={ focusOnMount }
-				onClose={ onClose }
-				position="bottom center"
-				noArrow={ false }
-				expandOnMobile={ true }
-			>
-				<div className="wikipediapreview-edit-inline-container">
-					<TextControl
-						label="title"
-						value={ title }
-						onChange={ setTitle }
-					/>
-					<Button
-						variant="secondary"
-						className="is-primary"
-						onClick={ () => {
-							onApply( value, title, lang );
-						} }
-					>
-						Add
-					</Button>{ ' ' }
-					<Button
-						variant="link"
-						className="is-secondary"
-						onClick={ onRemove }
-					>
-						Remove
-					</Button>
-				</div>
-			</Popover>
-		</>
+		<Popover
+			anchorRef={ anchorRef }
+			focusOnMount={ focusOnMount }
+			onClose={ onClose }
+			position="bottom center"
+			noArrow={ false }
+			expandOnMobile={ true }
+		>
+			<div className="wikipediapreview-edit-inline-container">
+				<TextControl
+					label="title"
+					value={ title }
+					onChange={ setTitle }
+				/>
+				<Button
+					variant="secondary"
+					className="is-primary"
+					onClick={ () => {
+						onApply( value, title, lang );
+					} }
+				>
+					Add
+				</Button>{ ' ' }
+				<Button
+					variant="link"
+					className="is-secondary"
+					onClick={ onRemove }
+				>
+					Remove
+				</Button>
+			</div>
+		</Popover>
 	);
 };
