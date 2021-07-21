@@ -1,4 +1,4 @@
 wikipediaPreview.init( {
-	root: document.querySelector( '.entry-content' ),
+	root: document,
 	detectLinks: true,
 } );
