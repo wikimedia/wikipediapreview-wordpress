@@ -84,7 +84,7 @@ const Edit = ( {
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
-						value.start !== value.end
+						value.start !== value.end || activeAttributes.title
 							? updateAttributes
 							: insertText
 					}
