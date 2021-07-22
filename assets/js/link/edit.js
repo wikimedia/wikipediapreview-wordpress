@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
@@ -12,6 +12,7 @@ import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview'; // @todo i18n
+let forceFormVisibleValue;
 
 const Edit = ( {
 	isActive,
@@ -26,6 +27,13 @@ const Edit = ( {
 		value,
 		settings,
 	} );
+
+	// hacky solution to show form after it has been shown before
+	// @todo fix this?
+	useEffect( () => {
+		if ( forceFormVisibleValue < 1 ) forceFormVisibleValue++;
+		else if ( forceFormVisibleValue >= 1 ) setFormVisible( true );
+	}, [ value ] );
 
 	const toggleWP = () => {
 		onChange(
@@ -51,6 +59,7 @@ const Edit = ( {
 			title.length
 		);
 		onChange( insert( value, toInsert ) );
+		forceFormVisibleValue = 0;
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
@@ -65,6 +74,7 @@ const Edit = ( {
 			} )
 		);
 		setFormVisible( false );
+		forceFormVisibleValue = 0;
 	};
 
 	const removeAttributes = () => {
