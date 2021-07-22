@@ -29,7 +29,7 @@ export const InlineEditUI = ( {
 		>
 			<div className="wikipediapreview-edit-inline-container">
 				<TextControl
-					label="title"
+					label="Add Wikipedia preview"
 					value={ title }
 					onChange={ setTitle }
 				/>
