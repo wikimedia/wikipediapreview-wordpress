@@ -32,6 +32,7 @@ export const InlineEditUI = ( {
 					label="Add Wikipedia preview"
 					value={ title }
 					onChange={ setTitle }
+					placeholder="Type preview to add"
 				/>
 				<Button
 					variant="secondary"
