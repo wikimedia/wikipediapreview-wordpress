@@ -80,6 +80,7 @@ const Edit = ( {
 	const removeAttributes = () => {
 		onChange( removeFormat( value, formatType ) );
 		setFormVisible( false );
+		forceFormVisibleValue = 0;
 	};
 
 	return (
