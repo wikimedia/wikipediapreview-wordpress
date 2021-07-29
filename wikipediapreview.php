@@ -3,6 +3,8 @@
  * Plugin Name: Wikipedia Preview
  * Plugin URI: https://github.com/wikimedia/wikipedia-preview
  * Description: Wikipedia Preview allows you to show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link
+ * Text Domain: wikipedia-preview
+ * Domain Path: /languages/
  * Version: 1.0.4
  * Requires at least: 4.2
  * Requires PHP: 5.6.39
@@ -66,6 +68,16 @@ function wikipediapreview_guten_enqueue() {
 		true
 	);
 
+	wp_enqueue_script(
+		'wikipedia-preview-localization',
+		$build_dir . 'inline.js',
+		array( 'wp-i18n' ),
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		true
+	);
+
+	wp_set_script_translations('wikipedia-preview-localization', 'wikipedia-preview');
+
 	wp_enqueue_style(
 		'wikipedia-preview-style',
 		$build_dir . 'styles.scss.css',
@@ -83,7 +95,12 @@ function wikipediapreview_guten_enqueue() {
 	);
 }
 
+function wikipediapreview_load_textdomain() {
+	load_plugin_textdomain( 'wikipedia-preview' );
+}
+
 register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
+add_action( 'plugins_loaded', 'wikipediapreview_load_textdomain' );

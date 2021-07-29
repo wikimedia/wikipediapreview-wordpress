@@ -13,6 +13,7 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
+	const { __, _x, _n, sprintf } = wp.i18n;
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -41,7 +42,7 @@ export const InlineEditUI = ( {
 						onApply( value, title, lang );
 					} }
 				>
-					Add
+					{__( 'Add', 'wikipedia-preview' )}
 				</Button>{ ' ' }
 				<Button
 					variant="link"

@@ -1,0 +1,42 @@
+{
+  "domain":"wikipedia-preview",
+  "locale_data":{
+     "wikipedia-preview":{
+        "":{
+           "domain":"wikipedia-preview",
+           "plural-forms":"nplurals=2; plural=n != 1;",
+           "lang":"es"
+        },
+        "Google preview":[
+           "Vista previa de Google"
+        ],
+        "Has feedback":[
+           "Tiene respuestas"
+        ],
+        "Add":[
+           "Agregar"
+        ],
+        "Content optimization:":[
+           "Optimización del contenido:"
+        ],
+        "fairly difficult":[
+           "bastante difícil"
+        ],
+        "OK":[
+           "Aceptable"
+        ],
+        "fairly easy":[
+           "bastante fácil"
+        ],
+        "easy":[
+           "fácil"
+        ],
+        "very easy":[
+           "extremadamente fácil"
+        ],
+        "Meta description":[
+           "Meta description"
+        ]
+     }
+  }
+}
