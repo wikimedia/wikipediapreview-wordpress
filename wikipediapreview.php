@@ -68,7 +68,7 @@ function wikipediapreview_guten_enqueue() {
 
 	wp_enqueue_style(
 		'wikipedia-preview-style',
-		$build_dir . 'styles.scss.css',
+		$build_dir . 'style-index.css',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		STYLESHEET_MEDIA_TYPE
