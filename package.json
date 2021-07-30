@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
-    "wikipedia-preview": "1.2.0"
+    "wikipedia-preview": "1.3.0"
   },
   "devDependencies": {
     "@wordpress/eslint-plugin": "^9.0.5",
