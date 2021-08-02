@@ -9,11 +9,12 @@
 
 VER=`./scripts/getversion.js`
 
+npm run build
 sed -i "s/'build\/'/'assets\/'/g" wikipediapreview.php
 cp ./wikipediapreview.php $1/trunk/
 cp ./readme.txt $1/trunk/
 cp ./build/{index.js,init.js,style-index.css} $1/trunk/assets
-cp ./build/{wikipedia-preview.link.css,wikipedia-preview.production.js} $1/trunk/assets
+cp ./assets/{wikipedia-preview-link.css,wikipedia-preview.production.js} $1/trunk/assets
 
 cd $1
 svn cp trunk tags/$VER
