@@ -16,11 +16,12 @@ DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.4' );
 DEFINE( 'STYLESHEET_MEDIA_TYPE', 'all' );
 
 function wikipediapreview_enqueue_scripts() {
+	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 
 	wp_enqueue_script(
 		'wikipedia-preview',
-		$assets_dir . 'js/wikipedia-preview.production.js',
+		$assets_dir . 'wikipedia-preview.production.js',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
@@ -28,7 +29,7 @@ function wikipediapreview_enqueue_scripts() {
 
 	wp_enqueue_script(
 		'wikipedia-preview-init',
-		$assets_dir . 'js/init.js',
+		$build_dir . 'init.js',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		true
@@ -36,7 +37,7 @@ function wikipediapreview_enqueue_scripts() {
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
-		$assets_dir . 'styles/wikipedia-preview-link.css',
+		$assets_dir . 'wikipedia-preview-link.css',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		STYLESHEET_MEDIA_TYPE
@@ -76,7 +77,7 @@ function wikipediapreview_guten_enqueue() {
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
-		$assets_dir . 'styles/wikipedia-preview-link.css',
+		$assets_dir . 'wikipedia-preview-link.css',
 		array(),
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		STYLESHEET_MEDIA_TYPE

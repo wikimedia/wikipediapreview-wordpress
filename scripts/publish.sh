@@ -9,11 +9,11 @@
 
 VER=`./scripts/getversion.js`
 
+sed -i "s/'build\/'/'assets\/'/g" wikipediapreview.php
 cp ./wikipediapreview.php $1/trunk/
 cp ./readme.txt $1/trunk/
-cp ./assets/js/* $1/trunk/assets/js/
-cp ./assets/styles/* $1/trunk/assets/styles/
-cp ./build $1/build/
+cp ./build/{index.js,init.js,style-index.css} $1/trunk/assets
+cp ./build/{wikipedia-preview.link.css,wikipedia-preview.production.js} $1/trunk/assets
 
 cd $1
 svn cp trunk tags/$VER
