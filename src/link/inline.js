@@ -1,6 +1,7 @@
 import { Popover, TextControl, Button } from '@wordpress/components';
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
 
 export const InlineEditUI = ( {
@@ -29,10 +30,13 @@ export const InlineEditUI = ( {
 		>
 			<div className="wikipediapreview-edit-inline-container">
 				<TextControl
-					label="Add Wikipedia preview"
+					label={ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
 					value={ title }
 					onChange={ setTitle }
-					placeholder="Type preview to add"
+					placeholder={ __(
+						'Type preview to add',
+						'wikipedia-preview'
+					) }
 				/>
 				<Button
 					variant="secondary"
@@ -41,14 +45,14 @@ export const InlineEditUI = ( {
 						onApply( value, title, lang );
 					} }
 				>
-					Add
+					{ __( 'Add', 'wikipedia-preview' ) }
 				</Button>{ ' ' }
 				<Button
 					variant="link"
 					className="is-secondary"
 					onClick={ onRemove }
 				>
-					Remove
+					{ __( 'Remove', 'wikipedia-preview' ) }
 				</Button>
 			</div>
 		</Popover>

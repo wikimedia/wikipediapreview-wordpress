@@ -85,7 +85,12 @@ function wikipediapreview_guten_enqueue() {
 	);
 }
 
+function myguten_set_script_translations() {
+	wp_set_script_translations( 'wikipedia-preview-localization', 'wikipedia-preview' );
+}
+
 register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
+add_action( 'init', 'myguten_set_script_translations' );
