@@ -12,7 +12,6 @@ import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = 'Wikipedia Preview'; // @todo i18n
-let forceFormVisibleValue;
 
 const Edit = ( {
 	isActive,
@@ -20,28 +19,24 @@ const Edit = ( {
 	contentRef,
 	value,
 	onChange,
+	onFocus
 } ) => {
-	const [ isFormVisible, setFormVisible ] = useState( true );
+	const [ addingPreview, setAddingPreview ] = useState( false );
+	const startAddingPreview = () => setAddingPreview( true );
+	const stopAddingPreview = () => setAddingPreview( false );
+
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
 		settings,
 	} );
 
-	// hacky solution to show form after it has been shown before
-	// @todo fix this?
-	useEffect( () => {
-		if ( forceFormVisibleValue < 1 ) forceFormVisibleValue++;
-		else if ( forceFormVisibleValue >= 1 ) setFormVisible( true );
-	}, [ value ] );
-
-	const toggleWP = () => {
-		onChange(
-			toggleFormat( value, {
-				type: formatType,
-			} )
-		);
-		setFormVisible( ! isActive );
+	const formatButtonClick = () => {
+		if ( isActive ) {
+			removeAttributes();
+		} else {
+			startAddingPreview();
+		}
 	};
 
 	const insertText = ( selectedValue, title, lang ) => {
@@ -59,28 +54,28 @@ const Edit = ( {
 			title.length
 		);
 		onChange( insert( value, toInsert ) );
-		forceFormVisibleValue = 0;
+		stopAddingPreview();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
-		onChange(
-			applyFormat( selectedValue, {
-				type: formatType,
-				attributes: {
-					preview: '',
-					title,
-					lang,
-				},
-			} )
-		);
-		setFormVisible( false );
-		forceFormVisibleValue = 0;
+		const newValue = applyFormat( selectedValue, {
+			type: formatType,
+			attributes: {
+				preview: '',
+				title,
+				lang,
+			},
+		} );
+		newValue.start = newValue.end;
+		newValue.activeFormats = [];
+		onChange( newValue );
+		stopAddingPreview();
+		onFocus();
 	};
 
 	const removeAttributes = () => {
 		onChange( removeFormat( value, formatType ) );
-		setFormVisible( false );
-		forceFormVisibleValue = 0;
+		stopAddingPreview();
 	};
 
 	return (
@@ -89,9 +84,9 @@ const Edit = ( {
 				icon="editor-code"
 				title={ `${ formatTitle } (${ isActive ? 'ON' : 'OFF' })` }
 				isActive={ isActive }
-				onClick={ toggleWP }
+				onClick={ formatButtonClick }
 			/>
-			{ isFormVisible && isActive && (
+			{ ( addingPreview || isActive ) && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
@@ -102,6 +97,7 @@ const Edit = ( {
 					onRemove={ removeAttributes }
 					value={ value }
 					activeAttributes={ activeAttributes }
+					onClose={ stopAddingPreview }
 				/>
 			) }
 		</>
