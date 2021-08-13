@@ -1,10 +1,9 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
 	insert,
 	useAnchorRef,
-	toggleFormat,
 	applyFormat,
 	removeFormat,
 } from '@wordpress/rich-text';
@@ -19,7 +18,7 @@ const Edit = ( {
 	contentRef,
 	value,
 	onChange,
-	onFocus
+	onFocus,
 } ) => {
 	const [ addingPreview, setAddingPreview ] = useState( false );
 	const startAddingPreview = () => setAddingPreview( true );
