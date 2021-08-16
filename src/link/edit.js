@@ -82,7 +82,7 @@ const Edit = ( {
 		<>
 			<RichTextToolbarButton
 				icon="editor-code"
-				title={ `${ formatTitle } (${ isActive ? 'ON' : 'OFF' })` }
+				title={ formatTitle }
 				isActive={ isActive }
 				onClick={ formatButtonClick }
 			/>
