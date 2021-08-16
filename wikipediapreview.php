@@ -58,6 +58,12 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
+
+	// feature toggle of the gutenberg support, disabled by default
+	if ( ! $_GET['wikipediapreview_gutenburg'] ) {
+		return;
+	}
+
 	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 	wp_enqueue_script(
