@@ -60,7 +60,7 @@ function wikipediapreview_detect_deletion() {
 function wikipediapreview_guten_enqueue() {
 
 	// feature toggle of the gutenberg support, disabled by default
-	if ( ! $_GET['wikipediapreview_gutenburg'] ) {
+	if ( ! $_GET['wikipediapreview_gutenburg'] ) { // phpcs:ignore
 		return;
 	}
 
