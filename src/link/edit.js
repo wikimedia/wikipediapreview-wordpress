@@ -7,10 +7,11 @@ import {
 	applyFormat,
 	removeFormat,
 } from '@wordpress/rich-text';
+import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 
 const formatType = 'wikipediapreview/link';
-const formatTitle = 'Wikipedia Preview'; // @todo i18n
+const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
 
 const Edit = ( {
 	isActive,
