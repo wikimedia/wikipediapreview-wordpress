@@ -1,3 +1,5 @@
 #!/bin/bash
 
-cp node_modules/wikipedia-preview/dist/wikipedia-preview.production.js assets/js
+npm run build
+cp node_modules/wikipedia-preview/dist/wikipedia-preview.production.js assets
+cp node_modules/wikipedia-preview/dist/wikipedia-preview-link.css assets

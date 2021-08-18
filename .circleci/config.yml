@@ -38,7 +38,8 @@ jobs:
       - run:
           name: Linter
           command: |
-            npm run lint
+            npm run lint:js
+            npm run lint:css
             composer run lint
       - run:
           name: Zip

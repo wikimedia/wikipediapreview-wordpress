@@ -5,8 +5,12 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint assets/js/**.js",
-    "lint:fix": "eslint assets/js/**.js --fix",
+    "start": "wp-scripts start src/init.js src/link/index.js",
+    "build": "wp-scripts build src/init.js src/link/index.js",
+    "lint:js": "wp-scripts lint-js src",
+    "lint:js:fix": "wp-scripts lint-js src --fix",
+    "lint:css": "wp-scripts lint-style src",
+    "lint:css:fix": "wp-scripts lint-style src --fix",
     "postinstall": "sh scripts/postinstall.sh",
     "version": "sh scripts/version.sh",
     "postversion": "git push && git push --tags"
@@ -22,10 +26,15 @@
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
+    "@wordpress/block-editor": "^6.1.5",
+    "@wordpress/components": "^14.1.4",
+    "@wordpress/element": "^3.1.1",
+    "@wordpress/i18n": "^4.2.1",
+    "@wordpress/rich-text": "^4.1.2",
     "wikipedia-preview": "1.3.0"
   },
   "devDependencies": {
     "@wordpress/eslint-plugin": "^9.0.5",
-    "eslint": "^7.27.0"
+    "@wordpress/scripts": "^17.1.0"
   }
 }
