@@ -51,14 +51,6 @@ function wikipediapreview_enqueue_scripts() {
 	);
 }
 
-/**
- * Record the option of detect links feature enabled in this version,
- * detect links feature may be disabled by default in the next version.
- */
-function wikipediapreview_detect_true() {
-	add_option( 'wikipediapreview_options_detect_links', true );
-}
-
 function wikipediapreview_detect_deletion() {
 	delete_option( 'wikipediapreview_options_detect_links' );
 }
@@ -106,7 +98,6 @@ function register_detectlinks_postmeta() {
 	register_post_meta( '', 'wikipediapreview_detectlinks', $options );
 }
 
-register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
