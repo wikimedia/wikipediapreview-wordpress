@@ -1,4 +1,4 @@
-const { registerPlugin } = wp.plugins;
+import { registerPlugin } from '@wordpress/plugins';
 
 import WikipediaPreviewPostMetaDetectLinks from './wp-postmeta-detectlinks';
 

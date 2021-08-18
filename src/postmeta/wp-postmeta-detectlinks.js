@@ -1,14 +1,10 @@
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { withSelect, withDispatch } from '@wordpress/data';
-import { PluginDocumentSettingPanel } from '@wordpress/editPost';
+import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { ToggleControl, PanelRow } from '@wordpress/components';
 
-const WikipediaPreviewPostMetaDetectLinks = ( {
-	postType,
-	postMeta,
-	setPostMeta,
-} ) => {
+const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
 	return (
 		<PluginDocumentSettingPanel
 			title={ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
