@@ -1,9 +1,8 @@
-const { __ } = wp.i18n;
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
-
-const { PluginDocumentSettingPanel } = wp.editPost;
-const { ToggleControl, PanelRow } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { compose } from '@wordpress/compose';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { PluginDocumentSettingPanel } from '@wordpress/editPost';
+import { ToggleControl, PanelRow } from '@wordpress/components';
 
 const WikipediaPreviewPostMetaDetectLinks = ( {
 	postType,
