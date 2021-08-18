@@ -40,7 +40,7 @@ function wikipediapreview_enqueue_scripts() {
 	$options = array(
 		'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
 	);
-	wp_localize_script( 'wikipedia-preview-init', 'options', $options );
+	wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',

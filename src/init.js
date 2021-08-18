@@ -1,5 +1,5 @@
-/* global options */
+/* global wikipediapreview_init_options */
 wikipediaPreview.init( {
 	root: document,
-	detectLinks: !! options.detectLinks,
+	detectLinks: !! wikipediapreview_init_options.detectLinks,
 } );
