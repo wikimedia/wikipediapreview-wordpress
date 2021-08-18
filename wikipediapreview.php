@@ -103,7 +103,7 @@ function register_detectlinks_postmeta() {
 		'type'          => 'boolean',
 		'default'       => true, // it could default to false when the gutenburg support is released
 	);
-	register_post_meta( 'post', 'wikipediapreview_detectlinks', $options );
+	register_post_meta( '', 'wikipediapreview_detectlinks', $options );
 }
 
 register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );

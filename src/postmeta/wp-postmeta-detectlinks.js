@@ -10,8 +10,6 @@ const WikipediaPreviewPostMetaDetectLinks = ( {
 	postMeta,
 	setPostMeta,
 } ) => {
-	if ( postType !== 'post' ) return null;
-
 	return (
 		<PluginDocumentSettingPanel
 			title={ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
