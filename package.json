@@ -5,8 +5,8 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "wp-scripts start",
-    "build": "wp-scripts build",
+    "start": "wp-scripts start src/init.js src/index.js",
+    "build": "wp-scripts build src/init.js src/index.js",
     "lint:js": "wp-scripts lint-js src",
     "lint:js:fix": "wp-scripts lint-js src --fix",
     "lint:css": "wp-scripts lint-style src",
