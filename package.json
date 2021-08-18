@@ -5,12 +5,14 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "wp-scripts start src/init.js src/link/index.js",
-    "build": "wp-scripts build src/init.js src/link/index.js",
+    "start": "wp-scripts start src/init.js src/index.js",
+    "build": "wp-scripts build src/init.js src/index.js",
     "lint:js": "wp-scripts lint-js src",
     "lint:js:fix": "wp-scripts lint-js src --fix",
     "lint:css": "wp-scripts lint-style src",
     "lint:css:fix": "wp-scripts lint-style src --fix",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses --prod --mit",
     "postinstall": "sh scripts/postinstall.sh",
     "version": "sh scripts/version.sh",
     "postversion": "git push && git push --tags"
@@ -28,8 +30,12 @@
   "dependencies": {
     "@wordpress/block-editor": "^6.1.5",
     "@wordpress/components": "^14.1.4",
+    "@wordpress/compose": "^5.0.0",
+    "@wordpress/data": "^6.0.0",
+    "@wordpress/edit-post": "^5.0.0",
     "@wordpress/element": "^3.1.1",
     "@wordpress/i18n": "^4.2.1",
+    "@wordpress/plugins": "^4.0.0",
     "@wordpress/rich-text": "^4.1.2",
     "wikipedia-preview": "1.3.0"
   },

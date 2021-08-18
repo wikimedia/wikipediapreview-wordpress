@@ -36,6 +36,12 @@ function wikipediapreview_enqueue_scripts() {
 		true
 	);
 
+	global $post;
+	$options = array(
+		'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
+	);
+	wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
+
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
 		$assets_dir . 'wikipedia-preview-link.css',
@@ -45,25 +51,11 @@ function wikipediapreview_enqueue_scripts() {
 	);
 }
 
-/**
- * Record the option of detect links feature enabled in this version,
- * detect links feature may be disabled by default in the next version.
- */
-function wikipediapreview_detect_true() {
-	add_option( 'wikipediapreview_options_detect_links', true );
-}
-
 function wikipediapreview_detect_deletion() {
 	delete_option( 'wikipediapreview_options_detect_links' );
 }
 
 function wikipediapreview_guten_enqueue() {
-
-	// feature toggle of the gutenberg support, disabled by default
-	if ( ! $_GET['wikipediapreview_gutenburg'] ) { // phpcs:ignore
-		return;
-	}
-
 	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 	wp_enqueue_script(
@@ -95,8 +87,19 @@ function myguten_set_script_translations() {
 	wp_set_script_translations( 'wikipedia-preview-localization', 'wikipedia-preview' );
 }
 
-register_activation_hook( __FILE__, 'wikipediapreview_detect_true' );
+function register_detectlinks_postmeta() {
+	$options = array(
+		'show_in_rest'  => true,
+		'auth_callback' => true,
+		'single'        => true,
+		'type'          => 'boolean',
+		'default'       => true, // it could default to false when the gutenburg support is released
+	);
+	register_post_meta( '', 'wikipediapreview_detectlinks', $options );
+}
+
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
 add_action( 'init', 'myguten_set_script_translations' );
+add_action( 'init', 'register_detectlinks_postmeta' );
