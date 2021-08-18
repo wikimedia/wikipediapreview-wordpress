@@ -36,6 +36,13 @@ function wikipediapreview_enqueue_scripts() {
 		true
 	);
 
+	global $post;
+	$detectLinks = get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true );
+	$options = [
+		'detectLinks' => $detectLinks
+	];
+	wp_localize_script( "wikipedia-preview-init", "options", $options );
+
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
 		$assets_dir . 'wikipedia-preview-link.css',
@@ -58,12 +65,6 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
-
-	// feature toggle of the gutenberg support, disabled by default
-	if ( ! $_GET['wikipediapreview_gutenburg'] ) { // phpcs:ignore
-		return;
-	}
-
 	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
 	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
 	wp_enqueue_script(
@@ -100,3 +101,13 @@ register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
 add_action( 'init', 'myguten_set_script_translations' );
+
+add_action( 'init', function() {
+	register_post_meta( 'post', 'wikipediapreview_detectlinks', [
+		'show_in_rest' => true,
+		'auth_callback' => true,
+		'single' => true,
+		'type' => 'boolean',
+		'default' => true, // it could default to false when the gutenburg support is released
+	] );
+} );

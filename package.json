@@ -5,12 +5,14 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "wp-scripts start src/init.js src/link/index.js",
-    "build": "wp-scripts build src/init.js src/link/index.js",
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
     "lint:js": "wp-scripts lint-js src",
     "lint:js:fix": "wp-scripts lint-js src --fix",
     "lint:css": "wp-scripts lint-style src",
     "lint:css:fix": "wp-scripts lint-style src --fix",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses --prod --mit",
     "postinstall": "sh scripts/postinstall.sh",
     "version": "sh scripts/version.sh",
     "postversion": "git push && git push --tags"
