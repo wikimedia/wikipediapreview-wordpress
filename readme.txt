@@ -26,6 +26,7 @@ Wikipedia Preview is an official plugin developed and supported by the [Wikimedi
 * Handles any link to a Wikipedia article regardless of language, lead image presence or length.
 * Works for Right-to-Left (RTL) and Left-To-Right (LTR) languages.
 * A built-in gallery to dive into article images.
+* Can be disabled for any page using the post metadata sidebar. Look for the Wikipedia Preview section.
 
 **How to use**
 
