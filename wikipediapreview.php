@@ -16,11 +16,11 @@
 DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.1.0' );
 
 function wikipediapreview_enqueue_scripts() {
-	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
-	$libs_dir = plugin_dir_url( __FILE__ ) . 'libs/';
-	$media_type_all = 'all';
+	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
+	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
+	$media_type_all  = 'all';
 	$no_dependencies = array();
-	$in_footer = true;
+	$in_footer       = true;
 
 	wp_enqueue_script(
 		'wikipedia-preview',
@@ -58,11 +58,11 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
-	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
-	$libs_dir = plugin_dir_url( __FILE__ ) . 'libs/';
-	$media_type_all = 'all';
+	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
+	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
+	$media_type_all  = 'all';
 	$no_dependencies = array();
-	$in_footer = true;
+	$in_footer       = true;
 
 	wp_enqueue_script(
 		'wikipedia-preview-edit-link',
@@ -95,8 +95,8 @@ function myguten_set_script_translations() {
 
 function register_detectlinks_postmeta() {
 	$all_post_types = '';
-	$meta_name = 'wikipediapreview_detectlinks';
-	$options = array(
+	$meta_name      = 'wikipediapreview_detectlinks';
+	$options        = array(
 		'show_in_rest'  => true,
 		'auth_callback' => true,
 		'single'        => true,
