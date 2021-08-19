@@ -1,6 +1,4 @@
 node_modules
-assets/wikipedia-preview.production.js
-assets/wikipedia-preview-link.css
-wikipediapreview.zip
-/vendor/
-/build/
+libs
+vendor
+build
