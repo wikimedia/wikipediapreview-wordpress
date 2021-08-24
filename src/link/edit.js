@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
@@ -6,9 +6,11 @@ import {
 	useAnchorRef,
 	applyFormat,
 	removeFormat,
+	getActiveFormat
 } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
+import { PreviewEditUI } from './preview';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -24,6 +26,11 @@ const Edit = ( {
 	const [ addingPreview, setAddingPreview ] = useState( false );
 	const startAddingPreview = () => setAddingPreview( true );
 	const stopAddingPreview = () => setAddingPreview( false );
+	const [ viewingPreview, setViewingPreview ] = useState( false );
+	const startViewingPreview = () => setViewingPreview( true );
+	const stopViewingPreview = () => setViewingPreview( false );
+	const [ previewTitle, setPreviewTitle ] = useState( );
+	const activePreview = getActiveFormat( value, name );
 
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -58,6 +65,7 @@ const Edit = ( {
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
+		// console.log('edit.js - updateAttributes - addingPreview...', addingPreview);
 		const newValue = applyFormat( selectedValue, {
 			type: formatType,
 			attributes: {
@@ -69,7 +77,9 @@ const Edit = ( {
 		newValue.start = newValue.end;
 		newValue.activeFormats = [];
 		onChange( newValue );
+		setPreviewTitle(title)
 		stopAddingPreview();
+		startViewingPreview()
 		onFocus();
 	};
 
@@ -77,6 +87,18 @@ const Edit = ( {
 		onChange( removeFormat( value, formatType ) );
 		stopAddingPreview();
 	};
+
+	useEffect( () => {
+		// console.log('edit.js - useEffect - addingPreview, viewingPreview...', addingPreview, viewingPreview);
+		// console.log('...isActive, activeAttributes...', isActive, activeAttributes);
+		// console.log('...previewTitle...', previewTitle);
+		// console.log('...activePreview...', activePreview);
+		if (activePreview) {
+			stopAddingPreview();
+			setPreviewTitle(activePreview.attributes.title)
+			startViewingPreview();
+		}
+	}, [activePreview])
 
 	return (
 		<>
@@ -86,7 +108,7 @@ const Edit = ( {
 				isActive={ isActive }
 				onClick={ formatButtonClick }
 			/>
-			{ ( addingPreview || isActive ) && (
+			{ ( addingPreview && !viewingPreview ) && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
@@ -98,6 +120,13 @@ const Edit = ( {
 					value={ value }
 					activeAttributes={ activeAttributes }
 					onClose={ stopAddingPreview }
+				/>
+			) }
+			{ ( viewingPreview && !addingPreview || isActive ) && (
+				<PreviewEditUI
+					anchorRef={ anchorRef }
+					onClose={ stopViewingPreview }
+					title={previewTitle}
 				/>
 			) }
 		</>
