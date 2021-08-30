@@ -65,7 +65,6 @@ const Edit = ( {
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
-		// console.log('edit.js - updateAttributes - addingPreview...', addingPreview);
 		const newValue = applyFormat( selectedValue, {
 			type: formatType,
 			attributes: {
@@ -79,20 +78,22 @@ const Edit = ( {
 		onChange( newValue );
 		setPreviewTitle(title)
 		stopAddingPreview();
-		startViewingPreview()
+		startViewingPreview();
 		onFocus();
 	};
 
 	const removeAttributes = () => {
 		onChange( removeFormat( value, formatType ) );
 		stopAddingPreview();
+		stopViewingPreview();
 	};
 
+	const goToEdit = () => {
+		stopViewingPreview();
+		startAddingPreview();
+	}
+
 	useEffect( () => {
-		// console.log('edit.js - useEffect - addingPreview, viewingPreview...', addingPreview, viewingPreview);
-		// console.log('...isActive, activeAttributes...', isActive, activeAttributes);
-		// console.log('...previewTitle...', previewTitle);
-		// console.log('...activePreview...', activePreview);
 		if (activePreview) {
 			stopAddingPreview();
 			setPreviewTitle(activePreview.attributes.title)
@@ -122,11 +123,14 @@ const Edit = ( {
 					onClose={ stopAddingPreview }
 				/>
 			) }
-			{ ( viewingPreview && !addingPreview || isActive ) && (
+			{ ( viewingPreview && !addingPreview ) && (
 				<PreviewEditUI
 					anchorRef={ anchorRef }
+					title={ previewTitle }
 					onClose={ stopViewingPreview }
-					title={previewTitle}
+					onEdit={ goToEdit }
+					onRemove={ removeAttributes }
+					activePreview={activePreview}
 				/>
 			) }
 		</>

@@ -1,30 +1,56 @@
 import { Popover } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-// import { getSiteLanguage } from './utils';
+import { getSiteLanguage } from './utils';
 import { getPreviewHtml } from 'wikipedia-preview'
-
 
 export const PreviewEditUI = ( {
 	anchorRef,
-  onClose,
-	title
+  title,
+	activePreview,
+	onClose,
+	onEdit,
+	onRemove
 } ) => {
-	const [previewHtml, setPreviewHtml] = useState(null)
+	const [previewHtml, setPreviewHtml] = useState(null);
+	const lang = getSiteLanguage()
 
 	useEffect( () => {
-    getPreviewHtml(title).then(setPreviewHtml)
-	}, [ title ] );
+		getPreviewHtml(title, lang).then(setPreviewHtml);
+	}, [ activePreview ] );
 
 	return (
-		<Popover
-			anchorRef={ anchorRef }
-			onClose={ onClose }
-			position="bottom center"
-			noArrow={ false }
-			expandOnMobile={ true }
-		>
-			<div className="wikipediapreview-edit-inline-container" dangerouslySetInnerHTML={{__html: previewHtml}}></div>
-		</Popover>
+		<div>
+			<Popover
+				anchorRef={ anchorRef }
+				onClose={ onClose }
+				position="bottom center"
+				noArrow={ false }
+				expandOnMobile={ true }
+				className="wikipediapreview-edit-preview-popover"
+			>
+				<div className="wikipediapreview-edit-preview-container">
+					<div className="wikipediapreview-edit-preview" dangerouslySetInnerHTML={{__html: previewHtml}}></div>
+					{previewHtml && (
+						<ControllerEditUI
+							onEdit={onEdit}
+							onRemove={onRemove}
+						/>
+					)}
+				</div>
+			</Popover>
+		</div>
+	);
+};
+
+const ControllerEditUI = ( {
+	onEdit,
+	onRemove
+} ) => {
+	return (
+		<div className="wikipediapreview-edit-preview-controllers">
+			<div className="wikipediapreview-edit-preview-controllers-change" onClick={onEdit}>{ __( 'Change', 'wikipedia-preview' ) }</div>
+			<div className="wikipediapreview-edit-preview-controllers-remove" onClick={onRemove}>{ __( 'Remove', 'wikipedia-preview' ) }</div>
+		</div>
 	);
 };
