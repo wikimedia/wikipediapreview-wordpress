@@ -37,7 +37,7 @@ export const InlineEditUI = ( {
 			noArrow={ false }
 			expandOnMobile={ true }
 		>
-			<div className="wikipediapreview-edit-inline-container">
+			<div className="wikipediapreview-edit-inline-search">
 				<TextControl
 					label={ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
 					value={ title }
@@ -63,32 +63,37 @@ export const InlineEditUI = ( {
 				>
 					{ __( 'Remove', 'wikipedia-preview' ) }
 				</Button> */ }
-				{ searchList &&
-					searchList.length &&
-					searchList.map( ( item ) => {
-						return (
-							<div
-								className="wikipediapreview-edit-inline-container-list"
-								key={ item.title }
-								onClick={ () => {
-									onApply( value, item.title, lang );
-								} }
-							>
-								<img
-									src={ item.thumbnail }
-									alt={ item.title }
-									width="42"
-								/>
-								<span className="wikipediapreview-edit-inline-container-list-title">
-									{ item.title }
-								</span>
-								<span className="wikipediapreview-edit-inline-container-list-description">
-									{ item.description }
-								</span>
-							</div>
-						);
-					} ) }
 			</div>
+			{ searchList &&
+				searchList.length &&
+				searchList.map( ( item ) => {
+					return (
+						<div
+							className="wikipediapreview-edit-inline-list"
+							key={ item.title }
+							onClick={ () => {
+								onApply( value, item.title, lang );
+							} }
+						>
+							<div
+								className="wikipediapreview-edit-inline-list-img"
+								style={
+									item.thumbnail
+										? {
+												backgroundImage: `url(${ item.thumbnail })`,
+										  }
+										: {}
+								}
+							/>
+							<span className="wikipediapreview-edit-inline-list-title">
+								{ item.title }
+							</span>
+							<span className="wikipediapreview-edit-inline-list-description">
+								{ item.description }
+							</span>
+						</div>
+					);
+				} ) }
 		</Popover>
 	);
 };

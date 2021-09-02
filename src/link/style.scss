@@ -1,27 +1,35 @@
-.wikipediapreview-edit-inline-container {
-	width: 400px;
-	padding: 16px;
+.wikipediapreview-edit-inline {
 
-	label {
-		width: 100%;
-		text-align: center;
-		font-size: 16px;
-		font-weight: 700;
+	&-search {
+		width: 400px;
+		padding: 10px 10px 0;
+		margin: 0;
+
+		label {
+			width: 100%;
+			text-align: center;
+			font-size: 16px;
+			font-weight: 700;
+		}
 	}
 
 	&-list {
+		position: relative;
+		width: 100%;
+		height: 60px;
+		padding: 10px;
+		overflow: hidden;
 
 		&:hover {
 			background-color: #eaecf0;
 			cursor: pointer;
 		}
 
-		height: 42px;
-		margin-top: 7px;
-
-		img {
+		&-img {
+			position: absolute;
+			background-image: url("./thumbnail.svg");
 			width: 42px;
-			height: 100%;
+			height: 42px;
 			background-repeat: no-repeat;
 			background-position: center center;
 			border-radius: 4px;
@@ -29,17 +37,28 @@
 
 		&-title {
 			position: absolute;
+			width: calc(100% - 70px);
+			left: 60px;
 			font-size: 15px;
 			font-weight: 700;
 			line-height: 20px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 
 		&-description {
-			position: relative;
+			position: absolute;
+			width: calc(100% - 70px);
+			left: 60px;
+			bottom: 10px;
 			color: #72777d;
 			font-size: 13px;
 			font-weight: 400;
 			line-height: 20px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 
 		}
 	}
