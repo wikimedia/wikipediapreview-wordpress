@@ -9,7 +9,7 @@ export const search = ( lang, term, callback ) => {
 		generator: 'prefixsearch',
 		redirects: true,
 		pithumbsize: 64,
-		gpslimit: 15,
+		gpslimit: 5,
 		gpsnamespace: 0,
 		gpssearch: term.replace( /:/g, ' ' ),
 	};

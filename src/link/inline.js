@@ -63,29 +63,32 @@ export const InlineEditUI = ( {
 				>
 					{ __( 'Remove', 'wikipedia-preview' ) }
 				</Button> */ }
+				{ searchList &&
+					searchList.length &&
+					searchList.map( ( item ) => {
+						return (
+							<div
+								className="wikipediapreview-edit-inline-container-list"
+								key={ item.title }
+								onClick={ () => {
+									onApply( value, item.title, lang );
+								} }
+							>
+								<img
+									src={ item.thumbnail }
+									alt={ item.title }
+									width="42"
+								/>
+								<span className="wikipediapreview-edit-inline-container-list-title">
+									{ item.title }
+								</span>
+								<span className="wikipediapreview-edit-inline-container-list-description">
+									{ item.description }
+								</span>
+							</div>
+						);
+					} ) }
 			</div>
-			{ searchList &&
-				searchList.length &&
-				searchList.map( ( item ) => {
-					return (
-						<div
-							key={ item.title }
-							onClick={ () => {
-								onApply( value, item.title, lang );
-							} }
-						>
-							<img
-								src={ item.thumbnail }
-								alt={ item.title }
-								width="50"
-							/>
-							<span>
-								{ item.title } <br />
-								{ item.description }
-							</span>
-						</div>
-					);
-				} ) }
 		</Popover>
 	);
 };

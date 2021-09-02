@@ -8,6 +8,41 @@
 		font-size: 16px;
 		font-weight: 700;
 	}
+
+	&-list {
+
+		&:hover {
+			background-color: #eaecf0;
+			cursor: pointer;
+		}
+
+		height: 42px;
+		margin-top: 7px;
+
+		img {
+			width: 42px;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			border-radius: 4px;
+		}
+
+		&-title {
+			position: absolute;
+			font-size: 15px;
+			font-weight: 700;
+			line-height: 20px;
+		}
+
+		&-description {
+			position: relative;
+			color: #72777d;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 20px;
+
+		}
+	}
 }
 
 .wmf-wp-with-preview:hover {
