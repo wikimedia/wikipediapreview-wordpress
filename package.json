@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
+    "@wordpress/api-fetch": "^5.2.1",
     "@wordpress/block-editor": "^6.1.5",
     "@wordpress/components": "^14.1.4",
     "@wordpress/compose": "^5.0.0",

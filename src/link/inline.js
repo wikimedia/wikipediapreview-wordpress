@@ -3,6 +3,7 @@ import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
+import { search } from './api';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -20,6 +21,12 @@ export const InlineEditUI = ( {
 		setLang( activeAttributes.lang || getSiteLanguage() );
 	}, [ activeAttributes ] );
 
+	useEffect( () => {
+		console.log( 'titles update' );
+		search( lang, title ).then( ( data ) => {
+			console.log( data );
+		} );
+	}, [ title ] );
 	return (
 		<Popover
 			anchorRef={ anchorRef }
