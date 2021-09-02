@@ -15,6 +15,7 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
+	const [ searchList, setSearchList ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -22,9 +23,8 @@ export const InlineEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		console.log( 'titles update' );
-		search( lang, title ).then( ( data ) => {
-			console.log( data );
+		search( lang, title, ( data ) => {
+			setSearchList( data );
 		} );
 	}, [ title ] );
 	return (
@@ -62,6 +62,20 @@ export const InlineEditUI = ( {
 					{ __( 'Remove', 'wikipedia-preview' ) }
 				</Button>
 			</div>
+			{ searchList &&
+				searchList.length &&
+				searchList.map( ( item ) => {
+					return (
+						<p
+							key={ item.title }
+							onClick={ () => {
+								onApply( value, item.title, lang );
+							} }
+						>
+							{ item.title }
+						</p>
+					);
+				} ) }
 		</Popover>
 	);
 };

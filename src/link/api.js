@@ -1,6 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
-
-export const search = ( lang, term ) => {
+export const search = ( lang, term, callback ) => {
 	// prefix search
 	const params = {
 		action: 'query',
@@ -17,18 +15,20 @@ export const search = ( lang, term ) => {
 	};
 
 	const url = buildMwApiUrl( lang, params );
-	return apiFetch( { url } ).then( ( data ) => {
+	return request( url, ( data ) => {
 		if ( ! data.query || ! data.query.pages ) {
-			return [];
+			callback( [] );
 		}
 
-		return Object.values( data.query.pages ).map( ( page ) => {
-			return {
-				title: page.title,
-				description: page.description,
-				imageUrl: page.thumbnail?.source,
-			};
-		} );
+		callback(
+			Object.values( data.query.pages ).map( ( page ) => {
+				return {
+					title: page.title,
+					description: page.description,
+					imageUrl: page.thumbnail?.source,
+				};
+			} )
+		);
 	} );
 };
 
@@ -50,4 +50,16 @@ const buildMwApiUrl = ( lang, params ) => {
 			} )
 			.join( '&' )
 	);
+};
+
+const request = ( url, callback ) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url );
+	xhr.send();
+	xhr.addEventListener( 'load', () => {
+		callback( JSON.parse( xhr.responseText ) );
+	} );
+	xhr.addEventListener( 'error', () => {
+		callback( null, xhr.status );
+	} );
 };
