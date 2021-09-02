@@ -23,9 +23,11 @@ export const InlineEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		search( lang, title, ( data ) => {
-			setSearchList( data );
-		} );
+		if ( title ) {
+			search( lang, title, ( data ) => {
+				setSearchList( data );
+			} );
+		}
 	}, [ title ] );
 	return (
 		<Popover
@@ -41,11 +43,11 @@ export const InlineEditUI = ( {
 					value={ title }
 					onChange={ setTitle }
 					placeholder={ __(
-						'Type preview to add',
+						'Search Wikipedia',
 						'wikipedia-preview'
 					) }
 				/>
-				<Button
+				{ /* <Button
 					variant="secondary"
 					className="is-primary"
 					onClick={ () => {
@@ -60,20 +62,28 @@ export const InlineEditUI = ( {
 					onClick={ onRemove }
 				>
 					{ __( 'Remove', 'wikipedia-preview' ) }
-				</Button>
+				</Button> */ }
 			</div>
 			{ searchList &&
 				searchList.length &&
 				searchList.map( ( item ) => {
 					return (
-						<p
+						<div
 							key={ item.title }
 							onClick={ () => {
 								onApply( value, item.title, lang );
 							} }
 						>
-							{ item.title }
-						</p>
+							<img
+								src={ item.thumbnail }
+								alt={ item.title }
+								width="50"
+							/>
+							<span>
+								{ item.title } <br />
+								{ item.description }
+							</span>
+						</div>
 					);
 				} ) }
 		</Popover>

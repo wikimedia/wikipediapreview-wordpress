@@ -25,7 +25,7 @@ export const search = ( lang, term, callback ) => {
 				return {
 					title: page.title,
 					description: page.description,
-					imageUrl: page.thumbnail?.source,
+					thumbnail: page.thumbnail?.source,
 				};
 			} )
 		);
