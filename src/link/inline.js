@@ -47,6 +47,15 @@ export const InlineEditUI = ( {
 						'wikipedia-preview'
 					) }
 				/>
+				<div className="wikipediapreview-edit-inline-search-icon" />
+				{ title && (
+					<div
+						onClick={ () => {
+							setTitle( '' );
+						} }
+						className="wikipediapreview-edit-inline-search-close"
+					/>
+				) }
 				{ /* <Button
 					variant="secondary"
 					className="is-primary"

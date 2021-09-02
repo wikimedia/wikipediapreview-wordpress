@@ -11,6 +11,32 @@
 			font-size: 16px;
 			font-weight: 700;
 		}
+
+		input {
+			padding-left: 35px !important;
+		}
+
+		&-icon {
+			background-image: url("./search.svg");
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 43px;
+			left: 18px;
+		}
+
+		&-close {
+			background-image: url("./close.svg");
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 43px;
+			right: 18px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
 	}
 
 	&-list {
