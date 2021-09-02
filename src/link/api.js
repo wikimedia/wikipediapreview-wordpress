@@ -2,33 +2,33 @@ export const search = ( lang, term, callback ) => {
 	// prefix search
 	const params = {
 		action: 'query',
-		prop: 'description|pageimages|pageprops',
+		prop: 'description|pageimages',
 		piprop: 'thumbnail',
 		pilimit: 5,
 		pprop: 'displaytitle',
 		generator: 'prefixsearch',
 		redirects: true,
 		pithumbsize: 64,
-		gpslimit: 15,
+		gpslimit: 5,
 		gpsnamespace: 0,
 		gpssearch: term.replace( /:/g, ' ' ),
 	};
 
 	const url = buildMwApiUrl( lang, params );
 	return request( url, ( data ) => {
-		if ( ! data.query || ! data.query.pages ) {
+		if ( ! data.query?.pages ) {
 			callback( [] );
+		} else {
+			callback(
+				Object.values( data.query.pages ).map( ( page ) => {
+					return {
+						title: page.title,
+						description: page.description,
+						thumbnail: page.thumbnail?.source,
+					};
+				} )
+			);
 		}
-
-		callback(
-			Object.values( data.query.pages ).map( ( page ) => {
-				return {
-					title: page.title,
-					description: page.description,
-					thumbnail: page.thumbnail?.source,
-				};
-			} )
-		);
 	} );
 };
 
@@ -53,6 +53,7 @@ const buildMwApiUrl = ( lang, params ) => {
 };
 
 const request = ( url, callback ) => {
+	// eslint-disable-next-line no-undef
 	const xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url );
 	xhr.send();

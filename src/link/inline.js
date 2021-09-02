@@ -9,7 +9,6 @@ export const InlineEditUI = ( {
 	anchorRef,
 	onClose,
 	onApply,
-	onRemove,
 	value,
 	activeAttributes,
 } ) => {
@@ -34,12 +33,16 @@ export const InlineEditUI = ( {
 			anchorRef={ anchorRef }
 			onClose={ onClose }
 			position="bottom center"
+			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
 		>
-			<div className="wikipediapreview-edit-inline-container">
+			<div className="wikipediapreview-edit-inline-search">
+				<p className="wikipediapreview-edit-inline-search-label">
+					{ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
+				</p>
 				<TextControl
-					label={ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
+					className="wikipediapreview-edit-inline-search-input"
 					value={ title }
 					onChange={ setTitle }
 					placeholder={ __(
@@ -47,45 +50,51 @@ export const InlineEditUI = ( {
 						'wikipedia-preview'
 					) }
 				/>
-				{ /* <Button
-					variant="secondary"
-					className="is-primary"
-					onClick={ () => {
-						onApply( value, title, lang );
-					} }
-				>
-					{ __( 'Add', 'wikipedia-preview' ) }
-				</Button>{ ' ' }
-				<Button
-					variant="link"
-					className="is-secondary"
-					onClick={ onRemove }
-				>
-					{ __( 'Remove', 'wikipedia-preview' ) }
-				</Button> */ }
+				<div className="wikipediapreview-edit-inline-search-icon" />
+				{ title && (
+					<Button
+						onClick={ () => {
+							setTitle( '' );
+						} }
+						className="wikipediapreview-edit-inline-search-close"
+					/>
+				) }
 			</div>
-			{ searchList &&
-				searchList.length &&
-				searchList.map( ( item ) => {
-					return (
-						<div
-							key={ item.title }
-							onClick={ () => {
-								onApply( value, item.title, lang );
-							} }
-						>
-							<img
-								src={ item.thumbnail }
-								alt={ item.title }
-								width="50"
-							/>
-							<span>
-								{ item.title } <br />
-								{ item.description }
-							</span>
-						</div>
-					);
-				} ) }
+			{ searchList?.length ? (
+				<div className="wikipediapreview-edit-inline-list">
+					{ searchList.map( ( item, index ) => {
+						return (
+							// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+							<div
+								className="wikipediapreview-edit-inline-list-item"
+								key={ item.title }
+								role="link"
+								tabIndex={ index }
+								onClick={ () => {
+									onApply( value, item.title, lang );
+								} }
+							>
+								<div
+									className="wikipediapreview-edit-inline-list-item-img"
+									style={
+										item.thumbnail
+											? {
+													backgroundImage: `url(${ item.thumbnail })`,
+											  }
+											: {}
+									}
+								/>
+								<span className="wikipediapreview-edit-inline-list-item-title">
+									{ item.title }
+								</span>
+								<span className="wikipediapreview-edit-inline-list-item-description">
+									{ item.description }
+								</span>
+							</div>
+						);
+					} ) }
+				</div>
+			) : null }
 		</Popover>
 	);
 };
