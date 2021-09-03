@@ -2,7 +2,7 @@ export const search = ( lang, term, callback ) => {
 	// prefix search
 	const params = {
 		action: 'query',
-		prop: 'description|pageimages|pageprops',
+		prop: 'description|pageimages',
 		piprop: 'thumbnail',
 		pilimit: 5,
 		pprop: 'displaytitle',

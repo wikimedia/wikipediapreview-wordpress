@@ -38,8 +38,11 @@ export const InlineEditUI = ( {
 			expandOnMobile={ true }
 		>
 			<div className="wikipediapreview-edit-inline-search">
+				<p className="wikipediapreview-edit-inline-search-label">
+					{ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
+				</p>
 				<TextControl
-					label={ __( 'Add Wikipedia preview', 'wikipedia-preview' ) }
+					className="wikipediapreview-edit-inline-search-input"
 					value={ title }
 					onChange={ setTitle }
 					placeholder={ __(

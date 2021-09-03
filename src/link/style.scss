@@ -1,19 +1,27 @@
 .wikipediapreview-edit-inline {
 
 	&-search {
+		position: relative;
 		width: 400px;
-		padding: 10px 10px 0;
 		margin: 0;
 
-		label {
+		&-label {
 			width: 100%;
 			text-align: center;
 			font-size: 16px;
 			font-weight: 700;
+			margin: 0;
+			padding: 12px 0;
+			border-bottom: 1px solid #c8ccd1;
 		}
 
-		input {
-			padding-left: 35px !important;
+		&-input {
+			margin: 30px 10px 0;
+
+			input {
+				padding-left: 35px !important;
+			}
+
 		}
 
 		&-icon {
@@ -21,7 +29,7 @@
 			width: 20px;
 			height: 20px;
 			position: absolute;
-			top: 43px;
+			bottom: 5px;
 			left: 18px;
 		}
 
@@ -30,7 +38,7 @@
 			width: 20px;
 			height: 20px;
 			position: absolute;
-			top: 42px;
+			bottom: 5px;
 			right: 15px;
 			padding: 0;
 
