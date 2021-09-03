@@ -16,19 +16,19 @@ export const search = ( lang, term, callback ) => {
 
 	const url = buildMwApiUrl( lang, params );
 	return request( url, ( data ) => {
-		if ( ! data.query || ! data.query.pages ) {
+		if ( ! data.query?.pages ) {
 			callback( [] );
+		} else {
+			callback(
+				Object.values( data.query.pages ).map( ( page ) => {
+					return {
+						title: page.title,
+						description: page.description,
+						thumbnail: page.thumbnail?.source,
+					};
+				} )
+			);
 		}
-
-		callback(
-			Object.values( data.query.pages ).map( ( page ) => {
-				return {
-					title: page.title,
-					description: page.description,
-					thumbnail: page.thumbnail?.source,
-				};
-			} )
-		);
 	} );
 };
 
@@ -53,6 +53,7 @@ const buildMwApiUrl = ( lang, params ) => {
 };
 
 const request = ( url, callback ) => {
+	// eslint-disable-next-line no-undef
 	const xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url );
 	xhr.send();
