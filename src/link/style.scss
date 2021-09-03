@@ -2,7 +2,7 @@
 
 	&-search {
 		position: relative;
-		width: 400px;
+		min-width: 400px;
 		margin: 0;
 
 		&-label {
@@ -25,16 +25,20 @@
 		}
 
 		&-icon {
-			background-image: url(./search.svg);
+			background-image: url(./images/search.svg);
 			width: 20px;
 			height: 20px;
 			position: absolute;
 			bottom: 5px;
 			left: 18px;
+
+			@media screen and (max-width: 782px) {
+				bottom: 10px;
+			}
 		}
 
 		&-close {
-			background-image: url(./close.svg);
+			background-image: url(./images/close.svg);
 			width: 20px;
 			height: 20px;
 			position: absolute;
@@ -44,6 +48,10 @@
 
 			&:hover {
 				cursor: pointer;
+			}
+
+			@media screen and (max-width: 782px) {
+				bottom: 10px;
 			}
 		}
 	}
@@ -65,7 +73,7 @@
 
 			&-img {
 				position: absolute;
-				background-image: url(./thumbnail.svg);
+				background-image: url(./images/thumbnail.svg);
 				width: 42px;
 				height: 42px;
 				background-repeat: no-repeat;
