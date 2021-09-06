@@ -114,3 +114,56 @@
 .wmf-wp-with-preview:hover {
 	border-style: dashed;
 }
+
+body.rtl {
+
+	.wikipediapreview-edit-inline {
+
+		&-search {
+
+			&-input {
+				margin: 30px 10px 0;
+
+				input {
+					padding-right: 35px !important;
+					padding-left: unset;
+				}
+
+			}
+
+			&-icon {
+				left: unset;
+				right: 18px;
+
+				@media screen and (max-width: 782px) {
+					bottom: 10px;
+				}
+			}
+
+			&-close {
+				left: 15px;
+				right: unset;
+
+				@media screen and (max-width: 782px) {
+					bottom: 10px;
+				}
+			}
+		}
+
+		&-list {
+
+			&-item {
+
+				&-title {
+					right: 60px;
+					left: unset;
+				}
+
+				&-description {
+					right: 60px;
+					left: unset;
+				}
+			}
+		}
+	}
+}
