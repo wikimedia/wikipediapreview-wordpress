@@ -43,8 +43,8 @@ export const InlineEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		const term = title.trim();
-		if ( term ) {
+		if ( title ) {
+			const term = title.trim();
 			prefixSearch( lang, term, ( prefixData ) => {
 				if ( ! prefixData.length ) {
 					fulltextSearch( lang, term, ( fulltextData ) => {
