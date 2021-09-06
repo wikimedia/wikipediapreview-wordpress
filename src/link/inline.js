@@ -8,7 +8,7 @@ import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
-import { search } from './api';
+import { prefixSearch, fulltextSearch } from './api';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -43,9 +43,16 @@ export const InlineEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		if ( title ) {
-			search( lang, title, ( data ) => {
-				setSearchList( data );
+		const term = title.trim();
+		if ( term ) {
+			prefixSearch( lang, term, ( prefixData ) => {
+				if ( ! prefixData.length ) {
+					fulltextSearch( lang, term, ( fulltextData ) => {
+						setSearchList( fulltextData );
+					} );
+				} else {
+					setSearchList( prefixData );
+				}
 				setHoverIndex( -1 );
 			} );
 		}

@@ -1,5 +1,4 @@
-export const search = ( lang, term, callback ) => {
-	// prefix search
+export const prefixSearch = ( lang, term, callback ) => {
 	const params = {
 		action: 'query',
 		prop: 'description|pageimages',
@@ -24,6 +23,48 @@ export const search = ( lang, term, callback ) => {
 					return {
 						title: page.title,
 						description: page.description,
+						thumbnail: page.thumbnail?.source,
+					};
+				} )
+			);
+		}
+	} );
+};
+
+export const fulltextSearch = ( lang, term, callback ) => {
+	const params = {
+		action: 'query',
+		list: 'search',
+		srprop: 'snippet',
+		srsearch: term,
+		srlimit: 5,
+		srenablerewrites: true,
+		srinfo: 'rewrittenquery',
+		prop: 'pageimages',
+		piprop: 'thumbnail',
+		pithumbsize: 64,
+		pilimit: 5,
+		generator: 'search',
+		gsrsearch: term,
+		gsrnamespace: 0,
+		gsrlimit: 5,
+		format: 'json',
+	};
+
+	const url = buildMwApiUrl( lang, params );
+	return request( url, ( data ) => {
+		if ( ! data.query?.search ) {
+			callback( [] );
+		} else {
+			const { search, pages } = data.query;
+			callback(
+				Object.values( search ).map( ( item ) => {
+					const page =
+						pages &&
+						pages.find( ( { pageid } ) => pageid === item.pageid );
+					return {
+						title: item.title,
+						description: stripHtml( item.snippet ),
 						thumbnail: page.thumbnail?.source,
 					};
 				} )
@@ -63,4 +104,10 @@ const request = ( url, callback ) => {
 	xhr.addEventListener( 'error', () => {
 		callback( null, xhr.status );
 	} );
+};
+
+const stripHtml = ( html ) => {
+	const tmp = document.createElement( 'DIV' );
+	tmp.innerHTML = html;
+	return tmp.textContent || tmp.innerText || '';
 };
