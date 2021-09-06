@@ -1,3 +1,5 @@
+let abortFunctions = [];
+
 export const prefixSearch = ( lang, term, callback ) => {
 	const params = {
 		action: 'query',
@@ -94,6 +96,9 @@ const buildMwApiUrl = ( lang, params ) => {
 };
 
 const request = ( url, callback ) => {
+	abortFunctions.forEach( ( x ) => x && x.abort() );
+	abortFunctions = [];
+
 	// eslint-disable-next-line no-undef
 	const xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url );
@@ -104,6 +109,8 @@ const request = ( url, callback ) => {
 	xhr.addEventListener( 'error', () => {
 		callback( null, xhr.status );
 	} );
+
+	abortFunctions.push( xhr );
 };
 
 const stripHtml = ( html ) => {
