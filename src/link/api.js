@@ -39,6 +39,7 @@ export const fulltextSearch = ( lang, term, callback ) => {
 		list: 'search',
 		srprop: 'snippet',
 		srsearch: term,
+		srnamespace: 0,
 		srlimit: 5,
 		srenablerewrites: true,
 		srinfo: 'rewrittenquery',
@@ -50,7 +51,6 @@ export const fulltextSearch = ( lang, term, callback ) => {
 		gsrsearch: term,
 		gsrnamespace: 0,
 		gsrlimit: 5,
-		format: 'json',
 	};
 
 	const url = buildMwApiUrl( lang, params );
