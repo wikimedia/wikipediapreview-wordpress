@@ -57,6 +57,7 @@ export const InlineEditUI = ( {
 			} );
 		}
 	}, [ title ] );
+
 	return (
 		<Popover
 			anchorRef={ anchorRef }
@@ -129,9 +130,7 @@ export const InlineEditUI = ( {
 				shortcuts={ {
 					down: () => {
 						onItemHovered(
-							hoveredIndex === searchList.length - 1
-								? 0
-								: hoveredIndex + 1
+							( hoveredIndex + 1 ) % searchList.length
 						);
 					},
 					up: () => {
