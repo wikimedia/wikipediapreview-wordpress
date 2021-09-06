@@ -1,4 +1,9 @@
-import { Popover, TextControl, Button } from '@wordpress/components';
+import {
+	Popover,
+	TextControl,
+	Button,
+	KeyboardShortcuts,
+} from '@wordpress/components';
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -14,7 +19,23 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
-	const [ searchList, setSearchList ] = useState( false );
+	const [ searchList, setSearchList ] = useState( [] );
+	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
+	const onItemHovered = ( index ) => {
+		if ( ! searchList.length ) return;
+		const className = 'wikipediapreview-edit-inline-list-item';
+
+		if ( hoveredIndex >= 0 ) {
+			document
+				.querySelectorAll( `.${ className }` )
+				[ hoveredIndex ].classList.remove( 'hovered' );
+		}
+
+		document
+			.querySelectorAll( `.${ className }` )
+			[ index ].classList.add( 'hovered' );
+		setHoverIndex( index );
+	};
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -25,6 +46,7 @@ export const InlineEditUI = ( {
 		if ( title ) {
 			search( lang, title, ( data ) => {
 				setSearchList( data );
+				setHoverIndex( -1 );
 			} );
 		}
 	}, [ title ] );
@@ -95,6 +117,32 @@ export const InlineEditUI = ( {
 					} ) }
 				</div>
 			) : null }
+			<KeyboardShortcuts
+				bindGlobal={ true }
+				shortcuts={ {
+					down: () => {
+						onItemHovered(
+							hoveredIndex === searchList.length - 1
+								? 0
+								: hoveredIndex + 1
+						);
+					},
+					up: () => {
+						onItemHovered(
+							hoveredIndex
+								? hoveredIndex - 1
+								: searchList.length - 1
+						);
+					},
+					enter: () => {
+						onApply(
+							value,
+							searchList[ hoveredIndex ].title,
+							lang
+						);
+					},
+				} }
+			/>
 		</Popover>
 	);
 };
