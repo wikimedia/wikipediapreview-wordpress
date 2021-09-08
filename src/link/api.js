@@ -3,10 +3,10 @@ let abortFunctions = [];
 export const prefixSearch = ( lang, term, callback ) => {
 	const params = {
 		action: 'query',
-		prop: 'description|pageimages',
+		prop: 'description|pageimages|pageprops',
 		piprop: 'thumbnail',
 		pilimit: 5,
-		pprop: 'displaytitle',
+		ppprop: 'displaytitle',
 		generator: 'prefixsearch',
 		redirects: true,
 		pithumbsize: 64,
