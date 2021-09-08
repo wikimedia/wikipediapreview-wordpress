@@ -16,9 +16,11 @@ export const PreviewEditUI = ( {
 	const lang = getSiteLanguage()
 
 	useEffect( () => {
-		getPreviewHtml(title, lang, preview => {
-			setPreviewHtml(preview)
-		});
+		if (title && lang) {
+			getPreviewHtml(title, lang, preview => {
+				setPreviewHtml(preview)
+			});
+		}
 	}, [ activePreview ] );
 
 	return (
