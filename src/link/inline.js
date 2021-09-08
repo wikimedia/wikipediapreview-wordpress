@@ -90,7 +90,7 @@ export const InlineEditUI = ( {
 					/>
 				) }
 			</div>
-			{ searchList?.length ? (
+			{ searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
