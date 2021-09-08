@@ -20,6 +20,7 @@ export const prefixSearch = ( lang, term, callback ) => {
 		if ( ! data.query?.pages ) {
 			callback( [] );
 		} else {
+			data.query.pages.sort( ( a, b ) => a.index - b.index );
 			callback(
 				Object.values( data.query.pages ).map( ( page ) => {
 					return {
