@@ -83,7 +83,12 @@ const Edit = ( {
 	};
 
 	const removeAttributes = () => {
-		onChange( removeFormat( value, formatType ) );
+		if (previewTitle && !activePreview) {
+			const start = value.end - previewTitle.length
+			onChange( removeFormat( value, formatType, start, value.end ) );
+		} else {
+			onChange( removeFormat( value, formatType ) );
+		}
 		stopAddingPreview();
 		stopViewingPreview();
 	};
@@ -94,9 +99,9 @@ const Edit = ( {
 	}
 	
 	const onClosePreview = () => {
-		if (previewTitle === activePreview.attributes.title) {
+		stopViewingPreview()
+		if (activePreview && previewTitle === activePreview.attributes.title) {
 			// Closing one and activating another preview in the same block
-			stopViewingPreview()
 			startViewingPreview()
 		}
 	}
