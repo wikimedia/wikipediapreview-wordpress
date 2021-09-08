@@ -92,6 +92,14 @@ const Edit = ( {
 		stopViewingPreview();
 		startAddingPreview();
 	}
+	
+	const onClosePreview = () => {
+		if (previewTitle === activePreview.attributes.title) {
+			// Closing one and activating another preview in the same block
+			stopViewingPreview()
+			startViewingPreview()
+		}
+	}
 
 	useEffect( () => {
 		if (activePreview) {
@@ -127,7 +135,7 @@ const Edit = ( {
 				<PreviewEditUI
 					anchorRef={ anchorRef }
 					title={ previewTitle }
-					onClose={ stopViewingPreview }
+					onClose={ onClosePreview }
 					onEdit={ goToEdit }
 					onRemove={ removeAttributes }
 					activePreview={activePreview}
