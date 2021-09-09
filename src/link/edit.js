@@ -6,7 +6,7 @@ import {
 	useAnchorRef,
 	applyFormat,
 	removeFormat,
-	getActiveFormat
+	getActiveFormat,
 } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
@@ -29,7 +29,7 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-	const [ previewTitle, setPreviewTitle ] = useState( );
+	const [ previewTitle, setPreviewTitle ] = useState();
 	const activePreview = getActiveFormat( value, name );
 
 	const anchorRef = useAnchorRef( {
@@ -76,7 +76,7 @@ const Edit = ( {
 		newValue.start = newValue.end;
 		newValue.activeFormats = [];
 		onChange( newValue );
-		setPreviewTitle(title)
+		setPreviewTitle(title);
 		stopAddingPreview();
 		startViewingPreview();
 		onFocus();
@@ -84,7 +84,7 @@ const Edit = ( {
 
 	const removeAttributes = () => {
 		if (previewTitle && !activePreview) {
-			const start = value.end - previewTitle.length
+			const start = value.end - previewTitle.length;
 			onChange( removeFormat( value, formatType, start, value.end ) );
 		} else {
 			onChange( removeFormat( value, formatType ) );
@@ -96,23 +96,23 @@ const Edit = ( {
 	const goToEdit = () => {
 		stopViewingPreview();
 		startAddingPreview();
-	}
-	
+	};
+
 	const onClosePreview = () => {
-		stopViewingPreview()
+		stopViewingPreview();
 		if (activePreview && previewTitle === activePreview.attributes.title) {
 			// Closing one and activating another preview in the same block
-			startViewingPreview()
-		}
-	}
-
-	useEffect( () => {
-		if (activePreview) {
-			stopAddingPreview();
-			setPreviewTitle(activePreview.attributes.title)
 			startViewingPreview();
 		}
-	}, [activePreview])
+	};
+
+	useEffect( () => {
+		if ( activePreview ) {
+			stopAddingPreview();
+			setPreviewTitle( activePreview.attributes.title )
+			startViewingPreview();
+		}
+	}, [ activePreview ])
 
 	return (
 		<>
@@ -143,7 +143,7 @@ const Edit = ( {
 					onClose={ onClosePreview }
 					onEdit={ goToEdit }
 					onRemove={ removeAttributes }
-					activePreview={activePreview}
+					activePreview={ activePreview }
 				/>
 			) }
 		</>
