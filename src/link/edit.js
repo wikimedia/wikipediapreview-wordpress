@@ -100,7 +100,7 @@ const Edit = ( {
 
 	const onClosePreview = () => {
 		stopViewingPreview();
-		if (activePreview && previewTitle === activePreview.attributes.title) {
+		if ( activePreview ) {
 			// Closing one and activating another preview in the same block
 			startViewingPreview();
 		}
