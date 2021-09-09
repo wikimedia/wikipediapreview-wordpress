@@ -45,3 +45,12 @@
 .wmf-wp-with-preview:hover {
 	border-style: dashed;
 }
+
+body.rtl {
+	.wikipediapreview-edit-preview-controllers {
+		border-top-right-radius: unset;
+		border-bottom-right-radius: unset;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+	}
+}
