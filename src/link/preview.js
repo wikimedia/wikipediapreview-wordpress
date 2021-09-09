@@ -21,7 +21,7 @@ export const PreviewEditUI = ( {
 				setPreviewHtml( preview )
 			} );
 		}
-	}, [ activePreview ] );
+	}, [ title ] );
 
 	return (
 		<div>
