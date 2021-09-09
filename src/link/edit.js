@@ -76,14 +76,14 @@ const Edit = ( {
 		newValue.start = newValue.end;
 		newValue.activeFormats = [];
 		onChange( newValue );
-		setPreviewTitle(title);
+		setPreviewTitle( title );
 		stopAddingPreview();
 		startViewingPreview();
 		onFocus();
 	};
 
 	const removeAttributes = () => {
-		if (previewTitle && !activePreview) {
+		if ( previewTitle && ! activePreview ) {
 			const start = value.end - previewTitle.length;
 			onChange( removeFormat( value, formatType, start, value.end ) );
 		} else {
@@ -109,10 +109,10 @@ const Edit = ( {
 	useEffect( () => {
 		if ( activePreview ) {
 			stopAddingPreview();
-			setPreviewTitle( activePreview.attributes.title )
+			setPreviewTitle( activePreview.attributes.title );
 			startViewingPreview();
 		}
-	}, [ activePreview ])
+	}, [ activePreview ]);
 
 	return (
 		<>
@@ -122,7 +122,7 @@ const Edit = ( {
 				isActive={ isActive }
 				onClick={ formatButtonClick }
 			/>
-			{ ( addingPreview && !viewingPreview ) && (
+			{ addingPreview && ! viewingPreview && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
@@ -136,7 +136,7 @@ const Edit = ( {
 					onClose={ stopAddingPreview }
 				/>
 			) }
-			{ ( viewingPreview && !addingPreview ) && (
+			{  viewingPreview && ! addingPreview && (
 				<PreviewEditUI
 					anchorRef={ anchorRef }
 					title={ previewTitle }

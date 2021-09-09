@@ -7,7 +7,6 @@ import { getPreviewHtml } from 'wikipedia-preview';
 export const PreviewEditUI = ( {
 	anchorRef,
 	title,
-	activePreview,
 	onClose,
 	onEdit,
 	onRemove,
@@ -18,7 +17,7 @@ export const PreviewEditUI = ( {
 	useEffect( () => {
 		if ( title && lang ) {
 			getPreviewHtml( title, lang, ( preview ) => {
-				setPreviewHtml( preview )
+				setPreviewHtml( preview );
 			} );
 		}
 	}, [ title ] );
@@ -34,7 +33,11 @@ export const PreviewEditUI = ( {
 				className="wikipediapreview-edit-preview-popover"
 			>
 				<div className="wikipediapreview-edit-preview-container">
-					<div className="wikipediapreview-edit-preview" dangerouslySetInnerHTML={ { __html: previewHtml } }></div>
+					<div
+						className="wikipediapreview-edit-preview"
+						dangerouslySetInnerHTML={ { __html: previewHtml } }
+					>
+					</div>
 					{ previewHtml && (
 						<ControllerEditUI
 							onEdit={ onEdit }
@@ -50,8 +53,18 @@ export const PreviewEditUI = ( {
 const ControllerEditUI = ( { onEdit, onRemove } ) => {
 	return (
 		<div className="wikipediapreview-edit-preview-controllers">
-			<div className="wikipediapreview-edit-preview-controllers-change" onClick={ onEdit }>{ __( 'Change', 'wikipedia-preview' ) }</div>
-			<div className="wikipediapreview-edit-preview-controllers-remove" onClick={ onRemove }>{ __( 'Remove', 'wikipedia-preview' ) }</div>
+			<div
+				className="wikipediapreview-edit-preview-controllers-change"
+				onClick={ onEdit }
+			>
+				{ __( 'Change', 'wikipedia-preview' ) }
+			</div>
+			<div
+				className="wikipediapreview-edit-preview-controllers-remove"
+				onClick={ onRemove }
+			>
+				{ __( 'Remove', 'wikipedia-preview' ) }
+			</div>
 		</div>
 	);
 };
