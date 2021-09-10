@@ -112,7 +112,7 @@ const Edit = ( {
 			setPreviewTitle( activePreview.attributes.title );
 			startViewingPreview();
 		}
-	}, [ activePreview ]);
+	}, [ activePreview ] );
 
 	return (
 		<>
@@ -136,7 +136,7 @@ const Edit = ( {
 					onClose={ stopAddingPreview }
 				/>
 			) }
-			{  viewingPreview && ! addingPreview && (
+			{ viewingPreview && ! addingPreview && (
 				<PreviewEditUI
 					anchorRef={ anchorRef }
 					title={ previewTitle }
