@@ -55,14 +55,14 @@ const ControllerEditUI = ( { onEdit, onRemove } ) => {
 			<div
 				className="wikipediapreview-edit-preview-controllers-change"
 				onClick={ onEdit }
-				role="button"
+				role="presentation"
 			>
 				{ __( 'Change', 'wikipedia-preview' ) }
 			</div>
 			<div
 				className="wikipediapreview-edit-preview-controllers-remove"
 				onClick={ onRemove }
-				role="button"
+				role="presentation"
 			>
 				{ __( 'Remove', 'wikipedia-preview' ) }
 			</div>
