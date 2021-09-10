@@ -24,7 +24,7 @@ jobs:
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages
-      - run: 
+      - run:
           name: Installing Composer packages
           command: |
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -41,11 +41,6 @@ jobs:
             npm run lint:js
             npm run lint:css
             composer run lint
-      - run:
-          name: Zip
-          command: ./scripts/zip.sh
-      - store_artifacts:
-          path: wikipediapreview.zip
 
 workflows:
   # Below is the definition of your workflow.

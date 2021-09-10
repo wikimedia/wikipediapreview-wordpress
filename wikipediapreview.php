@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/wikimedia/wikipedia-preview
  * Description: Wikipedia Preview allows you to show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link
  * Text Domain: wikipedia-preview
- * Version: 1.0.6
+ * Version: 1.1.1
  * Requires at least: 4.6
  * Requires PHP: 5.6.39
  * Author: Wikimedia Foundation
@@ -13,27 +13,29 @@
  * License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
  */
 
-DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.0.6' );
-DEFINE( 'WIKIPEDIA_PREVIEW_STYLESHEET_MEDIA_TYPE', 'all' );
+DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.1.1' );
 
 function wikipediapreview_enqueue_scripts() {
-	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
-	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
+	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
+	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
+	$media_type_all  = 'all';
+	$no_dependencies = array();
+	$in_footer       = true;
 
 	wp_enqueue_script(
 		'wikipedia-preview',
-		$assets_dir . 'wikipedia-preview.production.js',
-		array(),
+		$libs_dir . 'wikipedia-preview.production.js',
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		true
+		$in_footer
 	);
 
 	wp_enqueue_script(
 		'wikipedia-preview-init',
 		$build_dir . 'init.js',
-		array(),
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		true
+		$in_footer
 	);
 
 	global $post;
@@ -44,10 +46,10 @@ function wikipediapreview_enqueue_scripts() {
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
-		$assets_dir . 'wikipedia-preview-link.css',
-		array(),
+		$libs_dir . 'wikipedia-preview-link.css',
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		WIKIPEDIA_PREVIEW_STYLESHEET_MEDIA_TYPE
+		$media_type_all
 	);
 }
 
@@ -56,30 +58,34 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
-	$build_dir  = plugin_dir_url( __FILE__ ) . 'build/';
-	$assets_dir = plugin_dir_url( __FILE__ ) . 'assets/';
+	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
+	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
+	$media_type_all  = 'all';
+	$no_dependencies = array();
+	$in_footer       = true;
+
 	wp_enqueue_script(
 		'wikipedia-preview-edit-link',
 		$build_dir . 'index.js',
-		array(),
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		true
+		$in_footer
 	);
 
 	wp_enqueue_style(
 		'wikipedia-preview-style',
 		$build_dir . 'style-index.css',
-		array(),
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		WIKIPEDIA_PREVIEW_STYLESHEET_MEDIA_TYPE
+		$media_type_all
 	);
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
-		$assets_dir . 'wikipedia-preview-link.css',
-		array(),
+		$libs_dir . 'wikipedia-preview-link.css',
+		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
-		WIKIPEDIA_PREVIEW_STYLESHEET_MEDIA_TYPE
+		$media_type_all
 	);
 }
 
@@ -88,14 +94,16 @@ function myguten_set_script_translations() {
 }
 
 function register_detectlinks_postmeta() {
-	$options = array(
+	$all_post_types = '';
+	$meta_name      = 'wikipediapreview_detectlinks';
+	$options        = array(
 		'show_in_rest'  => true,
 		'auth_callback' => true,
 		'single'        => true,
 		'type'          => 'boolean',
 		'default'       => true, // it could default to false when the gutenburg support is released
 	);
-	register_post_meta( '', 'wikipediapreview_detectlinks', $options );
+	register_post_meta( $all_post_types, $meta_name, $options );
 }
 
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
