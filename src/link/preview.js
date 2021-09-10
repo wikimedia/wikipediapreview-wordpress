@@ -36,8 +36,7 @@ export const PreviewEditUI = ( {
 					<div
 						className="wikipediapreview-edit-preview"
 						dangerouslySetInnerHTML={ { __html: previewHtml } }
-					>
-					</div>
+					></div>
 					{ previewHtml && (
 						<ControllerEditUI
 							onEdit={ onEdit }
@@ -56,12 +55,14 @@ const ControllerEditUI = ( { onEdit, onRemove } ) => {
 			<div
 				className="wikipediapreview-edit-preview-controllers-change"
 				onClick={ onEdit }
+				role="presentation"
 			>
 				{ __( 'Change', 'wikipedia-preview' ) }
 			</div>
 			<div
 				className="wikipediapreview-edit-preview-controllers-remove"
 				onClick={ onRemove }
+				role="presentation"
 			>
 				{ __( 'Remove', 'wikipedia-preview' ) }
 			</div>

@@ -2,5 +2,8 @@
 	"extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
 	"globals": {
 		"wikipediaPreview": true
+	},
+	"rules": {
+		"click-events-have-key-events": "off"
 	}
 }
