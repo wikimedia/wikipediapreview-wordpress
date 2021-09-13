@@ -8,7 +8,7 @@ import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
-import { prefixSearch, fulltextSearch } from './api';
+import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -55,6 +55,9 @@ export const InlineEditUI = ( {
 				}
 				setHoverIndex( -1 );
 			} );
+		} else {
+			abortAllRequest();
+			setSearchList( [] );
 		}
 	}, [ title ] );
 

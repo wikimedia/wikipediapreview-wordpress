@@ -76,6 +76,11 @@ export const fulltextSearch = ( lang, term, callback ) => {
 	} );
 };
 
+export const abortAllRequest = () => {
+	abortFunctions.forEach( ( x ) => x && x.abort() );
+	abortFunctions = [];
+};
+
 const defautParams = {
 	format: 'json',
 	formatversion: 2,
@@ -97,8 +102,7 @@ const buildMwApiUrl = ( lang, params ) => {
 };
 
 const request = ( url, callback ) => {
-	abortFunctions.forEach( ( x ) => x && x.abort() );
-	abortFunctions = [];
+	abortAllRequest();
 
 	// eslint-disable-next-line no-undef
 	const xhr = new XMLHttpRequest();
