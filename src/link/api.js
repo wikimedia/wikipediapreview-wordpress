@@ -104,7 +104,6 @@ const buildMwApiUrl = ( lang, params ) => {
 const request = ( url, callback ) => {
 	abortAllRequest();
 
-	// eslint-disable-next-line no-undef
 	const xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url );
 	xhr.send();

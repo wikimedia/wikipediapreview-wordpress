@@ -21,21 +21,6 @@ export const InlineEditUI = ( {
 	const [ lang, setLang ] = useState( activeAttributes.lang );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
-	const onItemHovered = ( index ) => {
-		if ( ! searchList.length ) return;
-		const className = 'wikipediapreview-edit-inline-list-item';
-
-		if ( hoveredIndex >= 0 ) {
-			document
-				.querySelectorAll( `.${ className }` )
-				[ hoveredIndex ].classList.remove( 'hovered' );
-		}
-
-		document
-			.querySelectorAll( `.${ className }` )
-			[ index ].classList.add( 'hovered' );
-		setHoverIndex( index );
-	};
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -97,13 +82,17 @@ export const InlineEditUI = ( {
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
-							// eslint-disable-next-line jsx-a11y/click-events-have-key-events
 							<div
-								className="wikipediapreview-edit-inline-list-item"
+								className={ `wikipediapreview-edit-inline-list-item ${
+									index === hoveredIndex ? 'hovered' : ''
+								}` }
 								key={ item.title }
 								role="link"
 								tabIndex={ index }
 								onClick={ () => {
+									onApply( value, item.title, lang );
+								} }
+								onKeyUp={ () => {
 									onApply( value, item.title, lang );
 								} }
 							>
@@ -132,12 +121,12 @@ export const InlineEditUI = ( {
 				bindGlobal={ true }
 				shortcuts={ {
 					down: () => {
-						onItemHovered(
+						setHoverIndex(
 							( hoveredIndex + 1 ) % searchList.length
 						);
 					},
 					up: () => {
-						onItemHovered(
+						setHoverIndex(
 							hoveredIndex
 								? hoveredIndex - 1
 								: searchList.length - 1
