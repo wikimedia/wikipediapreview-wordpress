@@ -1,6 +1,7 @@
 {
 	"extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
 	"globals": {
-		"wikipediaPreview": true
+		"wikipediaPreview": true,
+		"XMLHttpRequest": true,
 	}
 }

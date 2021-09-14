@@ -1,15 +1,170 @@
-.wikipediapreview-edit-inline-container {
-	width: 400px;
-	padding: 16px;
+.wikipediapreview-edit-inline {
 
-	label {
+	&-search {
+		position: relative;
+		min-width: 400px;
+		margin: 0;
+
+		&-label {
+			width: 100%;
+			text-align: center;
+			font-size: 16px;
+			font-weight: 700;
+			margin: 0;
+			padding: 12px 0;
+			border-bottom: 1px solid #c8ccd1;
+		}
+
+		&-input {
+			margin: 30px 10px 0;
+
+			input {
+				padding-left: 35px !important;
+			}
+
+		}
+
+		&-icon {
+			background-image: url(./images/search.svg);
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			bottom: 5px;
+			left: 18px;
+
+			@media screen and (max-width: 782px) {
+				bottom: 10px;
+			}
+		}
+
+		&-close {
+			background-image: url(./images/close.svg);
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			bottom: 5px;
+			right: 15px;
+			padding: 0;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			@media screen and (max-width: 782px) {
+				bottom: 10px;
+			}
+		}
+	}
+
+	&-list {
+		position: relative;
 		width: 100%;
-		text-align: center;
-		font-size: 16px;
-		font-weight: 700;
+		overflow: hidden;
+
+		&-item {
+			position: relative;
+			height: 60px;
+			padding: 10px;
+
+			&:hover,
+			&.hovered {
+				background-color: #eaecf0;
+				cursor: pointer;
+			}
+
+			&-img {
+				position: absolute;
+				background-image: url(./images/thumbnail.svg);
+				width: 42px;
+				height: 42px;
+				background-repeat: no-repeat;
+				background-position: center center;
+				border-radius: 2px;
+				border: 1px solid #eaecf0;
+			}
+
+			&-title {
+				position: absolute;
+				width: calc(100% - 70px);
+				left: 60px;
+				font-size: 15px;
+				font-weight: 700;
+				line-height: 20px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+
+			&-description {
+				position: absolute;
+				width: calc(100% - 70px);
+				left: 60px;
+				bottom: 10px;
+				color: #72777d;
+				font-size: 13px;
+				font-weight: 400;
+				line-height: 20px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
 	}
 }
 
 .wmf-wp-with-preview:hover {
 	border-style: dashed;
+}
+
+body.rtl {
+
+	.wikipediapreview-edit-inline {
+
+		&-search {
+
+			&-input {
+				margin: 30px 10px 0;
+
+				input {
+					padding-right: 35px !important;
+					padding-left: unset;
+				}
+
+			}
+
+			&-icon {
+				left: unset;
+				right: 18px;
+
+				@media screen and (max-width: 782px) {
+					bottom: 10px;
+				}
+			}
+
+			&-close {
+				left: 15px;
+				right: unset;
+
+				@media screen and (max-width: 782px) {
+					bottom: 10px;
+				}
+			}
+		}
+
+		&-list {
+
+			&-item {
+
+				&-title {
+					right: 60px;
+					left: unset;
+				}
+
+				&-description {
+					right: 60px;
+					left: unset;
+				}
+			}
+		}
+	}
 }
