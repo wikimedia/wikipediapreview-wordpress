@@ -133,11 +133,22 @@ export const InlineEditUI = ( {
 						);
 					},
 					enter: () => {
-						onApply(
-							value,
-							searchList[ hoveredIndex ].title,
-							lang
-						);
+						if ( hoveredIndex === -1 ) {
+							const matchedItem = searchList.find(
+								( list ) =>
+									list.title.toLowerCase() ===
+									title.toLowerCase().trim()
+							);
+							if ( matchedItem ) {
+								onApply( value, matchedItem.title, lang );
+							}
+						} else {
+							onApply(
+								value,
+								searchList[ hoveredIndex ].title,
+								lang
+							);
+						}
 					},
 				} }
 			/>
