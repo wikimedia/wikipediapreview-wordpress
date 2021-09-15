@@ -1,26 +1,28 @@
 import { Popover } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { getSiteLanguage } from './utils';
 import { getPreviewHtml } from 'wikipedia-preview';
 
 export const PreviewEditUI = ( {
 	anchorRef,
-	title,
+	activeAttributes,
 	onClose,
 	onEdit,
 	onRemove,
 } ) => {
+	const [ title, setTitle ] = useState( activeAttributes.title );
+	const [ lang, setLang ] = useState( activeAttributes.lang );
 	const [ previewHtml, setPreviewHtml ] = useState( null );
-	const lang = getSiteLanguage();
 
 	useEffect( () => {
+		setTitle( activeAttributes.title );
+		setLang( activeAttributes.lang );
 		if ( title && lang ) {
 			getPreviewHtml( title, lang, ( preview ) => {
 				setPreviewHtml( preview );
 			} );
 		}
-	}, [ title ] );
+	}, [ activeAttributes ] );
 
 	return (
 		<div>

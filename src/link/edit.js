@@ -29,8 +29,7 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-	const [ previewTitle, setPreviewTitle ] = useState();
-	const activePreview = getActiveFormat( value, name );
+	const activePreview = getActiveFormat( value, name ); // @todo tbc whether necessary
 
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -73,22 +72,16 @@ const Edit = ( {
 				lang,
 			},
 		} );
-		newValue.start = newValue.end;
-		newValue.activeFormats = [];
+		// newValue.start = newValue.end; @todo tbc
+		// newValue.activeFormats = []; @todo tbc
 		onChange( newValue );
-		setPreviewTitle( title );
 		stopAddingPreview();
 		startViewingPreview();
 		onFocus();
 	};
 
 	const removeAttributes = () => {
-		if ( previewTitle && ! activePreview ) {
-			const start = value.end - previewTitle.length;
-			onChange( removeFormat( value, formatType, start, value.end ) );
-		} else {
-			onChange( removeFormat( value, formatType ) );
-		}
+		onChange( removeFormat( value, formatType ) );
 		stopAddingPreview();
 		stopViewingPreview();
 	};
@@ -107,12 +100,11 @@ const Edit = ( {
 	};
 
 	useEffect( () => {
-		if ( activePreview ) {
+		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
-			setPreviewTitle( activePreview.attributes.title );
 			startViewingPreview();
 		}
-	}, [ activePreview ] );
+	}, [ activeAttributes ] );
 
 	return (
 		<>
@@ -139,11 +131,10 @@ const Edit = ( {
 			{ viewingPreview && ! addingPreview && (
 				<PreviewEditUI
 					anchorRef={ anchorRef }
-					title={ previewTitle }
 					onClose={ onClosePreview }
 					onEdit={ goToEdit }
 					onRemove={ removeAttributes }
-					activePreview={ activePreview }
+					activeAttributes={ activeAttributes }
 				/>
 			) }
 		</>
