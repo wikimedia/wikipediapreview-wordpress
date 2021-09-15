@@ -6,7 +6,6 @@ import {
 	useAnchorRef,
 	applyFormat,
 	removeFormat,
-	getActiveFormat,
 } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
@@ -29,7 +28,6 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-	const activePreview = getActiveFormat( value, name ); // @todo tbc whether necessary
 
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -61,6 +59,7 @@ const Edit = ( {
 		);
 		onChange( insert( value, toInsert ) );
 		stopAddingPreview();
+		startViewingPreview();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
@@ -72,8 +71,6 @@ const Edit = ( {
 				lang,
 			},
 		} );
-		// newValue.start = newValue.end; @todo tbc
-		// newValue.activeFormats = []; @todo tbc
 		onChange( newValue );
 		stopAddingPreview();
 		startViewingPreview();
@@ -92,10 +89,8 @@ const Edit = ( {
 	};
 
 	const onClosePreview = () => {
-		stopViewingPreview();
-		if ( activePreview ) {
-			// Closing one and activating another preview in the same block
-			startViewingPreview();
+		if ( ! Object.keys( activeAttributes ).length ) {
+			stopViewingPreview();
 		}
 	};
 
@@ -114,7 +109,7 @@ const Edit = ( {
 				isActive={ isActive }
 				onClick={ formatButtonClick }
 			/>
-			{ addingPreview && ! viewingPreview && (
+			{ addingPreview && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
@@ -122,13 +117,12 @@ const Edit = ( {
 							? updateAttributes
 							: insertText
 					}
-					onRemove={ removeAttributes }
 					value={ value }
 					activeAttributes={ activeAttributes }
 					onClose={ stopAddingPreview }
 				/>
 			) }
-			{ viewingPreview && ! addingPreview && (
+			{ viewingPreview && (
 				<PreviewEditUI
 					anchorRef={ anchorRef }
 					onClose={ onClosePreview }

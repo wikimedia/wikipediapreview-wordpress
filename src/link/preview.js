@@ -10,13 +10,10 @@ export const PreviewEditUI = ( {
 	onEdit,
 	onRemove,
 } ) => {
-	const [ title, setTitle ] = useState( activeAttributes.title );
-	const [ lang, setLang ] = useState( activeAttributes.lang );
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 
 	useEffect( () => {
-		setTitle( activeAttributes.title );
-		setLang( activeAttributes.lang );
+		const { title, lang } = activeAttributes;
 		if ( title && lang ) {
 			getPreviewHtml( title, lang, ( preview ) => {
 				setPreviewHtml( preview );
