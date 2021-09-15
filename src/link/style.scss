@@ -120,14 +120,6 @@
 		border: unset;
 		box-shadow: none;
 	}
-
-	.wikipediapreview {
-		box-shadow: none;
-	}
-
-	.wikipediapreview-body::after {
-		content: none;
-	}
 }
 
 .wikipediapreview-edit-preview-container {
@@ -181,6 +173,13 @@
 		}
 	}
 
+	.wikipediapreview {
+		box-shadow: none;
+	}
+
+	.wikipediapreview-body::after {
+		content: none;
+	}
 }
 
 .wmf-wp-with-preview:hover {
