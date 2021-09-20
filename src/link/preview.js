@@ -1,5 +1,5 @@
 import { Popover } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useCallback } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
 
@@ -12,11 +12,11 @@ export const PreviewEditUI = ( {
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
-	const forceCloseEvent = ( e ) => {
+	const forceCloseEvent = useCallback( ( e ) => {
 		if ( e.target.className === 'components-popover__content' ) {
 			onForceClose();
 		}
-	};
+	}, [] );
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
@@ -36,7 +36,7 @@ export const PreviewEditUI = ( {
 				.querySelector( '.wikipediapreview-edit-preview-popover' )
 				.removeEventListener( 'click', forceCloseEvent );
 		};
-	}, [] );
+	}, [ forceCloseEvent ] );
 
 	return (
 		<div>
