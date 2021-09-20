@@ -30,7 +30,7 @@ Wikipedia Preview is an official plugin developed and supported by the [Wikimedi
 
 **How to use**
 
-After you [download and install](https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins) the Wikipedia Preview plugin, simply [add a link](https://wordpress.com/support/links/) in your site content to any Wikipedia article URL and it will be turned into a preview.
+After you [download and install](https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins) the Wikipedia Preview plugin, simply [add a link](https://wordpress.org/support/article/paragraph-block/#insert-hyperlinks) in your site content to any Wikipedia article URL and it will be turned into a preview.
 
 == Screenshots ==
 
@@ -49,7 +49,7 @@ The Wikipedia Preview works with any word or phrase that has an article on Wikip
 
 = What is the flow for implementing the Wikipedia Preview links in a post? =
 
-When writing articles, decide which words show a Wikipedia popup on a particular post. The process of enabling the Wikipedia popup on a specific word is identical to [adding a hyperlink](https://wordpress.com/support/links/#add-links-to-posts-pages-and-widgets).
+When writing articles, decide which words show a Wikipedia popup on a particular post. The process of enabling the Wikipedia popup on a specific word is identical to [adding a hyperlink](https://wordpress.org/support/article/paragraph-block/#insert-hyperlinks).
 
 = After the implementation of Wikipedia Preview will there be any impact on the size of the page? Will it get laggy? =
 
