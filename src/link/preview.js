@@ -7,10 +7,16 @@ export const PreviewEditUI = ( {
 	anchorRef,
 	activeAttributes,
 	onClose,
+	onForceClose,
 	onEdit,
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
+	const forceCloseEvent = ( e ) => {
+		if ( e.target.className === 'components-popover__content' ) {
+			onForceClose();
+		}
+	};
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
@@ -20,6 +26,17 @@ export const PreviewEditUI = ( {
 			} );
 		}
 	}, [ activeAttributes ] );
+
+	useEffect( () => {
+		document
+			.querySelector( '.wikipediapreview-edit-preview-popover' )
+			.addEventListener( 'click', forceCloseEvent );
+		return () => {
+			document
+				.querySelector( '.wikipediapreview-edit-preview-popover' )
+				.removeEventListener( 'click', forceCloseEvent );
+		};
+	}, [] );
 
 	return (
 		<div>

@@ -128,6 +128,7 @@ const Edit = ( {
 					onClose={ onClosePreview }
 					onEdit={ goToEdit }
 					onRemove={ removeAttributes }
+					onForceClose={ stopViewingPreview }
 					activeAttributes={ activeAttributes }
 				/>
 			) }
