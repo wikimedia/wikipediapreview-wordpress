@@ -58,8 +58,7 @@ const Edit = ( {
 			title.length
 		);
 		onChange( insert( value, toInsert ) );
-		stopAddingPreview();
-		startViewingPreview();
+		onFocus();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
@@ -72,8 +71,6 @@ const Edit = ( {
 			},
 		} );
 		onChange( newValue );
-		stopAddingPreview();
-		startViewingPreview();
 		onFocus();
 	};
 
@@ -98,6 +95,8 @@ const Edit = ( {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
 			startViewingPreview();
+		} else {
+			stopViewingPreview();
 		}
 	}, [ activeAttributes ] );
 
