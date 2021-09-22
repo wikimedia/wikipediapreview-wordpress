@@ -17,7 +17,7 @@ export const PreviewEditUI = ( {
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
-	const forceCloseEvent = useCallback( ( e ) => {
+	const onClickPopoverOutside = useCallback( ( e ) => {
 		if ( e.target.className === 'components-popover__content' ) {
 			onForceClose();
 		}
@@ -31,17 +31,6 @@ export const PreviewEditUI = ( {
 			} );
 		}
 	}, [ activeAttributes ] );
-
-	useEffect( () => {
-		document
-			.querySelector( '.wikipediapreview-edit-preview-popover' )
-			.addEventListener( 'click', forceCloseEvent );
-		return () => {
-			document
-				.querySelector( '.wikipediapreview-edit-preview-popover' )
-				.removeEventListener( 'click', forceCloseEvent );
-		};
-	}, [ forceCloseEvent ] );
 
 	useLayoutEffect( () => {
 		document
@@ -63,6 +52,7 @@ export const PreviewEditUI = ( {
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"
+				onClick={ onClickPopoverOutside }
 			>
 				<div className="wikipediapreview-edit-preview-container">
 					<div
