@@ -197,6 +197,10 @@
 
 		.wikipediapreview-edit-preview {
 			width: calc(100vw - 52px);
+
+			.wikipediapreview {
+				width: 100%;
+			}
 		}
 	}
 }
