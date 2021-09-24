@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
@@ -9,6 +9,7 @@ import {
 } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
+import { PreviewEditUI } from './preview';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -24,6 +25,9 @@ const Edit = ( {
 	const [ addingPreview, setAddingPreview ] = useState( false );
 	const startAddingPreview = () => setAddingPreview( true );
 	const stopAddingPreview = () => setAddingPreview( false );
+	const [ viewingPreview, setViewingPreview ] = useState( false );
+	const startViewingPreview = () => setViewingPreview( true );
+	const stopViewingPreview = () => setViewingPreview( false );
 
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -54,7 +58,7 @@ const Edit = ( {
 			title.length
 		);
 		onChange( insert( value, toInsert ) );
-		stopAddingPreview();
+		onFocus();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
@@ -66,17 +70,35 @@ const Edit = ( {
 				lang,
 			},
 		} );
-		newValue.start = newValue.end;
-		newValue.activeFormats = [];
 		onChange( newValue );
-		stopAddingPreview();
 		onFocus();
 	};
 
 	const removeAttributes = () => {
 		onChange( removeFormat( value, formatType ) );
 		stopAddingPreview();
+		stopViewingPreview();
 	};
+
+	const goToEdit = () => {
+		stopViewingPreview();
+		startAddingPreview();
+	};
+
+	const onClosePreview = () => {
+		if ( ! Object.keys( activeAttributes ).length ) {
+			stopViewingPreview();
+		}
+	};
+
+	useEffect( () => {
+		if ( Object.keys( activeAttributes ).length ) {
+			stopAddingPreview();
+			startViewingPreview();
+		} else {
+			stopViewingPreview();
+		}
+	}, [ activeAttributes ] );
 
 	return (
 		<>
@@ -86,7 +108,7 @@ const Edit = ( {
 				isActive={ isActive }
 				onClick={ formatButtonClick }
 			/>
-			{ ( addingPreview || isActive ) && (
+			{ addingPreview && (
 				<InlineEditUI
 					anchorRef={ anchorRef }
 					onApply={
@@ -94,10 +116,19 @@ const Edit = ( {
 							? updateAttributes
 							: insertText
 					}
-					onRemove={ removeAttributes }
 					value={ value }
 					activeAttributes={ activeAttributes }
 					onClose={ stopAddingPreview }
+				/>
+			) }
+			{ viewingPreview && (
+				<PreviewEditUI
+					anchorRef={ anchorRef }
+					onClose={ onClosePreview }
+					onEdit={ goToEdit }
+					onRemove={ removeAttributes }
+					onForceClose={ stopViewingPreview }
+					activeAttributes={ activeAttributes }
 				/>
 			) }
 		</>
