@@ -21,6 +21,7 @@ export const InlineEditUI = ( {
 	const [ lang, setLang ] = useState( activeAttributes.lang );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
+	const [ loading, setLoading ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -30,13 +31,16 @@ export const InlineEditUI = ( {
 	useEffect( () => {
 		if ( title ) {
 			const term = title.trim();
+			setLoading( true );
 			prefixSearch( lang, term, ( prefixData ) => {
 				if ( ! prefixData.length ) {
 					fulltextSearch( lang, term, ( fulltextData ) => {
 						setSearchList( fulltextData );
+						setLoading( false );
 					} );
 				} else {
 					setSearchList( prefixData );
+					setLoading( false );
 				}
 				setHoverIndex( -1 );
 			} );
@@ -76,6 +80,9 @@ export const InlineEditUI = ( {
 						} }
 						className="wikipediapreview-edit-inline-search-close"
 					/>
+				) }
+				{ loading && (
+					<div className="wikipediapreview-edit-inline-search-loading"></div>
 				) }
 			</div>
 			{ searchList.length ? (
