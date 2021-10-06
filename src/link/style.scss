@@ -16,7 +16,7 @@
 		}
 
 		&-input {
-			margin: 30px 10px 0;
+			margin: 30px 10px 15px;
 
 			input {
 				padding-left: 35px !important;
@@ -75,6 +75,7 @@
 		position: relative;
 		width: 100%;
 		overflow: hidden;
+		margin-top: -10px;
 
 		&-item {
 			position: relative;
@@ -285,8 +286,6 @@ body.rtl {
 		&-search {
 
 			&-input {
-				margin: 30px 10px 0;
-
 				input {
 					padding-right: 35px !important;
 					padding-left: unset;

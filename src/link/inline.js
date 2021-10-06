@@ -47,6 +47,7 @@ export const InlineEditUI = ( {
 		} else {
 			abortAllRequest();
 			setSearchList( [] );
+			setLoading( false );
 		}
 	}, [ title ] );
 
