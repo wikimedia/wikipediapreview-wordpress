@@ -16,7 +16,7 @@
 		}
 
 		&-input {
-			margin: 30px 10px 0;
+			margin: 30px 10px 15px;
 
 			input {
 				padding-left: 35px !important;
@@ -54,12 +54,32 @@
 				bottom: 10px;
 			}
 		}
+
+		&-loading {
+			position: absolute;
+			bottom: -7px;
+			left: 11px;
+			height: 3px;
+			width: 130px;
+			border-radius: 3px;
+			margin-top: 10px;
+			background: #36c;
+			animation-name: wikipediapreview-edit-inline-loader;
+			animation-duration: 2s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease;
+		}
+	}
+
+	&-info {
+		padding: 0 20px 10px;
 	}
 
 	&-list {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
+		margin-top: -10px;
 
 		&-item {
 			position: relative;
@@ -108,6 +128,13 @@
 				text-overflow: ellipsis;
 				overflow: hidden;
 			}
+		}
+	}
+
+	&.is-expanded {
+
+		.wikipediapreview-edit-inline-search-loading {
+			animation-name: wikipediapreview-edit-inline-loader-expanded;
 		}
 	}
 }
@@ -264,7 +291,6 @@ body.rtl {
 		&-search {
 
 			&-input {
-				margin: 30px 10px 0;
 
 				input {
 					padding-right: 35px !important;
@@ -290,6 +316,11 @@ body.rtl {
 					bottom: 10px;
 				}
 			}
+
+			/* stylelint-disable-next-line no-descending-specificity */
+			&-loading {
+				animation-name: wikipediapreview-edit-inline-rtl-loader;
+			}
 		}
 
 		&-list {
@@ -307,5 +338,72 @@ body.rtl {
 				}
 			}
 		}
+	}
+
+	&.is-expanded {
+
+		.wikipediapreview-edit-inline-search-loading {
+			animation-name: wikipediapreview-edit-inline-rtl-loader-expanded;
+		}
+	}
+}
+
+@keyframes wikipediapreview-edit-inline-loader {
+
+	0% {
+		transform: translateX(0);
+	}
+
+	50% {
+		transform: translateX(250px);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes wikipediapreview-edit-inline-rtl-loader {
+
+	0% {
+		transform: translateX(250px);
+	}
+
+	50% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(250px);
+	}
+}
+
+@keyframes wikipediapreview-edit-inline-loader-expanded {
+
+	0% {
+		transform: translateX(0);
+	}
+
+	50% {
+		transform: translateX(calc(100vw - 150px));
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes wikipediapreview-edit-inline-rtl-loader-expanded {
+
+	0% {
+		transform: translateX(calc(100vw - 150px));
+	}
+
+	50% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(calc(100vw - 150px));
 	}
 }

@@ -21,6 +21,7 @@ export const InlineEditUI = ( {
 	const [ lang, setLang ] = useState( activeAttributes.lang );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
+	const [ loading, setLoading ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -30,19 +31,23 @@ export const InlineEditUI = ( {
 	useEffect( () => {
 		if ( title ) {
 			const term = title.trim();
+			setLoading( true );
 			prefixSearch( lang, term, ( prefixData ) => {
 				if ( ! prefixData.length ) {
 					fulltextSearch( lang, term, ( fulltextData ) => {
 						setSearchList( fulltextData );
+						setLoading( false );
 					} );
 				} else {
 					setSearchList( prefixData );
+					setLoading( false );
 				}
 				setHoverIndex( -1 );
 			} );
 		} else {
 			abortAllRequest();
 			setSearchList( [] );
+			setLoading( false );
 		}
 	}, [ title ] );
 
@@ -77,8 +82,23 @@ export const InlineEditUI = ( {
 						className="wikipediapreview-edit-inline-search-close"
 					/>
 				) }
+				{ loading && (
+					<div className="wikipediapreview-edit-inline-search-loading"></div>
+				) }
 			</div>
-			{ searchList.length ? (
+			{ loading && ! searchList.length && (
+				<div className="wikipediapreview-edit-inline-info">
+					<bdi>
+						{ __( 'Loading search results…', 'wikipedia-preview' ) }
+					</bdi>
+				</div>
+			) }
+			{ ! loading && title && ! searchList.length && (
+				<div className="wikipediapreview-edit-inline-info">
+					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
+				</div>
+			) }
+			{ searchList && searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
