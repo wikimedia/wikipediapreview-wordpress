@@ -86,7 +86,17 @@ export const InlineEditUI = ( {
 					<div className="wikipediapreview-edit-inline-search-loading"></div>
 				) }
 			</div>
-			{ searchList.length ? (
+			{ loading && ! searchList.length && (
+				<div className="wikipediapreview-edit-inline-info">
+					{ __( 'Loading search results…', 'wikipedia-preview' ) }
+				</div>
+			) }
+			{ ! loading && title && ! searchList.length && (
+				<div className="wikipediapreview-edit-inline-info">
+					{ __( 'No results found', 'wikipedia-preview' ) }
+				</div>
+			) }
+			{ searchList && searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
