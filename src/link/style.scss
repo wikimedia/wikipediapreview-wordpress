@@ -317,6 +317,7 @@ body.rtl {
 				}
 			}
 
+			/* stylelint-disable-next-line no-descending-specificity */
 			&-loading {
 				animation-name: wikipediapreview-edit-inline-rtl-loader;
 			}
