@@ -19,6 +19,7 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
+	const [ languageSelector, setLanguageSelector ] = useState( false );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
@@ -74,6 +75,10 @@ export const InlineEditUI = ( {
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
+				<div className="wikipediapreview-edit-inline-search-language" onClick={() => {
+					console.log('onClick language selector');
+					setLanguageSelector(true)
+				}} />
 				{ title && (
 					<Button
 						onClick={ () => {
@@ -135,6 +140,12 @@ export const InlineEditUI = ( {
 							</div>
 						);
 					} ) }
+				</div>
+			) : null }
+			{ languageSelector ? (
+				<div className="wikipediapreview-edit-inline-language-selector">
+					Languages
+					<div onClick={() => setLanguageSelector(false)}>close</div>
 				</div>
 			) : null }
 			<KeyboardShortcuts
