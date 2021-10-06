@@ -132,8 +132,9 @@
 	}
 
 	&.is-expanded {
+
 		.wikipediapreview-edit-inline-search-loading {
-			animation-name: wikipediapreview-edit-inline-loader-expanded;			
+			animation-name: wikipediapreview-edit-inline-loader-expanded;
 		}
 	}
 }
@@ -290,6 +291,7 @@ body.rtl {
 		&-search {
 
 			&-input {
+
 				input {
 					padding-right: 35px !important;
 					padding-left: unset;
@@ -338,8 +340,9 @@ body.rtl {
 	}
 
 	&.is-expanded {
+
 		.wikipediapreview-edit-inline-search-loading {
-			animation-name: wikipediapreview-edit-inline-rtl-loader-expanded;			
+			animation-name: wikipediapreview-edit-inline-rtl-loader-expanded;
 		}
 	}
 }
