@@ -88,12 +88,14 @@ export const InlineEditUI = ( {
 			</div>
 			{ loading && ! searchList.length && (
 				<div className="wikipediapreview-edit-inline-info">
-					{ __( 'Loading search results…', 'wikipedia-preview' ) }
+					<bdi>
+						{ __( 'Loading search results…', 'wikipedia-preview' ) }
+					</bdi>
 				</div>
 			) }
 			{ ! loading && title && ! searchList.length && (
 				<div className="wikipediapreview-edit-inline-info">
-					{ __( 'No results found', 'wikipedia-preview' ) }
+					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 				</div>
 			) }
 			{ searchList && searchList.length ? (
