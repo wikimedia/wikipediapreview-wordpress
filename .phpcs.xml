@@ -8,6 +8,7 @@
 
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>composer-setup.php</exclude-pattern>
 
     <rule ref="WordPress">
         <exclude name="WordPress-Docs"/>
