@@ -58,6 +58,9 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
+	if ( !in_array( get_post_type(), array( 'post', 'page' ) ) ) {
+		return;
+	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
 	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
 	$media_type_all  = 'all';
