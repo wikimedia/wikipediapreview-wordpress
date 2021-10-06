@@ -22,6 +22,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - node/install-packages
       - php/install-composer:
           install-version: 1.10.16
       - php/install-packages
