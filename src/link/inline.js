@@ -4,6 +4,7 @@ import {
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
+import { languageData } from '@wikimedia/language-data';
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -25,6 +26,7 @@ export const InlineEditUI = ( {
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
 		setLang( activeAttributes.lang || getSiteLanguage() );
+		console.log('languageData...', languageData);
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
