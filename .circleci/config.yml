@@ -7,6 +7,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.1
+  php: circleci/php@1.1.0
 
 
 jobs:
@@ -21,20 +22,9 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      # Next, the node orb's install-packages step will install the dependencies from a package.json.
-      # The orb install-packages step will also automatically cache them for faster future runs.
-      - node/install-packages
-      - run:
-          name: Installing Composer packages
-          command: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php');"
-            composer install
-      # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
-      # - node/install-packages:
-      #     pkg-manager: yarn
+      - php/install-composer:
+          install-version: 1.10.16
+      - php/install-packages
       - run:
           name: Linter
           command: |
