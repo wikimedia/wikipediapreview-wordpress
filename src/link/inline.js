@@ -8,6 +8,7 @@ import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
+import { languages } from './languages';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 
 export const InlineEditUI = ( {
@@ -19,10 +20,11 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
-	const [ languageSelector, setLanguageSelector ] = useState( false );
+	const [ languageSelector, setLanguageSelector ] = useState( true );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
+	// add a classNamePrefix will ya?
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -75,10 +77,7 @@ export const InlineEditUI = ( {
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
-				<div className="wikipediapreview-edit-inline-search-language" onClick={() => {
-					console.log('onClick language selector');
-					setLanguageSelector(true)
-				}} />
+				<div className="wikipediapreview-edit-inline-search-language" onClick={() => setLanguageSelector(true)} />
 				{ title && (
 					<Button
 						onClick={ () => {
@@ -143,10 +142,7 @@ export const InlineEditUI = ( {
 				</div>
 			) : null }
 			{ languageSelector ? (
-				<div className="wikipediapreview-edit-inline-language-selector">
-					Languages
-					<div onClick={() => setLanguageSelector(false)}>close</div>
-				</div>
+				<LanguageSelector setLanguageSelector={ setLanguageSelector }/>
 			) : null }
 			<KeyboardShortcuts
 				bindGlobal={ true }
@@ -184,5 +180,57 @@ export const InlineEditUI = ( {
 				} }
 			/>
 		</Popover>
+	);
+};
+
+const LanguageSelector = ({setLanguageSelector}) => {
+	const [ language, setLanguage ] = useState('');
+	const [ items, setItems ] = useState([]);
+	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war'];
+	
+	const filterLanguages = (targetLang) => {
+		setLanguage(targetLang)
+		
+		if (targetLang === '') {
+			setItems(defaultFilter())
+			return
+		}
+		
+		const filtered = languages.filter((lang) => {
+			return lang.name.toLowerCase().indexOf(targetLang.toLowerCase()) !== -1;
+		})
+		setItems(filtered)
+	}
+
+	const defaultFilter = () => {
+		return languages.filter(lang => defaultLanguages.indexOf(lang.code) !== -1 )
+	}
+	
+	useEffect(() => {
+		setItems(defaultFilter())
+	}, [])
+
+	return (
+		<div className="wikipediapreview-edit-inline-language-selector">
+			<div className="wikipediapreview-edit-inline-language-selector-header">
+				<div>{ __( 'Languages', 'wikipedia-preview' ) }</div>
+				<div onClick={() => setLanguageSelector(false)}>close</div>
+			</div>
+			<TextControl
+				className="wikipediapreview-edit-inline-language-selector-input"
+				value={ language }
+				onChange={ filterLanguages }
+				placeholder={ __(
+					'Search languages',
+					'wikipedia-preview'
+				) }
+				autoFocus={true}
+			/>
+			<div className="wikipediapreview-edit-inline-language-selector-results">
+				{items.length ? items.map(item => (
+					<div className="wikipediapreview-edit-inline-language-selector-results-item">{item.name}</div>
+				)) : <div> No results found</div>}
+			</div>
+		</div>
 	);
 };
