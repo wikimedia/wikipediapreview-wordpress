@@ -52,7 +52,7 @@ export const InlineEditUI = ( {
 			setSearchList( [] );
 			setLoading( false );
 		}
-	}, [ title ] );
+	}, [ title, lang ] );
 
 	return (
 		<Popover
@@ -145,7 +145,7 @@ export const InlineEditUI = ( {
 				</div>
 			) : null }
 			{ languageSelector ? (
-				<LanguageSelector setLanguageSelector={ setLanguageSelector }/>
+				<LanguageSelector setLanguageSelector={ setLanguageSelector } setLang={ setLang }/>
 			) : null }
 			<KeyboardShortcuts
 				bindGlobal={ true }
@@ -186,7 +186,7 @@ export const InlineEditUI = ( {
 	);
 };
 
-const LanguageSelector = ({setLanguageSelector}) => {
+const LanguageSelector = ({setLanguageSelector, setLang}) => {
 	const [ language, setLanguage ] = useState('');
 	const [ items, setItems ] = useState([]);
 	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war', 'sq', 'is', 'af', 'yi', 'sa'];
@@ -208,6 +208,12 @@ const LanguageSelector = ({setLanguageSelector}) => {
 
 	const defaultFilter = () => {
 		return languages.filter(lang => defaultLanguages.indexOf(lang.code) !== -1 )
+	}
+
+	const selectLanguage = (e) => {
+		const languageCode = e.target.attributes['data-code'].nodeValue;
+		setLang(languageCode)
+		setLanguageSelector(false)
 	}
 	
 	useEffect(() => {
@@ -233,7 +239,7 @@ const LanguageSelector = ({setLanguageSelector}) => {
 			<div className="wikipediapreview-edit-inline-language-selector-search-icon" />
 			<div className="wikipediapreview-edit-inline-language-selector-results">
 				{items.length ? items.map(item => (
-					<div className="wikipediapreview-edit-inline-language-selector-results-item">{item.name}</div>
+					<div className="wikipediapreview-edit-inline-language-selector-results-item" data-code={item.code} onClick={(e) => { selectLanguage(e) }}>{item.name}</div>
 				)) : <div> No results found</div>}
 			</div>
 		</div>
