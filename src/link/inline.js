@@ -20,7 +20,7 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
-	const [ languageSelector, setLanguageSelector ] = useState( true );
+	const [ languageSelector, setLanguageSelector ] = useState( false );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
@@ -77,7 +77,10 @@ export const InlineEditUI = ( {
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
-				<div className="wikipediapreview-edit-inline-search-language" onClick={() => setLanguageSelector(true)} />
+				<div className="wikipediapreview-edit-inline-search-language" onClick={() => setLanguageSelector(true)}>
+					<div className="wikipediapreview-edit-inline-search-language-code">{lang}</div>
+					<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
+				</div>
 				{ title && (
 					<Button
 						onClick={ () => {
@@ -186,7 +189,8 @@ export const InlineEditUI = ( {
 const LanguageSelector = ({setLanguageSelector}) => {
 	const [ language, setLanguage ] = useState('');
 	const [ items, setItems ] = useState([]);
-	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war'];
+	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war', 'sq', 'is', 'af', 'yi', 'sa'];
+	const limit = defaultLanguages.length;
 	
 	const filterLanguages = (targetLang) => {
 		setLanguage(targetLang)
@@ -199,7 +203,7 @@ const LanguageSelector = ({setLanguageSelector}) => {
 		const filtered = languages.filter((lang) => {
 			return lang.name.toLowerCase().indexOf(targetLang.toLowerCase()) !== -1;
 		})
-		setItems(filtered)
+		setItems(filtered.slice(0, limit))
 	}
 
 	const defaultFilter = () => {
@@ -214,7 +218,7 @@ const LanguageSelector = ({setLanguageSelector}) => {
 		<div className="wikipediapreview-edit-inline-language-selector">
 			<div className="wikipediapreview-edit-inline-language-selector-header">
 				<div>{ __( 'Languages', 'wikipedia-preview' ) }</div>
-				<div onClick={() => setLanguageSelector(false)}>close</div>
+				<div className="wikipediapreview-edit-inline-language-selector-header-close" onClick={() => setLanguageSelector(false)}></div>
 			</div>
 			<TextControl
 				className="wikipediapreview-edit-inline-language-selector-input"

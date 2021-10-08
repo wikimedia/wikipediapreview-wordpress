@@ -38,13 +38,29 @@
 		}
 		
 		&-language {
-			background-image: url(./images/search.svg);
-			width: 20px;
-			height: 20px;
 			position: absolute;
-			bottom: 5px;
-			right: 40px;
+			bottom: 0px;
+			right: 10px;
+			display: flex;
+			width: 50px;
+			justify-content: space-evenly;
+			align-items: center;
+			border-left: solid 1px;
+			height: 30px;
 
+			&-code {
+				text-align: center;
+				text-transform: uppercase;
+				font-size: 14px;
+				font-weight: 700;
+			}
+
+			&-dropdown {
+				background-image: url(./images/dropdown.svg);
+				width: 20px;
+				height: 20px;
+			}
+			
 			@media screen and (max-width: 782px) {
 				bottom: 10px;
 			}
@@ -56,7 +72,7 @@
 			height: 20px;
 			position: absolute;
 			bottom: 5px;
-			right: 15px;
+			right: 65px;
 			padding: 0;
 
 			&:hover {
@@ -156,6 +172,15 @@
 			display: flex;
 			justify-content: space-between;
 			padding: 16px;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 19.55px;
+
+			&-close {
+				background-image: url(./images/close-language.svg);
+				width: 20px;
+				height: 20px;
+			}
 		}
 
 		&-input {
@@ -172,9 +197,11 @@
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
+			max-height: 235px;
+			padding: 30px 30px;
 
 			&-item {
-				margin: 2px 2px;
+				margin: 8px 4px;
 			}
 		}
 	}
