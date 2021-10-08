@@ -230,6 +230,7 @@ const LanguageSelector = ({setLanguageSelector}) => {
 				) }
 				autoFocus={true}
 			/>
+			<div className="wikipediapreview-edit-inline-language-selector-search-icon" />
 			<div className="wikipediapreview-edit-inline-language-selector-results">
 				{items.length ? items.map(item => (
 					<div className="wikipediapreview-edit-inline-language-selector-results-item">{item.name}</div>
