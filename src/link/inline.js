@@ -242,7 +242,7 @@ const LanguageSelector = ({setLanguageSelector, setLang, title}) => {
 			<div className="wikipediapreview-edit-inline-language-selector-results">
 				{items.length ? items.map(item => (
 					<div className="wikipediapreview-edit-inline-language-selector-results-item" data-code={item.code} onClick={(e) => { selectLanguage(e) }}>{item.name}</div>
-				)) : <div> No results found</div>}
+				)) : <div className="wikipediapreview-edit-inline-language-selector-results-none"> No results found</div>}
 			</div>
 		</div>
 	);
