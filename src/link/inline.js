@@ -24,7 +24,6 @@ export const InlineEditUI = ( {
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
-	// add a classNamePrefix will ya?
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -237,6 +236,9 @@ const LanguageSelector = ({setLanguageSelector, setLang, title}) => {
 				autoFocus={true}
 			/>
 			<div className="wikipediapreview-edit-inline-language-selector-search-icon" />
+			{ !language ? (
+				<div className="wikipediapreview-edit-inline-language-selector-label">{ __( 'All languages', 'wikipedia-preview' ) }</div>
+			) : null }
 			<div className="wikipediapreview-edit-inline-language-selector-results">
 				{items.length ? items.map(item => (
 					<div className="wikipediapreview-edit-inline-language-selector-results-item" data-code={item.code} onClick={(e) => { selectLanguage(e) }}>{item.name}</div>

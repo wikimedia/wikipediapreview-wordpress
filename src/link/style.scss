@@ -213,22 +213,32 @@
 			}	
 		}
 
+		&-label {
+			margin-left: 35px;
+			margin-top: 17px;
+			font-size: 16px;
+			line-height: 19px;
+			color: #72777D;
+		}
+
 		&-results {
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
 			max-height: 235px;
-			padding: 30px 30px;
+			padding: 15px 30px 30px 30px;
 
 			&-item {
 				margin: 8px 4px;
+				font-size: 16px;
+				line-height: 19px;
 			}
 		}
 
 		&.no-title {
 			position: relative;
 			top: -120px;
-			height: 290px;
+			height: 310px;
 		}
 	}
 
