@@ -39,10 +39,12 @@ function wikipediapreview_enqueue_scripts() {
 	);
 
 	global $post;
-	$options = array(
-		'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
-	);
-	wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
+	if ( isset( $post->ID ) ) {
+		$options = array(
+			'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
+		);
+		wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
+	}
 
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
