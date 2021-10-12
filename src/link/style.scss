@@ -224,6 +224,12 @@
 				margin: 8px 4px;
 			}
 		}
+
+		&.no-title {
+			position: relative;
+			top: -120px;
+			height: 290px;
+		}
 	}
 
 	&.is-expanded {

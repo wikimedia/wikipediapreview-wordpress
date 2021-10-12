@@ -145,7 +145,7 @@ export const InlineEditUI = ( {
 				</div>
 			) : null }
 			{ languageSelector ? (
-				<LanguageSelector setLanguageSelector={ setLanguageSelector } setLang={ setLang }/>
+				<LanguageSelector setLanguageSelector={ setLanguageSelector } setLang={ setLang } title={title}/>
 			) : null }
 			<KeyboardShortcuts
 				bindGlobal={ true }
@@ -186,7 +186,7 @@ export const InlineEditUI = ( {
 	);
 };
 
-const LanguageSelector = ({setLanguageSelector, setLang}) => {
+const LanguageSelector = ({setLanguageSelector, setLang, title}) => {
 	const [ language, setLanguage ] = useState('');
 	const [ items, setItems ] = useState([]);
 	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war', 'sq', 'is', 'af', 'yi', 'sa'];
@@ -221,7 +221,7 @@ const LanguageSelector = ({setLanguageSelector, setLang}) => {
 	}, [])
 
 	return (
-		<div className="wikipediapreview-edit-inline-language-selector">
+		<div className={`wikipediapreview-edit-inline-language-selector ${!title ? `no-title` : ''}`}>
 			<div className="wikipediapreview-edit-inline-language-selector-header">
 				<div>{ __( 'Languages', 'wikipedia-preview' ) }</div>
 				<div className="wikipediapreview-edit-inline-language-selector-header-close" onClick={() => setLanguageSelector(false)}></div>
