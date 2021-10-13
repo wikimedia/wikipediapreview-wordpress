@@ -57,6 +57,10 @@
 				text-transform: uppercase;
 				font-size: 14px;
 				font-weight: 700;
+
+				&.focused {
+					color: #006ba1;
+				}
 			}
 
 			&-dropdown {
@@ -68,6 +72,10 @@
 			@media screen and (max-width: 782px) {
 				right: 24px;
 				height: 40px;
+			}
+
+			&.focused {
+				border-left: solid 1.5px #006ba1;
 			}
 		}
 
@@ -238,9 +246,9 @@
 				width: 110px;
 
 				&:hover {
-				background-color: #eaecf0;
-				cursor: pointer;
-			}
+					background-color: #eaecf0;
+					cursor: pointer;
+				}
 			}
 		}
 
