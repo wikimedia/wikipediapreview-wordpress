@@ -5,7 +5,7 @@ import { getLanguages } from '@wikimedia/language-data';
 import { isLanguageWithWiki, defaultLanguages } from './languages';
 
 export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
-	const [ language, setLanguage ] = useState( '' );
+	const [ value, setValue ] = useState( '' );
 	const [ items, setItems ] = useState( [] );
 	const limit = defaultLanguages.length;
 	const languages = getLanguages();
@@ -21,7 +21,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
 	};
 
 	const filterLanguages = ( targetLang ) => {
-		setLanguage( targetLang );
+		setValue( targetLang );
 
 		if ( targetLang === '' ) {
 			setItems( defaultFilter() );
@@ -81,17 +81,18 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
 				<div
 					className="wikipediapreview-edit-inline-language-selector-header-close"
 					onClick={ () => setLanguageSelector( false ) }
+					role="presentation"
 				></div>
 			</div>
 			<TextControl
 				className="wikipediapreview-edit-inline-language-selector-input"
-				value={ language }
+				value={ value }
 				onChange={ filterLanguages }
 				placeholder={ __( 'Search languages', 'wikipedia-preview' ) }
-				autoFocus={ true }
+				autoFocus={ true } // eslint-disable-line jsx-a11y/no-autofocus
 			/>
 			<div className="wikipediapreview-edit-inline-language-selector-search-icon" />
-			{ ! language ? (
+			{ ! value ? (
 				<div className="wikipediapreview-edit-inline-language-selector-label">
 					{ __( 'All languages', 'wikipedia-preview' ) }
 				</div>
@@ -105,14 +106,17 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
 							onClick={ ( e ) => {
 								selectLanguage( e );
 							} }
+							role="presentation"
+							key={ item.code }
 						>
 							{ item.name }
 						</div>
 					) )
 				) : (
 					<div className="wikipediapreview-edit-inline-language-selector-results-none">
-						{ ' ' }
-						No results found
+						<bdi>
+							{ __( 'No results found', 'wikipedia-preview' ) }
+						</bdi>
 					</div>
 				) }
 			</div>
