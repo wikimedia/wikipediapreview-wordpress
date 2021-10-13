@@ -9,7 +9,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
-import { LanguageSelector } from './language-selector'
+import { LanguageSelector } from './language-selector';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -24,7 +24,7 @@ export const InlineEditUI = ( {
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
-	const [focused, setFocused] = useState(false)
+	const [ focused, setFocused ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -71,16 +71,28 @@ export const InlineEditUI = ( {
 					className="wikipediapreview-edit-inline-search-input"
 					value={ title }
 					onChange={ setTitle }
-					onFocus={ () => setFocused(true) }
-					onBlur={ () => setFocused(false) }
+					onFocus={ () => setFocused( true ) }
+					onBlur={ () => setFocused( false ) }
 					placeholder={ __(
 						'Search Wikipedia',
 						'wikipedia-preview'
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
-				<div className={`wikipediapreview-edit-inline-search-language ${focused ? `focused` : ''}`} onClick={() => setLanguageSelector(true)}>
-					<div className={`wikipediapreview-edit-inline-search-language-code ${focused ? `focused` : ''}`}>{lang}</div>
+				<div
+					className={ `wikipediapreview-edit-inline-search-language ${
+						focused ? `focused` : ''
+					}` }
+					onClick={ () => setLanguageSelector( true ) }
+					role="presentation"
+				>
+					<div
+						className={ `wikipediapreview-edit-inline-search-language-code ${
+							focused ? `focused` : ''
+						}` }
+					>
+						{ lang }
+					</div>
 					<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
 				</div>
 				{ title && (
@@ -147,7 +159,11 @@ export const InlineEditUI = ( {
 				</div>
 			) : null }
 			{ languageSelector ? (
-				<LanguageSelector setLanguageSelector={ setLanguageSelector } setLang={ setLang } title={title}/>
+				<LanguageSelector
+					setLanguageSelector={ setLanguageSelector }
+					setLang={ setLang }
+					title={ title }
+				/>
 			) : null }
 			<KeyboardShortcuts
 				bindGlobal={ true }
