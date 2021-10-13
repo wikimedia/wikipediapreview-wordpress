@@ -4,12 +4,12 @@ import {
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
-import { languageData } from '@wikimedia/language-data';
+import { getLanguages } from '@wikimedia/language-data';
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
-import { languages } from './languages';
+import { isLanguageWithWiki, defaultLanguages } from './languages';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 
 export const InlineEditUI = ( {
@@ -29,7 +29,6 @@ export const InlineEditUI = ( {
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
 		setLang( activeAttributes.lang || getSiteLanguage() );
-		console.log('languageData...', languageData);
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
@@ -190,25 +189,47 @@ export const InlineEditUI = ( {
 const LanguageSelector = ({setLanguageSelector, setLang, title}) => {
 	const [ language, setLanguage ] = useState('');
 	const [ items, setItems ] = useState([]);
-	const defaultLanguages = ['en', 'nl', 'de', 'sv', 'fr', 'it', 'ru', 'es', 'pl', 'war', 'sq', 'is', 'af', 'yi', 'sa'];
 	const limit = defaultLanguages.length;
-	
+	const languages = getLanguages()
+
+	const normalize = (result, language) => {
+		if (isLanguageWithWiki(language)) {
+			result.push({
+				name: languages[language][2],
+				code: language
+			})
+		}
+		return result
+	}
+
 	const filterLanguages = (targetLang) => {
 		setLanguage(targetLang)
-		
+
 		if (targetLang === '') {
 			setItems(defaultFilter())
 			return
 		}
-		
-		const filtered = languages.filter((lang) => {
-			return lang.name.toLowerCase().indexOf(targetLang.toLowerCase()) !== -1;
-		})
+
+		const filtered = Object.keys(languages)
+			.filter( language => {
+				if (languages[language].length > 2) {
+					return languages[language][2].toLowerCase().indexOf(targetLang.toLowerCase()) !== -1
+				}
+				return false
+			} )
+			.reduce( (result, language) => normalize(result,language), [])
+
 		setItems(filtered.slice(0, limit))
 	}
 
 	const defaultFilter = () => {
-		return languages.filter(lang => defaultLanguages.indexOf(lang.code) !== -1 )
+		const filtered = Object.keys(languages)
+			.filter(language => {
+				return defaultLanguages.indexOf(language) !== -1
+			})
+			.reduce( (result, language) => normalize(result,language), [])
+
+		return filtered
 	}
 
 	const selectLanguage = (e) => {
