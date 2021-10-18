@@ -175,11 +175,11 @@
 	}
 
 	&-language-selector {
-		position: absolute;
+		position: relative;
+		top: -120px;
+		height: 310px;
 		width: 100%;
 		background: #fff;
-		height: 100%;
-		top: 0;
 		overflow: hidden;
 
 		&-header {
@@ -194,6 +194,7 @@
 				background-image: url(./images/close-language.svg);
 				width: 20px;
 				height: 20px;
+				z-index: 1000;
 			}
 		}
 
@@ -258,10 +259,8 @@
 			margin-left: 16px;
 		}
 
-		&.no-title {
-			position: relative;
-			top: -120px;
-			height: 310px;
+		@media screen and (max-width: 782px) {
+			top: -185px;
 		}
 	}
 

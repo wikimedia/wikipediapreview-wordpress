@@ -4,7 +4,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { getLanguages } from '@wikimedia/language-data';
 import { isLanguageWithWiki, defaultLanguages } from './languages';
 
-export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
+export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 	const [ value, setValue ] = useState( '' );
 	const [ items, setItems ] = useState( [] );
 	const limit = defaultLanguages.length;
@@ -71,11 +71,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, title } ) => {
 	}, [] );
 
 	return (
-		<div
-			className={ `wikipediapreview-edit-inline-language-selector ${
-				! title ? `no-title` : ''
-			}` }
-		>
+		<div className="wikipediapreview-edit-inline-language-selector">
 			<div className="wikipediapreview-edit-inline-language-selector-header">
 				<div>{ __( 'Languages', 'wikipedia-preview' ) }</div>
 				<div

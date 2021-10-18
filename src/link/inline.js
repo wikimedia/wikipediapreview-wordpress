@@ -119,7 +119,7 @@ export const InlineEditUI = ( {
 					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 				</div>
 			) }
-			{ searchList && searchList.length ? (
+			{ !languageSelector && searchList && searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
@@ -162,7 +162,6 @@ export const InlineEditUI = ( {
 				<LanguageSelector
 					setLanguageSelector={ setLanguageSelector }
 					setLang={ setLang }
-					title={ title }
 				/>
 			) : null }
 			<KeyboardShortcuts
