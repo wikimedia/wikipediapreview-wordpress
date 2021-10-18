@@ -181,6 +181,7 @@
 		width: 100%;
 		background: #fff;
 		overflow: hidden;
+		z-index: 1000;
 
 		&-header {
 			display: flex;
@@ -194,7 +195,6 @@
 				background-image: url(./images/close-language.svg);
 				width: 20px;
 				height: 20px;
-				z-index: 1000;
 			}
 		}
 
@@ -431,6 +431,10 @@ body.rtl {
 					padding-left: unset;
 				}
 
+				@media screen and (max-width: 782px) {
+					padding-left: 20px;
+					padding-right: unset;
+				}
 			}
 
 			&-icon {
@@ -443,7 +447,7 @@ body.rtl {
 			}
 
 			&-close {
-				left: 15px;
+				left: 75px;
 				right: unset;
 
 				@media screen and (max-width: 782px) {
@@ -454,6 +458,23 @@ body.rtl {
 			/* stylelint-disable-next-line no-descending-specificity */
 			&-loading {
 				animation-name: wikipediapreview-edit-inline-rtl-loader;
+			}
+
+			&-language {
+				left: 10px;
+				border-right: solid 1px;
+				right: unset;
+				border-left: unset;
+
+				&.focused {
+					border-right: solid 1.5px #006ba1;
+					border-left: unset;
+				}
+
+				@media screen and (max-width: 782px) {
+					left: 25px;
+					right: unset;
+				}
 			}
 		}
 
@@ -469,6 +490,36 @@ body.rtl {
 				&-description {
 					right: 60px;
 					left: unset;
+				}
+			}
+		}
+
+		&-language-selector {
+
+			&-input {
+
+				input {
+					padding-right: 30px !important;
+					padding-left: unset;
+				}
+			}
+
+			&-search-icon {
+				right: 8px;
+				left: unset;
+			}
+
+			&-label {
+				margin-right: 35px;
+				margin-left: unset;
+			}
+
+			&-results {
+				padding: 15px 15px 30px 30px;
+
+				&-item {
+					margin-left: 15px;
+					margin-right: unset;
 				}
 			}
 		}
