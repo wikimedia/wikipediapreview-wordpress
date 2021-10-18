@@ -119,7 +119,7 @@ export const InlineEditUI = ( {
 					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 				</div>
 			) }
-			{ !languageSelector && searchList && searchList.length ? (
+			{ ! languageSelector && searchList && searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
