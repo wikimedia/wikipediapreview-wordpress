@@ -21,8 +21,9 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 		return result;
 	};
 
-	const filterLanguages = ( targetLang ) => {
-		setValue( targetLang );
+	const filterLanguages = ( target ) => {
+		setValue( target );
+		const targetLang = target.toLowerCase().trim();
 
 		if ( targetLang === '' ) {
 			setItems( defaultFilter() );
@@ -35,8 +36,8 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 					return (
 						languages[ language ][ 2 ]
 							.toLowerCase()
-							.indexOf( targetLang.toLowerCase() ) !== -1 ||
-						language === targetLang.toLowerCase()
+							.indexOf( targetLang ) !== -1 ||
+						language === targetLang
 					);
 				}
 				return false;
