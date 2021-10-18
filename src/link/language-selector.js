@@ -35,7 +35,8 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 					return (
 						languages[ language ][ 2 ]
 							.toLowerCase()
-							.indexOf( targetLang.toLowerCase() ) !== -1
+							.indexOf( targetLang.toLowerCase() ) !== -1 ||
+						language === targetLang.toLowerCase()
 					);
 				}
 				return false;
@@ -104,7 +105,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 							onClick={ () => {
 								selectLanguage( items[ index ].code );
 							} }
-              onMouseEnter={ () => setHoverIndex(-1) }
+							onMouseEnter={ () => setHoverIndex( -1 ) }
 							role="presentation"
 							key={ item.code }
 						>
