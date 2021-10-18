@@ -1,4 +1,4 @@
-import { TextControl } from '@wordpress/components';
+import { TextControl, KeyboardShortcuts } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import { getLanguages } from '@wikimedia/language-data';
@@ -7,6 +7,7 @@ import { isLanguageWithWiki, defaultLanguages } from './languages';
 export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 	const [ value, setValue ] = useState( '' );
 	const [ items, setItems ] = useState( [] );
+	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const limit = defaultLanguages.length;
 	const languages = getLanguages();
 
@@ -60,8 +61,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 		return filtered;
 	};
 
-	const selectLanguage = ( e ) => {
-		const languageCode = e.target.attributes[ 'data-code' ].nodeValue;
+	const selectLanguage = ( languageCode ) => {
 		setLang( languageCode );
 		setLanguageSelector( false );
 	};
@@ -95,12 +95,14 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 			) : null }
 			<div className="wikipediapreview-edit-inline-language-selector-results">
 				{ items.length ? (
-					items.map( ( item ) => (
+					items.map( ( item, index ) => (
 						<div
-							className="wikipediapreview-edit-inline-language-selector-results-item"
+							className={ `wikipediapreview-edit-inline-language-selector-results-item ${
+								index === hoveredIndex ? 'hovered' : ''
+							}` }
 							data-code={ item.code }
-							onClick={ ( e ) => {
-								selectLanguage( e );
+							onClick={ () => {
+								selectLanguage( items[ index ].code );
 							} }
 							role="presentation"
 							key={ item.code }
@@ -116,6 +118,21 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 					</div>
 				) }
 			</div>
+			<KeyboardShortcuts
+				shortcuts={ {
+					down: () => {
+						setHoverIndex( ( hoveredIndex + 1 ) % items.length );
+					},
+					up: () => {
+						setHoverIndex(
+							hoveredIndex ? hoveredIndex - 1 : items.length - 1
+						);
+					},
+					enter: () => {
+						selectLanguage( items[ hoveredIndex ].code );
+					},
+				} }
+			/>
 		</div>
 	);
 };

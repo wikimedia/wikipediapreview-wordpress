@@ -247,7 +247,8 @@
 				line-height: 19px;
 				width: 110px;
 
-				&:hover {
+				&:hover,
+				&.hovered {
 					background-color: #eaecf0;
 					cursor: pointer;
 				}

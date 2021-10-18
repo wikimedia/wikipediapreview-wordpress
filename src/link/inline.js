@@ -180,7 +180,7 @@ export const InlineEditUI = ( {
 						);
 					},
 					enter: () => {
-						if ( hoveredIndex === -1 ) {
+						if ( hoveredIndex === -1 && ! languageSelector ) {
 							const matchedItem = searchList.find(
 								( list ) =>
 									list.title.toLowerCase() ===
@@ -189,7 +189,7 @@ export const InlineEditUI = ( {
 							if ( matchedItem ) {
 								onApply( value, matchedItem.title, lang );
 							}
-						} else {
+						} else if ( ! languageSelector ) {
 							onApply(
 								value,
 								searchList[ hoveredIndex ].title,
