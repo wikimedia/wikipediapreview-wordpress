@@ -104,6 +104,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 							onClick={ () => {
 								selectLanguage( items[ index ].code );
 							} }
+              onMouseEnter={ () => setHoverIndex(-1) }
 							role="presentation"
 							key={ item.code }
 						>
