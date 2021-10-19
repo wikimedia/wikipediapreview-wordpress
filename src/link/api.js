@@ -62,13 +62,13 @@ export const fulltextSearch = ( lang, term, callback ) => {
 			const { search, pages } = data.query;
 			callback(
 				Object.values( search ).map( ( item ) => {
-					const page =
-						pages &&
-						pages.find( ( { pageid } ) => pageid === item.pageid );
+					const page = pages?.find(
+						( { pageid } ) => pageid === item.pageid
+					);
 					return {
 						title: item.title,
 						description: stripHtml( item.snippet ),
-						thumbnail: page.thumbnail?.source,
+						thumbnail: page?.thumbnail?.source,
 					};
 				} )
 			);
