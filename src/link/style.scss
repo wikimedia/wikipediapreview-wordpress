@@ -20,6 +20,7 @@
 
 			input {
 				padding-left: 35px !important;
+				padding-right: 30px !important;
 			}
 
 		}
@@ -293,8 +294,8 @@ body.rtl {
 			&-input {
 
 				input {
+					padding-left: 30px !important;
 					padding-right: 35px !important;
-					padding-left: unset;
 				}
 
 			}
