@@ -46,17 +46,24 @@
 			bottom: 0;
 			right: 10px;
 			display: flex;
-			width: 50px;
+			width: 58px;
 			justify-content: space-evenly;
 			align-items: center;
 			border-left: solid 1px;
 			height: 30px;
+			padding-right: 8px;
+			padding-left: 8px;
+
+			&:hover {
+				cursor: pointer;
+			}
 
 			&-code {
 				text-align: center;
 				text-transform: uppercase;
 				font-size: 14px;
 				font-weight: 700;
+				margin-right: 2px;
 
 				&.focused {
 					color: #006ba1;
@@ -85,7 +92,7 @@
 			height: 20px;
 			position: absolute;
 			bottom: 5px;
-			right: 65px;
+			right: 72px;
 			padding: 0;
 
 			&:hover {
@@ -94,7 +101,7 @@
 
 			@media screen and (max-width: 782px) {
 				bottom: 10px;
-				right: 78px;
+				right: 84px;
 			}
 		}
 
@@ -216,11 +223,11 @@
 			width: 20px;
 			height: 20px;
 			position: absolute;
-			top: 58px;
+			top: 60px;
 			left: 8px;
 
 			@media screen and (max-width: 782px) {
-				bottom: 10px;
+				top: 62px;
 			}
 		}
 
@@ -465,6 +472,11 @@ body.rtl {
 				border-right: solid 1px;
 				right: unset;
 				border-left: unset;
+
+				&-code {
+					margin-left: 2px;
+					margin-right: unset;
+				}
 
 				&.focused {
 					border-right: solid 1.5px #006ba1;
