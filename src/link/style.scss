@@ -20,6 +20,7 @@
 
 			input {
 				padding-left: 35px !important;
+				padding-right: 95px !important;
 			}
 
 			@media screen and (max-width: 782px) {
@@ -84,6 +85,10 @@
 			&.focused {
 				border-left: solid 1.5px #006ba1;
 			}
+
+			&.lang-code-adjustment {
+				width: 70px;
+			}
 		}
 
 		&-close {
@@ -101,6 +106,10 @@
 
 			@media screen and (max-width: 782px) {
 				bottom: 10px;
+				right: 84px;
+			}
+
+			&.lang-code-adjustment {
 				right: 84px;
 			}
 		}
@@ -435,7 +444,7 @@ body.rtl {
 
 				input {
 					padding-right: 35px !important;
-					padding-left: unset;
+					padding-left: 95px !important;
 				}
 
 				@media screen and (max-width: 782px) {
@@ -459,6 +468,11 @@ body.rtl {
 
 				@media screen and (max-width: 782px) {
 					bottom: 10px;
+				}
+
+				&.lang-code-adjustment {
+					left: 84px;
+					right: unset;
 				}
 			}
 
