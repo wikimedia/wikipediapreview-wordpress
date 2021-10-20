@@ -4,3 +4,6 @@ This WordPress plugin is a thin wrapper around [Wikipedia Preview](https://githu
 ## Run the plugin locally
 
 `npm install` to get everything ready including the wikipedia-preview code.
+`npm run build`
+`npm run start`
+after this 3 steps, everything should be working
