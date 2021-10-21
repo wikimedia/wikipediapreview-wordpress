@@ -55,7 +55,7 @@ const Edit = ( {
 				},
 			},
 			0,
-			title.length
+			title.length + 1
 		);
 		onChange( insert( value, toInsert ) );
 		onFocus();
