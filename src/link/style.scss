@@ -111,6 +111,10 @@
 
 			&.lang-code-adjustment {
 				right: 84px;
+
+				@media screen and (max-width: 782px) {
+					right: 98px;
+				}
 			}
 		}
 
@@ -463,7 +467,7 @@ body.rtl {
 			}
 
 			&-close {
-				left: 75px;
+				left: 84px;
 				right: unset;
 
 				@media screen and (max-width: 782px) {
@@ -473,6 +477,10 @@ body.rtl {
 				&.lang-code-adjustment {
 					left: 84px;
 					right: unset;
+
+					@media screen and (max-width: 782px) {
+						left: 98px;
+					}
 				}
 			}
 
