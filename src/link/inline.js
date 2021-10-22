@@ -124,7 +124,7 @@ export const InlineEditUI = ( {
 					</bdi>
 				</div>
 			) }
-			{ ! loading && title && ! searchList.length && (
+			{ ! loading && title && ! searchList.length && ! languageSelector && (
 				<div className="wikipediapreview-edit-inline-info">
 					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 				</div>
