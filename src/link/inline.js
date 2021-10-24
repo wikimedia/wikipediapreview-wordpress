@@ -25,7 +25,6 @@ export const InlineEditUI = ( {
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
 	const [ focused, setFocused ] = useState( false );
-	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -52,12 +51,6 @@ export const InlineEditUI = ( {
 			abortAllRequest();
 			setSearchList( [] );
 			setLoading( false );
-		}
-
-		if ( lang && lang.length > 2 ) {
-			setLangCodeAdjustment( true );
-		} else {
-			setLangCodeAdjustment( false );
 		}
 	}, [ title, lang ] );
 
@@ -86,33 +79,31 @@ export const InlineEditUI = ( {
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
-				<div
-					className={ `wikipediapreview-edit-inline-search-language 
-					${ focused ? `focused` : '' } ${
-						langCodeAdjustment ? `lang-code-adjustment` : ''
-					}` }
-					onClick={ () => setLanguageSelector( true ) }
-					role="presentation"
-				>
-					<div
-						className={ `wikipediapreview-edit-inline-search-language-code ${
-							focused ? `focused` : ''
-						}` }
-					>
-						{ lang }
-					</div>
-					<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
-				</div>
-				{ title && (
+				<div className="wikipediapreview-edit-inline-search-tools">
 					<Button
 						onClick={ () => {
 							setTitle( '' );
 						} }
 						className={ `wikipediapreview-edit-inline-search-close ${
-							langCodeAdjustment ? `lang-code-adjustment` : ''
+							title ? `visible` : ''
 						}` }
 					/>
-				) }
+					<div
+						className={ `wikipediapreview-edit-inline-search-language 
+						${ focused ? `focused` : '' }` }
+						onClick={ () => setLanguageSelector( true ) }
+						role="presentation"
+					>
+						<div
+							className={ `wikipediapreview-edit-inline-search-language-code ${
+								focused ? `focused` : ''
+							}` }
+						>
+							{ lang }
+						</div>
+						<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
+					</div>
+				</div>
 				{ loading && (
 					<div className="wikipediapreview-edit-inline-search-loading"></div>
 				) }
