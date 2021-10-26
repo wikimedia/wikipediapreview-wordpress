@@ -27,8 +27,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 		} );
 
 		try {
-			const localized = localizedName.of( language ).toLowerCase();
-			return localized;
+			return localizedName.of( language ).toLowerCase();
 		} catch {
 			return '';
 		}
