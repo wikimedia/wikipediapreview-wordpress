@@ -27,6 +27,7 @@ Wikipedia Preview is an official plugin developed and supported by the [Wikimedi
 * Works for Right-to-Left (RTL) and Left-To-Right (LTR) languages.
 * A built-in gallery to dive into article images.
 * Can be disabled for any page using the post metadata sidebar. Look for the Wikipedia Preview section.
+* Gutenburg editor custom tool to search for Wikipedia articles and visualize Wikipedia Preview for readers.
 
 **How to use**
 
@@ -34,8 +35,12 @@ After you [download and install](https://wordpress.org/support/article/managing-
 
 == Screenshots ==
 
-1. Desktop view on hover
-2. Mobile view on touch
+1. Mobile view on touch
+2. Mobile view expanded
+3. Fullscreen image gallery
+4. Desktop view on hover
+5. Search for Wikipedia articles
+6. Visualization of Wikipedia Preview for readers
 
 == Frequently Asked Questions ==
 
