@@ -21,11 +21,22 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 		return result;
 	};
 
+	const getLocalized = ( language ) => {
+		const localizedName = new Intl.DisplayNames( [ lang ], {
+			type: 'language',
+		} );
+
+		try {
+			const localized = localizedName.of( language ).toLowerCase();
+			return localized;
+		} catch {
+			return '';
+		}
+	};
+
 	const filterLanguages = ( target ) => {
 		setValue( target );
 		const targetLang = target.toLowerCase().trim();
-		console.log('lang...', lang);
-		const localizedName = new Intl.DisplayNames([lang], {type: 'language'});
 
 		if ( targetLang === '' ) {
 			setItems( defaultFilter() );
@@ -34,19 +45,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 
 		const filtered = Object.keys( languages )
 			.filter( ( language ) => {
-				let localized = ''
-				if (isLanguageWithWiki(language)) {
-					try {
-						localized = localizedName.of(language).toLowerCase()
-						// console.log('localizedName.of', language, localizedName.of(language));
-						console.log('language, localized', language, localized);
-					} catch {
-						console.log('invalid name');
-						localized = ''
-					}
-					
-				}
-
+				const localized = getLocalized( language );
 				if ( languages[ language ].length > 2 ) {
 					return (
 						languages[ language ][ 2 ]
