@@ -4,7 +4,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { getLanguages } from '@wikimedia/language-data';
 import { isLanguageWithWiki, defaultLanguages } from './languages';
 
-export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
+export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 	const [ value, setValue ] = useState( '' );
 	const [ items, setItems ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
@@ -24,6 +24,8 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 	const filterLanguages = ( target ) => {
 		setValue( target );
 		const targetLang = target.toLowerCase().trim();
+		console.log('lang...', lang);
+		const localizedName = new Intl.DisplayNames([lang], {type: 'language'});
 
 		if ( targetLang === '' ) {
 			setItems( defaultFilter() );
@@ -32,12 +34,26 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 
 		const filtered = Object.keys( languages )
 			.filter( ( language ) => {
+				let localized = ''
+				if (isLanguageWithWiki(language)) {
+					try {
+						localized = localizedName.of(language).toLowerCase()
+						// console.log('localizedName.of', language, localizedName.of(language));
+						console.log('language, localized', language, localized);
+					} catch {
+						console.log('invalid name');
+						localized = ''
+					}
+					
+				}
+
 				if ( languages[ language ].length > 2 ) {
 					return (
 						languages[ language ][ 2 ]
 							.toLowerCase()
 							.indexOf( targetLang ) !== -1 ||
-						language === targetLang
+						language === targetLang ||
+						localized.indexOf( targetLang ) !== -1
 					);
 				}
 				return false;

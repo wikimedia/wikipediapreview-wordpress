@@ -163,6 +163,7 @@ export const InlineEditUI = ( {
 				<LanguageSelector
 					setLanguageSelector={ setLanguageSelector }
 					setLang={ setLang }
+					lang={ lang }
 				/>
 			) : null }
 			<KeyboardShortcuts
