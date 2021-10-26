@@ -62,9 +62,13 @@ export const InlineEditUI = ( {
 		>
 			<div className="wikipediapreview-edit-inline-search">
 				<p className="wikipediapreview-edit-inline-search-label">
-					<span>{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }</span>
+					<span>
+						{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
+					</span>
 					&nbsp;
-					<span class="wikipediapreview-edit-inline-search-label-beta">{ __( 'beta', 'wikipedia-preview' ) }</span>
+					<span className="wikipediapreview-edit-inline-search-label-beta">
+						{ __( 'beta', 'wikipedia-preview' ) }
+					</span>
 				</p>
 				<TextControl
 					className="wikipediapreview-edit-inline-search-input"
