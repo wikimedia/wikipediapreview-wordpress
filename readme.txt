@@ -35,8 +35,10 @@ After you [download and install](https://wordpress.org/support/article/managing-
 
 == Screenshots ==
 
-1. Desktop view on hover
-2. Mobile view on touch
+1. Mobile view on touch
+2. Mobile view expanded
+3. Fullscreen image gallery
+4. Desktop view on hover
 5. Search for Wikipedia articles
 6. Visualization of Wikipedia Preview for readers
 
