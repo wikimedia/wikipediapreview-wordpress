@@ -9,6 +9,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
+import { LanguageSelector } from './language-selector';
 
 export const InlineEditUI = ( {
 	anchorRef,
@@ -19,9 +20,11 @@ export const InlineEditUI = ( {
 } ) => {
 	const [ title, setTitle ] = useState( activeAttributes.title );
 	const [ lang, setLang ] = useState( activeAttributes.lang );
+	const [ languageSelector, setLanguageSelector ] = useState( false );
 	const [ searchList, setSearchList ] = useState( [] );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
+	const [ focused, setFocused ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -49,7 +52,7 @@ export const InlineEditUI = ( {
 			setSearchList( [] );
 			setLoading( false );
 		}
-	}, [ title ] );
+	}, [ title, lang ] );
 
 	return (
 		<Popover
@@ -74,20 +77,39 @@ export const InlineEditUI = ( {
 					className="wikipediapreview-edit-inline-search-input"
 					value={ title }
 					onChange={ setTitle }
+					onFocus={ () => setFocused( true ) }
+					onBlur={ () => setFocused( false ) }
 					placeholder={ __(
 						'Search Wikipedia',
 						'wikipedia-preview'
 					) }
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
-				{ title && (
+				<div className="wikipediapreview-edit-inline-search-tools">
 					<Button
 						onClick={ () => {
 							setTitle( '' );
 						} }
-						className="wikipediapreview-edit-inline-search-close"
+						className={ `wikipediapreview-edit-inline-search-close ${
+							title ? `visible` : ''
+						}` }
 					/>
-				) }
+					<div
+						className={ `wikipediapreview-edit-inline-search-language 
+						${ focused ? `focused` : '' }` }
+						onClick={ () => setLanguageSelector( true ) }
+						role="presentation"
+					>
+						<div
+							className={ `wikipediapreview-edit-inline-search-language-code ${
+								focused ? `focused` : ''
+							}` }
+						>
+							{ lang }
+						</div>
+						<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
+					</div>
+				</div>
 				{ loading && (
 					<div className="wikipediapreview-edit-inline-search-loading"></div>
 				) }
@@ -99,12 +121,12 @@ export const InlineEditUI = ( {
 					</bdi>
 				</div>
 			) }
-			{ ! loading && title && ! searchList.length && (
+			{ ! loading && title && ! searchList.length && ! languageSelector && (
 				<div className="wikipediapreview-edit-inline-info">
 					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 				</div>
 			) }
-			{ searchList && searchList.length ? (
+			{ ! languageSelector && searchList && searchList.length ? (
 				<div className="wikipediapreview-edit-inline-list">
 					{ searchList.map( ( item, index ) => {
 						return (
@@ -143,6 +165,12 @@ export const InlineEditUI = ( {
 					} ) }
 				</div>
 			) : null }
+			{ languageSelector ? (
+				<LanguageSelector
+					setLanguageSelector={ setLanguageSelector }
+					setLang={ setLang }
+				/>
+			) : null }
 			<KeyboardShortcuts
 				bindGlobal={ true }
 				shortcuts={ {
@@ -159,7 +187,7 @@ export const InlineEditUI = ( {
 						);
 					},
 					enter: () => {
-						if ( hoveredIndex === -1 ) {
+						if ( hoveredIndex === -1 && ! languageSelector ) {
 							const matchedItem = searchList.find(
 								( list ) =>
 									list.title.toLowerCase() ===
@@ -168,7 +196,7 @@ export const InlineEditUI = ( {
 							if ( matchedItem ) {
 								onApply( value, matchedItem.title, lang );
 							}
-						} else {
+						} else if ( ! languageSelector ) {
 							onApply(
 								value,
 								searchList[ hoveredIndex ].title,
