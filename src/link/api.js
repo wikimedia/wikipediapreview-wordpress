@@ -1,7 +1,7 @@
 let abortFunctions = [];
 
 export const prefixSearch = ( lang, term, callback ) => {
-	const url = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${ term.trim() }&limit=5`;
+	const url = `https://${ lang }.wikipedia.org/w/rest.php/v1/search/title?q=${ term.trim() }&limit=5`;
 	return request( url, ( data ) => {
 		if ( ! data.pages ) {
 			callback( [] );
