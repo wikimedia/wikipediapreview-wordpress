@@ -1,32 +1,17 @@
 let abortFunctions = [];
 
 export const prefixSearch = ( lang, term, callback ) => {
-	const params = {
-		action: 'query',
-		prop: 'description|pageimages|pageprops',
-		piprop: 'thumbnail',
-		pilimit: 5,
-		ppprop: 'displaytitle',
-		generator: 'prefixsearch',
-		redirects: true,
-		pithumbsize: 64,
-		gpslimit: 5,
-		gpsnamespace: 0,
-		gpssearch: term.replace( /:/g, ' ' ),
-	};
-
-	const url = buildMwApiUrl( lang, params );
+	const url = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${ term.trim() }&limit=5`;
 	return request( url, ( data ) => {
-		if ( ! data.query?.pages ) {
+		if ( ! data.pages ) {
 			callback( [] );
 		} else {
-			data.query.pages.sort( ( a, b ) => a.index - b.index );
 			callback(
-				Object.values( data.query.pages ).map( ( page ) => {
+				Object.values( data.pages ).map( ( page ) => {
 					return {
 						title: page.title,
 						description: page.description,
-						thumbnail: page.thumbnail?.source,
+						thumbnail: page.thumbnail?.url,
 					};
 				} )
 			);
@@ -62,13 +47,13 @@ export const fulltextSearch = ( lang, term, callback ) => {
 			const { search, pages } = data.query;
 			callback(
 				Object.values( search ).map( ( item ) => {
-					const page =
-						pages &&
-						pages.find( ( { pageid } ) => pageid === item.pageid );
+					const page = pages?.find(
+						( { pageid } ) => pageid === item.pageid
+					);
 					return {
 						title: item.title,
 						description: stripHtml( item.snippet ),
-						thumbnail: page.thumbnail?.source,
+						thumbnail: page?.thumbnail?.source,
 					};
 				} )
 			);
