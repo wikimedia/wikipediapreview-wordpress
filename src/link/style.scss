@@ -374,6 +374,21 @@
 
 		.wikipediapreview {
 			box-shadow: none;
+
+			&-gallery {
+				display: none;
+			}
+
+			.wikipediapreview-footer {
+
+				&-cta-readmore {
+					display: none;
+				}
+
+				&-cta-readonwiki {
+					display: block;
+				}
+			}
 		}
 
 		.wikipediapreview-body::after {
