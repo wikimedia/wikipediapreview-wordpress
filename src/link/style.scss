@@ -10,6 +10,7 @@
 			text-align: center;
 			font-size: 16px;
 			font-weight: 700;
+			color: #202122;
 			margin: 0;
 			padding: 12px 0;
 			border-bottom: 1px solid #c8ccd1;
@@ -32,7 +33,7 @@
 		}
 
 		&-input {
-			margin: 30px 10px 15px;
+			margin: 30px 10px 30px;
 
 			input {
 				padding-left: 35px !important;
@@ -215,7 +216,7 @@
 
 	&-language-selector {
 		position: relative;
-		top: -120px;
+		top: -140px;
 		height: 310px;
 		width: 100%;
 		background: #fff;
@@ -234,6 +235,7 @@
 				background-image: url(./images/close-language.svg);
 				width: 20px;
 				height: 20px;
+				cursor: pointer;
 			}
 		}
 
@@ -466,6 +468,7 @@ body.rtl {
 			&-input {
 
 				input {
+					color: #72777d;
 					padding-right: 35px !important;
 					padding-left: 140px !important;
 				}
@@ -553,6 +556,7 @@ body.rtl {
 			&-input {
 
 				input {
+					color: #72777d;
 					padding-right: 30px !important;
 					padding-left: unset;
 				}
