@@ -86,14 +86,14 @@ export const InlineEditUI = ( {
 				/>
 				<div className="wikipediapreview-edit-inline-search-icon" />
 				<div className="wikipediapreview-edit-inline-search-tools">
-					<Button
-						onClick={ () => {
-							setTitle( '' );
-						} }
-						className={ `wikipediapreview-edit-inline-search-close ${
-							title ? `visible` : ''
-						}` }
-					/>
+					{ title && (
+						<Button
+							onClick={ () => {
+								setTitle( '' );
+							} }
+							className="wikipediapreview-edit-inline-search-close"
+						/>
+					) }
 					<div
 						className={ `wikipediapreview-edit-inline-search-language 
 						${ focused ? `focused` : '' }` }
