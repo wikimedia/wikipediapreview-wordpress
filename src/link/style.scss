@@ -216,7 +216,7 @@
 
 	&-language-selector {
 		position: relative;
-		top: -120px;
+		top: -140px;
 		height: 310px;
 		width: 100%;
 		background: #fff;
@@ -555,6 +555,7 @@ body.rtl {
 			&-input {
 
 				input {
+					color: #72777D;
 					padding-right: 30px !important;
 					padding-left: unset;
 				}
