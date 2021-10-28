@@ -3,7 +3,6 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
 	insert,
-	// useAnchorRef,
 	applyFormat,
 	removeFormat,
 } from '@wordpress/rich-text';
@@ -46,12 +45,6 @@ const Edit = ( {
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
 
-	// const anchorRef = useAnchorRef( {
-	// 	ref: contentRef,
-	// 	value,
-	// 	settings,
-	// } );
-
 	const formatButtonClick = () => {
 		if ( isActive ) {
 			removeAttributes();
@@ -61,7 +54,6 @@ const Edit = ( {
 	};
 
 	const insertText = ( selectedValue, title, lang ) => {
-		console.log('insertText - selectedValue...', selectedValue);
 		const toInsert = applyFormat(
 			create( { text: title } ),
 			{
@@ -80,7 +72,6 @@ const Edit = ( {
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
-		console.log('updateAttributes - selectedValue...', selectedValue);
 		const newValue = applyFormat( selectedValue, {
 			type: formatType,
 			attributes: {
@@ -100,8 +91,9 @@ const Edit = ( {
 	};
 
 	const goToEdit = () => {
-		stopViewingPreview();
 		startAddingPreview();
+		stopViewingPreview();
+		onFocus();
 	};
 
 	const onClosePreview = () => {
@@ -119,11 +111,6 @@ const Edit = ( {
 		}
 	}, [ activeAttributes ] );
 
-	useEffect(()=>{
-		console.log('contentRef...', typeof contentRef);
-		console.log('value...', value);
-	}, [contentRef, value])
-
 	return (
 		<>
 			<RichTextToolbarButton
@@ -135,7 +122,7 @@ const Edit = ( {
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }
-					settings={ contentRef }
+					settings={ settings }
 					onApply={
 						value.start !== value.end || activeAttributes.title
 							? updateAttributes

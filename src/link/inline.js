@@ -12,7 +12,6 @@ import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
 export const InlineEditUI = ( {
-	// anchorRef,
 	contentRef,
 	settings,
 	onClose,
