@@ -17,6 +17,11 @@ export const LanguageSelector = ( { setLanguageSelector, setLang } ) => {
 				name: languages[ language ][ 2 ],
 				code: language,
 			} );
+		} else if ( language === 'en-simple' ) {
+			result.push( {
+				name: languages[ language ][ 2 ],
+				code: 'simple',
+			} );
 		}
 		return result;
 	};
