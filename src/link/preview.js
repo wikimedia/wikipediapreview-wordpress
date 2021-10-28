@@ -10,7 +10,6 @@ import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
 
 export const PreviewEditUI = ( {
-	// anchorRef,
 	contentRef,
 	settings,
 	value,
