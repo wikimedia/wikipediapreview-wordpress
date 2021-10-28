@@ -25,6 +25,7 @@ export const InlineEditUI = ( {
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ loading, setLoading ] = useState( false );
 	const [ focused, setFocused ] = useState( false );
+	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -54,6 +55,14 @@ export const InlineEditUI = ( {
 		}
 	}, [ title, lang ] );
 
+	useEffect( () => {
+		if ( lang && lang.length > 3 ) {
+			setLangCodeAdjustment( true );
+		} else {
+			setLangCodeAdjustment( false );
+		}
+	}, [ lang ] );
+
 	return (
 		<Popover
 			anchorRef={ anchorRef }
@@ -74,7 +83,9 @@ export const InlineEditUI = ( {
 					</span>
 				</p>
 				<TextControl
-					className="wikipediapreview-edit-inline-search-input"
+					className={ `wikipediapreview-edit-inline-search-input ${
+						langCodeAdjustment ? 'lang-code-adjustment' : ''
+					}` }
 					value={ title }
 					onChange={ setTitle }
 					onFocus={ () => setFocused( true ) }
