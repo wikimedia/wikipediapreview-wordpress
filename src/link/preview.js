@@ -5,11 +5,14 @@ import {
 	useLayoutEffect,
 	useCallback,
 } from '@wordpress/element';
+import { useAnchorRef } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
 
 export const PreviewEditUI = ( {
-	anchorRef,
+	contentRef,
+	settings,
+	value,
 	activeAttributes,
 	onClose,
 	onForceClose,
@@ -17,6 +20,11 @@ export const PreviewEditUI = ( {
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
+	const anchorRef = useAnchorRef( {
+		ref: contentRef,
+		value,
+		settings,
+	} );
 	const onClickPopoverOutside = useCallback( ( e ) => {
 		if ( e.target.className === 'components-popover__content' ) {
 			onForceClose();

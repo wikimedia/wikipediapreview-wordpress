@@ -4,7 +4,7 @@ import {
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
-import { getTextContent, slice } from '@wordpress/rich-text';
+import { getTextContent, slice, useAnchorRef } from '@wordpress/rich-text';
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
@@ -12,7 +12,8 @@ import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
 export const InlineEditUI = ( {
-	anchorRef,
+	contentRef,
+	settings,
 	onClose,
 	onApply,
 	value,
@@ -26,6 +27,12 @@ export const InlineEditUI = ( {
 	const [ loading, setLoading ] = useState( false );
 	const [ focused, setFocused ] = useState( false );
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
+
+	const anchorRef = useAnchorRef( {
+		ref: contentRef,
+		value,
+		settings,
+	} );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );

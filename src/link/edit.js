@@ -3,7 +3,6 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
 import {
 	create,
 	insert,
-	useAnchorRef,
 	applyFormat,
 	removeFormat,
 } from '@wordpress/rich-text';
@@ -45,12 +44,6 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-
-	const anchorRef = useAnchorRef( {
-		ref: contentRef,
-		value,
-		settings,
-	} );
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -98,8 +91,9 @@ const Edit = ( {
 	};
 
 	const goToEdit = () => {
-		stopViewingPreview();
 		startAddingPreview();
+		stopViewingPreview();
+		onFocus();
 	};
 
 	const onClosePreview = () => {
@@ -127,7 +121,8 @@ const Edit = ( {
 			/>
 			{ addingPreview && (
 				<InlineEditUI
-					anchorRef={ anchorRef }
+					contentRef={ contentRef }
+					settings={ settings }
 					onApply={
 						value.start !== value.end || activeAttributes.title
 							? updateAttributes
@@ -140,7 +135,9 @@ const Edit = ( {
 			) }
 			{ viewingPreview && (
 				<PreviewEditUI
-					anchorRef={ anchorRef }
+					contentRef={ contentRef }
+					settings={ settings }
+					value={ value }
 					onClose={ onClosePreview }
 					onEdit={ goToEdit }
 					onRemove={ removeAttributes }
