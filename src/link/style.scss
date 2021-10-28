@@ -37,7 +37,14 @@
 
 			input {
 				padding-left: 35px !important;
-				padding-right: 140px !important;
+				padding-right: 95px !important;
+			}
+
+			&.lang-code-adjustment {
+
+				input {
+					padding-right: 140px !important;
+				}
 			}
 
 			@media screen and (max-width: 782px) {
@@ -238,6 +245,7 @@
 			width: 100%;
 			padding-right: 1px;
 
+			/* stylelint-disable-next-line no-descending-specificity */
 			input {
 				border: 2px solid #36c !important;
 				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
@@ -480,7 +488,14 @@ body.rtl {
 				input {
 					color: #72777d;
 					padding-right: 35px !important;
-					padding-left: 140px !important;
+					padding-left: 95px !important;
+				}
+
+				&.lang-code-adjustment {
+
+					input {
+						padding-left: 140px !important;
+					}
 				}
 
 				@media screen and (max-width: 782px) {
@@ -565,6 +580,7 @@ body.rtl {
 
 			&-input {
 
+				/* stylelint-disable-next-line no-descending-specificity */
 				input {
 					color: #72777d;
 					padding-right: 30px !important;
