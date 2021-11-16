@@ -79,118 +79,132 @@ export const InlineEditUI = ( {
 			noArrow={ false }
 			expandOnMobile={ true }
 		>
-			{ !languageSelector && (
+			{ ! languageSelector ? (
+				<div>
 					<div className="wikipediapreview-edit-inline-search">
-					<p className="wikipediapreview-edit-inline-search-label">
-						<span>
-							{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
-						</span>
-						&nbsp;
-						<span className="wikipediapreview-edit-inline-search-label-beta">
-							{ __( 'beta', 'wikipedia-preview' ) }
-						</span>
-					</p>
-					<TextControl
-						className={ `wikipediapreview-edit-inline-search-input ${
-							langCodeAdjustment ? 'lang-code-adjustment' : ''
-						}` }
-						value={ title }
-						onChange={ setTitle }
-						onFocus={ () => setFocused( true ) }
-						onBlur={ () => setFocused( false ) }
-						placeholder={ __(
-							'Search Wikipedia',
-							'wikipedia-preview'
-						) }
-					/>
-					<div className="wikipediapreview-edit-inline-search-icon" />
-					<div className="wikipediapreview-edit-inline-search-tools">
-						{ title && (
-							<Button
-								onClick={ () => {
-									setTitle( '' );
-								} }
-								className="wikipediapreview-edit-inline-search-close"
-							/>
-						) }
-						<div
-							className={ `wikipediapreview-edit-inline-search-language 
+						<p className="wikipediapreview-edit-inline-search-label">
+							<span>
+								{ __(
+									'Wikipedia Preview',
+									'wikipedia-preview'
+								) }
+							</span>
+							&nbsp;
+							<span className="wikipediapreview-edit-inline-search-label-beta">
+								{ __( 'beta', 'wikipedia-preview' ) }
+							</span>
+						</p>
+						<TextControl
+							className={ `wikipediapreview-edit-inline-search-input ${
+								langCodeAdjustment ? 'lang-code-adjustment' : ''
+							}` }
+							value={ title }
+							onChange={ setTitle }
+							onFocus={ () => setFocused( true ) }
+							onBlur={ () => setFocused( false ) }
+							placeholder={ __(
+								'Search Wikipedia',
+								'wikipedia-preview'
+							) }
+						/>
+						<div className="wikipediapreview-edit-inline-search-icon" />
+						<div className="wikipediapreview-edit-inline-search-tools">
+							{ title && (
+								<Button
+									onClick={ () => {
+										setTitle( '' );
+									} }
+									className="wikipediapreview-edit-inline-search-close"
+								/>
+							) }
+							<div
+								className={ `wikipediapreview-edit-inline-search-language 
 							${ focused ? `focused` : '' }` }
-							onClick={ () => setLanguageSelector( true ) }
-							role="presentation"
-						>
-							<div
-								className={ `wikipediapreview-edit-inline-search-language-code ${
-									focused ? `focused` : ''
-								}` }
-							>
-								{ lang }
-							</div>
-							<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
-						</div>
-					</div>
-					{ loading && (
-						<div className="wikipediapreview-edit-inline-search-loading"></div>
-					) }
-				</div>
-			) }
-			{ loading && ! searchList.length && (
-				<div className="wikipediapreview-edit-inline-info">
-					<bdi>
-						{ __( 'Loading search results…', 'wikipedia-preview' ) }
-					</bdi>
-				</div>
-			) }
-			{ ! loading && title && ! searchList.length && ! languageSelector && (
-				<div className="wikipediapreview-edit-inline-info">
-					<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
-				</div>
-			) }
-			{ ! languageSelector && searchList && searchList.length ? (
-				<div className="wikipediapreview-edit-inline-list">
-					{ searchList.map( ( item, index ) => {
-						return (
-							<div
-								className={ `wikipediapreview-edit-inline-list-item ${
-									index === hoveredIndex ? 'hovered' : ''
-								}` }
-								key={ item.title }
-								role="link"
-								tabIndex={ index }
-								onClick={ () => {
-									onApply( value, item.title, lang );
-								} }
-								onKeyUp={ () => {
-									onApply( value, item.title, lang );
-								} }
+								onClick={ () => setLanguageSelector( true ) }
+								role="presentation"
 							>
 								<div
-									className="wikipediapreview-edit-inline-list-item-img"
-									style={
-										item.thumbnail
-											? {
-													backgroundImage: `url(${ item.thumbnail })`,
-											  }
-											: {}
-									}
-								/>
-								<span className="wikipediapreview-edit-inline-list-item-title">
-									{ item.title }
-								</span>
-								<span className="wikipediapreview-edit-inline-list-item-description">
-									{ item.description }
-								</span>
+									className={ `wikipediapreview-edit-inline-search-language-code ${
+										focused ? `focused` : ''
+									}` }
+								>
+									{ lang }
+								</div>
+								<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
 							</div>
-						);
-					} ) }
+						</div>
+						{ loading && (
+							<div className="wikipediapreview-edit-inline-search-loading"></div>
+						) }
+					</div>
+					{ loading && ! searchList.length && (
+						<div className="wikipediapreview-edit-inline-info">
+							<bdi>
+								{ __(
+									'Loading search results…',
+									'wikipedia-preview'
+								) }
+							</bdi>
+						</div>
+					) }
+					{ ! loading && title && ! searchList.length && (
+						<div className="wikipediapreview-edit-inline-info">
+							<bdi>
+								{ __(
+									'No results found',
+									'wikipedia-preview'
+								) }
+							</bdi>
+						</div>
+					) }
+					{ searchList && searchList.length ? (
+						<div className="wikipediapreview-edit-inline-list">
+							{ searchList.map( ( item, index ) => {
+								return (
+									<div
+										className={ `wikipediapreview-edit-inline-list-item ${
+											index === hoveredIndex
+												? 'hovered'
+												: ''
+										}` }
+										key={ item.title }
+										role="link"
+										tabIndex={ index }
+										onClick={ () => {
+											onApply( value, item.title, lang );
+										} }
+										onKeyUp={ () => {
+											onApply( value, item.title, lang );
+										} }
+									>
+										<div
+											className="wikipediapreview-edit-inline-list-item-img"
+											style={
+												item.thumbnail
+													? {
+															backgroundImage: `url(${ item.thumbnail })`,
+													  }
+													: {}
+											}
+										/>
+										<span className="wikipediapreview-edit-inline-list-item-title">
+											{ item.title }
+										</span>
+										<span className="wikipediapreview-edit-inline-list-item-description">
+											{ item.description }
+										</span>
+									</div>
+								);
+							} ) }
+						</div>
+					) : null }
 				</div>
-			) : null }
-			{ languageSelector ? (
+			) : (
 				<LanguageSelector
 					setLanguageSelector={ setLanguageSelector }
 					setLang={ setLang }
 				/>
-			) : null }
+			) }
 			<KeyboardShortcuts
 				bindGlobal={ true }
 				shortcuts={ {
