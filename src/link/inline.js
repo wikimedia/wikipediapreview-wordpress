@@ -79,59 +79,61 @@ export const InlineEditUI = ( {
 			noArrow={ false }
 			expandOnMobile={ true }
 		>
-			<div className="wikipediapreview-edit-inline-search">
-				<p className="wikipediapreview-edit-inline-search-label">
-					<span>
-						{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
-					</span>
-					&nbsp;
-					<span className="wikipediapreview-edit-inline-search-label-beta">
-						{ __( 'beta', 'wikipedia-preview' ) }
-					</span>
-				</p>
-				<TextControl
-					className={ `wikipediapreview-edit-inline-search-input ${
-						langCodeAdjustment ? 'lang-code-adjustment' : ''
-					}` }
-					value={ title }
-					onChange={ setTitle }
-					onFocus={ () => setFocused( true ) }
-					onBlur={ () => setFocused( false ) }
-					placeholder={ __(
-						'Search Wikipedia',
-						'wikipedia-preview'
-					) }
-				/>
-				<div className="wikipediapreview-edit-inline-search-icon" />
-				<div className="wikipediapreview-edit-inline-search-tools">
-					{ title && (
-						<Button
-							onClick={ () => {
-								setTitle( '' );
-							} }
-							className="wikipediapreview-edit-inline-search-close"
-						/>
-					) }
-					<div
-						className={ `wikipediapreview-edit-inline-search-language 
-						${ focused ? `focused` : '' }` }
-						onClick={ () => setLanguageSelector( true ) }
-						role="presentation"
-					>
+			{ !languageSelector && (
+					<div className="wikipediapreview-edit-inline-search">
+					<p className="wikipediapreview-edit-inline-search-label">
+						<span>
+							{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
+						</span>
+						&nbsp;
+						<span className="wikipediapreview-edit-inline-search-label-beta">
+							{ __( 'beta', 'wikipedia-preview' ) }
+						</span>
+					</p>
+					<TextControl
+						className={ `wikipediapreview-edit-inline-search-input ${
+							langCodeAdjustment ? 'lang-code-adjustment' : ''
+						}` }
+						value={ title }
+						onChange={ setTitle }
+						onFocus={ () => setFocused( true ) }
+						onBlur={ () => setFocused( false ) }
+						placeholder={ __(
+							'Search Wikipedia',
+							'wikipedia-preview'
+						) }
+					/>
+					<div className="wikipediapreview-edit-inline-search-icon" />
+					<div className="wikipediapreview-edit-inline-search-tools">
+						{ title && (
+							<Button
+								onClick={ () => {
+									setTitle( '' );
+								} }
+								className="wikipediapreview-edit-inline-search-close"
+							/>
+						) }
 						<div
-							className={ `wikipediapreview-edit-inline-search-language-code ${
-								focused ? `focused` : ''
-							}` }
+							className={ `wikipediapreview-edit-inline-search-language 
+							${ focused ? `focused` : '' }` }
+							onClick={ () => setLanguageSelector( true ) }
+							role="presentation"
 						>
-							{ lang }
+							<div
+								className={ `wikipediapreview-edit-inline-search-language-code ${
+									focused ? `focused` : ''
+								}` }
+							>
+								{ lang }
+							</div>
+							<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
 						</div>
-						<div className="wikipediapreview-edit-inline-search-language-dropdown"></div>
 					</div>
+					{ loading && (
+						<div className="wikipediapreview-edit-inline-search-loading"></div>
+					) }
 				</div>
-				{ loading && (
-					<div className="wikipediapreview-edit-inline-search-loading"></div>
-				) }
-			</div>
+			) }
 			{ loading && ! searchList.length && (
 				<div className="wikipediapreview-edit-inline-info">
 					<bdi>
