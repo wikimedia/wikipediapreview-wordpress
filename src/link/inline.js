@@ -106,6 +106,7 @@ export const InlineEditUI = ( {
 								'Search Wikipedia',
 								'wikipedia-preview'
 							) }
+							autoFocus={ true } // eslint-disable-line jsx-a11y/no-autofocus
 						/>
 						<div className="wikipediapreview-edit-inline-search-icon" />
 						<div className="wikipediapreview-edit-inline-search-tools">
