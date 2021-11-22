@@ -28,7 +28,6 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 	};
 
 	const getLocalized = ( language ) => {
-		console.log('getLocalized');
 		const localizedName = new Intl.DisplayNames( [ lang ], {
 			type: 'language',
 		} );
@@ -47,14 +46,17 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 
 		const filtered = Object.keys( languages )
 			.filter( ( language ) => {
-				const localized = language.indexOf('-') === -1 && displayNamesSupport && getLocalized( language );
+				const localized =
+					language.indexOf( '-' ) === -1 &&
+					displayNamesSupport &&
+					getLocalized( language );
 				if ( languages[ language ].length > 2 ) {
 					return (
 						languages[ language ][ 2 ]
 							.toLowerCase()
 							.indexOf( targetLang ) !== -1 ||
 						language === targetLang ||
-						localized && localized.indexOf( targetLang ) !== -1
+						( localized && localized.indexOf( targetLang ) !== -1 )
 					);
 				}
 				return false;
@@ -87,7 +89,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 
 	useEffect( () => {
 		setItems( defaultFilter() );
-		setDisplayNamesSupport( !!Intl.DisplayNames )
+		setDisplayNamesSupport( !! Intl.DisplayNames );
 	}, [] );
 
 	return (
