@@ -5,7 +5,7 @@ import {
 	KeyboardShortcuts,
 } from '@wordpress/components';
 import { getTextContent, slice, useAnchorRef } from '@wordpress/rich-text';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
@@ -27,6 +27,7 @@ export const InlineEditUI = ( {
 	const [ loading, setLoading ] = useState( false );
 	const [ focused, setFocused ] = useState( false );
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
+	const inputRef = createRef();
 
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -93,6 +94,7 @@ export const InlineEditUI = ( {
 					className={ `wikipediapreview-edit-inline-search-input ${
 						langCodeAdjustment ? 'lang-code-adjustment' : ''
 					}` }
+					ref={ inputRef }
 					value={ title }
 					onChange={ setTitle }
 					onFocus={ () => setFocused( true ) }
@@ -108,6 +110,7 @@ export const InlineEditUI = ( {
 						<Button
 							onClick={ () => {
 								setTitle( '' );
+								inputRef.current.focus();
 							} }
 							className="wikipediapreview-edit-inline-search-close"
 						/>
