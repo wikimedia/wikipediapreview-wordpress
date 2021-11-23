@@ -31,8 +31,23 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 		const localizedName = new Intl.DisplayNames( [ lang ], {
 			type: 'language',
 		} );
+		const invalid = [
+			'bat-smg',
+			'be-x-old',
+			'cbk-zam',
+			'fiu-vro',
+			'map-bms',
+			'roa-rup',
+			'zh-classical',
+			'zh-min-nan',
+			'zh-yue',
+			'zh-cdo',
+		];
 
-		return localizedName.of( language ).toLowerCase();
+		if ( invalid.indexOf( language ) === -1 ) {
+			return localizedName.of( language ).toLowerCase();
+		}
+		return false;
 	};
 
 	const filterLanguages = ( target ) => {
@@ -47,15 +62,13 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 		const filtered = Object.keys( languages )
 			.filter( ( language ) => {
 				const localized =
-					language.indexOf( '-' ) === -1 &&
-					displayNamesSupport &&
-					getLocalized( language );
+					displayNamesSupport && getLocalized( language );
 				if ( languages[ language ].length > 2 ) {
 					return (
 						languages[ language ][ 2 ]
 							.toLowerCase()
 							.indexOf( targetLang ) !== -1 ||
-						language === targetLang ||
+						language.indexOf( targetLang ) !== -1 ||
 						( localized && localized.indexOf( targetLang ) !== -1 )
 					);
 				}
