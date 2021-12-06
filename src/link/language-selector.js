@@ -7,7 +7,6 @@ import { isLanguageWithWiki, defaultLanguages } from './languages';
 export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 	const [ value, setValue ] = useState( '' );
 	const [ items, setItems ] = useState( [] );
-	const [ displayNamesSupport, setDisplayNamesSupport ] = useState( false );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const limit = defaultLanguages.length;
 	const languages = getLanguages();
@@ -62,7 +61,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 		const filtered = Object.keys( languages )
 			.filter( ( language ) => {
 				const localized =
-					displayNamesSupport && getLocalized( language );
+					Intl.DisplayNames && getLocalized( language );
 				if ( languages[ language ].length > 2 ) {
 					return (
 						languages[ language ][ 2 ]
@@ -102,7 +101,6 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 
 	useEffect( () => {
 		setItems( defaultFilter() );
-		setDisplayNamesSupport( !! Intl.DisplayNames );
 	}, [] );
 
 	return (
