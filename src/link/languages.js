@@ -1,4 +1,6 @@
-export const defaultLanguages = [
+import { getLanguages } from '@wikimedia/language-data';
+
+const defaultLanguages = [
 	'en',
 	'nl',
 	'de',
@@ -340,5 +342,85 @@ const languagesWithWikis = [
 	'mus',
 ];
 
-export const isLanguageWithWiki = ( language ) =>
+const limit = defaultLanguages.length;
+const languages = getLanguages();
+
+const isLanguageWithWiki = ( language ) =>
 	languagesWithWikis.indexOf( language ) !== -1;
+
+const normalize = ( result, language ) => {
+	if ( isLanguageWithWiki( language ) ) {
+		result.push( {
+			name: languages[ language ][ 2 ],
+			code: language,
+		} );
+	} else if ( language === 'en-simple' ) {
+		result.push( {
+			name: languages[ language ][ 2 ],
+			code: 'simple',
+		} );
+	}
+	return result;
+};
+
+const getLocalized = ( language, userLang ) => {
+	const localizedName = new Intl.DisplayNames( [ userLang ], {
+		type: 'language',
+	} );
+	const invalid = [
+		'bat-smg',
+		'be-x-old',
+		'cbk-zam',
+		'fiu-vro',
+		'map-bms',
+		'roa-rup',
+		'zh-classical',
+		'zh-min-nan',
+		'zh-yue',
+		'zh-cdo',
+	];
+
+	if ( invalid.indexOf( language ) === -1 ) {
+		return localizedName.of( language ).toLowerCase();
+	}
+	return false;
+};
+
+export const filterLanguages = ( target, lang, setValue, setItems ) => {
+	setValue( target );
+	const targetLang = target.toLowerCase().trim();
+
+	if ( targetLang === '' ) {
+		setItems( defaultFilter() );
+		return;
+	}
+
+	const filtered = Object.keys( languages )
+		.filter( ( language ) => {
+			const localized =
+				Intl.DisplayNames && getLocalized( language, lang );
+			if ( languages[ language ].length > 2 ) {
+				return (
+					languages[ language ][ 2 ]
+						.toLowerCase()
+						.indexOf( targetLang ) !== -1 ||
+					language.indexOf( targetLang ) !== -1 ||
+					( localized && localized.indexOf( targetLang ) !== -1 )
+				);
+			}
+			return false;
+		} )
+		.reduce( ( result, language ) => normalize( result, language ), [] );
+
+	setItems( filtered.slice( 0, limit ) );
+};
+
+export const defaultFilter = () => {
+	const filtered = Object.keys( languages )
+		.filter( ( language ) => {
+			return defaultLanguages.indexOf( language ) !== -1;
+		} )
+		.reduce( ( result, language ) => normalize( result, language ), [] );
+
+	return filtered;
+};
