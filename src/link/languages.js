@@ -364,41 +364,40 @@ const normalize = ( result, language ) => {
 };
 
 const getLocalized = ( language, userLang ) => {
-	const localizedName = new Intl.DisplayNames( [ userLang ], {
-		type: 'language',
-	} );
-	const invalid = [
-		'bat-smg',
-		'be-x-old',
-		'cbk-zam',
-		'fiu-vro',
-		'map-bms',
-		'roa-rup',
-		'zh-classical',
-		'zh-min-nan',
-		'zh-yue',
-		'zh-cdo',
-	];
+	if ( Intl.DisplayNames ) {
+		const localizedName = new Intl.DisplayNames( [ userLang ], {
+			type: 'language',
+		} );
+		const invalid = [
+			'bat-smg',
+			'be-x-old',
+			'cbk-zam',
+			'fiu-vro',
+			'map-bms',
+			'roa-rup',
+			'zh-classical',
+			'zh-min-nan',
+			'zh-yue',
+			'zh-cdo',
+		];
 
-	if ( invalid.indexOf( language ) === -1 ) {
-		return localizedName.of( language ).toLowerCase();
+		if ( invalid.indexOf( language ) === -1 ) {
+			return localizedName.of( language ).toLowerCase();
+		}
 	}
 	return false;
 };
 
-export const filterLanguages = ( target, lang, setValue, setItems ) => {
-	setValue( target );
+export const filterLanguages = ( target, lang ) => {
 	const targetLang = target.toLowerCase().trim();
 
 	if ( targetLang === '' ) {
-		setItems( defaultFilter() );
-		return;
+		return defaultFilter();
 	}
 
 	const filtered = Object.keys( languages )
 		.filter( ( language ) => {
-			const localized =
-				Intl.DisplayNames && getLocalized( language, lang );
+			const localized = getLocalized( language, lang );
 			if ( languages[ language ].length > 2 ) {
 				return (
 					languages[ language ][ 2 ]
@@ -412,7 +411,7 @@ export const filterLanguages = ( target, lang, setValue, setItems ) => {
 		} )
 		.reduce( ( result, language ) => normalize( result, language ), [] );
 
-	setItems( filtered.slice( 0, limit ) );
+	return filtered.slice( 0, limit );
 };
 
 export const defaultFilter = () => {

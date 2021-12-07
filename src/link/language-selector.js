@@ -31,7 +31,8 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 				className="wikipediapreview-edit-inline-language-selector-input"
 				value={ value }
 				onChange={ ( target ) => {
-					filterLanguages( target, lang, setValue, setItems );
+					setValue( target );
+					setItems( filterLanguages( target, lang ) );
 				} }
 				placeholder={ __( 'Search languages', 'wikipedia-preview' ) }
 				autoFocus={ true } // eslint-disable-line jsx-a11y/no-autofocus
