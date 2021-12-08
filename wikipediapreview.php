@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Wikipedia Preview
  * Plugin URI: https://github.com/wikimedia/wikipedia-preview
- * Description: Wikipedia Preview allows you to show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link
+ * Description: Provide context to your readers by displaying a Wikipedia article preview when a reader clicks or hovers over a word or concept.
  * Text Domain: wikipedia-preview
  * Version: 1.2.0
  * Requires at least: 4.6

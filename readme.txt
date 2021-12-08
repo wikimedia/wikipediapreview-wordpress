@@ -11,7 +11,10 @@ Wikipedia Preview lets you show a popup card with a short summary from Wikipedia
 
 == Description ==
 Wikipedia Preview brings free knowledge to your site in the form of a Wikipedia article preview popup. With Wikipedia Preview, a reader can see a short summary of words or concepts in your content by hovering or tapping on the preview popup, as they read through your content page.
+
 Wikipedia Preview is an official plugin developed and supported by the [Wikimedia Foundation.](https://wikimediafoundation.org/)
+
+The plugin is entirely free to download and implement as it serves our non-profit’s mission to provide free knowledge for everyone.
 
 **Benefits**
 
@@ -19,7 +22,7 @@ Wikipedia Preview is an official plugin developed and supported by the [Wikimedi
 * Enable users to stay engaged by giving them context while they read.
 * Available in over 300 languages, so you can provide, where available, context in a language different from your site.
 * No need to explain a concept that is not directly related to the article you are writing, add a contextual popup instead.
-* Use the same process you use today to add hyperlinks to your articles.
+* Use the same process you use today to add hyperlinks to your articles or use the Gutenburg editor custom tool.
 
 **Features**
 
