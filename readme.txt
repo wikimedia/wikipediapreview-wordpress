@@ -22,7 +22,7 @@ The plugin is entirely free to download and implement as it serves our non-profi
 * Enable users to stay engaged by giving them context while they read.
 * Available in over 300 languages, so you can provide, where available, context in a language different from your site.
 * No need to explain a concept that is not directly related to the article you are writing, add a contextual popup instead.
-* Use the same process you use today to add hyperlinks to your articles or use the Gutenburg editor custom tool.
+* Use the same process you use today to add hyperlinks to your articles or use the Gutenberg editor custom tool.
 
 **Features**
 
@@ -30,7 +30,7 @@ The plugin is entirely free to download and implement as it serves our non-profi
 * Works for Right-to-Left (RTL) and Left-To-Right (LTR) languages.
 * A built-in gallery to dive into article images.
 * Can be disabled for any page using the post metadata sidebar. Look for the Wikipedia Preview section.
-* Gutenburg editor custom tool to search for Wikipedia articles and visualize Wikipedia Preview for readers.
+* Gutenberg editor custom tool to search for Wikipedia articles and visualize Wikipedia Preview for readers.
 
 **How to use**
 
