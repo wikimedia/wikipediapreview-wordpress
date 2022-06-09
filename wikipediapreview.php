@@ -118,7 +118,7 @@ function register_detectlinks_postmeta() {
 }
 
 function should_show_banner() {
-	if( !is_admin() ) {
+	if ( ! is_admin() ) {
 		// Only for admin site
 		return false;
 	}
@@ -128,14 +128,14 @@ function should_show_banner() {
 }
 
 function review_banner() {
-	if( !should_show_banner() ) {
+	if ( ! should_show_banner() ) {
 		return;
 	}
 
-	$msg = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on Wordpress.', 'wikipedia-preview' );
-	$rate_btn = __( 'Rate Wikipedia Preview' , 'wikipedia-preview' );
+	$msg        = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on Wordpress.', 'wikipedia-preview' );
+	$rate_btn   = __( 'Rate Wikipedia Preview' , 'wikipedia-preview' );
 	$remind_btn = __( 'Remind me later', 'wikipedia-preview' );
-	$rate_url = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
+	$rate_url   = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
 	echo <<<HTML
 		<div class="notice notice-wikipediapreview notice-info is-dismissible">
 			<p>{$msg}</p>
@@ -146,7 +146,7 @@ function review_banner() {
 }
 
 function review_banner_script() {
-	if( !should_show_banner() ) {
+	if ( ! should_show_banner() ) {
 		return;
 	}
 
@@ -170,9 +170,10 @@ function review_banner_script() {
 }
 
 function dismiss_review_banner() {
+	$remind = $_POST['remind'] ?? 'false';
 	update_option(
 		WIKIPEDIA_PREVIEW_BANNER_OPTION,
-		$_POST['remind'] === 'true' ? time() : 0
+		'true' === $remind ? time() : 0
 	);
 	// this is required to terminate immediately and return a proper response
 	wp_die();
