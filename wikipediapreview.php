@@ -132,8 +132,8 @@ function review_banner() {
 		return;
 	}
 
-	$msg        = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on Wordpress.', 'wikipedia-preview' );
-	$rate_btn   = __( 'Rate Wikipedia Preview' , 'wikipedia-preview' );
+	$msg        = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on WordPress.', 'wikipedia-preview' );
+	$rate_btn   = __( 'Rate Wikipedia Preview', 'wikipedia-preview' );
 	$remind_btn = __( 'Remind me later', 'wikipedia-preview' );
 	$rate_url   = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
 	echo <<<HTML
