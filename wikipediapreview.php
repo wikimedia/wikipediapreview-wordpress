@@ -132,17 +132,28 @@ function review_banner() {
 		return;
 	}
 
-	$msg        = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on WordPress.', 'wikipedia-preview' );
-	$rate_btn   = __( 'Rate Wikipedia Preview', 'wikipedia-preview' );
-	$remind_btn = __( 'Remind me later', 'wikipedia-preview' );
-	$rate_url   = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
-	echo <<<HTML
+	$msg          = __( 'Love Wikipedia Preview? Help others discover it by leaving your rating on WordPress.', 'wikipedia-preview' );
+	$rate_btn     = __( 'Rate Wikipedia Preview', 'wikipedia-preview' );
+	$remind_btn   = __( 'Remind me later', 'wikipedia-preview' );
+	$rate_url     = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
+	$html         = <<<HTML
 		<div class="notice notice-wikipediapreview notice-info is-dismissible">
 			<p>{$msg}</p>
 			<a href="{$rate_url}" class="button button-primary button-rate">{$rate_btn}</a>
 			<button class="button button-secondary button-remind">{$remind_btn}</button>
 		</div>
 	HTML;
+	$allowed_tags = array(
+		'div'    => array( 'class' => array() ),
+		'p'      => array(),
+		'a'      => array(
+			'class' => array(),
+			'href'  => array(),
+		),
+		'button' => array( 'class' => array() ),
+		'span'   => array( 'class' => array() ),
+	);
+	echo wp_kses( $html, $allowed_tags );
 }
 
 function review_banner_script() {
@@ -151,7 +162,7 @@ function review_banner_script() {
 	}
 
 	$nonce = wp_create_nonce( 'wikipediapreview-banner-dismiss' );
-	echo <<<HTML
+	$html  = <<<HTML
 		<script type='text/javascript'>
 			jQuery( function( $ ) {
 				$( '.notice-wikipediapreview' ).on(
@@ -169,11 +180,12 @@ function review_banner_script() {
 			} );
 		</script>
 	HTML;
+	echo wp_kses( $html, array( 'script' => array( 'type' => array() ) ) );
 }
 
 function dismiss_review_banner() {
 	check_ajax_referer( 'wikipediapreview-banner-dismiss' );
-	$remind = $_POST['remind'] ?? 'false';
+	$remind = sanitize_key( $_POST['remind'] ?? 'false' );
 	update_option(
 		WIKIPEDIA_PREVIEW_BANNER_OPTION,
 		'true' === $remind ? time() : 0
