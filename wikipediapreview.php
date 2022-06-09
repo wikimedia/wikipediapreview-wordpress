@@ -150,6 +150,7 @@ function review_banner_script() {
 		return;
 	}
 
+	$nonce = wp_create_nonce( 'wikipediapreview-banner-dismiss' );
 	echo <<<HTML
 		<script type='text/javascript'>
 			jQuery( function( $ ) {
@@ -158,8 +159,9 @@ function review_banner_script() {
 					'.button-rate, .notice-dismiss, .button-remind',
 					function () {
 						jQuery.post( ajaxurl, {
-							'action': 'dismiss_review_banner',
-							'remind': $( this ).hasClass( 'button-remind' )
+							_ajax_nonce: '{$nonce}',
+							action: 'dismiss_review_banner',
+							remind: $( this ).hasClass( 'button-remind' )
 						} );
 						$( '.notice-wikipediapreview' ).hide();
 					}
@@ -170,12 +172,12 @@ function review_banner_script() {
 }
 
 function dismiss_review_banner() {
+	check_ajax_referer( 'wikipediapreview-banner-dismiss' );
 	$remind = $_POST['remind'] ?? 'false';
 	update_option(
 		WIKIPEDIA_PREVIEW_BANNER_OPTION,
 		'true' === $remind ? time() : 0
 	);
-	// this is required to terminate immediately and return a proper response
 	wp_die();
 }
 
