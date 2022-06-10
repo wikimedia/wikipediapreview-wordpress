@@ -185,7 +185,7 @@ function review_banner_script() {
 
 function dismiss_review_banner() {
 	check_ajax_referer( 'wikipediapreview-banner-dismiss' );
-	$remind = sanitize_key( $_POST['remind'] ?? 'false' );
+	$remind = isset( $_POST['remind'] ) ? sanitize_key( $_POST['remind'] ) : 'false';
 	update_option(
 		WIKIPEDIA_PREVIEW_BANNER_OPTION,
 		'true' === $remind ? time() : 0
