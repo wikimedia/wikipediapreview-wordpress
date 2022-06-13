@@ -28,7 +28,7 @@ function review_banner() {
 	$html         = <<<HTML
 		<div class="notice notice-wikipediapreview notice-info is-dismissible">
 			<p>{$msg}</p>
-			<a href="{$rate_url}" class="button button-primary button-rate">{$rate_btn}</a>
+			<a href="{$rate_url}" target="_blank" class="button button-primary button-rate">{$rate_btn}</a>
 			<button class="button button-secondary button-remind">{$remind_btn}</button>
 		</div>
 	HTML;
@@ -38,6 +38,7 @@ function review_banner() {
 		'a'      => array(
 			'class' => array(),
 			'href'  => array(),
+			'target'  => array(),
 		),
 		'button' => array( 'class' => array() ),
 		'span'   => array( 'class' => array() ),
