@@ -36,9 +36,9 @@ function review_banner() {
 		'div'    => array( 'class' => array() ),
 		'p'      => array(),
 		'a'      => array(
-			'class' => array(),
-			'href'  => array(),
-			'target'  => array(),
+			'class'  => array(),
+			'href'   => array(),
+			'target' => array(),
 		),
 		'button' => array( 'class' => array() ),
 		'span'   => array( 'class' => array() ),
