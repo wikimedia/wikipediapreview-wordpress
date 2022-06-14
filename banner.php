@@ -13,7 +13,21 @@ function should_show_banner() {
 	}
 
 	$default = -1;
-	return get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default ) === $default;
+	$value   = get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default );
+
+	if ( $value === $default ) {
+		// never shown
+		return true;
+	}
+
+	if ( 0 === $value ) {
+		// dismiss forever
+		return false;
+	}
+
+	// remind later
+	$days = ( time() - $value ) / ( 60 * 60 * 24 );
+	return $days >= 7;
 }
 
 function review_banner() {
