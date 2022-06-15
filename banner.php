@@ -16,7 +16,7 @@ function should_show_banner() {
 	$value   = get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default );
 
 	if ( $value === $default ) {
-		// never shown
+		// not dismissed yet
 		return true;
 	}
 
