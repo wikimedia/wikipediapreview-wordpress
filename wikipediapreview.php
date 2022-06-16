@@ -116,3 +116,5 @@ add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
 add_action( 'init', 'myguten_set_script_translations' );
 add_action( 'init', 'register_detectlinks_postmeta' );
+
+require __DIR__ . '/banner.php';
