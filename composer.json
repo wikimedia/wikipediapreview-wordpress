@@ -1,10 +1,10 @@
 {
     "name": "wikimedia/wikipediapreview-wordpress",
-    "description": "Plugin wrapper for Wikipedia Preview which displays Wikipedia articles within WordPress",
-    "keywords": [],
+    "description": "WordPress plugin for Wikipedia Preview",
+    "keywords": [ wordpress, wikipedia, facts, popup, card, wiki ],
     "type": "wordpress-plugin",
     "license": "MIT",
-    "homepage": "https://wordpress.org/plugins/wikipedia-preview/",
+    "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme,
     "authors": [
         {
             "name": "Wikimedia Foundation",
