@@ -1,4 +1,21 @@
 {
+    "name": "wikimedia/wikipediapreview-wordpress",
+    "description": "Plugin wrapper for Wikipedia Preview which displays Wikipedia articles within WordPress",
+    "keywords": [],
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "homepage": "https://wordpress.org/plugins/wikipedia-preview/",
+    "authors": [
+        {
+            "name": "Wikimedia Foundation",
+            "homepage": "http://wikimediafoundation.org",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://phabricator.wikimedia.org/project/profile/4393/",
+        "source": "https://github.com/wikimedia/wikipediapreview-wordpress"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.6",
         "wp-coding-standards/wpcs": "^2.3",
