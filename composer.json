@@ -1,4 +1,21 @@
 {
+    "name": "wikimedia/wikipediapreview-wordpress",
+    "description": "WordPress plugin for Wikipedia Preview",
+    "keywords": [ "wordpress", "wikipedia", "facts", "popup", "card", "wiki" ],
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
+    "authors": [
+        {
+            "name": "Wikimedia Foundation",
+            "homepage": "http://wikimediafoundation.org",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://phabricator.wikimedia.org/project/profile/4393/",
+        "source": "https://github.com/wikimedia/wikipediapreview-wordpress"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.6",
         "wp-coding-standards/wpcs": "^2.3",
@@ -8,5 +25,10 @@
     "scripts": {
         "lint": "phpcs --ignore=build",
         "lint:fix": "phpcbf --ignore=build"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
