@@ -25,5 +25,10 @@
     "scripts": {
         "lint": "phpcs --ignore=build",
         "lint:fix": "phpcbf --ignore=build"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
