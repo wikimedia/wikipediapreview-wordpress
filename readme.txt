@@ -21,8 +21,6 @@ Wikipedia Preview is an official plug-in designed and developed by the [Wikimedi
 
 The plug-in is entirely free to download and use, in line with the Wikimedia Foundation’s mission to provide free knowledge for everyone.
 
-Learn more about Wikipedia Preview in [this short video](https://youtu.be/_m6YzR0j8Fs).
-
 https://youtu.be/_m6YzR0j8Fs
 
 **Benefits**
