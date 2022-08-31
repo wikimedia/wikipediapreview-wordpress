@@ -43,7 +43,7 @@ https://youtu.be/_m6YzR0j8Fs
 **How to use**
 
 1. [Download and install](https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins) the Wikipedia Preview plug-in for free.
-2. Add a Preview link to your site’s content (i.e. a word or a phrase you want to provide context for).
+2. [Add a Preview link](https://wordpress.org/support/article/paragraph-block/#insert-hyperlinks) to your site’s content (i.e. a word or a phrase you want to provide context for).
 3. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article.
 
 == Screenshots ==
