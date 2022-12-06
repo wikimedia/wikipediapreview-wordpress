@@ -5,12 +5,24 @@
  * was dismissed or the value 0 to indicate it should never be shown again.
  */
 DEFINE( 'WIKIPEDIA_PREVIEW_BANNER_OPTION', 'wikipediapreview_banner_dismissed' );
+DEFINE( 'WIKIPEDIA_PREVIEW_INIT_TIMESTAMP', 'wikipediapreview_init_timestamp' );
 
 function should_show_banner() {
 	if ( ! is_admin() ) {
 		// Only for admin site
 		return false;
 	}
+
+	// Pseudocode
+	$initTimestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
+	if ( !$initTimestamp ) {
+		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, 'current timestamp' );
+		return false;
+	}
+	if ( $initTimestamp < '14 days timestamp' ) {
+		return false;
+	}
+	// end of pseudocode
 
 	$default = -1;
 	$value   = get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default );
