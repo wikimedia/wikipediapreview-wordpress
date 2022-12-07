@@ -14,11 +14,11 @@ function should_show_banner() {
 	}
 
 	// Show banner after 7 days after plugin initialization
-	$initTimestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
-	if ( !$initTimestamp ) {
+	$init_timestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
+	if ( !$init_timestamp ) {
 		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, time() );
 		return false;
-	} elseif ( ( time() - $initTimestamp ) / ( 60 * 60 * 24 ) < 7 ) {
+	} elseif ( ( time() - $init_timestamp ) / ( 60 * 60 * 24 ) < 7 ) {
 		return false;
 	}
 
