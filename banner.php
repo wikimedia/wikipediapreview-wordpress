@@ -109,6 +109,12 @@ function dismiss_review_banner() {
 	wp_die();
 }
 
+function remove_all_options() {
+	delete_option( 'WIKIPEDIA_PREVIEW_BANNER_OPTION' );
+	delete_option( 'WIKIPEDIA_PREVIEW_INIT_TIMESTAMP' );
+}
+
 add_action( 'admin_notices', 'review_banner' );
 add_action( 'admin_footer', 'review_banner_script' );
 add_action( 'wp_ajax_dismiss_review_banner', 'dismiss_review_banner' );
+register_uninstall_hook( __FILE__, 'remove_all_options' );
