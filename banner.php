@@ -110,8 +110,8 @@ function dismiss_review_banner() {
 }
 
 function remove_all_options() {
-	delete_option( 'WIKIPEDIA_PREVIEW_BANNER_OPTION' );
-	delete_option( 'WIKIPEDIA_PREVIEW_INIT_TIMESTAMP' );
+	delete_option( 'wikipediapreview_banner_dismissed' );
+	delete_option( 'wikipediapreview_init_timestamp' );
 }
 
 add_action( 'admin_notices', 'review_banner' );
