@@ -13,17 +13,17 @@ function should_show_banner() {
 		return false;
 	}
 
-	// Pseudocode
+	// Show banner after 7 days after plugin initialization
 	$initTimestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
 	if ( !$initTimestamp ) {
-		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, 'current timestamp' );
+		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, time() );
+		return false;
+	} elseif ( ( time() - $initTimestamp ) / ( 60 * 60 * 24 ) < 7 ) {
 		return false;
 	}
-	if ( $initTimestamp < '14 days timestamp' ) {
-		return false;
-	}
-	// end of pseudocode
 
+	// Show banner after 7 days when user dismiss the dialog
+	// or dismiss banner forever when user press rate button
 	$default = -1;
 	$value   = get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default );
 
