@@ -15,7 +15,7 @@ function should_show_banner() {
 
 	// Show banner after 7 days after plugin initialization
 	$init_timestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
-	if ( !$init_timestamp ) {
+	if ( ! $init_timestamp ) {
 		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, time() );
 		return false;
 	} elseif ( ( time() - $init_timestamp ) / ( 60 * 60 * 24 ) < 7 ) {
