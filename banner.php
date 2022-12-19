@@ -5,6 +5,7 @@
  * was dismissed or the value 0 to indicate it should never be shown again.
  */
 DEFINE( 'WIKIPEDIA_PREVIEW_BANNER_OPTION', 'wikipediapreview_banner_dismissed' );
+DEFINE( 'WIKIPEDIA_PREVIEW_INIT_TIMESTAMP', 'wikipediapreview_init_timestamp' );
 
 function should_show_banner() {
 	if ( ! is_admin() ) {
@@ -12,6 +13,17 @@ function should_show_banner() {
 		return false;
 	}
 
+	// Show banner after 7 days after plugin initialization
+	$init_timestamp = get_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP );
+	if ( ! $init_timestamp ) {
+		update_option( WIKIPEDIA_PREVIEW_INIT_TIMESTAMP, time() );
+		return false;
+	} elseif ( ( time() - $init_timestamp ) / ( 60 * 60 * 24 ) < 7 ) {
+		return false;
+	}
+
+	// Show banner after 7 days when user dismiss the dialog
+	// or dismiss banner forever when user press rate button
 	$default = -1;
 	$value   = get_option( WIKIPEDIA_PREVIEW_BANNER_OPTION, $default );
 
@@ -97,6 +109,11 @@ function dismiss_review_banner() {
 	wp_die();
 }
 
+function remove_init_timestamp_options() {
+	delete_option( 'wikipediapreview_init_timestamp' );
+}
+
 add_action( 'admin_notices', 'review_banner' );
 add_action( 'admin_footer', 'review_banner_script' );
 add_action( 'wp_ajax_dismiss_review_banner', 'dismiss_review_banner' );
+register_uninstall_hook( __FILE__, 'remove_init_timestamp_options' );
