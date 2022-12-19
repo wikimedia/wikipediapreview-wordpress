@@ -116,11 +116,14 @@ function make_link( $text, $url ) {
 }
 
 function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) {
-	if( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
-		$links_array = array_merge( $links_array, array(
-			make_link( __( 'Review', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post' ),
-			make_link( __( 'Support', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/' ),
-		) );
+	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
+		$links_array = array_merge(
+			$links_array,
+			array(
+				make_link( __( 'Review', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post' ),
+				make_link( __( 'Support', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/' ),
+			)
+		);
 	}
 
 	return $links_array;
