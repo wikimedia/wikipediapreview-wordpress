@@ -32,7 +32,7 @@ function should_show_banner() {
 		return true;
 	}
 
-	if ( 0 === $value ) {
+	if ( '0' === $value ) {
 		// dismiss forever
 		return false;
 	}
