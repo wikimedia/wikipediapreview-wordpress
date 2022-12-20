@@ -111,6 +111,25 @@ function register_detectlinks_postmeta() {
 	register_post_meta( $all_post_types, $meta_name, $options );
 }
 
+function make_link( $text, $url ) {
+	return '<a target="_BLANK" href="' . esc_url( $url ) . '">' . $text . '</a>';
+}
+
+function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) {
+	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
+		$links_array = array_merge(
+			$links_array,
+			array(
+				make_link( __( 'Review', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post' ),
+				make_link( __( 'Support', 'wikipedia-preview' ), 'https://wordpress.org/support/plugin/wikipedia-preview/' ),
+			)
+		);
+	}
+
+	return $links_array;
+}
+
+add_filter( 'plugin_row_meta', 'add_meta_links', 10, 4 );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
 add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
