@@ -53,7 +53,7 @@ function review_banner() {
 	$rate_url     = 'https://wordpress.org/support/plugin/wikipedia-preview/reviews/#new-post';
 	$html         = <<<HTML
 		<div class="notice notice-wikipediapreview notice-info is-dismissible">
-			<p>{$msg}</p>
+			<p style="font-size: 1.15em;">{$msg}</p>
 			<p>
 				<a href="{$rate_url}" target="_blank" class="button button-primary button-rate">{$rate_btn}</a>
 				<button class="button button-secondary button-remind">{$remind_btn}</button>
@@ -62,7 +62,7 @@ function review_banner() {
 	HTML;
 	$allowed_tags = array(
 		'div'    => array( 'class' => array() ),
-		'p'      => array(),
+		'p'      => array( 'style' => array() ),
 		'a'      => array(
 			'class'  => array(),
 			'href'   => array(),
