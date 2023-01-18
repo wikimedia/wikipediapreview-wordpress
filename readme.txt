@@ -40,11 +40,59 @@ https://youtu.be/_m6YzR0j8Fs
 * Can be disabled for any page using the post metadata sidebar.
 * Uses Gutenberg editor custom tool to search for Wikipedia articles and visualize Wikipedia Preview for readers.
 
-**How to use**
+**How to add preview links to your site**
 
-1. [Download and install](https://wordpress.org/support/article/managing-plugins/#finding-and-installing-plugins) the Wikipedia Preview plug-in for free.
-2. [Add a Preview link](https://wordpress.org/support/article/paragraph-block/#insert-hyperlinks) to your site’s content (i.e. a word or a phrase you want to provide context for).
-3. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article.
+**Option 1 - How to add Wikipedia Preview links using the Classic Editor:**
+
+* Add a Wikipedia article link to your site’s content using the same process you use to add hyperlinks to your articles.
+
+**Option 2 - How to add Wikipedia Preview links using the Gutenberg/ Block Editor:**
+
+1. Highlight the text you want to link to a Wikipedia article.
+2. Select ‘Wikipedia Preview’ from the menu.
+3. You will see a list of suggested articles. Select the one you want to link to.
+4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
+
+== Installation ==
+
+Setting up the Wikipedia Preview plugin requires two simple steps:
+
+1. Install and activate the plugin on your site for free.
+2. Add preview links to your site content to improve the experience for your site visitors.
+
+**INSTALLATION:**
+
+**Option 1 - Install using the automatic plug-in installer:**
+
+1. To add a plugin using the built-in plugin installer:
+2. Navigate to Plug-ins > select Add New.
+3. Use the search form in the top-right and search Wikipedia Preview.
+4. Click the Install Now button to install the plug-in.
+5. Once the plug-in installation is complete, click Activate to activate the plugin.
+
+**Option 2 - Upload via Wordpress Admin:**
+
+1. If you have a copy of the plug-in downloaded as a zip file, you can manually upload it and install it through the Plug-ins admin screen.
+2. Navigate to Plugins > Add New.
+3. Click the Upload Plugin button at the top of the screen.
+4. Select the zip file from your local filesystem.
+5. Click the Install Now button.
+6. When the installation is complete, you’ll see “Plug-in installed successfully.” Click the Activate Plug-in button.
+
+**AFTER ACTIVATION:**
+
+It’s easy to add Wikipedia Preview links to your site. It takes only a few seconds to add a preview link and create a richer experience for your site visitors.
+
+**Option 1 - How to add Wikipedia Preview links using the Classic Editor:**
+
+* Add a Wikipedia article link to your site’s content using the same process you use to add hyperlinks to your articles.
+
+**Option 2 - How to add Wikipedia Preview links using the Gutenberg/ Block Editor:**
+
+1. Highlight the text you want to link to a Wikipedia article.
+2. Select ‘Wikipedia Preview’ from the menu.
+3. You will see a list of suggested articles. Select the one you want to link to.
+4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
 
 == Screenshots ==
 
