@@ -94,6 +94,12 @@ It’s easy to add Wikipedia Preview links to your site. It takes only a few sec
 3. You will see a list of suggested articles. Select the one you want to link to.
 4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
 
+**GETTING STARTED:**
+
+Wikipedia Preview gives your site visitors context without leaving your site. We recommend adding links to words, pronouns, or phrases that you think your site visitors might be confused about or want more information about. Some sections of your site may be enhanced by adding a lot of links; other sections of your site might not need any.
+Take a few minutes to add links retroactively to your existing content, and take just a few seconds to add links to new content as you create it in the future. Your visitors will thank you!
+Let us know what you think about the product as you’re using it – we love to hear from you.
+
 == Screenshots ==
 
 1. Mobile view on touch
