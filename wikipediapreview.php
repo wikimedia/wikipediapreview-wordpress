@@ -137,3 +137,4 @@ add_action( 'init', 'myguten_set_script_translations' );
 add_action( 'init', 'register_detectlinks_postmeta' );
 
 require __DIR__ . '/banner.php';
+require __DIR__ . '/intro.php';
