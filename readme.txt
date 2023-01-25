@@ -48,12 +48,15 @@ https://youtu.be/_m6YzR0j8Fs
 
 == Screenshots ==
 
-1. Mobile view on touch
-2. Mobile view expanded
-3. Fullscreen image gallery
-4. Desktop view on hover
-5. Search for Wikipedia articles
-6. Visualization of Wikipedia Preview for readers
+1. Highlight a word in Gutenberg editor and access Wikipedia Preview option from dropdown menu
+2. Select a preview from the search results
+3. Preview is displayed for highlighted word
+4. Hover over cursor to view the preview
+5. Highlight a word in Classic editor for preview
+6. Insert Wikipedia article link to enable preview
+7. Preview can be discovered on mobile web by readers
+8. Tap on preview to show preview card
+9. Tap on an image within the preview card to open it in a gallery view
 
 == Frequently Asked Questions ==
 
