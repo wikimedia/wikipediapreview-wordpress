@@ -26,8 +26,8 @@ add_action( 'admin_menu', 'wikipediapreview_intro_submenu_page' );
 function wikipediapreview_intro_submenu_page() {
 	$submenu = add_submenu_page(
 		'options-general.php',
-		'Wikipedia Preview',
-		'Wikipedia Preview',
+		__( 'Wikipedia Preview', 'wikipedia-preview' ),
+		__( 'Wikipedia Preview', 'wikipedia-preview' ),
 		'manage_options',
 		'wikipediapreview_intro',
 		'wikipediapreview_intro_submenu_page_callback'
