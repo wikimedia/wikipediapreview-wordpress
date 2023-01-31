@@ -19,6 +19,7 @@ mkdir $1/trunk/build
 cp ./build/{index.js,init.js,style-index.css} $1/trunk/build
 mkdir $1/trunk/libs
 cp ./libs/{wikipedia-preview-link.css,wikipedia-preview.production.js} $1/trunk/libs
+cp ./images/* $1/assets/
 
 cd $1
 svn cp trunk tags/$VER
