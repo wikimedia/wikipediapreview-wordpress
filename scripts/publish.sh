@@ -14,6 +14,7 @@ npm run build
 cp ./wikipediapreview.php $1/trunk/
 cp ./banner.php $1/trunk/
 cp ./intro.php $1/trunk/
+cp ./intro.css $1/trunk/
 cp ./readme.txt $1/trunk/
 mkdir $1/trunk/build
 cp ./build/{index.js,init.js,style-index.css} $1/trunk/build
