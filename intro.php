@@ -11,9 +11,10 @@ function wikipediapreview_redirect() {
 	if ( get_option( 'wikipediapreview_do_activation_redirect', false ) ) {
 		delete_option( 'wikipediapreview_do_activation_redirect' );
 		// phpcs:ignore
-		$multi = isset( $_GET['activate-multi'] );
+		$multi                 = isset( $_GET['activate-multi'] );
 		$classic_editor_active = is_plugin_active( 'classic-editor/classic-editor.php' );
-		if ( ! $multi && ! $classic_editor_active ) {
+		$can_manage_options    = current_user_can( 'manage_options' );
+		if ( ! $multi && ! $classic_editor_active && $can_manage_options ) {
 			wp_safe_redirect( 'options-general.php?page=wikipediapreview_intro' );
 			exit();
 		}
