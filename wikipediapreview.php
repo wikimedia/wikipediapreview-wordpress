@@ -16,6 +16,9 @@
 DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.6.0' );
 
 function wikipediapreview_enqueue_scripts() {
+	if ( ! in_array( get_post_type(), array( 'post', 'page' ), true ) ) {
+		return;
+	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
 	$libs_dir        = plugin_dir_url( __FILE__ ) . 'libs/';
 	$media_type_all  = 'all';
