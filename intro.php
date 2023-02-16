@@ -33,6 +33,8 @@ function wikipediapreview_intro_submenu_page() {
 		'wikipediapreview_intro_submenu_page_callback'
 	);
 	add_action( 'load-' . $submenu, 'wikipediapreview_load_style' );
+	# Remove the submenu right away so that it is not permanent under Settings menu
+	remove_submenu_page( 'options-general.php', 'wikipediapreview_intro' );
 }
 
 function wikipediapreview_load_style() {
