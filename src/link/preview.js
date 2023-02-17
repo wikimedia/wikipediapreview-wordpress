@@ -5,7 +5,7 @@ import {
 	useLayoutEffect,
 	useCallback,
 } from '@wordpress/element';
-import { useAnchor } from '@wordpress/rich-text';
+import { useAnchorRef } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
 
@@ -20,7 +20,7 @@ export const PreviewEditUI = ( {
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
-	const anchor = useAnchor( {
+	const anchor = useAnchorRef( {
 		ref: contentRef,
 		value,
 		settings,
@@ -56,7 +56,7 @@ export const PreviewEditUI = ( {
 			<Popover
 				anchor={ anchor }
 				onClose={ onClose }
-				position="bottom center"
+				placement="top"
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"

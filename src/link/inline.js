@@ -4,7 +4,7 @@ import {
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
-import { getTextContent, slice, useAnchor } from '@wordpress/rich-text';
+import { getTextContent, slice, useAnchorRef } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
@@ -29,7 +29,7 @@ export const InlineEditUI = ( {
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 	const inputRef = createRef();
 
-	const anchor = useAnchor( {
+	const anchor = useAnchorRef( {
 		ref: contentRef,
 		value,
 		settings,
@@ -75,7 +75,8 @@ export const InlineEditUI = ( {
 		<Popover
 			anchor={ anchor }
 			onClose={ onClose }
-			position="bottom center"
+			placement="top"
+			offset="20"
 			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
