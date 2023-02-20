@@ -5,7 +5,7 @@ import {
 	useLayoutEffect,
 	useCallback,
 } from '@wordpress/element';
-import { useAnchorRef } from '@wordpress/rich-text';
+import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
 
@@ -20,8 +20,8 @@ export const PreviewEditUI = ( {
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
-	const anchor = useAnchorRef( {
-		ref: contentRef,
+	const anchor = useAnchor( {
+		editableContentElement : contentRef.current,
 		value,
 		settings,
 	} );

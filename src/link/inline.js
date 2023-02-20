@@ -4,7 +4,7 @@ import {
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
-import { getTextContent, slice, useAnchorRef } from '@wordpress/rich-text';
+import { getTextContent, slice, useAnchor } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage } from './utils';
@@ -29,8 +29,8 @@ export const InlineEditUI = ( {
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 	const inputRef = createRef();
 
-	const anchor = useAnchorRef( {
-		ref: contentRef,
+	const anchor = useAnchor( {
+		editableContentElement : contentRef.current,
 		value,
 		settings,
 	} );
