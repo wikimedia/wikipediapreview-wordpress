@@ -76,7 +76,6 @@ export const InlineEditUI = ( {
 			anchor={ anchor }
 			onClose={ onClose }
 			placement="top"
-			offset="20"
 			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
