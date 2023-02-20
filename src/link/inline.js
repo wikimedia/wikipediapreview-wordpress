@@ -30,7 +30,7 @@ export const InlineEditUI = ( {
 	const inputRef = createRef();
 
 	const anchor = useAnchor( {
-		editableContentElement : contentRef.current,
+		editableContentElement: contentRef.current,
 		value,
 		settings,
 	} );

@@ -21,7 +21,7 @@ export const PreviewEditUI = ( {
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const anchor = useAnchor( {
-		editableContentElement : contentRef.current,
+		editableContentElement: contentRef.current,
 		value,
 		settings,
 	} );
