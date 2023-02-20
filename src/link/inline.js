@@ -187,7 +187,7 @@ export const InlineEditUI = ( {
 												item.thumbnail
 													? {
 															backgroundImage: `url(${ item.thumbnail })`,
-													  }
+														}
 													: {}
 											}
 										/>
