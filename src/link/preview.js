@@ -21,7 +21,7 @@ export const PreviewEditUI = ( {
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const anchor = useAnchor( {
-		ref: contentRef,
+		editableContentElement: contentRef.current,
 		value,
 		settings,
 	} );
@@ -56,7 +56,7 @@ export const PreviewEditUI = ( {
 			<Popover
 				anchor={ anchor }
 				onClose={ onClose }
-				position="bottom center"
+				placement="top"
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"

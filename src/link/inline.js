@@ -30,7 +30,7 @@ export const InlineEditUI = ( {
 	const inputRef = createRef();
 
 	const anchor = useAnchor( {
-		ref: contentRef,
+		editableContentElement: contentRef.current,
 		value,
 		settings,
 	} );
@@ -75,7 +75,7 @@ export const InlineEditUI = ( {
 		<Popover
 			anchor={ anchor }
 			onClose={ onClose }
-			position="bottom center"
+			placement="top"
 			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
