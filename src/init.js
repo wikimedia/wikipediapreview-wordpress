@@ -1,6 +1,6 @@
 /* global wikipediapreview_init_options */
-/* eslint-disable camelcase */
 wikipediaPreview.init( {
 	root: document,
+	/* eslint-disable-next-line camelcase */
 	detectLinks: !! wikipediapreview_init_options.detectLinks,
 } );
