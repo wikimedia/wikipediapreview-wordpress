@@ -27,7 +27,7 @@ cp ./libs/{wikipedia-preview-link.css,wikipedia-preview.production.js} $1/trunk/
 cp ./assets/* $1/assets/
 
 mkdir $1/trunk/images
-cp ./images/* $1/images/
+cp ./images/* $1/trunk/images/
 
 cd $1
 svn cp trunk tags/$VER
