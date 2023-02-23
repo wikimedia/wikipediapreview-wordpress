@@ -5,7 +5,7 @@
  * Description: Provide context to your readers by displaying a Wikipedia article preview when a reader clicks or hovers over a word or concept.
  * Text Domain: wikipedia-preview
  * Version: 1.8.0
- * Requires at least: 4.6
+ * Requires at least: 6.1
  * Requires PHP: 5.6.39
  * Author: Wikimedia Foundation
  * Author URI: https://wikimediafoundation.org/
