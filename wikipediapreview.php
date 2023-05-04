@@ -9,7 +9,7 @@
  * Requires PHP: 5.6.39
  * Author: Wikimedia Foundation
  * Author URI: https://wikimediafoundation.org/
- * License: MIT
+ * License: GPL-2.0-or-later
  * License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
  */
 

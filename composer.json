@@ -3,7 +3,7 @@
     "description": "WordPress plugin for Wikipedia Preview",
     "keywords": [ "wordpress", "wikipedia", "facts", "popup", "card", "wiki" ],
     "type": "wordpress-plugin",
-    "license": "MIT",
+    "license": "GPL-2.0-or-later",
     "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
     "authors": [
         {
