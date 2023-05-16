@@ -130,6 +130,21 @@ When writing articles, decide which words show a Wikipedia popup on a particular
 
 The words that will have a Wikipedia Preview popup on your site need to be annotated. Those annotations add to the page size but not more than the regular hyperlinks you already use.
 
+= How does one customise the preview style? =
+
+In the admin site, go to “Appearance / customize”, then select the “Additional CSS” option from the left side menu. In the text box, the following CSS should reset the existing term style so you can adjust it to your liking.
+
+```
+.wmf-wp-with-preview {
+    border: 0;
+    background-color: unset;
+    padding: unset;
+}
+.wmf-wp-with-preview::after {
+    content: '';
+}
+```
+
 = Is it compatible with all the browsers? =
 
 The Wikipedia Preview is compatible with the following browsers: Chrome, Firefox, Opera, Edge (Current and previous version), Safari 5.1+, iOS 6.1+ and Android 4.1+
