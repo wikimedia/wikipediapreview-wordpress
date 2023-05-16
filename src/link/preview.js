@@ -56,7 +56,7 @@ export const PreviewEditUI = ( {
 			<Popover
 				anchor={ anchor }
 				onClose={ onClose }
-				placement="top"
+				placement="bottom"
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"
