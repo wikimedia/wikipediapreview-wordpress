@@ -134,7 +134,7 @@ The words that will have a Wikipedia Preview popup on your site need to be annot
 
 In the admin site, go to “Appearance / customize”, then select the “Additional CSS” option from the left side menu. In the text box, the following CSS should reset the existing term style so you can adjust it to your liking.
 
-```
+~~~
 .wmf-wp-with-preview {
     border: 0;
     background-color: unset;
@@ -143,7 +143,7 @@ In the admin site, go to “Appearance / customize”, then select the “Additi
 .wmf-wp-with-preview::after {
     content: '';
 }
-```
+~~~
 
 = Is it compatible with all the browsers? =
 
