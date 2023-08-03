@@ -65,15 +65,15 @@ const Edit = ( {
 					lang,
 				},
 			},
-			0,
-			title.length
+			getTrimmedStart( selectedValue ),
+			getTrimmedEnd( selectedValue )
 		);
 		onChange( insert( value, toInsert ) );
 		onFocus();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
-		const newValue = applyFormat( 
+		const newValue = applyFormat(
 			selectedValue,
 			{
 				type: formatType,
@@ -122,24 +122,24 @@ const Edit = ( {
 		return position;
 	};
 
-	const getTrimmedStart = ( value ) => {
-		const selectedString = value.text.slice( value.start, value.end );
+	const getTrimmedStart = ( selectedValue ) => {
+		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
 		const trimmed = selectedString.trimStart();
 		if ( selectedString.length !== trimmed.length ) {
 			const delta = selectedString.length - trimmed.length;
-			return value.start + delta;
+			return selectedValue.start + delta;
 		}
-		return value.start;
+		return selectedValue.start;
 	};
 
-	const getTrimmedEnd = ( value ) => {
-		const selectedString = value.text.slice( value.start, value.end );
+	const getTrimmedEnd = ( selectedValue ) => {
+		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
 		const trimmed = selectedString.trimEnd();
 		if ( selectedString.length !== trimmed.length ) {
 			const delta = selectedString.length - trimmed.length;
-			return value.end - delta;
+			return selectedValue.end - delta;
 		}
-		return value.end;
+		return selectedValue.end;
 	};
 
 	const handleTextEdit = () => {
@@ -150,7 +150,7 @@ const Edit = ( {
 			const formatEnd = getFormatEnd( value.end + 1 );
 			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
 		}
-	}
+	};
 
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
