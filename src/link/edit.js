@@ -44,6 +44,7 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
+	const [ lastValue, setLastValue ] = useState( null );
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -102,6 +103,14 @@ const Edit = ( {
 		}
 	};
 
+	const getFormatStart = ( position ) => {
+		if ( value.formats[ position ] && value.formats[ position ][0].type === formatType ) {
+			return getFormatStart( position - 1);
+		} else {
+			return position;
+		}
+	}
+
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -110,6 +119,21 @@ const Edit = ( {
 			stopViewingPreview();
 		}
 	}, [ activeAttributes ] );
+
+	useEffect( () => {
+		if ( lastValue === null ) {
+			setLastValue( value );
+		} else if (lastValue !== value ) {
+			const deletionDetected = lastValue.formats.length > value.formats.length;
+			const involvesPreviewFormat = lastValue.formats[ value.start ] && lastValue.formats[ value.start ][0].type === formatType;
+			if ( deletionDetected && involvesPreviewFormat ) {
+				const formatEnd = value.start;
+				const formatStart = getFormatStart( formatEnd - 1 );
+				onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
+			}
+			setLastValue( value );
+		}		
+	}, [ value ] );
 
 	return (
 		<>
