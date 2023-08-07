@@ -73,9 +73,10 @@ export const InlineEditUI = ( {
 	}, [ lang ] );
 
 	const anchorXPosition = anchor.getBoundingClientRect().x;
+	const scrollWidth = document.body.scrollWidth;
 	if (
-		anchorXPosition < 100 ||
-		document.body.scrollWidth - anchorXPosition < 100
+		anchorXPosition / scrollWidth < 0.15 ||
+		( scrollWidth - anchorXPosition ) / scrollWidth < 0.15
 	) {
 		placement = 'right';
 	}
