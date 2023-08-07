@@ -29,6 +29,7 @@ export const InlineEditUI = ( {
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 	const inputRef = createRef();
 
+	let placement = 'top';
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
 		value,
@@ -71,11 +72,19 @@ export const InlineEditUI = ( {
 		}
 	}, [ lang ] );
 
+	const anchorXPosition = anchor.getBoundingClientRect().x;
+	if (
+		anchorXPosition < 100 ||
+		document.body.scrollWidth - anchorXPosition < 100
+	) {
+		placement = 'right';
+	}
+
 	return (
 		<Popover
 			anchor={ anchor }
 			onClose={ onClose }
-			placement="top"
+			placement={ placement }
 			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
