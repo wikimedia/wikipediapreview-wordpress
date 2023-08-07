@@ -19,6 +19,7 @@ export const PreviewEditUI = ( {
 	onEdit,
 	onRemove,
 } ) => {
+	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
@@ -51,12 +52,20 @@ export const PreviewEditUI = ( {
 		};
 	}, [ previewHtml ] );
 
+	const anchorXPosition = anchor.getBoundingClientRect().x;
+	if (
+		anchorXPosition < 100 ||
+		document.body.scrollWidth - anchorXPosition < 100
+	) {
+		placement = 'right';
+	}
+
 	return (
 		<div>
 			<Popover
 				anchor={ anchor }
 				onClose={ onClose }
-				placement="bottom"
+				placement={ placement }
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"
