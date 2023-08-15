@@ -52,12 +52,11 @@ export const PreviewEditUI = ( {
 		};
 	}, [ previewHtml ] );
 
-	const anchorXPosition = anchor.getBoundingClientRect().x;
+	const anchorXPosition = anchor.getBoundingClientRect();
 	const scrollWidth = document.body.scrollWidth;
-
 	if (
-		anchorXPosition / scrollWidth < 0.15 ||
-		( scrollWidth - anchorXPosition ) / scrollWidth < 0.15
+		anchorXPosition.left / scrollWidth < 0.15 ||
+		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.15
 	) {
 		placement = 'right';
 	}
