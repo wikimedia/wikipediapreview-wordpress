@@ -55,8 +55,8 @@ export const PreviewEditUI = ( {
 	const anchorXPosition = anchor.getBoundingClientRect();
 	const scrollWidth = document.body.scrollWidth;
 	if (
-		anchorXPosition.left / scrollWidth < 0.15 ||
-		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.15
+		anchorXPosition.left / scrollWidth < 0.2 ||
+		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2
 	) {
 		placement = 'right';
 	}
