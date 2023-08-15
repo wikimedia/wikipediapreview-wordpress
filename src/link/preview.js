@@ -8,6 +8,7 @@ import {
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
+import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
 	contentRef,
@@ -52,12 +53,7 @@ export const PreviewEditUI = ( {
 		};
 	}, [ previewHtml ] );
 
-	const anchorXPosition = anchor.getBoundingClientRect();
-	const scrollWidth = document.body.scrollWidth;
-	if (
-		anchorXPosition.left / scrollWidth < 0.2 ||
-		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2
-	) {
+	if ( isTextNearTheEdge( anchor ) ) {
 		placement = 'right';
 	}
 

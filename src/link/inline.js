@@ -7,7 +7,7 @@ import {
 import { getTextContent, slice, useAnchor } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { getSiteLanguage } from './utils';
+import { getSiteLanguage, isTextNearTheEdge } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
@@ -72,12 +72,7 @@ export const InlineEditUI = ( {
 		}
 	}, [ lang ] );
 
-	const anchorXPosition = anchor.getBoundingClientRect();
-	const scrollWidth = document.body.scrollWidth;
-	if (
-		anchorXPosition.left / scrollWidth < 0.2 ||
-		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2
-	) {
+	if ( isTextNearTheEdge( anchor ) ) {
 		placement = 'right';
 	}
 
