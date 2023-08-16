@@ -8,4 +8,4 @@ export const isTextNearTheEdge = ( anchor ) => {
 
 	return anchorXPosition.left / scrollWidth < 0.2 ||
 		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2;
-}
+};
