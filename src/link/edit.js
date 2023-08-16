@@ -143,8 +143,17 @@ const Edit = ( {
 	};
 
 	const handleTextEdit = () => {
-		const editDetected = lastValue.formats.length !== value.formats.length;
-		const involvesPreviewFormat = lastValue.formats[ value.start ] && lastValue.formats[ value.start ][ 0 ].type === formatType;
+		const differentLength = lastValue.formats.length !== value.formats.length;
+		const everyCharEqual = value.formats.every( ( f, i ) => lastValue.text[ i ] === value.text[ i ] );
+		const editDetected = differentLength || !everyCharEqual;
+		// Assuming a Left-To-Right language:
+		// --> cursorDirection > 0 means cursor is moving left
+		// --> cursorDirection < 0 means cursor is moving right
+		const cursorDirection = lastValue.start - value.start;
+		const involvesPreviewFormat = cursorDirection >= 0 ?
+			lastValue.formats[ value.start ] && lastValue.formats[ value.start ][ 0 ].type === formatType :
+			lastValue.formats[ value.end - 1 ] && lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
+
 		if ( editDetected && involvesPreviewFormat ) {
 			const formatStart = getFormatStart( value.start - 1 );
 			const formatEnd = getFormatEnd( value.end + 1 );
