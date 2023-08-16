@@ -8,6 +8,7 @@ import {
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
+import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
 	contentRef,
@@ -19,6 +20,7 @@ export const PreviewEditUI = ( {
 	onEdit,
 	onRemove,
 } ) => {
+	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
@@ -51,12 +53,16 @@ export const PreviewEditUI = ( {
 		};
 	}, [ previewHtml ] );
 
+	if ( isTextNearTheEdge( anchor ) ) {
+		placement = 'right';
+	}
+
 	return (
 		<div>
 			<Popover
 				anchor={ anchor }
 				onClose={ onClose }
-				placement="bottom"
+				placement={ placement }
 				noArrow={ false }
 				expandOnMobile={ true }
 				className="wikipediapreview-edit-preview-popover"

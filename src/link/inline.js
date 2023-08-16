@@ -7,7 +7,7 @@ import {
 import { getTextContent, slice, useAnchor } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { getSiteLanguage } from './utils';
+import { getSiteLanguage, isTextNearTheEdge } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
@@ -29,6 +29,7 @@ export const InlineEditUI = ( {
 	const [ langCodeAdjustment, setLangCodeAdjustment ] = useState( false );
 	const inputRef = createRef();
 
+	let placement = 'top';
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
 		value,
@@ -71,11 +72,15 @@ export const InlineEditUI = ( {
 		}
 	}, [ lang ] );
 
+	if ( isTextNearTheEdge( anchor ) ) {
+		placement = 'right';
+	}
+
 	return (
 		<Popover
 			anchor={ anchor }
 			onClose={ onClose }
-			placement="top"
+			placement={ placement }
 			className="wikipediapreview-edit-inline"
 			noArrow={ false }
 			expandOnMobile={ true }
