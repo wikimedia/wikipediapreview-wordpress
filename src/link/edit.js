@@ -44,6 +44,7 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
+	const [ lastValue, setLastValue ] = useState( null );
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -64,22 +65,27 @@ const Edit = ( {
 					lang,
 				},
 			},
-			0,
-			title.length
+			getTrimmedStart( selectedValue ),
+			getTrimmedEnd( selectedValue )
 		);
 		onChange( insert( value, toInsert ) );
 		onFocus();
 	};
 
 	const updateAttributes = ( selectedValue, title, lang ) => {
-		const newValue = applyFormat( selectedValue, {
-			type: formatType,
-			attributes: {
-				preview: '',
-				title,
-				lang,
+		const newValue = applyFormat(
+			selectedValue,
+			{
+				type: formatType,
+				attributes: {
+					preview: '',
+					title,
+					lang,
+				},
 			},
-		} );
+			getTrimmedStart( selectedValue ),
+			getTrimmedEnd( selectedValue )
+		);
 		onChange( newValue );
 		onFocus();
 	};
@@ -102,6 +108,57 @@ const Edit = ( {
 		}
 	};
 
+	const getFormatStart = ( position ) => {
+		if ( value.formats[ position ] && value.formats[ position ][ 0 ].type === formatType ) {
+			return getFormatStart( position - 1 );
+		}
+		return position;
+	};
+
+	const getFormatEnd = ( position ) => {
+		if ( value.formats[ position ] && value.formats[ position ][ 0 ].type === formatType ) {
+			return getFormatEnd( position + 1 );
+		}
+		return position;
+	};
+
+	const getTrimmedStart = ( selectedValue ) => {
+		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
+		const trimmed = selectedString.trimStart();
+		if ( selectedString.length !== trimmed.length ) {
+			const delta = selectedString.length - trimmed.length;
+			return selectedValue.start + delta;
+		}
+		return selectedValue.start;
+	};
+
+	const getTrimmedEnd = ( selectedValue ) => {
+		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
+		const trimmed = selectedString.trimEnd();
+		if ( selectedString.length !== trimmed.length ) {
+			const delta = selectedString.length - trimmed.length;
+			return selectedValue.end - delta;
+		}
+		return selectedValue.end;
+	};
+
+	const handleTextEdit = () => {
+		// Assuming a Left-To-Right language:
+		// --> cursorDirection > 0 means cursor is moving left
+		// --> cursorDirection < 0 means cursor is moving right
+		const cursorDirection = lastValue.start - value.start;
+		const editDetected = value.text !== lastValue.text;
+		const involvesPreviewFormat = cursorDirection >= 0
+			? lastValue.formats[ value.start ] && lastValue.formats[ value.start ][ 0 ].type === formatType
+			: lastValue.formats[ value.end - 1 ] && lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
+
+		if ( editDetected && involvesPreviewFormat ) {
+			const formatStart = getFormatStart( value.start - 1 );
+			const formatEnd = getFormatEnd( value.end + 1 );
+			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
+		}
+	};
+
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -110,6 +167,15 @@ const Edit = ( {
 			stopViewingPreview();
 		}
 	}, [ activeAttributes ] );
+
+	useEffect( () => {
+		if ( lastValue === null ) {
+			setLastValue( value );
+		} else if ( lastValue !== value ) {
+			handleTextEdit();
+			setLastValue( value );
+		}
+	}, [ value ] );
 
 	return (
 		<>
