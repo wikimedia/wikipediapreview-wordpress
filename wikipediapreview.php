@@ -56,6 +56,13 @@ function wikipediapreview_enqueue_scripts() {
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		$media_type_all
 	);
+	wp_enqueue_style(
+		'wikipedia-preview-link-style-extra',
+		plugin_dir_url( __FILE__ ) . 'wp-extra.css',
+		$no_dependencies,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		$media_type_all
+	);
 }
 
 function wikipediapreview_detect_deletion() {
@@ -91,6 +98,13 @@ function wikipediapreview_guten_enqueue() {
 	wp_enqueue_style(
 		'wikipedia-preview-link-style',
 		$libs_dir . 'wikipedia-preview-link.css',
+		$no_dependencies,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		$media_type_all
+	);
+	wp_enqueue_style(
+		'wikipedia-preview-link-style-extra',
+		plugin_dir_url( __FILE__ ) . 'wp-extra.css',
 		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		$media_type_all
