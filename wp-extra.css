@@ -1,0 +1,8 @@
+.wikipediapreview,
+.wikipediapreview-body,
+.wikipediapreview-body-message,
+.wikipediapreview-body p,
+.wikipediapreview-body:after {
+	background-color: var( --wp--preset--color--background ) !important;
+	color: var( --wp--preset--color--primary ) !important;
+}
