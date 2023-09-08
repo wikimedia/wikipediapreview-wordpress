@@ -134,10 +134,14 @@ function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status 
 
 add_filter( 'plugin_row_meta', 'add_meta_links', 10, 4 );
 register_deactivation_hook( __FILE__, 'wikipediapreview_detect_deletion' );
-add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
-add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
-add_action( 'init', 'myguten_set_script_translations' );
+// disable for classic editor
+// add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
+// add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
+// add_action( 'init', 'myguten_set_script_translations' );
 add_action( 'init', 'register_detectlinks_postmeta' );
 
 require __DIR__ . '/banner.php';
 require __DIR__ . '/intro.php';
+
+// tinymce button
+require __DIR__ . './tinymce.php';
