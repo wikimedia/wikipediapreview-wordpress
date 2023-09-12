@@ -73,6 +73,7 @@ export const PreviewEditUI = ( {
 						className="wikipediapreview-edit-preview"
 						dangerouslySetInnerHTML={ { __html: previewHtml } }
 					></div>
+					<div className="wikipediapreview-edit-preview-controllers-menu"></div>
 					{ previewHtml && (
 						<ControllerEditUI
 							onEdit={ onEdit }

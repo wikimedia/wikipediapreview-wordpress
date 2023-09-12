@@ -352,13 +352,54 @@
 
 				&::before {
 					position: relative;
-					content: url(./images/remove.svg);
+					content: url(./images/remove.svg); // these svgs not being used anywhere so replace entirely
 					width: 20px;
 					height: 20px;
 					left: 15px;
 
 				}
 
+			}
+
+			@media screen and (max-width: 782px) {
+				width: 120px;
+				height: 85px;
+				background-color: #fff;
+				color: #000;
+				border-top-right-radius: unset;
+				border-bottom-right-radius: unset;
+				border: solid 1px #ccc;
+				font-size: 16px;
+				box-shadow: 0px 2px 2px #1e1e1e;
+
+				&-menu {
+					height: 20px;
+					width: 20px;
+					position: relative;
+					top: -148px;
+					left: -75px;
+					background-image: url(./images/vertical-ellipsis.svg);
+				}
+
+				&-change {
+					text-align: center;
+
+					&::before {
+						content: url(./images/change-black.svg);
+						left: -7px;
+						top: 5px;
+					}
+				}
+
+				&-remove {
+					text-align: center;
+
+					&::before {
+						content: url(./images/remove-black.svg);
+						left: -7px;
+						top: 5px;
+					}
+				}
 			}
 		}
 
@@ -405,11 +446,8 @@
 			width: 100vw;
 
 			&-controllers {
-				margin-left: -52px;
-				border-top-right-radius: unset;
-				border-bottom-right-radius: unset;
-				border-top-left-radius: 4px;
-				border-bottom-left-radius: 4px;
+				margin-left: -205px;
+				margin-top: -170px;
 			}
 
 			.wikipediapreview {
