@@ -34,7 +34,7 @@ export const PreviewEditUI = ( {
 		}
 	}, [] );
 	const toggleControllersMenu = () => {
-		setShowControllersMenu( showControllersMenu => ! showControllersMenu );
+		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );
 	};
 
 	useEffect( () => {
@@ -61,9 +61,9 @@ export const PreviewEditUI = ( {
 
 			return () => {
 				document
-				.querySelector( '.wikipediapreview-edit-preview-controllers-menu' )
-				?.removeEventListener( 'click', toggleControllersMenu );
-			}
+					.querySelector( '.wikipediapreview-edit-preview-controllers-menu' )
+					?.removeEventListener( 'click', toggleControllersMenu );
+			};
 		}
 	}, [ previewHtml ] );
 
