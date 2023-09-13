@@ -34,6 +34,7 @@ export const PreviewEditUI = ( {
 		}
 	}, [] );
 	const toggleControllersMenu = () => {
+		/* eslint-disable-next-line no-shadow */
 		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );
 	};
 
