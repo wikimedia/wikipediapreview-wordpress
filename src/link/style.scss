@@ -489,6 +489,7 @@ body.rtl {
 			}
 
 			@media screen and (max-width: 782px) {
+
 				&-change {
 
 					&::before {
@@ -503,7 +504,7 @@ body.rtl {
 						right: unset;
 						left: 7px;
 					}
-				}	
+				}
 			}
 		}
 
