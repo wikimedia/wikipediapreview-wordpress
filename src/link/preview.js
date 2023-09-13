@@ -8,7 +8,7 @@ import {
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
-import { isTextNearTheEdge } from './utils';
+import { isTextNearTheEdge, isTouch } from './utils';
 
 export const PreviewEditUI = ( {
 	contentRef,
@@ -22,6 +22,7 @@ export const PreviewEditUI = ( {
 } ) => {
 	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
+	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
 		value,
@@ -32,6 +33,9 @@ export const PreviewEditUI = ( {
 			onForceClose();
 		}
 	}, [] );
+	const toggleControllersMenu = () => {
+		setShowControllersMenu( showControllersMenu => ! showControllersMenu );
+	};
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
@@ -41,6 +45,27 @@ export const PreviewEditUI = ( {
 			} );
 		}
 	}, [ activeAttributes ] );
+
+	useEffect( () => {
+		if ( isTouch ) {
+			const previewHeader = document.querySelector( '.wikipediapreview-header' );
+			const previewHeaderCloseBtn = document.querySelector( '.wikipediapreview-header-closebtn' );
+			const controllersMenu = document.createElement( 'div' );
+			controllersMenu.setAttribute( 'class', 'wikipediapreview-edit-preview-controllers-menu' );
+			controllersMenu.addEventListener( 'click', toggleControllersMenu );
+			setShowControllersMenu( false );
+
+			if ( previewHeader ) {
+				previewHeader.insertBefore( controllersMenu, previewHeaderCloseBtn );
+			}
+
+			return () => {
+				document
+				.querySelector( '.wikipediapreview-edit-preview-controllers-menu' )
+				?.removeEventListener( 'click', toggleControllersMenu );
+			}
+		}
+	}, [ previewHtml ] );
 
 	useLayoutEffect( () => {
 		document
@@ -73,8 +98,7 @@ export const PreviewEditUI = ( {
 						className="wikipediapreview-edit-preview"
 						dangerouslySetInnerHTML={ { __html: previewHtml } }
 					></div>
-					<div className="wikipediapreview-edit-preview-controllers-menu"></div>
-					{ previewHtml && (
+					{ previewHtml && showControllersMenu && (
 						<ControllerEditUI
 							onEdit={ onEdit }
 							onRemove={ onRemove }
