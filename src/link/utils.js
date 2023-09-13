@@ -10,5 +10,4 @@ export const isTextNearTheEdge = ( anchor ) => {
 		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2;
 };
 
-export const isTouch = 'ontouchstart' in window || ( navigator.maxTouchPoints > 0 ) ||
-	( navigator.msMaxTouchPoints > 0 );
+export const isTouch = 'ontouchstart' in window;
