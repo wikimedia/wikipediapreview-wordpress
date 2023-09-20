@@ -8,7 +8,7 @@ import {
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { getPreviewHtml } from 'wikipedia-preview';
-import { isTextNearTheEdge, isTouch } from './utils';
+import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
 	contentRef,
@@ -48,7 +48,7 @@ export const PreviewEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		if ( isTouch ) {
+		if ( isPopoverExpanded() ) {
 			const previewHeader = document.querySelector( '.wikipediapreview-header' );
 			const previewHeaderCloseBtn = document.querySelector( '.wikipediapreview-header-closebtn' );
 			const controllersMenu = document.createElement( 'div' );
@@ -109,6 +109,12 @@ export const PreviewEditUI = ( {
 			</Popover>
 		</div>
 	);
+};
+
+const isPopoverExpanded = () => {
+	const hasPreviewPopup = document.querySelector( '.wikipediapreview-edit-preview-container' );
+	const hasExpandedClass = document.querySelector( '.is-expanded' );
+	return hasPreviewPopup && hasExpandedClass;
 };
 
 const ControllerEditUI = ( { onEdit, onRemove } ) => {
