@@ -360,8 +360,72 @@
 				}
 
 			}
+		}
 
-			@media screen and (max-width: 782px) {
+		.wikipediapreview {
+			box-shadow: none;
+			border: solid #ccc 1px;
+
+			&-gallery {
+				display: none;
+			}
+
+			.wikipediapreview-footer {
+
+				&-cta-readmore {
+					display: none;
+				}
+
+				&-cta-readonwiki {
+					display: block;
+				}
+			}
+		}
+
+		.wikipediapreview-body::after {
+			content: none;
+		}
+	}
+
+	&.is-expanded {
+
+		background-color: rgba(0, 0, 0, 0.7);
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.components-popover__header {
+			visibility: hidden;
+		}
+
+		.wikipediapreview-edit-preview {
+			width: 100vw;
+
+			.wikipediapreview {
+				width: 100%;
+			}
+
+			&-container {
+				position: fixed;
+				bottom: 0;
+
+				&[dir="rtl"] {
+
+					.wikipediapreview-edit-preview-controllers {
+						right: unset;
+						left: 70px;
+
+						&-change::before,
+						&-remove::before {
+							right: unset;
+							left: 7px;
+						}
+					}
+				}
+			}
+
+			&-controllers {
+				position: absolute;
+				right: 70px;
+				top: 58px;
 				width: 120px;
 				height: 85px;
 				background-color: #fff;
@@ -399,73 +463,6 @@
 						top: 5px;
 					}
 				}
-			}
-		}
-
-		.wikipediapreview {
-			box-shadow: none;
-			border: solid #ccc 1px;
-
-			&-gallery {
-				display: none;
-			}
-
-			.wikipediapreview-footer {
-
-				&-cta-readmore {
-					display: none;
-				}
-
-				&-cta-readonwiki {
-					display: block;
-				}
-			}
-		}
-
-		.wikipediapreview-body::after {
-			content: none;
-		}
-	}
-
-	&.is-expanded {
-
-		background-color: rgba(0, 0, 0, 0.7);
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		.components-popover__header {
-			visibility: hidden;
-		}
-
-		.wikipediapreview-edit-preview-container {
-			position: fixed;
-			bottom: 0;
-
-			&[dir="rtl"] {
-
-				.wikipediapreview-edit-preview-controllers {
-					right: unset;
-					left: 70px;
-
-					&-change::before,
-					&-remove::before {
-						right: unset;
-						left: 7px;
-					}
-				}
-			}
-		}
-
-		.wikipediapreview-edit-preview {
-			width: 100vw;
-
-			&-controllers {
-				position: absolute;
-				right: 70px;
-				top: 58px;
-			}
-
-			.wikipediapreview {
-				width: 100%;
 			}
 		}
 	}
