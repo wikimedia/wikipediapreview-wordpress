@@ -49,6 +49,7 @@ export const PreviewEditUI = ( {
 
 	useEffect( () => {
 		if ( isPopoverExpanded() ) {
+			const preview = document.querySelector( '.wikipediapreview' );
 			const previewHeader = document.querySelector( '.wikipediapreview-header' );
 			const previewHeaderCloseBtn = document.querySelector( '.wikipediapreview-header-closebtn' );
 			const controllersMenu = document.createElement( 'div' );
@@ -58,6 +59,12 @@ export const PreviewEditUI = ( {
 
 			if ( previewHeader ) {
 				previewHeader.insertBefore( controllersMenu, previewHeaderCloseBtn );
+			}
+
+			// special handle to set the container direction
+			if ( preview ) {
+				document.querySelector( '.wikipediapreview-edit-preview-container' )
+					.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
 			}
 
 			return () => {
