@@ -611,6 +611,7 @@ body {
 			}
 		}
 
+		/* stylelint-disable no-descending-specificity */
 		.wikipediapreview-edit-preview-popover {
 
 			.wikipediapreview-edit-preview {
@@ -633,6 +634,7 @@ body {
 				}
 			}
 		}
+		/* stylelint-enable no-descending-specificity */
 	}
 }
 
