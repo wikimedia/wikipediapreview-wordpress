@@ -22,6 +22,7 @@ export const PreviewEditUI = ( {
 } ) => {
 	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
+	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
 	const anchor = useAnchor( {
 		editableContentElement: contentRef.current,
 		value,
@@ -32,6 +33,10 @@ export const PreviewEditUI = ( {
 			onForceClose();
 		}
 	}, [] );
+	const toggleControllersMenu = () => {
+		/* eslint-disable-next-line no-shadow */
+		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );
+	};
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
@@ -41,6 +46,34 @@ export const PreviewEditUI = ( {
 			} );
 		}
 	}, [ activeAttributes ] );
+
+	useEffect( () => {
+		if ( isPopoverExpanded() ) {
+			const preview = document.querySelector( '.wikipediapreview' );
+			const previewHeader = document.querySelector( '.wikipediapreview-header' );
+			const previewHeaderCloseBtn = document.querySelector( '.wikipediapreview-header-closebtn' );
+			const controllersMenu = document.createElement( 'div' );
+			controllersMenu.setAttribute( 'class', 'wikipediapreview-edit-preview-controllers-menu' );
+			controllersMenu.addEventListener( 'click', toggleControllersMenu );
+			setShowControllersMenu( false );
+
+			if ( previewHeader ) {
+				previewHeader.insertBefore( controllersMenu, previewHeaderCloseBtn );
+			}
+
+			// special handle to set the container direction
+			if ( preview ) {
+				document.querySelector( '.wikipediapreview-edit-preview-container' )
+					.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
+			}
+
+			return () => {
+				document
+					.querySelector( '.wikipediapreview-edit-preview-controllers-menu' )
+					?.removeEventListener( 'click', toggleControllersMenu );
+			};
+		}
+	}, [ previewHtml ] );
 
 	useLayoutEffect( () => {
 		document
@@ -73,7 +106,7 @@ export const PreviewEditUI = ( {
 						className="wikipediapreview-edit-preview"
 						dangerouslySetInnerHTML={ { __html: previewHtml } }
 					></div>
-					{ previewHtml && (
+					{ previewHtml && showControllersMenu && (
 						<ControllerEditUI
 							onEdit={ onEdit }
 							onRemove={ onRemove }
@@ -83,6 +116,12 @@ export const PreviewEditUI = ( {
 			</Popover>
 		</div>
 	);
+};
+
+const isPopoverExpanded = () => {
+	const hasPreviewPopup = document.querySelector( '.wikipediapreview-edit-preview-container' );
+	const hasExpandedClass = document.querySelector( '.is-expanded' );
+	return hasPreviewPopup && hasExpandedClass;
 };
 
 const ControllerEditUI = ( { onEdit, onRemove } ) => {
