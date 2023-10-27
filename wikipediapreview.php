@@ -16,7 +16,11 @@
 DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.11.0' );
 
 function wikipediapreview_enqueue_scripts() {
-	if ( ! in_array( get_post_type(), array( 'post', 'page' ), true ) ) {
+	$enabled_post_types = apply_filters(
+		'wikipediapreview:enabled_post_types',
+		array('post', 'page')
+	);
+	if ( ! in_array( get_post_type(), $enabled_post_types, true ) ) {
 		return;
 	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
@@ -63,6 +67,10 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
+	$enabled_post_types = apply_filters(
+		'wikipediapreview:enabled_post_types',
+		array('post', 'page')
+	);
 	if ( ! in_array( get_post_type(), array( 'post', 'page' ), true ) ) {
 		return;
 	}
