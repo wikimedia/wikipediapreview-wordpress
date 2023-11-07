@@ -26,12 +26,16 @@ function get_public_post_types() {
 	return $public_post_types;
 }
 
-function wikipediapreview_enqueue_scripts() {
+function is_enabled_on_post_type( $post_type ) {
 	$enabled_post_types = apply_filters(
 		'wikipediapreview:enabled_post_types',
 		get_public_post_types()
 	);
-	if ( ! in_array( get_post_type(), $enabled_post_types, true ) ) {
+	return in_array( $post_type, $enabled_post_types, true );
+}
+
+function wikipediapreview_enqueue_scripts() {
+	if ( ! is_enabled_on_post_type( get_post_type() ) ) {
 		return;
 	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
@@ -78,11 +82,7 @@ function wikipediapreview_detect_deletion() {
 }
 
 function wikipediapreview_guten_enqueue() {
-	$enabled_post_types = apply_filters(
-		'wikipediapreview:enabled_post_types',
-		get_public_post_types()
-	);
-	if ( ! in_array( get_post_type(), $enabled_post_types, true ) ) {
+	if ( ! is_enabled_on_post_type( get_post_type() ) ) {
 		return;
 	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
