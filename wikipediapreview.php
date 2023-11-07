@@ -28,7 +28,7 @@ function get_public_post_types() {
 
 function is_enabled_on_post_type( $post_type ) {
 	$enabled_post_types = apply_filters(
-		'wikipediapreview:enabled_post_types',
+		'wikipediapreview_enabled_post_types',
 		get_public_post_types()
 	);
 	return in_array( $post_type, $enabled_post_types, true );
