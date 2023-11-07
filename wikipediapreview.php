@@ -15,10 +15,21 @@
 
 DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.11.0' );
 
+function get_public_post_types() {
+	$post_types        = get_post_types( array(), 'objects' );
+	$public_post_types = array();
+	foreach ( $post_types as $post_type ) {
+		if ( $post_type->public ) {
+			$public_post_types[] = $post_type->name;
+		}
+	}
+	return $public_post_types;
+}
+
 function wikipediapreview_enqueue_scripts() {
 	$enabled_post_types = apply_filters(
 		'wikipediapreview:enabled_post_types',
-		array('post', 'page')
+		get_public_post_types()
 	);
 	if ( ! in_array( get_post_type(), $enabled_post_types, true ) ) {
 		return;
@@ -69,9 +80,9 @@ function wikipediapreview_detect_deletion() {
 function wikipediapreview_guten_enqueue() {
 	$enabled_post_types = apply_filters(
 		'wikipediapreview:enabled_post_types',
-		array('post', 'page')
+		get_public_post_types()
 	);
-	if ( ! in_array( get_post_type(), array( 'post', 'page' ), true ) ) {
+	if ( ! in_array( get_post_type(), $enabled_post_types, true ) ) {
 		return;
 	}
 	$build_dir       = plugin_dir_url( __FILE__ ) . 'build/';
