@@ -46,7 +46,7 @@ function wikipediapreview_enqueue_scripts() {
 
 	wp_enqueue_script(
 		'wikipedia-preview',
-		$libs_dir . 'wikipedia-preview.production.js',
+		$libs_dir . 'wikipedia-preview.js',
 		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		$in_footer
