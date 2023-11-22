@@ -137,7 +137,7 @@ function make_link( $text, $url ) {
 	return '<a target="_BLANK" href="' . esc_url( $url ) . '">' . $text . '</a>';
 }
 
-function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) {
+function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) { // phpcs:ignore
 	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
 		$links_array = array_merge(
 			$links_array,
