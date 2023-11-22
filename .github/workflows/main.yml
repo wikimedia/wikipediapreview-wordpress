@@ -25,11 +25,16 @@ jobs:
         with:
           php-version: '8.2'
 
+      - name: Install PHP_CodeSniffer
+        run: |
+          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+          php phpcs.phar --version
+
       - name: Install and Build
         run: |
           npm install
           npm run build
-     
+
       - name: Linter
         run: |
           npm run lint:js
