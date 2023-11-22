@@ -1,11 +1,13 @@
 export const getSiteLanguage = () => {
-	return document.documentElement.getAttribute( 'lang' ).split( '-' )[ 0 ];
+	return document.documentElement.getAttribute('lang').split('-')[0];
 };
 
-export const isTextNearTheEdge = ( anchor ) => {
+export const isTextNearTheEdge = (anchor) => {
 	const anchorXPosition = anchor.getBoundingClientRect();
 	const scrollWidth = document.body.scrollWidth;
 
-	return anchorXPosition.left / scrollWidth < 0.2 ||
-		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2;
+	return (
+		anchorXPosition.left / scrollWidth < 0.2 ||
+		(scrollWidth - anchorXPosition.right) / scrollWidth < 0.2
+	);
 };

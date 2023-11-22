@@ -345,29 +345,29 @@ const languagesWithWikis = [
 const limit = defaultLanguages.length;
 const languages = getLanguages();
 
-const isLanguageWithWiki = ( language ) =>
-	languagesWithWikis.indexOf( language ) !== -1;
+const isLanguageWithWiki = (language) =>
+	languagesWithWikis.indexOf(language) !== -1;
 
-const normalize = ( result, language ) => {
-	if ( isLanguageWithWiki( language ) ) {
-		result.push( {
-			name: languages[ language ][ 2 ],
+const normalize = (result, language) => {
+	if (isLanguageWithWiki(language)) {
+		result.push({
+			name: languages[language][2],
 			code: language,
-		} );
-	} else if ( language === 'en-simple' ) {
-		result.push( {
-			name: languages[ language ][ 2 ],
+		});
+	} else if (language === 'en-simple') {
+		result.push({
+			name: languages[language][2],
 			code: 'simple',
-		} );
+		});
 	}
 	return result;
 };
 
-const getLocalized = ( language, userLang ) => {
-	if ( Intl.DisplayNames ) {
-		const localizedName = new Intl.DisplayNames( [ userLang ], {
+const getLocalized = (language, userLang) => {
+	if (Intl.DisplayNames) {
+		const localizedName = new Intl.DisplayNames([userLang], {
 			type: 'language',
-		} );
+		});
 		const invalid = [
 			'bat-smg',
 			'be-x-old',
@@ -381,45 +381,44 @@ const getLocalized = ( language, userLang ) => {
 			'zh-cdo',
 		];
 
-		if ( invalid.indexOf( language ) === -1 ) {
-			return localizedName.of( language ).toLowerCase();
+		if (invalid.indexOf(language) === -1) {
+			return localizedName.of(language).toLowerCase();
 		}
 	}
 	return false;
 };
 
-export const filterLanguages = ( target, lang ) => {
+export const filterLanguages = (target, lang) => {
 	const targetLang = target.toLowerCase().trim();
 
-	if ( targetLang === '' ) {
+	if (targetLang === '') {
 		return defaultFilter();
 	}
 
-	const filtered = Object.keys( languages )
-		.filter( ( language ) => {
-			const localized = getLocalized( language, lang );
-			if ( languages[ language ].length > 2 ) {
+	const filtered = Object.keys(languages)
+		.filter((language) => {
+			const localized = getLocalized(language, lang);
+			if (languages[language].length > 2) {
 				return (
-					languages[ language ][ 2 ]
-						.toLowerCase()
-						.indexOf( targetLang ) !== -1 ||
-					language.indexOf( targetLang ) !== -1 ||
-					( localized && localized.indexOf( targetLang ) !== -1 )
+					languages[language][2].toLowerCase().indexOf(targetLang) !==
+						-1 ||
+					language.indexOf(targetLang) !== -1 ||
+					(localized && localized.indexOf(targetLang) !== -1)
 				);
 			}
 			return false;
-		} )
-		.reduce( ( result, language ) => normalize( result, language ), [] );
+		})
+		.reduce((result, language) => normalize(result, language), []);
 
-	return filtered.slice( 0, limit );
+	return filtered.slice(0, limit);
 };
 
 export const defaultFilter = () => {
-	const filtered = Object.keys( languages )
-		.filter( ( language ) => {
-			return defaultLanguages.indexOf( language ) !== -1;
-		} )
-		.reduce( ( result, language ) => normalize( result, language ), [] );
+	const filtered = Object.keys(languages)
+		.filter((language) => {
+			return defaultLanguages.indexOf(language) !== -1;
+		})
+		.reduce((result, language) => normalize(result, language), []);
 
 	return filtered;
 };
