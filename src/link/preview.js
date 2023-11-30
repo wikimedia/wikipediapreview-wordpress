@@ -7,7 +7,7 @@ import {
 } from '@wordpress/element';
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
-import { getPreviewHtml } from 'wikipedia-preview';
+import wikipediaPreview from 'wikipedia-preview';
 import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ({
@@ -41,7 +41,7 @@ export const PreviewEditUI = ({
 	useEffect(() => {
 		const { title, lang } = activeAttributes;
 		if (title && lang) {
-			getPreviewHtml(title, lang, (preview) => {
+			wikipediaPreview.getPreviewHtml(title, lang, (preview) => {
 				setPreviewHtml(preview);
 			});
 		}
