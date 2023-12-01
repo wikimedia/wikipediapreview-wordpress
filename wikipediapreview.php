@@ -100,6 +100,14 @@ function wikipediapreview_guten_enqueue() {
 	);
 
 	wp_enqueue_style(
+		'wikipedia-preview-core-style',
+		$libs_dir . 'wikipedia-preview.css',
+		$no_dependencies,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		$media_type_all
+	);
+
+	wp_enqueue_style(
 		'wikipedia-preview-style',
 		$build_dir . 'style-index.css',
 		$no_dependencies,
