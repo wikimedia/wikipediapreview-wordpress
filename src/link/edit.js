@@ -1,5 +1,6 @@
 import { useEffect, useState } from '@wordpress/element';
-import { RichTextToolbarButton } from '@wordpress/block-editor';
+import { BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import {
 	create,
 	insert,
@@ -179,12 +180,16 @@ const Edit = ( {
 
 	return (
 		<>
-			<RichTextToolbarButton
-				icon={ generateWikipediaLogo( isActive ? 'white' : 'black' ) }
-				title={ formatTitle }
-				isActive={ isActive }
-				onClick={ formatButtonClick }
-			/>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={ generateWikipediaLogo( isActive ? 'white' : 'black' ) }
+						title={ formatTitle }
+						isActive={ isActive }
+						onClick={ formatButtonClick }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }
