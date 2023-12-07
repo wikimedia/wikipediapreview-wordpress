@@ -46,7 +46,7 @@ function wikipediapreview_enqueue_scripts() {
 
 	wp_enqueue_script(
 		'wikipedia-preview',
-		$libs_dir . 'wikipedia-preview.production.js',
+		$libs_dir . 'wikipedia-preview.js',
 		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		$in_footer
@@ -100,6 +100,14 @@ function wikipediapreview_guten_enqueue() {
 	);
 
 	wp_enqueue_style(
+		'wikipedia-preview-core-style',
+		$libs_dir . 'wikipedia-preview.css',
+		$no_dependencies,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		$media_type_all
+	);
+
+	wp_enqueue_style(
 		'wikipedia-preview-style',
 		$build_dir . 'style-index.css',
 		$no_dependencies,
@@ -137,7 +145,7 @@ function make_link( $text, $url ) {
 	return '<a target="_BLANK" href="' . esc_url( $url ) . '">' . $text . '</a>';
 }
 
-function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) {
+function add_meta_links( $links_array, $plugin_file_name, $plugin_data, $status ) { // phpcs:ignore
 	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
 		$links_array = array_merge(
 			$links_array,

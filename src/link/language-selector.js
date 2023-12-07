@@ -63,9 +63,7 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 					) )
 				) : (
 					<div className="wikipediapreview-edit-inline-language-selector-results-none">
-						<bdi>
-							{ __( 'No results found', 'wikipedia-preview' ) }
-						</bdi>
+						<bdi>{ __( 'No results found', 'wikipedia-preview' ) }</bdi>
 					</div>
 				) }
 			</div>

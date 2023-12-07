@@ -90,10 +90,7 @@ export const InlineEditUI = ( {
 					<div className="wikipediapreview-edit-inline-search">
 						<p className="wikipediapreview-edit-inline-search-label">
 							<span>
-								{ __(
-									'Wikipedia Preview',
-									'wikipedia-preview'
-								) }
+								{ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
 							</span>
 						</p>
 						<TextControl
@@ -154,10 +151,7 @@ export const InlineEditUI = ( {
 					{ ! loading && title && ! searchList.length && (
 						<div className="wikipediapreview-edit-inline-info">
 							<bdi>
-								{ __(
-									'No results found',
-									'wikipedia-preview'
-								) }
+								{ __( 'No results found', 'wikipedia-preview' ) }
 							</bdi>
 						</div>
 					) }
@@ -214,9 +208,7 @@ export const InlineEditUI = ( {
 				bindGlobal={ true }
 				shortcuts={ {
 					down: () => {
-						setHoverIndex(
-							( hoveredIndex + 1 ) % searchList.length
-						);
+						setHoverIndex( ( hoveredIndex + 1 ) % searchList.length );
 					},
 					up: () => {
 						setHoverIndex(

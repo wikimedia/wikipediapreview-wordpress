@@ -7,7 +7,7 @@ import {
 } from '@wordpress/element';
 import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
-import { getPreviewHtml } from 'wikipedia-preview';
+import wikipediaPreview from 'wikipedia-preview';
 import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
@@ -41,7 +41,7 @@ export const PreviewEditUI = ( {
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
 		if ( title && lang ) {
-			getPreviewHtml( title, lang, ( preview ) => {
+			wikipediaPreview.getPreviewHtml( title, lang, ( preview ) => {
 				setPreviewHtml( preview );
 			} );
 		}
@@ -50,26 +50,39 @@ export const PreviewEditUI = ( {
 	useEffect( () => {
 		if ( isPopoverExpanded() ) {
 			const preview = document.querySelector( '.wikipediapreview' );
-			const previewHeader = document.querySelector( '.wikipediapreview-header' );
-			const previewHeaderCloseBtn = document.querySelector( '.wikipediapreview-header-closebtn' );
+			const previewHeader = document.querySelector(
+				'.wikipediapreview-header'
+			);
+			const previewHeaderCloseBtn = document.querySelector(
+				'.wikipediapreview-header-closebtn'
+			);
 			const controllersMenu = document.createElement( 'div' );
-			controllersMenu.setAttribute( 'class', 'wikipediapreview-edit-preview-controllers-menu' );
+			controllersMenu.setAttribute(
+				'class',
+				'wikipediapreview-edit-preview-controllers-menu'
+			);
 			controllersMenu.addEventListener( 'click', toggleControllersMenu );
 			setShowControllersMenu( false );
 
 			if ( previewHeader ) {
-				previewHeader.insertBefore( controllersMenu, previewHeaderCloseBtn );
+				previewHeader.insertBefore(
+					controllersMenu,
+					previewHeaderCloseBtn
+				);
 			}
 
 			// special handle to set the container direction
 			if ( preview ) {
-				document.querySelector( '.wikipediapreview-edit-preview-container' )
+				document
+					.querySelector( '.wikipediapreview-edit-preview-container' )
 					.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
 			}
 
 			return () => {
 				document
-					.querySelector( '.wikipediapreview-edit-preview-controllers-menu' )
+					.querySelector(
+						'.wikipediapreview-edit-preview-controllers-menu'
+					)
 					?.removeEventListener( 'click', toggleControllersMenu );
 			};
 		}
@@ -107,10 +120,7 @@ export const PreviewEditUI = ( {
 						dangerouslySetInnerHTML={ { __html: previewHtml } }
 					></div>
 					{ previewHtml && showControllersMenu && (
-						<ControllerEditUI
-							onEdit={ onEdit }
-							onRemove={ onRemove }
-						/>
+						<ControllerEditUI onEdit={ onEdit } onRemove={ onRemove } />
 					) }
 				</div>
 			</Popover>
@@ -119,7 +129,9 @@ export const PreviewEditUI = ( {
 };
 
 const isPopoverExpanded = () => {
-	const hasPreviewPopup = document.querySelector( '.wikipediapreview-edit-preview-container' );
+	const hasPreviewPopup = document.querySelector(
+		'.wikipediapreview-edit-preview-container'
+	);
 	const hasExpandedClass = document.querySelector( '.is-expanded' );
 	return hasPreviewPopup && hasExpandedClass;
 };

@@ -400,9 +400,8 @@ export const filterLanguages = ( target, lang ) => {
 			const localized = getLocalized( language, lang );
 			if ( languages[ language ].length > 2 ) {
 				return (
-					languages[ language ][ 2 ]
-						.toLowerCase()
-						.indexOf( targetLang ) !== -1 ||
+					languages[ language ][ 2 ].toLowerCase().indexOf( targetLang ) !==
+						-1 ||
 					language.indexOf( targetLang ) !== -1 ||
 					( localized && localized.indexOf( targetLang ) !== -1 )
 				);

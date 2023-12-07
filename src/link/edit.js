@@ -110,21 +110,30 @@ const Edit = ( {
 	};
 
 	const getFormatStart = ( position ) => {
-		if ( value.formats[ position ] && value.formats[ position ][ 0 ].type === formatType ) {
+		if (
+			value.formats[ position ] &&
+			value.formats[ position ][ 0 ].type === formatType
+		) {
 			return getFormatStart( position - 1 );
 		}
 		return position;
 	};
 
 	const getFormatEnd = ( position ) => {
-		if ( value.formats[ position ] && value.formats[ position ][ 0 ].type === formatType ) {
+		if (
+			value.formats[ position ] &&
+			value.formats[ position ][ 0 ].type === formatType
+		) {
 			return getFormatEnd( position + 1 );
 		}
 		return position;
 	};
 
 	const getTrimmedStart = ( selectedValue ) => {
-		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
+		const selectedString = selectedValue.text.slice(
+			selectedValue.start,
+			selectedValue.end
+		);
 		const trimmed = selectedString.trimStart();
 		if ( selectedString.length !== trimmed.length ) {
 			const delta = selectedString.length - trimmed.length;
@@ -134,7 +143,10 @@ const Edit = ( {
 	};
 
 	const getTrimmedEnd = ( selectedValue ) => {
-		const selectedString = selectedValue.text.slice( selectedValue.start, selectedValue.end );
+		const selectedString = selectedValue.text.slice(
+			selectedValue.start,
+			selectedValue.end
+		);
 		const trimmed = selectedString.trimEnd();
 		if ( selectedString.length !== trimmed.length ) {
 			const delta = selectedString.length - trimmed.length;
@@ -149,9 +161,12 @@ const Edit = ( {
 		// --> cursorDirection < 0 means cursor is moving right
 		const cursorDirection = lastValue.start - value.start;
 		const editDetected = value.text !== lastValue.text;
-		const involvesPreviewFormat = cursorDirection >= 0
-			? lastValue.formats[ value.start ] && lastValue.formats[ value.start ][ 0 ].type === formatType
-			: lastValue.formats[ value.end - 1 ] && lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
+		const involvesPreviewFormat =
+			cursorDirection >= 0
+				? lastValue.formats[ value.start ] &&
+				lastValue.formats[ value.start ][ 0 ].type === formatType
+				: lastValue.formats[ value.end - 1 ] &&
+				lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
 
 		if ( editDetected && involvesPreviewFormat ) {
 			const formatStart = getFormatStart( value.start - 1 );
