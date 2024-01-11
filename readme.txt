@@ -120,7 +120,7 @@ Yes, Wikipedia Preview is free. It has been made available to you by Wikimedia F
 
 = Does Wikipedia Preview work on any word? =
 
-The Wikipedia Preview works with any word or phrase that has an article on Wikipedia, in any of the available languages.
+Wikipedia Preview works with any word or phrase that has an article on Wikipedia, in any of the available languages. However, Wikipedia articles are typically language specific, meaning that different articles will be available in different languages. Not every article is available in every language, but you control the language of each preview on your site.
 
 = What is the flow for implementing the Wikipedia Preview links in a post? =
 
@@ -133,6 +133,14 @@ The words that will have a Wikipedia Preview popup on your site need to be annot
 = How does one customise the preview style? =
 
 In the admin site, go to “Appearance / customize”, then select the “Additional CSS” option from the left side menu. In the text box, the following CSS should reset the existing term style so you can adjust it to your liking.
+
+= How can I select the language of my preview links? =
+
+You control the language of each preview link on your website when using the Wikipedia Preview search bar. This allows you to select different languages for each of your site’s previews, if you choose, particularly if your audience speaks multiple languages. Since not every Wikipedia article is available in every language, this has the benefit of creating previews for content that is not available in your site’s primary language. For example, if your website is in Swahili, you will likely add previews of Wikipedia articles in Swahili. However, you may find a word or phrase that does not have a Wikipedia article in Swahili, but perhaps has an English article instead. You can add the English preview in that case by using the Wikipedia Preview search bar. Note: Since Wikipedia is an ever-growing and expanding project, you may come back later and find that the missing article is now available in your preferred language.
+
+= Does the Wikipedia Preview plugin affect my website's SEO? =
+
+No, the Wikipedia Preview plugin has zero impact on your website's SEO. It operates on the client side, does not duplicate content, and is implemented with SEO best practices. Your search engine rankings remain unaffected.
 
 ~~~
 .wmf-wp-with-preview {
