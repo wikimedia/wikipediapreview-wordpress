@@ -67,14 +67,12 @@ function wikipediapreview_intro_submenu_page_callback() {
 	$img_illustration = wikipediapreview_image( 'illustration01.png', 'illustration' );
 	$p1               = __( 'Wikipedia Preview lets you show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link.', 'wikipedia-preview' );
 	$p2               = __( 'Wikipedia Preview is easy to set up and use. Simply follow these steps:', 'wikipedia-preview' );
-	$step1_text       = __( 'Highlight the text you want to link to a Wikipedia article.', 'wikipedia-preview' );
+	$step1_text       = __( 'Highlight the text you want to link to a Wikipedia article and select ‘W’- Wikipedia Preview from the menu', 'wikipedia-preview' );
 	$step1_img        = wikipediapreview_image( 'Step-1-detailed.png', 'step' );
-	$step2_text       = __( 'Select ‘Wikipedia Preview’ from the menu.', 'wikipedia-preview' );
+	$step2_text       = __( 'You will see a list of suggested articles. Select the one you want to link to.', 'wikipedia-preview' );
 	$step2_img        = wikipediapreview_image( 'Step-2-detailed.png', 'step' );
-	$step3_text       = __( 'You will see a list of suggested articles. Select the one you want to link to.', 'wikipedia-preview' );
+	$step3_text       = __( 'Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.', 'wikipedia-preview' );
 	$step3_img        = wikipediapreview_image( 'Step-3-detailed.png', 'step' );
-	$step4_text       = __( 'Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.', 'wikipedia-preview' );
-	$step4_img        = wikipediapreview_image( 'Step-4-detailed.png', 'step' );
 	$html             = <<<HTML
 		<div class="wrap wikipediapreview-intro">
 			{$img_wordmark}
@@ -94,10 +92,6 @@ function wikipediapreview_intro_submenu_page_callback() {
 				<li>
 					<div>{$step3_text}</div>
 					{$step3_img}
-				</li>
-				<li>
-					<div>{$step4_text}</div>
-					{$step4_img}
 				</li>
 			</ol>
 		</div>
