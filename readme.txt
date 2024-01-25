@@ -49,7 +49,7 @@ https://youtu.be/_m6YzR0j8Fs
 **Option 2 - How to add Wikipedia Preview links using the Gutenberg/ Block Editor:**
 
 1. Highlight the text you want to link to a Wikipedia article.
-2. Select ‘Wikipedia Preview’ from the menu.
+2. Select ‘W’ - Wikipedia Preview icon from the menu.
 3. You will see a list of suggested articles. Select the one you want to link to.
 4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
 
@@ -90,7 +90,7 @@ It’s easy to add Wikipedia Preview links to your site. It takes only a few sec
 **Option 2 - How to add Wikipedia Preview links using the Gutenberg/ Block Editor:**
 
 1. Highlight the text you want to link to a Wikipedia article.
-2. Select ‘Wikipedia Preview’ from the menu.
+2. Select ‘W’ - Wikipedia Preview icon from the menu.
 3. You will see a list of suggested articles. Select the one you want to link to.
 4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
 
