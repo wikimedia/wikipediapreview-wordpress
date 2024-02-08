@@ -5,6 +5,11 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { ToggleControl, PanelRow } from '@wordpress/components';
 
 const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
+	if ( postMeta === undefined ) {
+		// this is probably a custom post type
+		// without 'custom-fields' support
+		return;
+	}
 	return (
 		<PluginDocumentSettingPanel
 			title={ __( 'Wikipedia Preview', 'wikipedia-preview' ) }
