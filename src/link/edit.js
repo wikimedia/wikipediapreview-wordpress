@@ -66,8 +66,8 @@ const Edit = ( {
 					lang,
 				},
 			},
-			getTrimmedStart( selectedValue ),
-			getTrimmedEnd( selectedValue )
+			0,
+			title.length
 		);
 		onChange( insert( value, toInsert ) );
 		onFocus();
