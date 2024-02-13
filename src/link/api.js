@@ -70,6 +70,7 @@ const defautParams = {
 	format: 'json',
 	formatversion: 2,
 	origin: '*',
+	wprov: 'wpwpp',
 };
 
 const buildMwApiUrl = ( lang, params ) => {
