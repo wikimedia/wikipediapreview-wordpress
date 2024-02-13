@@ -1,35 +1,49 @@
 let abortFunctions = [];
 
-export const prefixSearch = ( lang, term, callback ) => {
-	const url = `https://${ lang }.wikipedia.org/w/rest.php/v1/search/title?q=${ term.trim() }&limit=5`;
-	return request( url, ( data ) => {
-		if ( ! data.pages ) {
+const handler = ( callback ) => {
+	return ( data ) => {
+		if ( ! data.query || ! data.query.pages ) {
 			callback( [] );
 		} else {
 			callback(
-				Object.values( data.pages ).map( ( page ) => {
-					return {
-						title: page.title,
-						description: page.description,
-						thumbnail: page.thumbnail?.url,
-					};
-				} )
+				Object.values( data.query.pages )
+					.filter( ( page ) => {
+						return ! page.pageprops ||
+							! page.pageprops.hasOwnProperty( 'disambiguation' );
+					} )
+					.map( ( page ) => {
+						return {
+							title: page.title,
+							description: page.description,
+							thumbnail: page.thumbnail?.source,
+						};
+					} )
 			);
 		}
-	} );
+	};
+};
+
+export const prefixSearch = ( lang, term, callback ) => {
+	const params = {
+		action: 'query',
+		prop: 'pageimages|pageprops|description',
+		piprop: 'thumbnail',
+		pithumbsize: 64,
+		pilimit: 5,
+		generator: 'prefixsearch',
+		gpssearch: term,
+		gpsnamespace: 0,
+		gpslimit: 5,
+	};
+
+	const url = buildMwApiUrl( lang, params );
+	return request( url, handler( callback ) );
 };
 
 export const fulltextSearch = ( lang, term, callback ) => {
 	const params = {
 		action: 'query',
-		list: 'search',
-		srprop: 'snippet',
-		srsearch: term,
-		srnamespace: 0,
-		srlimit: 5,
-		srenablerewrites: true,
-		srinfo: 'rewrittenquery',
-		prop: 'pageimages',
+		prop: 'pageimages|pageprops|description',
 		piprop: 'thumbnail',
 		pithumbsize: 64,
 		pilimit: 5,
@@ -40,25 +54,7 @@ export const fulltextSearch = ( lang, term, callback ) => {
 	};
 
 	const url = buildMwApiUrl( lang, params );
-	return request( url, ( data ) => {
-		if ( ! data.query?.search ) {
-			callback( [] );
-		} else {
-			const { search, pages } = data.query;
-			callback(
-				Object.values( search ).map( ( item ) => {
-					const page = pages?.find(
-						( { pageid } ) => pageid === item.pageid
-					);
-					return {
-						title: item.title,
-						description: stripHtml( item.snippet ),
-						thumbnail: page?.thumbnail?.source,
-					};
-				} )
-			);
-		}
-	} );
+	return request( url, handler( callback ) );
 };
 
 export const abortAllRequest = () => {
@@ -100,10 +96,4 @@ const request = ( url, callback ) => {
 	} );
 
 	abortFunctions.push( xhr );
-};
-
-const stripHtml = ( html ) => {
-	const tmp = document.createElement( 'DIV' );
-	tmp.innerHTML = html;
-	return tmp.textContent || tmp.innerText || '';
 };
