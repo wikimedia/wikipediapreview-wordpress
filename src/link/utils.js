@@ -11,3 +11,11 @@ export const isTextNearTheEdge = ( anchor ) => {
 		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2
 	);
 };
+
+export const getColorScheme = () => {
+	if ( window.matchMedia( '(prefers-color-scheme: dark)' ).matches ) {
+		return 'dark';
+	}
+
+	return 'detect';
+};
