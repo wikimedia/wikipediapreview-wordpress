@@ -64,7 +64,7 @@ function wikipediapreview_enqueue_scripts() {
 	if ( isset( $post->ID ) ) {
 		$options = array(
 			'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
-			'darkmode' => get_post_meta( $post->ID, 'wikipediapreview_darkmode', true ),
+			'darkmode'    => get_post_meta( $post->ID, 'wikipediapreview_darkmode', true ),
 		);
 		wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
 	}
