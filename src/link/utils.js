@@ -17,8 +17,8 @@ export const getColorScheme = ( userSetPostMeta ) => {
 	if (
 		window.matchMedia( '(prefers-color-scheme: dark)' ).matches ||
 		userSetPostMeta
-		) {
-			return 'dark';
+	) {
+		return 'dark';
 	}
 
 	return 'detect';
