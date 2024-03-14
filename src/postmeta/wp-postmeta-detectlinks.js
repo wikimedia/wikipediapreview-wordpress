@@ -27,18 +27,6 @@ const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
 					checked={ postMeta.wikipediapreview_detectlinks }
 				/>
 			</PanelRow>
-			<PanelRow>
-				<ToggleControl
-					label={ __(
-						'Enable dark mode',
-						'wikipedia-preview'
-					) }
-					onChange={ ( value ) =>
-						setPostMeta( { wikipediapreview_darkmode: value } )
-					}
-					checked={ postMeta.wikipediapreview_darkmode }
-				/>
-			</PanelRow>
 		</PluginDocumentSettingPanel>
 	);
 };

@@ -64,7 +64,6 @@ function wikipediapreview_enqueue_scripts() {
 	if ( isset( $post->ID ) ) {
 		$options = array(
 			'detectLinks' => get_post_meta( $post->ID, 'wikipediapreview_detectlinks', true ),
-			'darkmode'    => get_post_meta( $post->ID, 'wikipediapreview_darkmode', true ),
 		);
 		wp_localize_script( 'wikipedia-preview-init', 'wikipediapreview_init_options', $options );
 	}
@@ -142,18 +141,6 @@ function register_detectlinks_postmeta() {
 	register_post_meta( $all_post_types, $meta_name, $options );
 }
 
-function register_darkmode_postmeta() {
-	$all_post_types = '';
-	$meta_name      = 'wikipediapreview_darkmode';
-	$options        = array(
-		'show_in_rest'  => true,
-		'auth_callback' => true,
-		'single'        => true,
-		'type'          => 'boolean',
-		'default'       => true, // it could default to false when the gutenburg support is released
-	);
-	register_post_meta( $all_post_types, $meta_name, $options );
-}
 
 function make_link( $text, $url ) {
 	return '<a target="_BLANK" href="' . esc_url( $url ) . '">' . $text . '</a>';
@@ -179,7 +166,6 @@ add_action( 'wp_enqueue_scripts', 'wikipediapreview_enqueue_scripts' );
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_guten_enqueue' );
 add_action( 'init', 'myguten_set_script_translations' );
 add_action( 'init', 'register_detectlinks_postmeta' );
-add_action( 'init', 'register_darkmode_postmeta' );
 
 require __DIR__ . '/banner.php';
 require __DIR__ . '/intro.php';

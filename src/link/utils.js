@@ -12,11 +12,10 @@ export const isTextNearTheEdge = ( anchor ) => {
 	);
 };
 
-export const getColorScheme = ( userSetPostMeta ) => {
+export const getColorScheme = () => {
 	// TODO: add extra check for document.body.style background color?
 	if (
-		window.matchMedia( '(prefers-color-scheme: dark)' ).matches ||
-		userSetPostMeta
+		window.matchMedia( '(prefers-color-scheme: dark)' ).matches
 	) {
 		return 'dark';
 	}

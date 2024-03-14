@@ -5,6 +5,6 @@ wikipediaPreview.init( {
 	root: document,
 	/* eslint-disable camelcase */
 	detectLinks: !! wikipediapreview_init_options.detectLinks,
-	prefersColorScheme: getColorScheme( !! wikipediapreview_init_options.darkmode ),
+	prefersColorScheme: getColorScheme(),
 	/* eslint-enable camelcase */
 } );
