@@ -22,3 +22,27 @@ export const getColorScheme = () => {
 
 	return 'detect';
 };
+
+export const observeDarkModePluginActivation = ( callback ) => {
+	const htmlTag = document.documentElement;
+
+	// eslint-disable-next-line no-undef
+	const observer = new MutationObserver( ( mutationsList ) => {
+		for ( const mutation of mutationsList ) {
+			if ( mutation.type === 'attributes' && mutation.attributeName === 'class' ) {
+				if ( htmlTag.classList.contains( 'wp-dark-mode-active' ) ) {
+					// eslint-disable-next-line no-console
+					console.log( 'Plugin dark mode enabled' );
+					callback( 'dark', true );
+				} else {
+					// eslint-disable-next-line no-console
+					console.log( 'Plugin dark mode disabled' );
+					callback( 'light', true );
+				}
+			}
+		}
+	} );
+
+	// Start observing changes in the body element
+	observer.observe( htmlTag, { attributes: true } );
+};
