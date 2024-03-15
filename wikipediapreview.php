@@ -141,7 +141,6 @@ function register_detectlinks_postmeta() {
 	register_post_meta( $all_post_types, $meta_name, $options );
 }
 
-
 function make_link( $text, $url ) {
 	return '<a target="_BLANK" href="' . esc_url( $url ) . '">' . $text . '</a>';
 }

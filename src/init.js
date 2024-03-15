@@ -3,8 +3,7 @@ import { getColorScheme } from './link/utils';
 
 wikipediaPreview.init( {
 	root: document,
-	/* eslint-disable camelcase */
+	/* eslint-disable-next-line camelcase */
 	detectLinks: !! wikipediapreview_init_options.detectLinks,
 	prefersColorScheme: getColorScheme(),
-	/* eslint-enable camelcase */
 } );
