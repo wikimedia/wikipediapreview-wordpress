@@ -9,13 +9,13 @@ const isWPDarkModePluginActive = () => {
 
 export const getColorScheme = () => {
 	// eslint-disable-next-line no-console
-    console.log( 'getColorScheme...' );
+	console.log( 'getColorScheme...' );
 	if (
 		window.matchMedia( '(prefers-color-scheme: dark)' ).matches ||
 		isWPDarkModePluginActive()
 	) {
 		// eslint-disable-next-line no-console
-        console.log( '...dark detected' );
+		console.log( '...dark detected' );
 		return 'dark';
 	}
 
@@ -24,18 +24,18 @@ export const getColorScheme = () => {
 
 const removePreviewPopup = () => {
 	// eslint-disable-next-line no-console
-    console.log( 'removePreviewPopup...' );
+	console.log( 'removePreviewPopup...' );
 	const wikipediaPreviewPopup = document.querySelector( '.wp-popup' );
 	if ( wikipediaPreviewPopup ) {
 		// eslint-disable-next-line no-console
-        console.log( '...removing popup' );
+		console.log( '...removing popup' );
 		wikipediaPreviewPopup.remove();
 	}
 };
 
 const reInitWikipediaPreview = ( scheme ) => {
 	// eslint-disable-next-line no-console
-    console.log( 'reInitWikipediaPreview', scheme );
+	console.log( 'reInitWikipediaPreview', scheme );
 	wikipediaPreview.init( {
 		root: document,
 		detectLinks: true, // TODO read from wikipediapreview_init_options
