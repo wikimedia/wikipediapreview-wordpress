@@ -21,7 +21,7 @@ export const observeDarkModePluginActivation = ( callback ) => {
 				} else {
 					callback( 'light' );
 				}
-                break;
+				break;
 			}
 		}
 	} );
