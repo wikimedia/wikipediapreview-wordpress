@@ -14,6 +14,4 @@ const init = ( scheme ) => {
 init( getColorScheme() );
 
 // Re-init as needed as the color scheme changes
-observeDarkModePluginActivation( ( scheme ) => {
-	init( scheme );
-} );
+observeDarkModePluginActivation( init );

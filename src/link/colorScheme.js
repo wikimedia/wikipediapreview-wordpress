@@ -1,8 +1,7 @@
 const attNameWPDarkModePlugin = 'data-wp-dark-mode-active';
 
 const isWPDarkModePluginActive = () => {
-	const htmlTag = document.documentElement;
-	return htmlTag.hasAttribute( attNameWPDarkModePlugin );
+	return document.documentElement.hasAttribute( attNameWPDarkModePlugin );
 };
 
 export const getColorScheme = () => {
@@ -13,7 +12,6 @@ export const getColorScheme = () => {
 };
 
 export const observeDarkModePluginActivation = ( callback ) => {
-	const htmlTag = document.documentElement;
 	// eslint-disable-next-line no-undef
 	const observer = new MutationObserver( ( mutationsList ) => {
 		for ( const mutation of mutationsList ) {
@@ -23,9 +21,10 @@ export const observeDarkModePluginActivation = ( callback ) => {
 				} else {
 					callback( 'light' );
 				}
+                break;
 			}
 		}
 	} );
 
-	observer.observe( htmlTag, { attributes: true } );
+	observer.observe( document.documentElement, { attributes: true } );
 };
