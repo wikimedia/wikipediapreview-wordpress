@@ -13,18 +13,12 @@ export const getColorScheme = () => {
 
 export const observeDarkModePluginActivation = ( callback ) => {
 	// eslint-disable-next-line no-undef
-	const observer = new MutationObserver( ( mutationsList ) => {
-		for ( const mutation of mutationsList ) {
-			if ( mutation.type === 'attributes' && mutation.attributeName === attNameWPDarkModePlugin ) {
-				if ( isWPDarkModePluginActive() ) {
-					callback( 'dark' );
-				} else {
-					callback( 'light' );
-				}
-				break;
-			}
+	const observer = new MutationObserver( () => {
+		if ( isWPDarkModePluginActive() ) {
+			callback( 'dark' );
+		} else {
+			callback( 'light' );
 		}
 	} );
-
-	observer.observe( document.documentElement, { attributes: true } );
+	observer.observe( document.documentElement, { attributeFilter: [ attNameWPDarkModePlugin ] } );
 };
