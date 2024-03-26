@@ -1,12 +1,19 @@
-const attNameWPDarkModePlugin = 'data-wp-dark-mode-active';
+const attNameWPDarkModePluginActive = 'data-wp-dark-mode-active';
+const attNameWPDarkModePluginInstalled = 'data-wp-dark-mode-preset';
 
 const isWPDarkModePluginActive = () => {
-	return document.documentElement.hasAttribute( attNameWPDarkModePlugin );
+	return document.documentElement.hasAttribute( attNameWPDarkModePluginActive );
+};
+
+const isWPDarkModePluginInstalled = () => {
+	return document.documentElement.hasAttribute( attNameWPDarkModePluginInstalled );
 };
 
 export const getColorScheme = () => {
-	if ( isWPDarkModePluginActive() ) {
+	if ( isWPDarkModePluginInstalled() && isWPDarkModePluginActive() ) {
 		return 'dark';
+	} else if ( isWPDarkModePluginInstalled() && ! isWPDarkModePluginActive() ) {
+		return 'light';
 	}
 	return 'detect';
 };
@@ -20,5 +27,5 @@ export const observeDarkModePluginActivation = ( callback ) => {
 			callback( 'light' );
 		}
 	} );
-	observer.observe( document.documentElement, { attributeFilter: [ attNameWPDarkModePlugin ] } );
+	observer.observe( document.documentElement, { attributeFilter: [ attNameWPDarkModePluginActive ] } );
 };
