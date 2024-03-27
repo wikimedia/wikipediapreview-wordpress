@@ -10,6 +10,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
+import { CustomTooltip } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -46,6 +47,7 @@ const Edit = ( {
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
+	const showCustomTooltip = useState( true );
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -202,9 +204,13 @@ const Edit = ( {
 						title={ formatTitle }
 						isActive={ isActive }
 						onClick={ formatButtonClick }
+						className='wikipediapreview-edit-toolbar-button'
 					/>
 				</ToolbarGroup>
 			</BlockControls>
+			{ showCustomTooltip && (
+				<CustomTooltip />
+			)}
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }
