@@ -204,13 +204,13 @@ const Edit = ( {
 						title={ formatTitle }
 						isActive={ isActive }
 						onClick={ formatButtonClick }
-						className='wikipediapreview-edit-toolbar-button'
+						className="wikipediapreview-edit-toolbar-button"
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			{ showCustomTooltip && (
 				<CustomTooltip />
-			)}
+			) }
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }
