@@ -1,33 +1,28 @@
 import { __ } from '@wordpress/i18n';
+import { Popover } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 
-export const CustomTooltip = () => {
-	const wikipediaPreviewToolbarButton = document.querySelector( '.wikipediapreview-edit-toolbar-button' );
-	const toolbarButtonRect = wikipediaPreviewToolbarButton?.getBoundingClientRect();
-
-	const computeTooltipPosition = ( targetRect ) => {
-        console.log('computeTooltipPosition...');
-        const targetCenterX = targetRect.left + targetRect.width / 2;
-        const targetCenterY = targetRect.top + targetRect.height / 2;
-
-
-        console.log('...top, left', targetCenterY, targetCenterX);
-
-        return {
-            top: targetCenterY,
-            left: targetCenterX,
-        };
-    }
+export const CustomTooltip = ( {
+	anchorRef,
+	setShowCustomTooltip,
+} ) => {
+	useEffect( () => {
+		setTimeout( () => {
+			setShowCustomTooltip( false );
+		}, 5000 );
+	}, [] );
 
 	return (
-		<div
-			className="wikipediapreview-edit-inline-tooltip"
-			style={
-				toolbarButtonRect
-					? computeTooltipPosition( toolbarButtonRect )
-					: {}
-			}
-		>
-			{ __( 'Add Wikipedia Preview', 'wikipedia-preview' ) }
+		<div>
+			<Popover
+				anchor={ anchorRef.current }
+				placement={ 'top' }
+				noArrow={ false }
+			>
+				<div className="wikipediapreview-edit-inline-tooltip">
+					<p className="wikipediapreview-edit-inline-tooltip-text">{ __( 'Add Wikipedia Preview' ) }</p>
+				</div>
+			</Popover>
 		</div>
 	);
 };

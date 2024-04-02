@@ -1,4 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import {
@@ -47,7 +47,11 @@ const Edit = ( {
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
-	const showCustomTooltip = useState( true );
+	const [ showCustomTooltip, setShowCustomTooltip ] = useState( false );
+	const customTooltipShowedLimit = 1;
+	const toolbarButtonRef = useRef();
+	// eslint-disable-next-line no-undef
+	const customTooltipShowedNumber = parseInt( localStorage.getItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipShowedNumber' ) ) || 0;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -195,6 +199,16 @@ const Edit = ( {
 		}
 	}, [ value ] );
 
+	useEffect( () => {
+		if ( customTooltipShowedNumber < customTooltipShowedLimit ) {
+			setTimeout( () => {
+				setShowCustomTooltip( true );
+				// eslint-disable-next-line no-undef
+				localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipShowedNumber', customTooltipShowedNumber + 1 );
+			}, 1000 );
+		}
+	}, [] );
+
 	return (
 		<>
 			<BlockControls>
@@ -205,11 +219,15 @@ const Edit = ( {
 						isActive={ isActive }
 						onClick={ formatButtonClick }
 						className="wikipediapreview-edit-toolbar-button"
+						ref={ toolbarButtonRef }
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			{ showCustomTooltip && (
-				<CustomTooltip />
+				<CustomTooltip
+					anchorRef={ toolbarButtonRef }
+					setShowCustomTooltip={ setShowCustomTooltip }
+				/>
 			) }
 			{ addingPreview && (
 				<InlineEditUI
