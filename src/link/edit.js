@@ -208,7 +208,7 @@ const Edit = ( {
 				localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount', customTooltipDisplayedCount + 1 );
 			}, 1000 );
 		}
-	}, [] );
+	} );
 
 	return (
 		<>

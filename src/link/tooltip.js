@@ -11,7 +11,7 @@ export const CustomTooltip = ( {
 		setTimeout( () => {
 			setDisplayCustomTooltip( false );
 		}, 5000 );
-	}, [] );
+	} );
 
 	return (
 		<div>
