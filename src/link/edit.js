@@ -181,6 +181,14 @@ const Edit = ( {
 		}
 	};
 
+	const waitOneSecThenDisplayCustomTooltip = () => {
+		setTimeout( () => {
+			setDisplayCustomTooltip( true );
+			// eslint-disable-next-line no-undef
+			localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount', customTooltipDisplayedCount + 1 );
+		}, 1000 );
+	};
+
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -202,11 +210,7 @@ const Edit = ( {
 	useEffect( () => {
 		if ( customTooltipDisplayedCount < customTooltipDisplayedLimit ) {
 			// Wait 1 second and then display tooltip
-			setTimeout( () => {
-				setDisplayCustomTooltip( true );
-				// eslint-disable-next-line no-undef
-				localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount', customTooltipDisplayedCount + 1 );
-			}, 1000 );
+			waitOneSecThenDisplayCustomTooltip();
 		}
 	} );
 
