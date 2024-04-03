@@ -4,11 +4,12 @@ import { useEffect } from '@wordpress/element';
 
 export const CustomTooltip = ( {
 	anchorRef,
-	setShowCustomTooltip,
+	setDisplayCustomTooltip,
 } ) => {
 	useEffect( () => {
+		// Wait 5 seconds and then hide the tooltip
 		setTimeout( () => {
-			setShowCustomTooltip( false );
+			setDisplayCustomTooltip( false );
 		}, 5000 );
 	}, [] );
 

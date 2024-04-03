@@ -47,11 +47,11 @@ const Edit = ( {
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
-	const [ showCustomTooltip, setShowCustomTooltip ] = useState( false );
-	const customTooltipShowedLimit = 1;
 	const toolbarButtonRef = useRef();
+	const [ displayCustomTooltip, setDisplayCustomTooltip ] = useState( false );
 	// eslint-disable-next-line no-undef
-	const customTooltipShowedNumber = parseInt( localStorage.getItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipShowedNumber' ) ) || 0;
+	const customTooltipDisplayedCount = parseInt( localStorage.getItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount' ) ) || 0;
+	const customTooltipDisplayedLimit = 1;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -200,11 +200,12 @@ const Edit = ( {
 	}, [ value ] );
 
 	useEffect( () => {
-		if ( customTooltipShowedNumber < customTooltipShowedLimit ) {
+		if ( customTooltipDisplayedCount < customTooltipDisplayedLimit ) {
+			// Wait 1 second and then display tooltip
 			setTimeout( () => {
-				setShowCustomTooltip( true );
+				setDisplayCustomTooltip( true );
 				// eslint-disable-next-line no-undef
-				localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipShowedNumber', customTooltipShowedNumber + 1 );
+				localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount', customTooltipDisplayedCount + 1 );
 			}, 1000 );
 		}
 	}, [] );
@@ -215,7 +216,7 @@ const Edit = ( {
 				<ToolbarGroup>
 					<ToolbarButton
 						icon={ generateWikipediaLogo( isActive ? 'white' : 'black' ) }
-						title={ formatTitle }
+						title={ __( 'Add Wikipedia Preview', 'wikipedia-preview' ) }
 						isActive={ isActive }
 						onClick={ formatButtonClick }
 						className="wikipediapreview-edit-toolbar-button"
@@ -223,10 +224,10 @@ const Edit = ( {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			{ showCustomTooltip && (
+			{ displayCustomTooltip && (
 				<CustomTooltip
 					anchorRef={ toolbarButtonRef }
-					setShowCustomTooltip={ setShowCustomTooltip }
+					setDisplayCustomTooltip={ setDisplayCustomTooltip }
 				/>
 			) }
 			{ addingPreview && (
