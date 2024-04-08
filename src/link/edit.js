@@ -10,7 +10,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
-import { CustomTooltip } from './tooltip';
+import { CustomTooltip, getDisplayedCount, incrementDisplayedCount } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -48,10 +48,9 @@ const Edit = ( {
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
-	const [ displayCustomTooltip, setDisplayCustomTooltip ] = useState( false );
-	// eslint-disable-next-line no-undef
-	const customTooltipDisplayedCount = parseInt( localStorage.getItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount' ) ) || 0;
-	const customTooltipDisplayedLimit = 1;
+	const [ displayTooltip, setDisplayTooltip ] = useState( false );
+	const [ localTooltipDisplayedCount, setLocalTooltipDisplayedCount ] = useState( null );
+	const tooltipDisplayedLimit = 2;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -181,11 +180,10 @@ const Edit = ( {
 		}
 	};
 
-	const waitOneSecThenDisplayCustomTooltip = () => {
+	const waitOneSecThenDisplayTooltip = () => {
 		setTimeout( () => {
-			setDisplayCustomTooltip( true );
-			// eslint-disable-next-line no-undef
-			localStorage.setItem( 'WikipediaPreviewWordpressPlugin-CustomTooltipDisplayedCount', customTooltipDisplayedCount + 1 );
+			setDisplayTooltip( true );
+			incrementDisplayedCount();
 		}, 1000 );
 	};
 
@@ -208,11 +206,12 @@ const Edit = ( {
 	}, [ value ] );
 
 	useEffect( () => {
-		if ( customTooltipDisplayedCount < customTooltipDisplayedLimit ) {
-			// Wait 1 second and then display tooltip
-			waitOneSecThenDisplayCustomTooltip();
+		if ( localTooltipDisplayedCount === null ) {
+			getDisplayedCount( setLocalTooltipDisplayedCount );
+		} else if ( localTooltipDisplayedCount < tooltipDisplayedLimit ) {
+			waitOneSecThenDisplayTooltip();
 		}
-	} );
+	}, [ localTooltipDisplayedCount ] );
 
 	return (
 		<>
@@ -228,10 +227,10 @@ const Edit = ( {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			{ displayCustomTooltip && (
+			{ displayTooltip && (
 				<CustomTooltip
 					anchorRef={ toolbarButtonRef }
-					setDisplayCustomTooltip={ setDisplayCustomTooltip }
+					setDisplayTooltip={ setDisplayTooltip }
 				/>
 			) }
 			{ addingPreview && (
