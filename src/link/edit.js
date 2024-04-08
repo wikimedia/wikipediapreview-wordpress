@@ -182,8 +182,10 @@ const Edit = ( {
 
 	const waitOneSecThenDisplayTooltip = () => {
 		setTimeout( () => {
-			setDisplayTooltip( true );
-			incrementDisplayedCount();
+			if ( toolbarButtonRef.current ) {
+				setDisplayTooltip( true );
+				incrementDisplayedCount();
+			}
 		}, 1000 );
 	};
 
