@@ -222,7 +222,6 @@ const Edit = ( {
 						title={ __( 'Add Wikipedia Preview', 'wikipedia-preview' ) }
 						isActive={ isActive }
 						onClick={ formatButtonClick }
-						className="wikipediapreview-edit-toolbar-button"
 						ref={ toolbarButtonRef }
 					/>
 				</ToolbarGroup>
