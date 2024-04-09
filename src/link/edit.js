@@ -1,3 +1,4 @@
+/* global wikipediapreview_custom_tooltip */
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
@@ -49,8 +50,8 @@ const Edit = ( {
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
 	const [ displayTooltip, setDisplayTooltip ] = useState( false );
-	const [ localTooltipDisplayedCount, setLocalTooltipDisplayedCount ] = useState( null );
-	const tooltipDisplayedLimit = 2;
+	const [ localTooltipDisplayedCount, setLocalTooltipDisplayedCount ] = useState( parseInt( wikipediapreview_custom_tooltip.tooltipCount ) );
+	const tooltipDisplayedLimit = 200;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -184,6 +185,7 @@ const Edit = ( {
 		setTimeout( () => {
 			if ( toolbarButtonRef.current ) {
 				setDisplayTooltip( true );
+				setLocalTooltipDisplayedCount( localTooltipDisplayedCount + 1 );
 				incrementDisplayedCount();
 			}
 		}, 1000 );
@@ -208,12 +210,13 @@ const Edit = ( {
 	}, [ value ] );
 
 	useEffect( () => {
-		if ( localTooltipDisplayedCount === null ) {
-			getDisplayedCount( setLocalTooltipDisplayedCount );
-		} else if ( localTooltipDisplayedCount < tooltipDisplayedLimit ) {
+		
+		console.log('wikipediapreview_custom_tooltip.tooltipCount', wikipediapreview_custom_tooltip.tooltipCount);
+		console.log('localTooltipDisplayedCount', localTooltipDisplayedCount);
+		if ( localTooltipDisplayedCount < tooltipDisplayedLimit ) {
 			waitOneSecThenDisplayTooltip();
 		}
-	}, [ localTooltipDisplayedCount ] );
+	}, [] );
 
 	return (
 		<>
