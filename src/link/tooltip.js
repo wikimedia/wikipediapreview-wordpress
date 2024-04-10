@@ -36,9 +36,11 @@ export const CustomTooltip = ( {
 				anchor={ anchorRef.current }
 				placement={ 'top' }
 				noArrow={ false }
+				offset={ 10 }
+				className="wikipediapreview-edit-tooltip-popover"
 			>
-				<div className="wikipediapreview-edit-inline-tooltip">
-					<p className="wikipediapreview-edit-inline-tooltip-text">{ __( 'Add Wikipedia Preview' ) }</p>
+				<div className="wikipediapreview-edit-tooltip-popover-content">
+					<p className="wikipediapreview-edit-tooltip-popover-text">{ __( 'Add Wikipedia Preview' ) }</p>
 				</div>
 			</Popover>
 		</div>

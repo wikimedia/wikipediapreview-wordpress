@@ -301,18 +301,34 @@ body {
 				animation-name: wikipediapreview-edit-inline-loader-expanded;
 			}
 		}
+	}
 
-		&-tooltip {
+	.wikipediapreview-edit-tooltip-popover {
+
+		&-content {
 			width: 190px;
 			height: 40px;
 			background: #36c;
 			color: #fff;
 			display: flex;
 			justify-content: center;
+		}
 
-			&-text {
-				align-self: center;
+		&-text {
+			align-self: center;
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.components-popover__arrow {
+
+			&::before {
+				background-color: unset;
 			}
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.components-popover__triangle-bg {
+			fill: #36c;
 		}
 	}
 
