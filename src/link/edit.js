@@ -11,7 +11,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
-import { CustomTooltip, getDisplayedCount, incrementDisplayedCount } from './tooltip';
+import { CustomTooltip, incrementDisplayedCount } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -50,7 +50,6 @@ const Edit = ( {
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
 	const [ displayTooltip, setDisplayTooltip ] = useState( false );
-	const [ localTooltipDisplayedCount, setLocalTooltipDisplayedCount ] = useState( parseInt( wikipediapreview_custom_tooltip.tooltipCount ) );
 	const tooltipDisplayedLimit = 200;
 
 	const formatButtonClick = () => {
@@ -185,8 +184,9 @@ const Edit = ( {
 		setTimeout( () => {
 			if ( toolbarButtonRef.current ) {
 				setDisplayTooltip( true );
-				setLocalTooltipDisplayedCount( localTooltipDisplayedCount + 1 );
 				incrementDisplayedCount();
+				/* eslint-disable-next-line camelcase */
+				wikipediapreview_custom_tooltip.tooltipCount = parseInt( wikipediapreview_custom_tooltip.tooltipCount ) + 1;
 			}
 		}, 1000 );
 	};
@@ -210,13 +210,13 @@ const Edit = ( {
 	}, [ value ] );
 
 	useEffect( () => {
-		
-		console.log('wikipediapreview_custom_tooltip.tooltipCount', wikipediapreview_custom_tooltip.tooltipCount);
-		console.log('localTooltipDisplayedCount', localTooltipDisplayedCount);
-		if ( localTooltipDisplayedCount < tooltipDisplayedLimit ) {
+		/* eslint-disable-next-line camelcase */
+		const tooltipDisplayedCount = parseInt( wikipediapreview_custom_tooltip.tooltipCount );
+
+		if ( tooltipDisplayedCount < tooltipDisplayedLimit ) {
 			waitOneSecThenDisplayTooltip();
 		}
-	}, [] );
+	} );
 
 	return (
 		<>
