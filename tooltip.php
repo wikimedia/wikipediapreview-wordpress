@@ -17,7 +17,7 @@ function wikipediapreview_increment_tooltip_count() {
 	);
 }
 
-add_action('rest_api_init', function () {
+function wikipediapreview_set_rest_endpoints() {
 	$route_namespace = 'wikipediapreview/v1';
 
 	register_rest_route( $route_namespace, '/option/', array(
@@ -28,4 +28,6 @@ add_action('rest_api_init', function () {
 		'methods'  => 'POST',
 		'callback' => 'wikipediapreview_increment_tooltip_count',
 	) );
-});
+}
+
+add_action( 'rest_api_init', 'wikipediapreview_set_rest_endpoints' );
