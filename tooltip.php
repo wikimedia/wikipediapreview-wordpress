@@ -45,7 +45,7 @@ function wikipediapreview_tooltip_enqueue_script() {
 		'tooltipCount' => wikipediapreview_get_tooltip_count(),
 	);
 
-	wp_localize_script( 'wikipedia-preview-tooltip', 'wikipediapreview_custom_tooltip', $options );
+	wp_localize_script( 'wikipedia-preview-tooltip', 'wikipediapreviewCustomTooltip', $options );
 }
 
 add_action( 'enqueue_block_editor_assets', 'wikipediapreview_tooltip_enqueue_script' );

@@ -1,4 +1,4 @@
-/* global wikipediapreview_custom_tooltip */
+/* global wikipediapreviewCustomTooltip */
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
@@ -11,7 +11,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
-import { CustomTooltip, incrementDisplayedCount } from './tooltip';
+import { CustomTooltip, incrementStoredDisplayedCount } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -50,7 +50,7 @@ const Edit = ( {
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
 	const [ displayTooltip, setDisplayTooltip ] = useState( false );
-	const tooltipDisplayedLimit = 200;
+	const tooltipDisplayedLimit = 2;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -184,9 +184,10 @@ const Edit = ( {
 		setTimeout( () => {
 			if ( toolbarButtonRef.current ) {
 				setDisplayTooltip( true );
-				incrementDisplayedCount();
-				/* eslint-disable-next-line camelcase */
-				wikipediapreview_custom_tooltip.tooltipCount = parseInt( wikipediapreview_custom_tooltip.tooltipCount ) + 1;
+				incrementStoredDisplayedCount();
+				// Increment global tooltip count directly as well
+				// to ensure count is up to date in between page reloads
+				wikipediapreviewCustomTooltip.tooltipCount = parseInt( wikipediapreviewCustomTooltip.tooltipCount ) + 1;
 			}
 		}, 1000 );
 	};
@@ -210,8 +211,7 @@ const Edit = ( {
 	}, [ value ] );
 
 	useEffect( () => {
-		/* eslint-disable-next-line camelcase */
-		const tooltipDisplayedCount = parseInt( wikipediapreview_custom_tooltip.tooltipCount );
+		const tooltipDisplayedCount = parseInt( wikipediapreviewCustomTooltip.tooltipCount );
 
 		if ( tooltipDisplayedCount < tooltipDisplayedLimit ) {
 			waitOneSecThenDisplayTooltip();

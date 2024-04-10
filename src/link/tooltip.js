@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { Popover } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-export const incrementDisplayedCount = () => {
+export const incrementStoredDisplayedCount = () => {
 	fetch( '/wp-json/wikipediapreview/v1/option/', {
 		method: 'POST',
 		headers: {
