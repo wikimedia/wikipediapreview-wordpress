@@ -17,19 +17,9 @@ function wikipediapreview_increment_tooltip_count() {
 	);
 }
 
-function wikipediapreview_set_rest_endpoints() {
-	$route_namespace = 'wikipediapreview/v1';
-
+function wikipediapreview_set_rest_endpoint() {
 	register_rest_route(
-		$route_namespace,
-		'/option/',
-		array(
-			'methods'  => 'GET',
-			'callback' => 'wikipediapreview_get_tooltip_count',
-		)
-	);
-	register_rest_route(
-		$route_namespace,
+		'wikipediapreview/v1',
 		'/option/',
 		array(
 			'methods'  => 'POST',
@@ -38,4 +28,25 @@ function wikipediapreview_set_rest_endpoints() {
 	);
 }
 
-add_action( 'rest_api_init', 'wikipediapreview_set_rest_endpoints' );
+function wikipediapreview_tooltip_enqueue_script() {
+	$src_link_dir    = plugin_dir_url( __FILE__ ) . 'src/link';
+	$no_dependencies = array();
+	$in_footer       = true;
+
+	wp_enqueue_script(
+		'wikipedia-preview-tooltip',
+		$src_link_dir . 'edit.js',
+		$no_dependencies,
+		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
+		$in_footer
+	);
+
+	$options = array(
+		'tooltipCount' => wikipediapreview_get_tooltip_count(),
+	);
+
+	wp_localize_script( 'wikipedia-preview-tooltip', 'wikipediapreview_custom_tooltip', $options );
+}
+
+add_action( 'enqueue_block_editor_assets', 'wikipediapreview_tooltip_enqueue_script' );
+add_action( 'rest_api_init', 'wikipediapreview_set_rest_endpoint' );

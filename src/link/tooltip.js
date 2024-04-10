@@ -2,14 +2,6 @@ import { __ } from '@wordpress/i18n';
 import { Popover } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-export const getDisplayedCount = ( setLocal ) => {
-	fetch( '/wp-json/wikipediapreview/v1/option/' )
-		.then( ( response ) => response.json() )
-		.then( ( value ) => {
-			setLocal( value );
-		} );
-};
-
 export const incrementDisplayedCount = () => {
 	fetch( '/wp-json/wikipediapreview/v1/option/', {
 		method: 'POST',
