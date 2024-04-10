@@ -20,14 +20,22 @@ function wikipediapreview_increment_tooltip_count() {
 function wikipediapreview_set_rest_endpoints() {
 	$route_namespace = 'wikipediapreview/v1';
 
-	register_rest_route( $route_namespace, '/option/', array(
-		'methods'  => 'GET',
-		'callback' => 'wikipediapreview_get_tooltip_count',
-	) );
-	register_rest_route( $route_namespace, '/option/', array(
-		'methods'  => 'POST',
-		'callback' => 'wikipediapreview_increment_tooltip_count',
-	) );
+	register_rest_route(
+		$route_namespace,
+		'/option/',
+		array(
+			'methods'  => 'GET',
+			'callback' => 'wikipediapreview_get_tooltip_count',
+		)
+	);
+	register_rest_route(
+		$route_namespace,
+		'/option/',
+		array(
+			'methods'  => 'POST',
+			'callback' => 'wikipediapreview_increment_tooltip_count',
+		)
+	);
 }
 
 add_action( 'rest_api_init', 'wikipediapreview_set_rest_endpoints' );
