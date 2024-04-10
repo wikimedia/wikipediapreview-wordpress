@@ -1,6 +1,6 @@
 {
   "name": "wikipediapreview-wordpress",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "WordPress plugin for Wikipedia Preview",
   "main": "init.js",
   "scripts": {
