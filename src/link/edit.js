@@ -1,4 +1,3 @@
-/* global wikipediapreviewCustomTooltip */
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
@@ -11,7 +10,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
-import { CustomTooltip, incrementStoredDisplayedCount } from './tooltip';
+import { CustomTooltip } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -49,8 +48,6 @@ const Edit = ( {
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
-	const [ displayTooltip, setDisplayTooltip ] = useState( false );
-	const tooltipDisplayedLimit = 2;
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -180,18 +177,6 @@ const Edit = ( {
 		}
 	};
 
-	const waitOneSecThenDisplayTooltip = () => {
-		setTimeout( () => {
-			if ( toolbarButtonRef.current ) {
-				setDisplayTooltip( true );
-				incrementStoredDisplayedCount();
-				// Increment global tooltip count directly as well
-				// to ensure count is up to date in between page reloads
-				wikipediapreviewCustomTooltip.tooltipCount = parseInt( wikipediapreviewCustomTooltip.tooltipCount ) + 1;
-			}
-		}, 1000 );
-	};
-
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -210,14 +195,6 @@ const Edit = ( {
 		}
 	}, [ value ] );
 
-	useEffect( () => {
-		const tooltipDisplayedCount = parseInt( wikipediapreviewCustomTooltip.tooltipCount );
-
-		if ( tooltipDisplayedCount < tooltipDisplayedLimit ) {
-			waitOneSecThenDisplayTooltip();
-		}
-	} );
-
 	return (
 		<>
 			<BlockControls>
@@ -231,12 +208,9 @@ const Edit = ( {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
-			{ displayTooltip && (
-				<CustomTooltip
-					anchorRef={ toolbarButtonRef }
-					setDisplayTooltip={ setDisplayTooltip }
-				/>
-			) }
+			<CustomTooltip
+				anchorRef={ toolbarButtonRef }
+			/>
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }

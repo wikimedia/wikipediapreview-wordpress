@@ -35,7 +35,7 @@ function wikipediapreview_tooltip_enqueue_script() {
 
 	wp_enqueue_script(
 		'wikipedia-preview-tooltip',
-		$src_link_dir . 'edit.js',
+		$src_link_dir . 'tooltip.js',
 		$no_dependencies,
 		WIKIPEDIA_PREVIEW_PLUGIN_VERSION,
 		$in_footer
