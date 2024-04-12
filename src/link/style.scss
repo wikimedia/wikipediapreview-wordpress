@@ -318,7 +318,6 @@ body {
 			align-self: center;
 		}
 
-		/* stylelint-disable-next-line selector-class-pattern */
 		.components-popover__arrow {
 
 			&::before {
@@ -326,7 +325,6 @@ body {
 			}
 		}
 
-		/* stylelint-disable-next-line selector-class-pattern */
 		.components-popover__triangle-bg {
 			fill: #36c;
 		}
@@ -334,7 +332,6 @@ body {
 
 	.wikipediapreview-edit-preview-popover {
 
-		/* stylelint-disable-next-line selector-class-pattern */
 		.components-popover__content {
 			background: unset;
 			border: unset;
@@ -421,7 +418,6 @@ body {
 		&.is-expanded {
 			background-color: rgba(0, 0, 0, 0.7);
 
-			/* stylelint-disable-next-line selector-class-pattern */
 			.components-popover__header {
 				visibility: hidden;
 			}
