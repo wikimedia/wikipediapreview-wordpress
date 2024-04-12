@@ -67,7 +67,7 @@ function wikipediapreview_intro_submenu_page_callback() {
 	$img_illustration = wikipediapreview_image( 'illustration01.png', 'illustration' );
 	$p1               = __( 'Wikipedia Preview lets you show a popup card with a short summary from Wikipedia when a reader clicks or hovers over a link.', 'wikipedia-preview' );
 	$p2               = __( 'Wikipedia Preview is easy to set up and use. Simply follow these steps:', 'wikipedia-preview' );
-	$step1_text       = __( 'Highlight the text and select ‘W’- Wikipedia Preview icon from the menu', 'wikipedia-preview' );
+	$step1_text       = __( 'Highlight the text and select ‘W’- Wikipedia Preview icon from the toolbar', 'wikipedia-preview' );
 	$step1_img        = wikipediapreview_image( 'Step-1-detailed.png', 'step' );
 	$step2_text       = __( 'You will see a list of suggested articles. Select the one you want to link to.', 'wikipedia-preview' );
 	$step2_img        = wikipediapreview_image( 'Step-2-detailed.png', 'step' );
