@@ -79,7 +79,7 @@ function wikipediapreview_tooltip_enqueue_script() {
 	);
 
 	$options = array(
-		'tooltipCount' => wikipediapreview_get_tooltip_count(),
+		'tooltipCount'    => wikipediapreview_get_tooltip_count(),
 		'tooltipDuration' => get_option( WIKIPEDIA_PREVIEW_TOOLTIP_DISPLAYED_DURATION, 0 ),
 	);
 
