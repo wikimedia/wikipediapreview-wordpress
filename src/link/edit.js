@@ -210,6 +210,7 @@ const Edit = ( {
 			</BlockControls>
 			<CustomTooltip
 				anchorRef={ toolbarButtonRef }
+				addingPreview={ addingPreview }
 			/>
 			{ addingPreview && (
 				<InlineEditUI

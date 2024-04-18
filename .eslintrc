@@ -5,6 +5,7 @@
 		"XMLHttpRequest": true
 	},
 	"rules": {
-		"click-events-have-key-events": "off"
+		"click-events-have-key-events": "off",
+		"no-shadow": "off"
 	}
 }
