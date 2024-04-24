@@ -28,12 +28,11 @@ export const CustomTooltip = ( {
 		updateStoredProperty( 'duration' );
 	};
 
-
 	const clearTimeouts = () => {
 		timeoutIds.forEach( ( id ) => {
 			clearTimeout( id );
 		} );
-	}
+	};
 
 	const waitOneSecThenDisplayTooltip = () => {
 		const oneSecId = setTimeout( () => {
