@@ -28,6 +28,13 @@ export const CustomTooltip = ( {
 		updateStoredProperty( 'duration' );
 	};
 
+
+	const clearTimeouts = () => {
+		timeoutIds.forEach( ( id ) => {
+			clearTimeout( id );
+		} );
+	}
+
 	const waitOneSecThenDisplayTooltip = () => {
 		const oneSecId = setTimeout( () => {
 			if ( anchorRef.current ) {
@@ -58,14 +65,13 @@ export const CustomTooltip = ( {
 	useEffect( () => {
 		// Clear all timeouts when unmounting
 		return () => {
-			timeoutIds.forEach( ( id ) => {
-				clearTimeout( id );
-			} );
+			clearTimeouts();
 		};
 	}, [ timeoutIds ] );
 
 	useEffect( () => {
 		if ( addingPreview ) {
+			clearTimeouts();
 			finishDisplayingTooltip();
 		}
 	}, [ addingPreview ] );
