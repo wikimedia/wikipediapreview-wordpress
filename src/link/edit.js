@@ -1,4 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import {
@@ -10,6 +10,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
+import { CustomTooltip } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -46,6 +47,7 @@ const Edit = ( {
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
+	const toolbarButtonRef = useRef();
 
 	const formatButtonClick = () => {
 		if ( isActive ) {
@@ -199,12 +201,17 @@ const Edit = ( {
 				<ToolbarGroup>
 					<ToolbarButton
 						icon={ generateWikipediaLogo( isActive ? 'white' : 'black' ) }
-						title={ formatTitle }
+						title={ __( 'Add Wikipedia Preview', 'wikipedia-preview' ) }
 						isActive={ isActive }
 						onClick={ formatButtonClick }
+						ref={ toolbarButtonRef }
 					/>
 				</ToolbarGroup>
 			</BlockControls>
+			<CustomTooltip
+				anchorRef={ toolbarButtonRef }
+				addingPreview={ addingPreview }
+			/>
 			{ addingPreview && (
 				<InlineEditUI
 					contentRef={ contentRef }

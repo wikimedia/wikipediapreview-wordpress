@@ -303,9 +303,35 @@ body {
 		}
 	}
 
+	.wikipediapreview-edit-tooltip-popover {
+
+		&-content {
+			width: 190px;
+			height: 40px;
+			background: #36c;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+		}
+
+		&-text {
+			align-self: center;
+		}
+
+		.components-popover__arrow {
+
+			&::before {
+				background-color: unset;
+			}
+		}
+
+		.components-popover__triangle-bg {
+			fill: #36c;
+		}
+	}
+
 	.wikipediapreview-edit-preview-popover {
 
-		/* stylelint-disable-next-line selector-class-pattern */
 		.components-popover__content {
 			background: unset;
 			border: unset;
@@ -392,7 +418,6 @@ body {
 		&.is-expanded {
 			background-color: rgba(0, 0, 0, 0.7);
 
-			/* stylelint-disable-next-line selector-class-pattern */
 			.components-popover__header {
 				visibility: hidden;
 			}
