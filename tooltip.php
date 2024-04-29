@@ -1,6 +1,16 @@
 <?php
 
+/*
+ * The number of times the tooltip has been displayed, whether in full duration or not.
+ * This count can be incremented until we hit a limit (set on the client side).
+ */
 DEFINE( 'WIKIPEDIA_PREVIEW_TOOLTIP_DISPLAYED_COUNT', 'wikipediapreview_tooltip_count' );
+
+/*
+ * Whether or not the tooltip has been displayed in full duration at least once,
+ * this acts as a boolean that's either 0 or 1. When set to 1, we infer the
+ * Wikipedia Preview plugin has been 'discovered' and hence we do not display it again
+ */
 DEFINE( 'WIKIPEDIA_PREVIEW_TOOLTIP_DISPLAYED_DURATION', 'wikipediapreview_tooltip_duration' );
 
 function wikipediapreview_get_tooltip_count() {
