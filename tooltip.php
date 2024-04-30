@@ -86,7 +86,7 @@ function wikipediapreview_tooltip_enqueue_script() {
 	$src_link_dir    = plugin_dir_url( __FILE__ ) . 'src/link';
 	$no_dependencies = array();
 	$in_footer       = true;
-	$nonce = wp_create_nonce( 'wp_rest' );
+	$nonce           = wp_create_nonce( 'wp_rest' );
 
 	wp_enqueue_script(
 		'wikipedia-preview-tooltip',
@@ -99,7 +99,7 @@ function wikipediapreview_tooltip_enqueue_script() {
 	$options = array(
 		'tooltipCount'    => wikipediapreview_get_tooltip_count(),
 		'tooltipDuration' => get_option( WIKIPEDIA_PREVIEW_TOOLTIP_DISPLAYED_DURATION, 0 ),
-		'nonce' => $nonce,
+		'nonce'           => $nonce,
 	);
 
 	wp_localize_script( 'wikipedia-preview-tooltip', 'wikipediapreviewCustomTooltip', $options );
