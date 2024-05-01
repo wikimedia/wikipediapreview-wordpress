@@ -17,9 +17,9 @@
         "source": "https://github.com/wikimedia/wikipediapreview-wordpress"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.7.2",
-        "wp-coding-standards/wpcs": "^3.0.1",
-        "phpcompatibility/phpcompatibility-wp": "^2.1.4",
+        "squizlabs/php_codesniffer": "3.9.2",
+        "wp-coding-standards/wpcs": "3.1.0",
+        "phpcompatibility/phpcompatibility-wp": "2.1.5",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0"
     },
     "scripts": {
