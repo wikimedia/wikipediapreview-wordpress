@@ -5,17 +5,16 @@ import {
 	useLayoutEffect,
 	useCallback,
 } from '@wordpress/element';
-import { useAnchor } from '@wordpress/rich-text';
+// import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
 import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
-	contentRef,
-	settings,
-	value,
+	// contentRef,
+	// settings,
+	// value,
 	activeAttributes,
-	onClose,
 	onForceClose,
 	onEdit,
 	onRemove,
@@ -23,11 +22,11 @@ export const PreviewEditUI = ( {
 	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
-	const anchor = useAnchor( {
-		editableContentElement: contentRef.current,
-		value,
-		settings,
-	} );
+	// const anchor = useAnchor( {
+	// 	editableContentElement: contentRef.current,
+	// 	value,
+	// 	settings,
+	// } );
 	const onClickPopoverOutside = useCallback( ( e ) => {
 		if ( e.target.className === 'components-popover__content' ) {
 			onForceClose();
@@ -99,31 +98,24 @@ export const PreviewEditUI = ( {
 		};
 	}, [ previewHtml ] );
 
-	if ( isTextNearTheEdge( anchor ) ) {
-		placement = 'right';
-	}
+	// TODO: move isTextNearTheEdge logic to parent
+	// if ( isTextNearTheEdge( anchor ) ) {
+	// 	placement = 'right';
+	// }
+
+	// useEffect( () => {
+	// 	console.log('preview.js - value:', value);
+	// }, [ value ]);
 
 	return (
-		<div>
-			<Popover
-				anchor={ anchor }
-				onClose={ onClose }
-				placement={ placement }
-				noArrow={ false }
-				expandOnMobile={ true }
-				className="wikipediapreview-edit-preview-popover"
-				onClick={ onClickPopoverOutside }
-			>
-				<div className="wikipediapreview-edit-preview-container">
-					<div
-						className="wikipediapreview-edit-preview"
-						dangerouslySetInnerHTML={ { __html: previewHtml } }
-					></div>
-					{ previewHtml && showControllersMenu && (
-						<ControllerEditUI onEdit={ onEdit } onRemove={ onRemove } />
-					) }
-				</div>
-			</Popover>
+		<div className="wikipediapreview-edit-preview-container">
+			<div
+				className="wikipediapreview-edit-preview"
+				dangerouslySetInnerHTML={ { __html: previewHtml } }
+			></div>
+			{ previewHtml && showControllersMenu && (
+				<ControllerEditUI onEdit={ onEdit } onRemove={ onRemove } />
+			) }
 		</div>
 	);
 };

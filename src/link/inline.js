@@ -1,10 +1,9 @@
 import {
-	Popover,
 	TextControl,
 	Button,
 	KeyboardShortcuts,
 } from '@wordpress/components';
-import { getTextContent, slice, useAnchor } from '@wordpress/rich-text';
+import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { getSiteLanguage, isTextNearTheEdge } from './utils';
@@ -12,9 +11,6 @@ import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
 export const InlineEditUI = ( {
-	contentRef,
-	settings,
-	onClose,
 	onApply,
 	value,
 	activeAttributes,
@@ -30,11 +26,6 @@ export const InlineEditUI = ( {
 	const inputRef = createRef();
 
 	let placement = 'top';
-	const anchor = useAnchor( {
-		editableContentElement: contentRef.current,
-		value,
-		settings,
-	} );
 
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
@@ -72,19 +63,13 @@ export const InlineEditUI = ( {
 		}
 	}, [ lang ] );
 
-	if ( isTextNearTheEdge( anchor ) ) {
-		placement = 'right';
-	}
+	// TODO: move isTextNearTheEdge logic to parent
+	// if ( isTextNearTheEdge( anchor ) ) {
+	// 	placement = 'right';
+	// }
 
 	return (
-		<Popover
-			anchor={ anchor }
-			onClose={ onClose }
-			placement={ placement }
-			className="wikipediapreview-edit-inline"
-			noArrow={ false }
-			expandOnMobile={ true }
-		>
+		<div>
 			{ ! languageSelector ? (
 				<div>
 					<div className="wikipediapreview-edit-inline-search">
@@ -237,6 +222,6 @@ export const InlineEditUI = ( {
 					},
 				} }
 			/>
-		</Popover>
+		</div>
 	);
 };
