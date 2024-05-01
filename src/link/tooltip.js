@@ -18,6 +18,7 @@ export const CustomTooltip = ( {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'X-WP-Nonce': wikipediapreviewCustomTooltip.nonce,
 			},
 		} );
 	};
