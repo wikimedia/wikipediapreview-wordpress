@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
-import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { ToolbarGroup, ToolbarButton, Popover } from '@wordpress/components';
 import {
 	create,
 	insert,
@@ -12,7 +12,6 @@ import { __ } from '@wordpress/i18n';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
 import { CustomTooltip } from './tooltip';
-import { Popover } from '@wordpress/components';
 
 const formatType = 'wikipediapreview/link';
 const formatTitle = __( 'Wikipedia Preview', 'wikipedia-preview' );
@@ -44,22 +43,9 @@ const Edit = ( {
 } ) => {
 	const [ addingPreview, setAddingPreview ] = useState( false );
 	const startAddingPreview = () => setAddingPreview( true );
-	// const startAddingPreview = () => {
-	// 	console.log('startAddingPreview');
-	// 	setAddingPreview( true );
-	// 	// if ( contentRef.current ) {
-	// 	// 	contentRef.current.focus();
-	// 	// }
-	// };
 	const stopAddingPreview = () => setAddingPreview( false );
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
-	// const startViewingPreview = () => {
-	// 	setViewingPreview( true );
-	// 	if ( contentRef.current ) {
-	// 		contentRef.current.focus();
-	// 	}
-	// };
 	const stopViewingPreview = () => setViewingPreview( false );
 	const [ lastValue, setLastValue ] = useState( null );
 	const toolbarButtonRef = useRef();
@@ -120,13 +106,8 @@ const Edit = ( {
 	};
 
 	const goToEdit = () => {
-		console.log('goToEdit - value:', value);
-		console.log('goToEdit - contentRef:', contentRef);
-		console.log('goToEdit - activeAttributes:', activeAttributes);
-		
 		startAddingPreview();
 		stopViewingPreview();
-		// onFocus();
 	};
 
 	const onClosePreview = () => {
@@ -182,7 +163,6 @@ const Edit = ( {
 	};
 
 	const handleTextEdit = () => {
-		console.log('handleTextEdit');
 		// Assuming a Left-To-Right language:
 		// --> cursorDirection > 0 means cursor is moving left
 		// --> cursorDirection < 0 means cursor is moving right
@@ -195,11 +175,11 @@ const Edit = ( {
 				: lastValue.formats[ value.end - 1 ] &&
 				lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
 
+		console.log('editDetected, involvesPreviewFormat', editDetected, involvesPreviewFormat);
 		if ( editDetected && involvesPreviewFormat ) {
 			const formatStart = getFormatStart( value.start - 1 );
 			const formatEnd = getFormatEnd( value.end + 1 );
 			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
-			// setLastValue( null );
 		}
 	};
 
@@ -220,11 +200,6 @@ const Edit = ( {
 			setLastValue( value );
 		}
 	}, [ value ] );
-
-	useEffect( () => {
-		console.log('edit.js - adding/viewing useEffect  addingPreview:', addingPreview);
-		console.log('edit.js - adding/viewing useEffect viewingPreview:', viewingPreview);
-	}, [ addingPreview, viewingPreview ] );
 
 	return (
 		<>
