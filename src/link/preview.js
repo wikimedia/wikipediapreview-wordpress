@@ -2,7 +2,6 @@ import {
 	useState,
 	useEffect,
 	useLayoutEffect,
-	useCallback,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
@@ -15,11 +14,6 @@ export const PreviewEditUI = ( {
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
-	const onClickPopoverOutside = useCallback( ( e ) => {
-		if ( e.target.className === 'components-popover__content' ) {
-			onForceClose();
-		}
-	}, [] );
 	const toggleControllersMenu = () => {
 		/* eslint-disable-next-line no-shadow */
 		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );

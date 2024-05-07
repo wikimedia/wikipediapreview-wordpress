@@ -1,3 +1,4 @@
+import { useCallback } from '@wordpress/element';
 import { useAnchor } from '@wordpress/rich-text';
 import { Popover } from '@wordpress/components';
 import { InlineEditUI } from './inline';
@@ -30,6 +31,12 @@ export const WikipediaPreviewPopover = ( {
 		}
 	};
 
+    const onClickPopoverOutside = useCallback( ( e ) => {
+		if ( e.target.className === 'components-popover__content' ) {
+			stopViewingPreview();
+		}
+	}, [] );
+
     const setPlacement = () => {
         if ( isTextNearTheEdge( anchor ) ) {
             return 'right';
@@ -48,7 +55,7 @@ export const WikipediaPreviewPopover = ( {
             expandOnMobile={ true }
             onClose={ addingPreview ? stopAddingPreview : onClosePreview }
             className={`wikipediapreview-edit-${ addingPreview ? 'inline' : 'preview-popover' }`}
-            // onClick={ onClickPopoverOutside }
+            onClick={ onClickPopoverOutside }
         >
             { addingPreview && (
                 <InlineEditUI
