@@ -114,7 +114,7 @@ const Edit = ( {
 		}
 
 		return lastValueCount > valueCount;
-	}
+	};
 
 	const goToEdit = () => {
 		startAddingPreview();
@@ -176,21 +176,20 @@ const Edit = ( {
 		}
 	}, [ activeAttributes ] );
 
-    useEffect( () => {
-        valueRef.current = value;
+	useEffect( () => {
+		valueRef.current = value;
 
-        if ( removesPreviewFormat() ) {
-            const formatStart = getFormatStart( value.start - 1 );
-            const formatEnd = getFormatEnd( value.end + 1 );
-            onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
-        }
+		if ( removesPreviewFormat() ) {
+			const formatStart = getFormatStart( value.start - 1 );
+			const formatEnd = getFormatEnd( value.end + 1 );
+			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
+		}
+	}, [ value.formats ] );
 
-    }, [ value.formats ] );
-
-    useEffect( () => {
+	useEffect( () => {
 		// Update lastValue with the previous value
-        setLastValue( valueRef.current );
-    }, [ value ] );
+		setLastValue( valueRef.current );
+	}, [ value ] );
 
 	return (
 		<>
@@ -210,7 +209,7 @@ const Edit = ( {
 				addingPreview={ addingPreview }
 			/>
 			{ ( addingPreview || viewingPreview ) && (
-				< WikipediaPreviewPopover
+				<WikipediaPreviewPopover
 					addingPreview={ addingPreview }
 					stopAddingPreview={ stopAddingPreview }
 					viewingPreview={ viewingPreview }
@@ -224,7 +223,7 @@ const Edit = ( {
 					contentRef={ contentRef }
 					settings={ settings }
 				/>
-			)}
+			) }
 		</>
 	);
 };
