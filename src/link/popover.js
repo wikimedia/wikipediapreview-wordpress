@@ -2,6 +2,7 @@ import { useAnchor } from '@wordpress/rich-text';
 import { Popover } from '@wordpress/components';
 import { InlineEditUI } from './inline';
 import { PreviewEditUI } from './preview';
+import { isTextNearTheEdge } from './utils';
 
 export const WikipediaPreviewPopover = ( {
     addingPreview,
@@ -29,10 +30,20 @@ export const WikipediaPreviewPopover = ( {
 		}
 	};
 
+    const setPlacement = () => {
+        if ( isTextNearTheEdge( anchor ) ) {
+            return 'right';
+        } else if ( addingPreview ) {
+            return 'top';
+        } else {
+            return 'bottom';
+        }
+    };
+
     return (
         <Popover
             anchor={ anchor }
-            placement={ addingPreview ? 'top' : 'bottom' }
+            placement={ setPlacement() }
             noArrow={ false }
             expandOnMobile={ true }
             onClose={ addingPreview ? stopAddingPreview : onClosePreview }

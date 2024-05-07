@@ -1,32 +1,20 @@
-import { Popover } from '@wordpress/components';
 import {
 	useState,
 	useEffect,
 	useLayoutEffect,
 	useCallback,
 } from '@wordpress/element';
-// import { useAnchor } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
-import { isTextNearTheEdge } from './utils';
 
 export const PreviewEditUI = ( {
-	// contentRef,
-	// settings,
-	// value,
 	activeAttributes,
 	onForceClose,
 	onEdit,
 	onRemove,
 } ) => {
-	let placement = 'bottom';
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
-	// const anchor = useAnchor( {
-	// 	editableContentElement: contentRef.current,
-	// 	value,
-	// 	settings,
-	// } );
 	const onClickPopoverOutside = useCallback( ( e ) => {
 		if ( e.target.className === 'components-popover__content' ) {
 			onForceClose();
@@ -97,15 +85,6 @@ export const PreviewEditUI = ( {
 				?.removeEventListener( 'click', onForceClose );
 		};
 	}, [ previewHtml ] );
-
-	// TODO: move isTextNearTheEdge logic to parent
-	// if ( isTextNearTheEdge( anchor ) ) {
-	// 	placement = 'right';
-	// }
-
-	// useEffect( () => {
-	// 	console.log('preview.js - value:', value);
-	// }, [ value ]);
 
 	return (
 		<div className="wikipediapreview-edit-preview-container">
