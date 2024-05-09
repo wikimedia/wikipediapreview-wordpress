@@ -102,21 +102,40 @@ const isPopoverExpanded = () => {
 };
 
 const ControllerEditUI = ( { onEdit, onRemove } ) => {
+	const showSections = () => {
+		console.log('showSections');
+	}
 	return (
 		<div className="wikipediapreview-edit-preview-controllers">
 			<div
-				className="wikipediapreview-edit-preview-controllers-change"
+				className="wikipediapreview-edit-preview-controllers-option"
 				onClick={ onEdit }
 				role="presentation"
 			>
-				{ __( 'Change', 'wikipedia-preview' ) }
+				<div className="wikipediapreview-edit-preview-controllers-option-icon-change"></div>
+				<div className="wikipediapreview-edit-preview-controllers-option-message">
+					{ __( 'Topic', 'wikipedia-preview' ) }
+				</div>
 			</div>
 			<div
-				className="wikipediapreview-edit-preview-controllers-remove"
+				className="wikipediapreview-edit-preview-controllers-option"
+				onClick={ showSections }
+				role="presentation"
+			>
+				<div className="wikipediapreview-edit-preview-controllers-option-icon-sections"></div>
+				<div className="wikipediapreview-edit-preview-controllers-option-message">
+					{ __( 'Sections', 'wikipedia-preview' ) }
+				</div>
+			</div>
+			<div
+				className="wikipediapreview-edit-preview-controllers-option"
 				onClick={ onRemove }
 				role="presentation"
 			>
-				{ __( 'Remove', 'wikipedia-preview' ) }
+				<div className="wikipediapreview-edit-preview-controllers-option-icon-remove"></div>
+				<div className="wikipediapreview-edit-preview-controllers-option-message">
+					{ __( 'Remove', 'wikipedia-preview' ) }
+				</div>
 			</div>
 		</div>
 	);
