@@ -5,18 +5,25 @@ import {
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
+import { Sections } from './sections';
 
 export const PreviewEditUI = ( {
 	activeAttributes,
 	onForceClose,
-	onEdit,
+	onEditTopic,
 	onRemove,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
+	const [ selectingSection, setSelectingSection ] = useState( false );
 	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
+
 	const toggleControllersMenu = () => {
 		/* eslint-disable-next-line no-shadow */
 		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );
+	};
+
+	const showSections = () => {
+		setSelectingSection( true );
 	};
 
 	useEffect( () => {
@@ -81,13 +88,19 @@ export const PreviewEditUI = ( {
 	}, [ previewHtml ] );
 
 	return (
-		<div className="wikipediapreview-edit-preview-container">
-			<div
-				className="wikipediapreview-edit-preview"
-				dangerouslySetInnerHTML={ { __html: previewHtml } }
-			></div>
-			{ previewHtml && showControllersMenu && (
-				<ControllerEditUI onEdit={ onEdit } onRemove={ onRemove } />
+		<div>
+			{ ! selectingSection ? (
+				<div className="wikipediapreview-edit-preview-container">
+					<div
+						className="wikipediapreview-edit-preview"
+						dangerouslySetInnerHTML={ { __html: previewHtml } }
+					></div>
+					{ previewHtml && showControllersMenu && (
+						<ControllerEditUI onEditTopic={ onEditTopic } onEditSection={ showSections } onRemove={ onRemove } />
+					) }
+				</div>
+			) : (
+				<Sections />
 			) }
 		</div>
 	);
@@ -101,15 +114,12 @@ const isPopoverExpanded = () => {
 	return hasPreviewPopup && hasExpandedClass;
 };
 
-const ControllerEditUI = ( { onEdit, onRemove } ) => {
-	const showSections = () => {
-		console.log('showSections');
-	}
+const ControllerEditUI = ( { onEditTopic, onEditSection, onRemove } ) => {
 	return (
 		<div className="wikipediapreview-edit-preview-controllers">
 			<div
 				className="wikipediapreview-edit-preview-controllers-option"
-				onClick={ onEdit }
+				onClick={ onEditTopic }
 				role="presentation"
 			>
 				<div className="wikipediapreview-edit-preview-controllers-option-icon-change"></div>
@@ -119,7 +129,7 @@ const ControllerEditUI = ( { onEdit, onRemove } ) => {
 			</div>
 			<div
 				className="wikipediapreview-edit-preview-controllers-option"
-				onClick={ showSections }
+				onClick={ onEditSection }
 				role="presentation"
 			>
 				<div className="wikipediapreview-edit-preview-controllers-option-icon-sections"></div>
