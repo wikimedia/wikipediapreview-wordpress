@@ -40,7 +40,7 @@ body {
 			}
 
 			&-icon {
-				background-image: url(./images/search.svg);
+				background-image: url(./images/search-black.svg);
 				width: 20px;
 				height: 20px;
 				position: absolute;
@@ -242,7 +242,7 @@ body {
 			}
 
 			&-search-icon {
-				background-image: url(./images/search.svg);
+				background-image: url(./images/search-black.svg);
 				width: 20px;
 				height: 20px;
 				position: absolute;
@@ -348,12 +348,13 @@ body {
 			}
 
 			&-controllers {
-				width: 52px;
-				height: 136px;
+				width: 73px;
+				height: 194px;
 				background-color: #000;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
+				align-items: center;
 				font-size: 12px;
 				color: #fff;
 				border-top-right-radius: 4px;
@@ -364,29 +365,36 @@ body {
 					cursor: pointer;
 				}
 
-				&-change {
+				&-option {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
 
-					&::before {
-						position: relative;
-						content: url(./images/change.svg);
-						width: 20px;
-						height: 20px;
-						left: 14px;
-
+					&-icon {
+						&-change {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							content: url(./images/search-white.svg);
+						}
+						&-sections {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							content: url(./images/article-white.svg);
+						}
+						&-remove {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							content: url(./images/remove-white.svg);
+						}
 					}
-				}
 
-				&-remove {
-
-					&::before {
-						position: relative;
-						content: url(./images/remove.svg);
-						width: 20px;
+					&-message {
+						width: 100%;
 						height: 20px;
-						left: 15px;
-
 					}
-
 				}
 			}
 
@@ -455,23 +463,22 @@ body {
 							cursor: pointer;
 						}
 
-						&-change {
-							text-align: center;
-
-							&::before {
-								content: url(./images/change-black.svg);
-								left: -7px;
-								top: 5px;
-							}
-						}
-
-						&-remove {
-							text-align: center;
-
-							&::before {
-								content: url(./images/remove-black.svg);
-								left: -7px;
-								top: 5px;
+						&-option {
+							flex-direction: row;
+							width: 100%;
+							&-icon {
+								&-change {
+									margin: 0 5px 0 5px;
+									content: url(./images/search-black.svg);
+								}
+								&-sections {
+									margin: 0 5px 0 5px;
+									content: url(./images/article-black.svg);
+								}
+								&-remove {
+									margin: 0 5px 0 5px;
+									content: url(./images/remove-black.svg);
+								}
 							}
 						}
 					}
@@ -494,6 +501,15 @@ body {
 
 			}
 		}
+	}
+
+	.wikipediapreview-edit-sections {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		width: 100%;
+		border: papayawhip ;
 	}
 
 	&.rtl {
