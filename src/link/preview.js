@@ -16,7 +16,6 @@ export const PreviewEditUI = ( {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const [ selectingSection, setSelectingSection ] = useState( false );
 	const [ showControllersMenu, setShowControllersMenu ] = useState( true );
-
 	const toggleControllersMenu = () => {
 		/* eslint-disable-next-line no-shadow */
 		setShowControllersMenu( ( showControllersMenu ) => ! showControllersMenu );

@@ -1,5 +1,5 @@
 /* global wikipediapreview_init_options */
-import { getColorScheme, observeDarkModePluginActivation } from './link/colorScheme';
+import { getColorScheme, observeDarkModePluginActivation } from './link/color-scheme';
 
 const init = ( scheme ) => {
 	wikipediaPreview.init( {
