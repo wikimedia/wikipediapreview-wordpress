@@ -8,8 +8,7 @@ import {
 	removeFormat,
 } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
-import { InlineEditUI } from './inline';
-import { PreviewEditUI } from './preview';
+import { WikipediaPreviewPopover } from './popover';
 import { CustomTooltip } from './tooltip';
 
 const formatType = 'wikipediapreview/link';
@@ -46,7 +45,8 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-	const [ lastValue, setLastValue ] = useState( null );
+	const [ lastValue, setLastValue ] = useState( value );
+	const valueRef = useRef( value );
 	const toolbarButtonRef = useRef();
 
 	const formatButtonClick = () => {
@@ -99,16 +99,26 @@ const Edit = ( {
 		stopViewingPreview();
 	};
 
+	const removesPreviewFormat = () => {
+		const counter = ( count, format ) => {
+			if ( format[ 0 ].type === formatType ) {
+				return count + 1;
+			}
+			return count;
+		};
+		const lastValueCount = lastValue.formats && lastValue.formats.reduce( counter, 0 );
+		const valueCount = value.formats && value.formats.reduce( counter, 0 );
+
+		if ( valueCount === 0 ) {
+			return false;
+		}
+
+		return lastValueCount > valueCount;
+	};
+
 	const goToEdit = () => {
 		startAddingPreview();
 		stopViewingPreview();
-		onFocus();
-	};
-
-	const onClosePreview = () => {
-		if ( ! Object.keys( activeAttributes ).length ) {
-			stopViewingPreview();
-		}
 	};
 
 	const getFormatStart = ( position ) => {
@@ -157,26 +167,6 @@ const Edit = ( {
 		return selectedValue.end;
 	};
 
-	const handleTextEdit = () => {
-		// Assuming a Left-To-Right language:
-		// --> cursorDirection > 0 means cursor is moving left
-		// --> cursorDirection < 0 means cursor is moving right
-		const cursorDirection = lastValue.start - value.start;
-		const editDetected = value.text !== lastValue.text;
-		const involvesPreviewFormat =
-			cursorDirection >= 0
-				? lastValue.formats[ value.start ] &&
-				lastValue.formats[ value.start ][ 0 ].type === formatType
-				: lastValue.formats[ value.end - 1 ] &&
-				lastValue.formats[ value.end - 1 ][ 0 ].type === formatType;
-
-		if ( editDetected && involvesPreviewFormat ) {
-			const formatStart = getFormatStart( value.start - 1 );
-			const formatEnd = getFormatEnd( value.end + 1 );
-			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
-		}
-	};
-
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -187,12 +177,18 @@ const Edit = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
-		if ( lastValue === null ) {
-			setLastValue( value );
-		} else if ( lastValue !== value ) {
-			handleTextEdit();
-			setLastValue( value );
+		valueRef.current = value;
+
+		if ( removesPreviewFormat() ) {
+			const formatStart = getFormatStart( value.start - 1 );
+			const formatEnd = getFormatEnd( value.end + 1 );
+			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
 		}
+	}, [ value.formats ] );
+
+	useEffect( () => {
+		// Update lastValue with the previous value
+		setLastValue( valueRef.current );
 	}, [ value ] );
 
 	return (
@@ -212,30 +208,20 @@ const Edit = ( {
 				anchorRef={ toolbarButtonRef }
 				addingPreview={ addingPreview }
 			/>
-			{ addingPreview && (
-				<InlineEditUI
-					contentRef={ contentRef }
-					settings={ settings }
-					onApply={
-						value.start !== value.end || activeAttributes.title
-							? updateAttributes
-							: insertText
-					}
+			{ ( addingPreview || viewingPreview ) && (
+				<WikipediaPreviewPopover
+					addingPreview={ addingPreview }
+					stopAddingPreview={ stopAddingPreview }
+					viewingPreview={ viewingPreview }
+					stopViewingPreview={ stopViewingPreview }
+					updateAttributes={ updateAttributes }
+					insertText={ insertText }
+					removeAttributes={ removeAttributes }
+					goToEdit={ goToEdit }
 					value={ value }
 					activeAttributes={ activeAttributes }
-					onClose={ stopAddingPreview }
-				/>
-			) }
-			{ viewingPreview && (
-				<PreviewEditUI
 					contentRef={ contentRef }
 					settings={ settings }
-					value={ value }
-					onClose={ onClosePreview }
-					onEdit={ goToEdit }
-					onRemove={ removeAttributes }
-					onForceClose={ stopViewingPreview }
-					activeAttributes={ activeAttributes }
 				/>
 			) }
 		</>
