@@ -8,10 +8,12 @@ import wikipediaPreview from 'wikipedia-preview';
 import { Sections } from './sections';
 
 export const PreviewEditUI = ( {
-	activeAttributes,
-	onForceClose,
 	onEditTopic,
 	onRemove,
+	onForceClose,
+	activeAttributes,
+	updateAttributes,
+	value,
 } ) => {
 	const [ previewHtml, setPreviewHtml ] = useState( null );
 	const [ selectingSection, setSelectingSection ] = useState( false );
@@ -99,7 +101,13 @@ export const PreviewEditUI = ( {
 					) }
 				</div>
 			) : (
-				<Sections />
+				<Sections
+					value={ value }
+					updateAttributes={ updateAttributes }
+					activeAttributes={ activeAttributes }
+					setPreviewHtml={ setPreviewHtml }
+					setSelectingSection={ setSelectingSection }
+				/>
 			) }
 		</div>
 	);

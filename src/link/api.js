@@ -57,6 +57,11 @@ export const fulltextSearch = ( lang, term, callback ) => {
 	return request( url, handler( callback ) );
 };
 
+export const getArticleText = ( lang, title, callback ) => {
+	const url = `https://${ lang }.wikipedia.org/api/rest_v1/page/mobile-html/${ encodeURIComponent( title ) }`;
+	return request( url, callback );
+};
+
 export const abortAllRequest = () => {
 	abortFunctions.forEach( ( x ) => x && x.abort() );
 	abortFunctions = [];
@@ -90,7 +95,11 @@ const request = ( url, callback ) => {
 	xhr.open( 'GET', url );
 	xhr.send();
 	xhr.addEventListener( 'load', () => {
-		callback( JSON.parse( xhr.responseText ) );
+		if ( xhr.responseURL.includes( 'rest_v1' ) ) {
+			callback( xhr.responseText );
+		} else {
+			callback( JSON.parse( xhr.responseText ) );
+		}
 	} );
 	xhr.addEventListener( 'error', () => {
 		callback( null, xhr.status );

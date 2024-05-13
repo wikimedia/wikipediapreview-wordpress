@@ -509,7 +509,16 @@ body {
 		justify-content: space-between;
 		height: 100%;
 		width: 100%;
-		border: papayawhip ;
+		background-color: #fff;
+
+		&-list {
+			&-item {
+				display: flex;
+				flex-direction: column;
+				padding: 5px 5px 5px 5px;
+			}
+		}
+		
 	}
 
 	&.rtl {
