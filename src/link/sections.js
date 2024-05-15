@@ -11,29 +11,6 @@ export const Sections = ( {
 } ) => {
 	const [ sections, setSections ] = useState( null );
 
-	const parseSections = ( articleText ) => {
-		// eslint-disable-next-line no-undef
-		const doc = new DOMParser().parseFromString( articleText, 'text/html' );
-		const sections = Array.from( doc.querySelectorAll( 'section' ) );
-
-		return sections.map( ( section ) => {
-			const titleElement = section.querySelector( 'h2, h3, h4, h5, h6' );
-			const paragraphElement = section.querySelector( 'p' );
-
-			if ( ! titleElement ) {
-				return {
-					title: 'Summary',
-					textContent: paragraphElement && paragraphElement.textContent,
-				};
-			}
-
-			return {
-				title: titleElement.id, // TODO: title without underscore
-				textContent: paragraphElement && paragraphElement.textContent,
-			};
-		} );
-	};
-
 	const selectSection = ( sectionTitle ) => {
 		const { title, lang } = activeAttributes;
 		const titleWithSection = `${ title }#${ sectionTitle }`;
@@ -47,8 +24,8 @@ export const Sections = ( {
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
 		if ( ! sections && title && lang ) {
-			getArticleText( lang, title, ( articleText ) => {
-				setSections( parseSections( articleText ) );
+			wikipediaPreview.getSections( lang, title, ( info ) => {
+				setSections( info.sections );
 			} );
 		}
 	}, [] );
@@ -61,21 +38,21 @@ export const Sections = ( {
 						return (
 							<div
 								className={ `wikipediapreview-edit-sections-list-item` }
-								key={ item.title }
+								key={ item.id }
 								role="link"
 								tabIndex={ index }
 								onClick={ () => {
-									selectSection( item.title );
+									selectSection( item.id );
 								} }
 								onKeyUp={ () => {
 									// TODO: console.log( 'onKeyUp' );
 								} }
 							>
 								<span className="wikipediapreview-edit-sections-list-item-title">
-									{ item.title }
+									{ item.id }
 								</span>
 								<span className="wikipediapreview-edit-sections-list-item-content">
-									{ item.textContent && item.textContent.substring( 0, 100 ) }
+									{ item.extractHtml && item.extractHtml.substring( 0, 100 ) }
 								</span>
 							</div>
 						);
