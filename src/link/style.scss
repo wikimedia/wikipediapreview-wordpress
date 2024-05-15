@@ -508,14 +508,41 @@ body {
 		flex-direction: column;
 		justify-content: space-between;
 		height: 100%;
-		width: 100%;
+		width: 390px;
 		background-color: #fff;
 
-		&-list {
-			&-item {
+		&-header {
+			width: 100%;
+			height: 70px;
+			display: flex;
+			align-items: center;
+			padding: 0 5px 0 5px;
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		&-list-item {
+			display: flex;
+			align-items: center;
+			padding: 0 5px 0 5px;
+			
+			&-content {
 				display: flex;
 				flex-direction: column;
-				padding: 5px 5px 5px 5px;
+			}
+
+			&-selected-indicator {
+				background-image: url(./images/selected.svg);
+				width: 40px;
+				height: 20px;
+			}
+
+			&.wikipediapreview-edit-sections-list-item-selected {
+				border: solid #36c;
+
+				.wikipediapreview-edit-sections-list-item-content-title {
+					font-weight: bold;
+				}
 			}
 		}
 		
