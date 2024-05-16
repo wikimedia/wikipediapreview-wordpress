@@ -1,4 +1,5 @@
 import { useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
 
 export const Sections = ( {
@@ -11,9 +12,16 @@ export const Sections = ( {
 	const [ sections, setSections ] = useState( null );
 	const [ selectedSection, setSelectedSection ] = useState( null );
 
+	const withoutSection = ( title ) => {
+		if ( title.includes( '#' ) ) {
+			return title.split( '#' )[ 0 ];
+		}
+		return title;
+	};
+
 	const selectSection = ( sectionTitle ) => {
 		const { title, lang } = activeAttributes;
-		const titleWithSection = `${ title }#${ sectionTitle }`;
+		const titleWithSection = `${ withoutSection( title ) }#${ sectionTitle }`;
 		wikipediaPreview.getPreviewHtml( titleWithSection, lang, ( preview ) => {
 			setPreviewHtml( preview );
 		} );
@@ -41,7 +49,7 @@ export const Sections = ( {
 	return (
 		<div className="wikipediapreview-edit-sections">
 			<div className="wikipediapreview-edit-sections-header">
-				{ activeAttributes.title }
+				{ withoutSection( activeAttributes.title ) }
 			</div>
 			{ sections && sections.length ? (
 				<div className="wikipediapreview-edit-sections-list">
@@ -61,11 +69,11 @@ export const Sections = ( {
 							>
 								<div className="wikipediapreview-edit-sections-list-item-content">
 									<span className="wikipediapreview-edit-sections-list-item-content-title">
-										{ item.id }
+										{ index === 0 ? __( 'Summary', 'wikipedia-preview' ) : item.id.replaceAll( '_', ' ' ) }
 									</span>
 									<span
 										className="wikipediapreview-edit-sections-list-item-content-text"
-										dangerouslySetInnerHTML={ { __html: item.extractHtml.substring( 0, 100 ) } }
+										dangerouslySetInnerHTML={ { __html: item.extractHtml.substring( 0, 115 ) } }
 									></span>
 								</div>
 								{ item.id === selectedSection && (
