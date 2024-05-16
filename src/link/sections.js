@@ -73,7 +73,7 @@ export const Sections = ( {
 									</span>
 									<span
 										className="wikipediapreview-edit-sections-list-item-content-text"
-										dangerouslySetInnerHTML={ { __html: item.extractHtml.substring( 0, 115 ) } }
+										dangerouslySetInnerHTML={ { __html: item.extractHtml.substring( 0, 180 ) } }
 									></span>
 								</div>
 								{ item.id === selectedSection && (

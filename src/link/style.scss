@@ -543,6 +543,11 @@ body {
 					color: #757575;
 					p {
 						margin: 0;
+						text-overflow: ellipsis;
+						display: -webkit-box;
+						-webkit-line-clamp: 2;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
 					}
 				}
 			}
@@ -550,7 +555,7 @@ body {
 			&-selected-indicator {
 				background-image: url(./images/selected.svg);
 				background-repeat: no-repeat;
-				width: 40px;
+				width: 75px;
 				height: 20px;
 			}
 
