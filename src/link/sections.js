@@ -46,6 +46,13 @@ export const Sections = ( {
 		}
 	}, [] );
 
+	useEffect( () => {
+		const selectedSectionElement = document.querySelector( '.wikipediapreview-edit-sections-list-item-selected' );
+		if ( selectedSectionElement ) {
+			selectedSectionElement.scrollIntoView( { block: 'center' } );
+		}
+	}, [ sections ] );
+
 	return (
 		<div className="wikipediapreview-edit-sections">
 			<div className="wikipediapreview-edit-sections-header">
