@@ -57,6 +57,11 @@ export const Sections = ( {
 		<div className="wikipediapreview-edit-sections">
 			<div className="wikipediapreview-edit-sections-header">
 				{ withoutSection( activeAttributes.title ) }
+				<div
+					className="wikipediapreview-edit-sections-header-close"
+					onClick={ () => setSelectingSection( false ) }
+					role="presentation"
+				></div>
 			</div>
 			{ sections && sections.length ? (
 				<div className="wikipediapreview-edit-sections-list">
