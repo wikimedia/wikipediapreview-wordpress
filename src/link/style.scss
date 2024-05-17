@@ -575,6 +575,12 @@ body {
 					font-weight: bold;
 				}
 			}
+			
+			&:hover,
+			&.wikipediapreview-edit-sections-list-item-hovered {
+				background-color: #eaecf0;
+				cursor: pointer;
+			}
 		}
 		
 	}

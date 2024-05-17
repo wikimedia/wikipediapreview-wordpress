@@ -1,4 +1,5 @@
 import { useEffect, useState } from '@wordpress/element';
+import { KeyboardShortcuts } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
 
@@ -10,10 +11,11 @@ export const Sections = ( {
 	setSelectingSection,
 } ) => {
 	const [ sections, setSections ] = useState( null );
+	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ selectedSection, setSelectedSection ] = useState( null );
 
 	const withoutSection = ( title ) => {
-		if ( title.includes( '#' ) ) {
+		if ( title && title.includes( '#' ) ) {
 			return title.split( '#' )[ 0 ];
 		}
 		return title;
@@ -53,6 +55,13 @@ export const Sections = ( {
 		}
 	}, [ sections ] );
 
+	useEffect( () => {
+		const hoveredSectionElement = document.querySelector( '.wikipediapreview-edit-sections-list-item-hovered' );
+		if ( hoveredSectionElement ) {
+			hoveredSectionElement.scrollIntoView( { block: 'center', behavior: 'auto' } );
+		}
+	}, [ hoveredIndex ] );
+
 	return (
 		<div className="wikipediapreview-edit-sections">
 			<div className="wikipediapreview-edit-sections-header">
@@ -68,7 +77,15 @@ export const Sections = ( {
 					{ sections.map( ( item, index ) => {
 						return (
 							<div
-								className={ `wikipediapreview-edit-sections-list-item ${ item.id === selectedSection ? 'wikipediapreview-edit-sections-list-item-selected' : '' }` }
+								className={
+									`wikipediapreview-edit-sections-list-item
+									${ item.id === selectedSection
+								? 'wikipediapreview-edit-sections-list-item-selected'
+								: '' }
+									${ index === hoveredIndex
+								? 'wikipediapreview-edit-sections-list-item-hovered'
+								: '' }`
+								}
 								key={ item.id }
 								role="link"
 								tabIndex={ index }
@@ -76,8 +93,9 @@ export const Sections = ( {
 									selectSection( item.id );
 								} }
 								onKeyUp={ () => {
-									// TODO: console.log( 'onKeyUp' );
+									selectSection( item.id );
 								} }
+								onMouseEnter={ () => setHoverIndex( -1 ) }
 							>
 								<div className="wikipediapreview-edit-sections-list-item-content">
 									<span className="wikipediapreview-edit-sections-list-item-content-title">
@@ -97,6 +115,25 @@ export const Sections = ( {
 					} ) }
 				</div>
 			) : null }
+			<KeyboardShortcuts
+				bindGlobal={ true }
+				shortcuts={ {
+					down: () => {
+						setHoverIndex( ( hoveredIndex + 1 ) % sections.length );
+					},
+					up: () => {
+						setHoverIndex(
+							hoveredIndex ? hoveredIndex - 1 : sections.length - 1
+						);
+					},
+					enter: () => {
+						selectSection( sections[ hoveredIndex ].id );
+					},
+					escape: () => {
+						setSelectingSection( false );
+					},
+				} }
+			/>
 		</div>
 	);
 };
