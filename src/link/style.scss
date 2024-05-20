@@ -375,19 +375,25 @@ body {
 							width: 20px;
 							height: 20px;
 							margin-bottom: 5px;
-							content: url(./images/search-white.svg);
+							background-image: url(./images/search-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
 						}
 						&-sections {
 							width: 20px;
 							height: 20px;
 							margin-bottom: 5px;
-							content: url(./images/article-white.svg);
+							background-image: url(./images/article-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
 						}
 						&-remove {
 							width: 20px;
 							height: 20px;
 							margin-bottom: 5px;
-							content: url(./images/remove-white.svg);
+							background-image: url(./images/remove-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
 						}
 					}
 
@@ -469,15 +475,21 @@ body {
 							&-icon {
 								&-change {
 									margin: 0 5px 0 5px;
-									content: url(./images/search-black.svg);
+									background-image: url(./images/search-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
 								}
 								&-sections {
 									margin: 0 5px 0 5px;
-									content: url(./images/article-black.svg);
+									background-image: url(./images/article-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
 								}
 								&-remove {
 									margin: 0 5px 0 5px;
-									content: url(./images/remove-black.svg);
+									background-image: url(./images/remove-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
 								}
 							}
 						}
