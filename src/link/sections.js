@@ -13,12 +13,17 @@ export const Sections = ( {
 	const [ sections, setSections ] = useState( null );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ selectedSection, setSelectedSection ] = useState( null );
+	const sectionsPrefix = 'wikipediapreview-edit-sections';
 
 	const withoutSection = ( title ) => {
 		if ( title && title.includes( '#' ) ) {
 			return title.split( '#' )[ 0 ];
 		}
 		return title;
+	};
+
+	const isItemSelected = ( item ) => {
+		return item.id === selectedSection;
 	};
 
 	const selectSection = ( sectionTitle ) => {
@@ -29,6 +34,21 @@ export const Sections = ( {
 		} );
 		setSelectingSection( false );
 		updateAttributes( value, titleWithSection, lang );
+	};
+
+	const getItemClassName = ( item, index ) => {
+		return `${ sectionsPrefix }-list-item
+				${ isItemSelected( item )
+		? `${ sectionsPrefix }-list-item-selected`
+		: '' }
+				${ index === hoveredIndex
+		? `${ sectionsPrefix }-list-item-hovered`
+		: '' }
+				`;
+	};
+
+	const getItemTitle = ( item, index ) => {
+		return index === 0 ? __( 'Summary', 'wikipedia-preview' ) : item.id.replaceAll( '_', ' ' );
 	};
 
 	useEffect( () => {
@@ -49,43 +69,35 @@ export const Sections = ( {
 	}, [] );
 
 	useEffect( () => {
-		const selectedSectionElement = document.querySelector( '.wikipediapreview-edit-sections-list-item-selected' );
+		const selectedSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-selected` );
 		if ( selectedSectionElement ) {
 			selectedSectionElement.scrollIntoView( { block: 'center' } );
 		}
 	}, [ sections ] );
 
 	useEffect( () => {
-		const hoveredSectionElement = document.querySelector( '.wikipediapreview-edit-sections-list-item-hovered' );
+		const hoveredSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-hovered` );
 		if ( hoveredSectionElement ) {
 			hoveredSectionElement.scrollIntoView( { block: 'center', behavior: 'auto' } );
 		}
 	}, [ hoveredIndex ] );
 
 	return (
-		<div className="wikipediapreview-edit-sections">
-			<div className="wikipediapreview-edit-sections-header">
+		<div className={ `${ sectionsPrefix }` }>
+			<div className={ `${ sectionsPrefix }-header` }>
 				{ withoutSection( activeAttributes.title ) }
 				<div
-					className="wikipediapreview-edit-sections-header-close"
+					className={ `${ sectionsPrefix }-header-close` }
 					onClick={ () => setSelectingSection( false ) }
 					role="presentation"
 				></div>
 			</div>
 			{ sections && sections.length ? (
-				<div className="wikipediapreview-edit-sections-list">
+				<div className={ `${ sectionsPrefix }-list` }>
 					{ sections.map( ( item, index ) => {
 						return (
 							<div
-								className={
-									`wikipediapreview-edit-sections-list-item
-									${ item.id === selectedSection
-								? 'wikipediapreview-edit-sections-list-item-selected'
-								: '' }
-									${ index === hoveredIndex
-								? 'wikipediapreview-edit-sections-list-item-hovered'
-								: '' }`
-								}
+								className={ getItemClassName( item, index ) }
 								key={ item.id }
 								role="link"
 								tabIndex={ index }
@@ -97,17 +109,17 @@ export const Sections = ( {
 								} }
 								onMouseEnter={ () => setHoverIndex( -1 ) }
 							>
-								<div className="wikipediapreview-edit-sections-list-item-content">
-									<span className="wikipediapreview-edit-sections-list-item-content-title">
-										{ index === 0 ? __( 'Summary', 'wikipedia-preview' ) : item.id.replaceAll( '_', ' ' ) }
+								<div className={ `${ sectionsPrefix }-list-item-content` }>
+									<span className={ `${ sectionsPrefix }-list-item-content-title` }>
+										{ getItemTitle( item, index ) }
 									</span>
 									<span
-										className="wikipediapreview-edit-sections-list-item-content-text"
+										className={ `${ sectionsPrefix }-list-item-content-text` }
 										dangerouslySetInnerHTML={ { __html: item.extractHtml.substring( 0, 180 ) } }
 									></span>
 								</div>
-								{ item.id === selectedSection && (
-									<div className="wikipediapreview-edit-sections-list-item-selected-indicator">
+								{ isItemSelected( item ) && (
+									<div className={ `${ sectionsPrefix }-list-item-selected-indicator` }>
 									</div>
 								) }
 							</div>
