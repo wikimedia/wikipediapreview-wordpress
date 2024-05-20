@@ -2,6 +2,7 @@ import { useEffect, useState } from '@wordpress/element';
 import { KeyboardShortcuts } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
+import { titleWithoutSection } from './utils';
 
 export const Sections = ( {
 	value,
@@ -15,25 +16,22 @@ export const Sections = ( {
 	const [ selectedSection, setSelectedSection ] = useState( null );
 	const sectionsPrefix = 'wikipediapreview-edit-sections';
 
-	const withoutSection = ( title ) => {
-		if ( title && title.includes( '#' ) ) {
-			return title.split( '#' )[ 0 ];
-		}
-		return title;
-	};
-
 	const isItemSelected = ( item ) => {
 		return item.id === selectedSection;
 	};
 
-	const selectSection = ( sectionTitle ) => {
+	const craftNewTitle = ( title, selected ) => {
+		return title === selected ? titleWithoutSection( title ) : `${ titleWithoutSection( title ) }#${ selected }`;
+	};
+
+	const selectSection = ( selectedSection ) => {
 		const { title, lang } = activeAttributes;
-		const titleWithSection = `${ withoutSection( title ) }#${ sectionTitle }`;
-		wikipediaPreview.getPreviewHtml( titleWithSection, lang, ( preview ) => {
+		const newTitle = craftNewTitle( title, selectedSection );
+		wikipediaPreview.getPreviewHtml( newTitle, lang, ( preview ) => {
 			setPreviewHtml( preview );
 		} );
 		setSelectingSection( false );
-		updateAttributes( value, titleWithSection, lang );
+		updateAttributes( value, newTitle, lang );
 	};
 
 	const getItemClassName = ( item, index ) => {
@@ -86,7 +84,7 @@ export const Sections = ( {
 	return (
 		<div className={ `${ sectionsPrefix }` }>
 			<div className={ `${ sectionsPrefix }-header` }>
-				{ withoutSection( activeAttributes.title ) }
+				{ titleWithoutSection( activeAttributes.title ) }
 				<div
 					className={ `${ sectionsPrefix }-header-close` }
 					onClick={ () => setSelectingSection( false ) }
