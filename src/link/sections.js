@@ -14,6 +14,7 @@ export const Sections = ( {
 	const [ sections, setSections ] = useState( null );
 	const [ hoveredIndex, setHoverIndex ] = useState( -1 );
 	const [ selectedSection, setSelectedSection ] = useState( null );
+	const [ loading, setLoading ] = useState( true );
 	const sectionsPrefix = 'wikipediapreview-edit-sections';
 
 	const isItemSelected = ( item ) => {
@@ -62,6 +63,7 @@ export const Sections = ( {
 		if ( ! sections && title && lang ) {
 			wikipediaPreview.getSections( lang, title, ( info ) => {
 				setSections( info.sections );
+				setLoading( false );
 			} );
 		}
 	}, [] );
@@ -91,7 +93,7 @@ export const Sections = ( {
 					role="presentation"
 				></div>
 			</div>
-			{ sections && sections.length ? (
+			{ ! loading && sections && sections.length ? (
 				<div className={ `${ sectionsPrefix }-list` }>
 					{ sections.map( ( item, index ) => {
 						return (
@@ -126,6 +128,14 @@ export const Sections = ( {
 					} ) }
 				</div>
 			) : null }
+			{ loading && (
+				<div className={ `${ sectionsPrefix }-loading` }>
+					<div className={ `${ sectionsPrefix }-loading-spinner` }></div>
+					<bdi className={ `${ sectionsPrefix }-loading-message` }>
+						{ __( 'Loading sections…', 'wikipedia-preview' ) }
+					</bdi>
+				</div>
+			) }
 			<KeyboardShortcuts
 				bindGlobal={ true }
 				shortcuts={ {

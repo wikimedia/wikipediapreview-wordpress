@@ -598,6 +598,28 @@ body {
 			}
 		}
 
+		&-loading {
+			display: flex;
+			height: 212px;
+			flex-direction: column;
+			justify-content: center;
+    		align-items: center;
+
+			&-spinner {
+				border: 2px solid #f3f3f3;
+				border-top: 2px solid #36c;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				animation: 2s linear infinite;
+				animation-name: wikipediapreview-edit-sections-loading-spinner;
+			}
+			
+			&-text {
+				align-self: center;
+			}
+		}
+
 		@media screen and (max-width: 782px) {
 			width: 100%;
 			max-height: unset;
@@ -830,4 +852,9 @@ body {
 	100% {
 		transform: translateX(calc(100vw - 150px));
 	}
+}
+
+@keyframes wikipediapreview-edit-sections-loading-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
