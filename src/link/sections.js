@@ -72,6 +72,7 @@ export const Sections = ( {
 		const selectedSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-selected` );
 		if ( selectedSectionElement ) {
 			selectedSectionElement.scrollIntoView( { block: 'center' } );
+			setHoverIndex( selectedSectionElement.tabIndex );
 		}
 	}, [ sections ] );
 
@@ -130,10 +131,12 @@ export const Sections = ( {
 			<KeyboardShortcuts
 				bindGlobal={ true }
 				shortcuts={ {
-					down: () => {
+					down: ( e ) => {
+						e.preventDefault();
 						setHoverIndex( ( hoveredIndex + 1 ) % sections.length );
 					},
-					up: () => {
+					up: ( e ) => {
+						e.preventDefault();
 						setHoverIndex(
 							hoveredIndex ? hoveredIndex - 1 : sections.length - 1
 						);
