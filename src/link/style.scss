@@ -339,6 +339,18 @@ body {
 			box-shadow: none;
 		}
 
+		@media (prefers-color-scheme: dark ) {
+			.components-popover__arrow {
+				&::before {
+					background-color: unset;
+				}
+			}
+	
+			.components-popover__triangle-bg {
+				fill: #202122;
+			}
+		}
+
 		.wikipediapreview-edit-preview {
 			width: 350px;
 
