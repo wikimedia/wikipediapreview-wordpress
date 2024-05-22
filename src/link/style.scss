@@ -453,7 +453,7 @@ body {
 						right: 70px;
 						top: 58px;
 						width: 120px;
-						height: 85px;
+						height: 95px;
 						background-color: #fff;
 						color: #000;
 						border-top-right-radius: unset;
@@ -479,18 +479,21 @@ body {
 									background-image: url(./images/search-black.svg);
 									background-repeat: no-repeat;
 									background-position: center;
+									width: 25px;
 								}
 								&-sections {
 									margin: 0 5px 0 5px;
 									background-image: url(./images/article-black.svg);
 									background-repeat: no-repeat;
 									background-position: center;
+									width: 25px;
 								}
 								&-remove {
 									margin: 0 5px 0 5px;
 									background-image: url(./images/remove-black.svg);
 									background-repeat: no-repeat;
 									background-position: center;
+									width: 25px;
 								}
 							}
 						}
