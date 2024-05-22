@@ -78,7 +78,7 @@ export const PreviewEditUI = ( {
 				.querySelector( '.wikipediapreview-header-closebtn' )
 				?.removeEventListener( 'click', onForceClose );
 		};
-	}, [ previewHtml ] );
+	}, [ previewHtml, onForceClose ] );
 
 	return (
 		<div className="wikipediapreview-edit-preview-container">
