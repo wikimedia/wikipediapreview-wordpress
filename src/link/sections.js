@@ -53,6 +53,7 @@ export const Sections = ( {
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
 		const [ titlePart, sectionPart ] = title.split( '#' );
+		const selectedSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-selected` );
 
 		if ( ! sectionPart ) {
 			setSelectedSection( titlePart );
@@ -66,15 +67,12 @@ export const Sections = ( {
 				setLoading( false );
 			} );
 		}
-	}, [] );
 
-	useEffect( () => {
-		const selectedSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-selected` );
 		if ( selectedSectionElement ) {
 			selectedSectionElement.scrollIntoView( { block: 'center' } );
 			setHoverIndex( selectedSectionElement.tabIndex );
 		}
-	}, [ sections ] );
+	}, [ activeAttributes, sections ] );
 
 	useEffect( () => {
 		const hoveredSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-hovered` );
