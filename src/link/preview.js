@@ -27,6 +27,37 @@ export const PreviewEditUI = ( {
 		setSelectingSection( true );
 	};
 
+	const insertControllersMenu = () => {
+		const preview = document.querySelector( '.wikipediapreview' );
+		const previewHeader = document.querySelector(
+			'.wikipediapreview-header'
+		);
+		const previewHeaderCloseBtn = document.querySelector(
+			'.wikipediapreview-header-closebtn'
+		);
+		const controllersMenu = document.createElement( 'div' );
+		controllersMenu.setAttribute(
+			'class',
+			'wikipediapreview-edit-preview-controllers-menu'
+		);
+		controllersMenu.addEventListener( 'click', toggleControllersMenu );
+		setShowControllersMenu( false );
+
+		if ( previewHeader ) {
+			previewHeader.insertBefore(
+				controllersMenu,
+				previewHeaderCloseBtn
+			);
+		}
+
+		// special handle to set the container direction
+		if ( preview ) {
+			document
+				.querySelector( '.wikipediapreview-edit-preview-container' )
+				.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
+		}
+	};
+
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
 		if ( title && lang ) {
@@ -38,34 +69,9 @@ export const PreviewEditUI = ( {
 
 	useEffect( () => {
 		if ( isPopoverExpanded() ) {
-			const preview = document.querySelector( '.wikipediapreview' );
-			const previewHeader = document.querySelector(
-				'.wikipediapreview-header'
-			);
-			const previewHeaderCloseBtn = document.querySelector(
-				'.wikipediapreview-header-closebtn'
-			);
-			const controllersMenu = document.createElement( 'div' );
-			controllersMenu.setAttribute(
-				'class',
-				'wikipediapreview-edit-preview-controllers-menu'
-			);
-			controllersMenu.addEventListener( 'click', toggleControllersMenu );
-			setShowControllersMenu( false );
-
-			if ( previewHeader ) {
-				previewHeader.insertBefore(
-					controllersMenu,
-					previewHeaderCloseBtn
-				);
-			}
-
-			// special handle to set the container direction
-			if ( preview ) {
-				document
-					.querySelector( '.wikipediapreview-edit-preview-container' )
-					.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
-			}
+			// The parent header div (where the menu needs to be inserted)
+			// comes from previewHtml so we need to construct the menu on the fly
+			insertControllersMenu();
 
 			return () => {
 				document
@@ -75,7 +81,7 @@ export const PreviewEditUI = ( {
 					?.removeEventListener( 'click', toggleControllersMenu );
 			};
 		}
-	}, [ previewHtml ] );
+	}, [ previewHtml, selectingSection ] );
 
 	useLayoutEffect( () => {
 		document
@@ -86,7 +92,7 @@ export const PreviewEditUI = ( {
 				.querySelector( '.wikipediapreview-header-closebtn' )
 				?.removeEventListener( 'click', onForceClose );
 		};
-	}, [ previewHtml ] );
+	}, [ previewHtml, selectingSection ] );
 
 	return (
 		<>
