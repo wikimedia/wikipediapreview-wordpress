@@ -432,6 +432,7 @@ body {
 
 		&.is-expanded {
 			background-color: rgba(0, 0, 0, 0.7);
+			overflow-y: scroll;
 
 			.components-popover__header {
 				visibility: hidden;
