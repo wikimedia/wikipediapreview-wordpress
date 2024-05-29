@@ -52,7 +52,7 @@ export const Sections = ( {
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
-		const [ titlePart, sectionPart ] = title.split( '#' );
+		const [ titlePart, sectionPart ] = title && title.split( '#' );
 		const selectedSectionElement = document.querySelector( `.${ sectionsPrefix }-list-item-selected` );
 
 		if ( ! sectionPart ) {
