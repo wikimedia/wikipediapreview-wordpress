@@ -89,7 +89,7 @@ export const PreviewEditUI = ( {
 	}, [ previewHtml ] );
 
 	return (
-		<div>
+		<>
 			{ ! selectingSection ? (
 				<div className="wikipediapreview-edit-preview-container">
 					<div
@@ -109,7 +109,7 @@ export const PreviewEditUI = ( {
 					setSelectingSection={ setSelectingSection }
 				/>
 			) }
-		</div>
+		</>
 	);
 };
 
