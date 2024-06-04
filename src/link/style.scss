@@ -40,7 +40,7 @@ body {
 			}
 
 			&-icon {
-				background-image: url(./images/search.svg);
+				background-image: url(./images/search-black.svg);
 				width: 20px;
 				height: 20px;
 				position: absolute;
@@ -242,7 +242,7 @@ body {
 			}
 
 			&-search-icon {
-				background-image: url(./images/search.svg);
+				background-image: url(./images/search-black.svg);
 				width: 20px;
 				height: 20px;
 				position: absolute;
@@ -337,6 +337,7 @@ body {
 			border: unset;
 			outline: 0;
 			box-shadow: none;
+			overflow: unset !important;
 		}
 
 		@media (prefers-color-scheme: dark ) {
@@ -360,12 +361,13 @@ body {
 			}
 
 			&-controllers {
-				width: 52px;
-				height: 136px;
+				width: 73px;
+				height: 194px;
 				background-color: #000;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
+				align-items: center;
 				font-size: 12px;
 				color: #fff;
 				border-top-right-radius: 4px;
@@ -376,29 +378,42 @@ body {
 					cursor: pointer;
 				}
 
-				&-change {
+				&-option {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
 
-					&::before {
-						position: relative;
-						content: url(./images/change.svg);
-						width: 20px;
-						height: 20px;
-						left: 14px;
-
+					&-icon {
+						&-change {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							background-image: url(./images/search-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
+						}
+						&-sections {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							background-image: url(./images/article-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
+						}
+						&-remove {
+							width: 20px;
+							height: 20px;
+							margin-bottom: 5px;
+							background-image: url(./images/remove-white.svg);
+							background-repeat: no-repeat;
+							background-position: center;
+						}
 					}
-				}
 
-				&-remove {
-
-					&::before {
-						position: relative;
-						content: url(./images/remove.svg);
-						width: 20px;
+					&-message {
+						width: 100%;
 						height: 20px;
-						left: 15px;
-
 					}
-
 				}
 			}
 
@@ -429,6 +444,7 @@ body {
 
 		&.is-expanded {
 			background-color: rgba(0, 0, 0, 0.7);
+			overflow-y: hidden;
 
 			.components-popover__header {
 				visibility: hidden;
@@ -450,7 +466,7 @@ body {
 						right: 70px;
 						top: 58px;
 						width: 120px;
-						height: 85px;
+						height: 95px;
 						background-color: #fff;
 						color: #000;
 						border-top-right-radius: unset;
@@ -467,23 +483,31 @@ body {
 							cursor: pointer;
 						}
 
-						&-change {
-							text-align: center;
-
-							&::before {
-								content: url(./images/change-black.svg);
-								left: -7px;
-								top: 5px;
-							}
-						}
-
-						&-remove {
-							text-align: center;
-
-							&::before {
-								content: url(./images/remove-black.svg);
-								left: -7px;
-								top: 5px;
+						&-option {
+							flex-direction: row;
+							width: 100%;
+							&-icon {
+								&-change {
+									margin: 0 5px 0 5px;
+									background-image: url(./images/search-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
+									width: 25px;
+								}
+								&-sections {
+									margin: 0 5px 0 5px;
+									background-image: url(./images/article-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
+									width: 25px;
+								}
+								&-remove {
+									margin: 0 5px 0 5px;
+									background-image: url(./images/remove-black.svg);
+									background-repeat: no-repeat;
+									background-position: center;
+									width: 25px;
+								}
 							}
 						}
 					}
@@ -505,6 +529,119 @@ body {
 
 
 			}
+		}
+	}
+
+	.wikipediapreview-edit-sections {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		max-height: 420px;
+		width: 390px;
+		background-color: #fff;
+		border: 1px solid #c8ccd1;
+		border-radius: 2px;
+
+		&-header {
+			width: 100%;
+			min-height: 70px;
+			display: flex;
+			align-items: center;
+			padding: 0 10px 0 10px;
+			font-size: 16px;
+			font-weight: bold;
+			border-bottom: 1px solid #c8ccd1;
+			justify-content: space-between;
+
+				&-close {
+					background-image: url(./images/close-language.svg);
+					width: 20px;
+					height: 20px;
+					cursor: pointer;
+				}
+		}
+
+		&-list {
+			overflow: scroll;
+			height: 100vh;
+
+			&-item {
+				display: flex;
+				align-items: center;
+				padding: 5px;
+				margin: 5px;
+				
+				&-content {
+					display: flex;
+					flex-direction: column;
+	
+					&-title {
+						color: #202122
+					}
+	
+					&-text {
+						color: #757575;
+						p {
+							margin: 0;
+							text-overflow: ellipsis;
+							display: -webkit-box;
+							-webkit-line-clamp: 2;
+							-webkit-box-orient: vertical;
+							overflow: hidden;
+						}
+					}
+				}
+	
+				&-selected-indicator {
+					background-image: url(./images/selected.svg);
+					background-repeat: no-repeat;
+					width: 75px;
+					height: 20px;
+				}
+	
+				&.wikipediapreview-edit-sections-list-item-selected {
+					border: solid #36c;
+					border-radius: 2px;
+	
+					.wikipediapreview-edit-sections-list-item-content-title {
+						font-weight: bold;
+					}
+				}
+				
+				&:hover,
+				&.wikipediapreview-edit-sections-list-item-hovered {
+					background-color: #eaecf0;
+					cursor: pointer;
+				}
+			}
+		}
+
+		&-loading {
+			display: flex;
+			height: 212px;
+			flex-direction: column;
+			justify-content: center;
+    		align-items: center;
+
+			&-spinner {
+				border: 2px solid #f3f3f3;
+				border-top: 2px solid #36c;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				animation: 2s linear infinite;
+				animation-name: wikipediapreview-edit-sections-loading-spinner;
+			}
+			
+			&-text {
+				align-self: center;
+			}
+		}
+
+		@media screen and (max-width: 782px) {
+			width: 100%;
+			max-height: unset;
+			margin-top: 60px;
 		}
 	}
 
@@ -732,4 +869,9 @@ body {
 	100% {
 		transform: translateX(calc(100vw - 150px));
 	}
+}
+
+@keyframes wikipediapreview-edit-sections-loading-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -69,10 +69,12 @@ export const WikipediaPreviewPopover = ( {
 			) }
 			{ viewingPreview && (
 				<PreviewEditUI
-					onEdit={ goToEdit }
+					onEditTopic={ goToEdit }
 					onRemove={ removeAttributes }
 					onForceClose={ stopViewingPreview }
 					activeAttributes={ activeAttributes }
+					updateAttributes={ updateAttributes }
+					value={ value }
 				/>
 			) }
 		</Popover>

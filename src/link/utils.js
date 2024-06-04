@@ -11,3 +11,10 @@ export const isTextNearTheEdge = ( anchor ) => {
 		( scrollWidth - anchorXPosition.right ) / scrollWidth < 0.2
 	);
 };
+
+export const titleWithoutSection = ( title ) => {
+	if ( title && title.includes( '#' ) ) {
+		return title.split( '#' )[ 0 ];
+	}
+	return title;
+};
