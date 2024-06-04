@@ -6,7 +6,7 @@ import {
 import { getTextContent, slice } from '@wordpress/rich-text';
 import { useState, useEffect, createRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { getSiteLanguage } from './utils';
+import { getSiteLanguage, titleWithoutSection } from './utils';
 import { prefixSearch, fulltextSearch, abortAllRequest } from './api';
 import { LanguageSelector } from './language-selector';
 
@@ -76,7 +76,7 @@ export const InlineEditUI = ( {
 								langCodeAdjustment ? 'lang-code-adjustment' : ''
 							}` }
 							ref={ inputRef }
-							value={ title }
+							value={ titleWithoutSection( title ) }
 							onChange={ setTitle }
 							onFocus={ () => setFocused( true ) }
 							onBlur={ () => setFocused( false ) }
