@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from '@wordpress/element';
+import { useEffect, useState, useRef, useCallback } from '@wordpress/element';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import {
@@ -45,7 +45,6 @@ const Edit = ( {
 	const [ viewingPreview, setViewingPreview ] = useState( false );
 	const startViewingPreview = () => setViewingPreview( true );
 	const stopViewingPreview = () => setViewingPreview( false );
-	const [ lastValue, setLastValue ] = useState( value );
 	const valueRef = useRef( value );
 	const toolbarButtonRef = useRef();
 
@@ -99,29 +98,12 @@ const Edit = ( {
 		stopViewingPreview();
 	};
 
-	const removesPreviewFormat = () => {
-		const counter = ( count, format ) => {
-			if ( format[ 0 ].type === formatType ) {
-				return count + 1;
-			}
-			return count;
-		};
-		const lastValueCount = lastValue.formats && lastValue.formats.reduce( counter, 0 );
-		const valueCount = value.formats && value.formats.reduce( counter, 0 );
-
-		if ( valueCount === 0 ) {
-			return false;
-		}
-
-		return lastValueCount > valueCount;
-	};
-
 	const goToEdit = () => {
 		startAddingPreview();
 		stopViewingPreview();
 	};
 
-	const getFormatStart = ( position ) => {
+	const getFormatStart = useCallback( ( position ) => {
 		if (
 			value.formats[ position ] &&
 			value.formats[ position ][ 0 ].type === formatType
@@ -129,9 +111,9 @@ const Edit = ( {
 			return getFormatStart( position - 1 );
 		}
 		return position;
-	};
+	}, [ value.formats ] );
 
-	const getFormatEnd = ( position ) => {
+	const getFormatEnd = useCallback( ( position ) => {
 		if (
 			value.formats[ position ] &&
 			value.formats[ position ][ 0 ].type === formatType
@@ -139,7 +121,7 @@ const Edit = ( {
 			return getFormatEnd( position + 1 );
 		}
 		return position;
-	};
+	}, [ value.formats ] );
 
 	const getTrimmedStart = ( selectedValue ) => {
 		const selectedString = selectedValue.text.slice(
@@ -167,6 +149,27 @@ const Edit = ( {
 		return selectedValue.end;
 	};
 
+	const handleTextFormatRemoval = useCallback( () => {
+		// Assuming a Left-To-Right language:
+		// --> cursorDirection > 0 means cursor is moving left
+		// --> cursorDirection < 0 means cursor is moving right
+		const previousValue = valueRef.current;
+		const cursorDirection = previousValue.start - value.start;
+		const editDetected = value.text !== previousValue.text;
+		const involvesPreviewFormat =
+			cursorDirection >= 0
+				? previousValue.formats[ value.start ] &&
+				previousValue.formats[ value.start ][ 0 ].type === formatType
+				: previousValue.formats[ value.end - 1 ] &&
+				previousValue.formats[ value.end - 1 ][ 0 ].type === formatType;
+
+		if ( editDetected && involvesPreviewFormat ) {
+			const formatStart = getFormatStart( value.start - 1 );
+			const formatEnd = getFormatEnd( value.end + 1 );
+			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
+		}
+	}, [ getFormatStart, getFormatEnd, onChange, value ] );
+
 	useEffect( () => {
 		if ( Object.keys( activeAttributes ).length ) {
 			stopAddingPreview();
@@ -177,19 +180,9 @@ const Edit = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
+		handleTextFormatRemoval();
 		valueRef.current = value;
-
-		if ( removesPreviewFormat() ) {
-			const formatStart = getFormatStart( value.start - 1 );
-			const formatEnd = getFormatEnd( value.end + 1 );
-			onChange( removeFormat( value, formatType, formatStart, formatEnd ) );
-		}
-	}, [ value.formats ] );
-
-	useEffect( () => {
-		// Update lastValue with the previous value
-		setLastValue( valueRef.current );
-	}, [ value ] );
+	}, [ value, handleTextFormatRemoval ] );
 
 	return (
 		<>
