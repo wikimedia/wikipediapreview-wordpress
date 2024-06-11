@@ -333,11 +333,8 @@ body {
 	.wikipediapreview-edit-preview-popover {
 
 		.components-popover__content {
-			background: unset;
-			border: unset;
-			outline: 0;
-			box-shadow: none;
 			overflow: unset !important;
+			border-radius: 8px 8px 0 0;
 		}
 
 		@media (prefers-color-scheme: dark ) {
@@ -362,6 +359,7 @@ body {
 
 			&-controllers {
 				width: 73px;
+				margin-right: -73px;
 				height: 194px;
 				background-color: #000;
 				display: flex;
@@ -419,7 +417,6 @@ body {
 
 			.wikipediapreview {
 				box-shadow: none;
-				border: solid #ccc 1px;
 
 				&-gallery {
 					display: none;
@@ -517,6 +514,9 @@ body {
 						.wikipediapreview-edit-preview-controllers {
 							right: unset;
 							left: 70px;
+
+							margin-right: 0;
+							margin-left: -73px;
 
 							&-change::before,
 							&-remove::before {
