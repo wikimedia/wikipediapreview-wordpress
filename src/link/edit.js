@@ -50,9 +50,7 @@ const Edit = ( {
 	const toolbarButtonRef = useRef();
 
 	const formatButtonClick = () => {
-		if ( isActive ) {
-			removeAttributes();
-		} else {
+		if ( ! isActive ) {
 			startAddingPreview();
 		}
 	};
