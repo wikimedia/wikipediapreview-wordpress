@@ -1,7 +1,7 @@
 /* global wikipediapreviewCustomTooltip */
 import { __ } from '@wordpress/i18n';
 import { Popover } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useCallback } from '@wordpress/element';
 
 export const CustomTooltip = ( {
 	anchorRef,
@@ -23,19 +23,26 @@ export const CustomTooltip = ( {
 		} );
 	};
 
-	const finishDisplayingTooltip = () => {
+	const finishDisplayingTooltip = useCallback( () => {
 		setDisplayTooltip( false );
 		wikipediapreviewCustomTooltip.tooltipDuration = 1;
 		updateStoredProperty( 'duration' );
-	};
+	}, [] );
 
-	const clearTimeouts = () => {
+	const clearTimeouts = useCallback( () => {
 		timeoutIds.forEach( ( id ) => {
 			clearTimeout( id );
 		} );
-	};
+	}, [ timeoutIds ] );
 
-	const waitOneSecThenDisplayTooltip = () => {
+	const waitFiveSecsThenHideTooltip = useCallback( () => {
+		const fiveSecId = setTimeout( () => {
+			finishDisplayingTooltip();
+		}, 5000 );
+		setTimeoutIds( ( timeoutIds ) => [ ...timeoutIds, fiveSecId ] );
+	}, [ finishDisplayingTooltip ] );
+
+	const waitOneSecThenDisplayTooltip = useCallback( () => {
 		const oneSecId = setTimeout( () => {
 			if ( anchorRef.current ) {
 				setDisplayTooltip( true );
@@ -47,34 +54,27 @@ export const CustomTooltip = ( {
 			}
 		}, 1000 );
 		setTimeoutIds( ( timeoutIds ) => [ ...timeoutIds, oneSecId ] );
-	};
-
-	const waitFiveSecsThenHideTooltip = () => {
-		const fiveSecId = setTimeout( () => {
-			finishDisplayingTooltip();
-		}, 5000 );
-		setTimeoutIds( ( timeoutIds ) => [ ...timeoutIds, fiveSecId ] );
-	};
+	}, [ anchorRef, tooltipDisplayedCount, waitFiveSecsThenHideTooltip ] );
 
 	useEffect( () => {
 		if ( tooltipDisplayedCount < tooltipDisplayedLimit && tooltipDisplayedFullDuration < 1 ) {
 			waitOneSecThenDisplayTooltip();
 		}
-	}, [] );
+	}, [ tooltipDisplayedCount, tooltipDisplayedFullDuration, waitOneSecThenDisplayTooltip ] );
 
 	useEffect( () => {
 		// Clear all timeouts when unmounting
 		return () => {
 			clearTimeouts();
 		};
-	}, [ timeoutIds ] );
+	}, [ timeoutIds, clearTimeouts ] );
 
 	useEffect( () => {
 		if ( addingPreview ) {
 			clearTimeouts();
 			finishDisplayingTooltip();
 		}
-	}, [ addingPreview ] );
+	}, [ addingPreview, clearTimeouts, finishDisplayingTooltip ] );
 
 	return (
 		<div>

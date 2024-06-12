@@ -28,7 +28,7 @@ export const InlineEditUI = ( {
 	useEffect( () => {
 		setTitle( activeAttributes.title || getTextContent( slice( value ) ) );
 		setLang( activeAttributes.lang || getSiteLanguage() );
-	}, [ activeAttributes ] );
+	}, [ activeAttributes, value ] );
 
 	useEffect( () => {
 		if ( title ) {

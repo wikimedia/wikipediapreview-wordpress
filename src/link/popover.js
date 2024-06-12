@@ -35,7 +35,7 @@ export const WikipediaPreviewPopover = ( {
 		if ( e.target.className === 'components-popover__content' ) {
 			stopViewingPreview();
 		}
-	}, [] );
+	}, [ stopViewingPreview ] );
 
 	const setPlacement = () => {
 		if ( isTextNearTheEdge( anchor ) ) {

@@ -2,6 +2,7 @@ import {
 	useState,
 	useEffect,
 	useLayoutEffect,
+	useCallback,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import wikipediaPreview from 'wikipedia-preview';
@@ -27,7 +28,7 @@ export const PreviewEditUI = ( {
 		setSelectingSection( true );
 	};
 
-	const insertControllersMenu = () => {
+	const insertControllersMenu = useCallback( () => {
 		const preview = document.querySelector( '.wikipediapreview' );
 		const previewHeader = document.querySelector(
 			'.wikipediapreview-header'
@@ -56,7 +57,7 @@ export const PreviewEditUI = ( {
 				.querySelector( '.wikipediapreview-edit-preview-container' )
 				.setAttribute( 'dir', preview.getAttribute( 'dir' ) );
 		}
-	};
+	}, [] );
 
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
@@ -81,7 +82,7 @@ export const PreviewEditUI = ( {
 					?.removeEventListener( 'click', toggleControllersMenu );
 			};
 		}
-	}, [ previewHtml, selectingSection ] );
+	}, [ previewHtml, selectingSection, insertControllersMenu ] );
 
 	useLayoutEffect( () => {
 		document
@@ -92,7 +93,7 @@ export const PreviewEditUI = ( {
 				.querySelector( '.wikipediapreview-header-closebtn' )
 				?.removeEventListener( 'click', onForceClose );
 		};
-	}, [ previewHtml, selectingSection ] );
+	}, [ previewHtml, onForceClose, selectingSection ] );
 
 	return (
 		<>
