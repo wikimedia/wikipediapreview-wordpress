@@ -106,7 +106,6 @@ export const Sections = ( {
 								onKeyUp={ () => {
 									selectSection( item.id );
 								} }
-								onMouseEnter={ () => setHoverIndex( -1 ) }
 							>
 								<div className={ `${ sectionsPrefix }-list-item-content` }>
 									<span className={ `${ sectionsPrefix }-list-item-content-title` }>
