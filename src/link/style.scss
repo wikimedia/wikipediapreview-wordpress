@@ -570,6 +570,15 @@ body {
 			border-bottom: 1px solid #c8ccd1;
 			justify-content: space-between;
 
+				&-title {
+					max-width: 90%;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+				}
+
 				&-close {
 					background-image: url(./images/close-language.svg);
 					width: 20px;
