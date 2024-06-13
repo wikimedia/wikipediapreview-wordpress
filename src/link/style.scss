@@ -351,6 +351,7 @@ body {
 
 		.wikipediapreview-edit-preview {
 			width: 350px;
+			min-height: 214px;
 
 			&-container {
 				display: flex;
@@ -423,19 +424,35 @@ body {
 				}
 
 				.wikipediapreview-footer {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 40px;
+					z-index: 5;
 
-					&-cta-readmore {
-						display: none;
-					}
+					&-link {
+						margin-right: 5px;
 
-					&-cta-readonwiki {
-						display: block;
+						&-cta {
+							text-decoration: none;
+							font-size: 14px;
+							color: #36c;
+							margin-right: 4px;
+
+							&:hover {
+								text-decoration: underline;
+							}
+
+							&:visited {
+								color: #6B4BA1;
+								svg path {
+									fill: #6B4BA1;
+								}
+							}
+						}
 					}
 				}
-			}
-
-			.wikipediapreview-body::after {
-				content: none;
 			}
 		}
 
