@@ -55,6 +55,7 @@ export const WikipediaPreviewPopover = ( {
 			onClose={ addingPreview ? stopAddingPreview : onClosePreview }
 			className={ `wikipediapreview-edit-${ addingPreview ? 'inline' : 'preview-popover' }` }
 			onClick={ onClickPopoverOutside }
+			focusOnMount={ addingPreview ? 'firstElement' : false }
 		>
 			{ addingPreview && (
 				<InlineEditUI
