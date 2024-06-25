@@ -84,7 +84,9 @@ export const Sections = ( {
 	return (
 		<div className={ `${ sectionsPrefix }` }>
 			<div className={ `${ sectionsPrefix }-header` }>
-				{ titleWithoutSection( activeAttributes.title ) }
+				<div className={ `${ sectionsPrefix }-header-title` }>
+					{ titleWithoutSection( activeAttributes.title ) }
+				</div>
 				<div
 					className={ `${ sectionsPrefix }-header-close` }
 					onClick={ () => setSelectingSection( false ) }
