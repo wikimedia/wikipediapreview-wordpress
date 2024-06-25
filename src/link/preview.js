@@ -59,6 +59,18 @@ export const PreviewEditUI = ( {
 		}
 	}, [] );
 
+	const addScrollListener = useCallback( () => {
+		const scrollCue = document.querySelector( '.wikipediapreview-scroll-cue' );
+		const body = document.querySelector( '.wikipediapreview-body' );
+		if ( scrollCue ) {
+			body.addEventListener( 'scroll', ( e ) => {
+				if ( e.target.scrollTop > 0 ) {
+					scrollCue.remove();
+				}
+			} );
+		}
+	}, [] );
+
 	useEffect( () => {
 		const { title, lang } = activeAttributes;
 		if ( title && lang ) {
@@ -69,6 +81,7 @@ export const PreviewEditUI = ( {
 	}, [ activeAttributes ] );
 
 	useEffect( () => {
+		addScrollListener();
 		if ( isPopoverExpanded() ) {
 			// The parent header div (where the menu needs to be inserted)
 			// comes from previewHtml so we need to construct the menu on the fly
@@ -82,7 +95,7 @@ export const PreviewEditUI = ( {
 					?.removeEventListener( 'click', toggleControllersMenu );
 			};
 		}
-	}, [ previewHtml, selectingSection, insertControllersMenu ] );
+	}, [ previewHtml, selectingSection, insertControllersMenu, addScrollListener ] );
 
 	useLayoutEffect( () => {
 		document
