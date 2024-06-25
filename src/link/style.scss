@@ -335,6 +335,7 @@ body {
 		.components-popover__content {
 			overflow: unset !important;
 			border-radius: 8px 8px 0 0;
+			height: unset !important;
 		}
 
 		@media (prefers-color-scheme: dark ) {
@@ -417,10 +418,6 @@ body {
 
 			.wikipediapreview {
 				box-shadow: none;
-
-				&-gallery {
-					display: none;
-				}
 
 				.wikipediapreview-footer {
 
