@@ -140,6 +140,12 @@ body {
 				animation-iteration-count: infinite;
 				animation-timing-function: ease;
 			}
+
+			@media screen and (max-width: 782px) {
+				width: 100%;
+				max-height: unset;
+				margin-top: 60px;
+			}
 		}
 
 		&-info {
