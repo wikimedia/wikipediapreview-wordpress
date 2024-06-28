@@ -32,7 +32,7 @@ export const InlineEditUI = ( {
 
 	useEffect( () => {
 		if ( title ) {
-			const term = title.trim();
+			const term = titleWithoutSection( title.trim() );
 			setLoading( true );
 			prefixSearch( lang, term, ( prefixData ) => {
 				if ( ! prefixData.length ) {
