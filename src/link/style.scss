@@ -666,7 +666,7 @@ body {
 
 		@media screen and (max-width: 782px) {
 			width: 100%;
-			max-height: unset;
+			max-height: calc( 100vh - 106px );
 			margin-top: 60px;
 		}
 	}
