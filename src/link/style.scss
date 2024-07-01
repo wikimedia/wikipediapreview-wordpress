@@ -19,7 +19,7 @@ body {
 			}
 
 			&-input {
-				margin: 30px 10px 30px;
+				margin: 20px 12px;
 
 				input {
 					padding-left: 35px !important;
@@ -32,11 +32,6 @@ body {
 						padding-right: 140px !important;
 					}
 				}
-
-				@media screen and (max-width: 782px) {
-					padding-right: 20px;
-				}
-
 			}
 
 			&-icon {
@@ -45,7 +40,7 @@ body {
 				height: 20px;
 				position: absolute;
 				bottom: 5px;
-				left: 18px;
+				left: 22px;
 
 				@media screen and (max-width: 782px) {
 					bottom: 10px;
@@ -62,8 +57,7 @@ body {
 				justify-content: space-between;
 
 				@media screen and (max-width: 782px) {
-					top: 84px;
-					right: 28px;
+					top: 74px;
 				}
 			}
 
@@ -140,6 +134,12 @@ body {
 				animation-iteration-count: infinite;
 				animation-timing-function: ease;
 			}
+
+			@media screen and (max-width: 782px) {
+				width: 100%;
+				max-height: unset;
+				margin-top: 60px;
+			}
 		}
 
 		&-info {
@@ -155,7 +155,7 @@ body {
 			&-item {
 				position: relative;
 				height: 60px;
-				padding: 10px;
+				padding: 10px 10px 10px 12px;
 
 				&:hover,
 				&.hovered {
@@ -178,7 +178,7 @@ body {
 				&-title {
 					position: absolute;
 					width: calc(100% - 70px);
-					left: 60px;
+					left: 62px;
 					font-size: 15px;
 					font-weight: 700;
 					line-height: 20px;
@@ -190,7 +190,7 @@ body {
 				&-description {
 					position: absolute;
 					width: calc(100% - 70px);
-					left: 60px;
+					left: 62px;
 					bottom: 10px;
 					color: #72777d;
 					font-size: 13px;
@@ -211,6 +211,10 @@ body {
 			overflow: hidden;
 			z-index: 1000;
 
+			@media screen and (max-width: 782px) {
+				width: 100%;
+			}
+
 			&-header {
 				display: flex;
 				justify-content: space-between;
@@ -218,6 +222,8 @@ body {
 				font-size: 16px;
 				font-weight: 700;
 				line-height: 19.55px;
+				color: #202122;
+				border-bottom: 1px solid #c8ccd1;
 
 				&-close {
 					background-image: url(./images/close-view.svg);
@@ -228,8 +234,7 @@ body {
 			}
 
 			&-input {
-				width: 100%;
-				padding-right: 1px;
+				margin: 20px 12px;
 
 				/* stylelint-disable-next-line no-descending-specificity */
 				input {
@@ -246,11 +251,11 @@ body {
 				width: 20px;
 				height: 20px;
 				position: absolute;
-				top: 60px;
-				left: 8px;
+				top: 80px;
+				left: 20px;
 
 				@media screen and (max-width: 782px) {
-					top: 62px;
+					top: 82px;
 				}
 			}
 
@@ -267,7 +272,7 @@ body {
 				flex-direction: column;
 				flex-wrap: wrap;
 				max-height: 235px;
-				padding: 15px 30px 30px 15px;
+				padding: 7px 30px 30px 15px;
 
 				&-item {
 					margin-right: 15px;
@@ -291,7 +296,7 @@ body {
 			}
 
 			@media screen and (max-width: 782px) {
-				top: -185px;
+				top: 60px;
 			}
 		}
 
@@ -388,7 +393,7 @@ body {
 						&-change {
 							width: 20px;
 							height: 20px;
-							margin-bottom: 5px;
+							margin-bottom: 2px;
 							background-image: url(./images/search-white.svg);
 							background-repeat: no-repeat;
 							background-position: center;
@@ -396,7 +401,7 @@ body {
 						&-sections {
 							width: 20px;
 							height: 20px;
-							margin-bottom: 5px;
+							margin-bottom: 2px;
 							background-image: url(./images/article-white.svg);
 							background-repeat: no-repeat;
 							background-position: center;
@@ -404,7 +409,7 @@ body {
 						&-remove {
 							width: 20px;
 							height: 20px;
-							margin-bottom: 5px;
+							margin-bottom: 2px;
 							background-image: url(./images/remove-white.svg);
 							background-repeat: no-repeat;
 							background-position: center;

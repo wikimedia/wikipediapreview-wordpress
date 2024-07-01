@@ -34,13 +34,13 @@ export const LanguageSelector = ( { setLanguageSelector, setLang, lang } ) => {
 					setValue( target );
 					setItems( filterLanguages( target, lang ) );
 				} }
-				placeholder={ __( 'Search languages', 'wikipedia-preview' ) }
+				placeholder={ __( 'Search for a language', 'wikipedia-preview' ) }
 				autoFocus={ true } // eslint-disable-line jsx-a11y/no-autofocus
 			/>
 			<div className="wikipediapreview-edit-inline-language-selector-search-icon" />
 			{ ! value ? (
 				<div className="wikipediapreview-edit-inline-language-selector-label">
-					{ __( 'All languages', 'wikipedia-preview' ) }
+					{ __( 'Suggested languages', 'wikipedia-preview' ) }
 				</div>
 			) : null }
 			<div className="wikipediapreview-edit-inline-language-selector-results">
