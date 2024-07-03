@@ -35,6 +35,8 @@ https://youtu.be/_m6YzR0j8Fs
 
 * Can be set up using the same process you use to add hyperlinks to your articles or using the Gutenberg editor custom tool.
 * Handles any link to a Wikipedia article regardless of language, lead image presence or length.
+* Site owners can choose a specific section of an article as a preview, not limited to just the lead section.
+* Supports dark mode option for improved readability.
 * Works for Right-to-Left (RTL) and Left-To-Right (LTR) languages.
 * Offers access to a built-in gallery to dive into article images.
 * Can be disabled for any page using the post metadata sidebar.
@@ -51,7 +53,7 @@ https://youtu.be/_m6YzR0j8Fs
 1. Highlight the text you want to link to a Wikipedia article.
 2. Select ‘W’ - Wikipedia Preview icon from the menu.
 3. You will see a list of suggested articles. Select the one you want to link to.
-4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
+4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily customize the preview content by selecting a specific section of the article.
 
 == Installation ==
 
@@ -92,7 +94,8 @@ It’s easy to add Wikipedia Preview links to your site. It takes only a few sec
 1. Highlight the text you want to link to a Wikipedia article.
 2. Select ‘W’ - Wikipedia Preview icon from the menu.
 3. You will see a list of suggested articles. Select the one you want to link to.
-4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article. You can easily edit or remove this.
+4. Wikipedia Preview will automatically turn the link into a preview of the relevant Wikipedia article.
+5. To customize the preview content, choose "Sections" from the toolbar. Select a specific section of the article as the preview content.
 
 **GETTING STARTED:**
 
@@ -164,3 +167,11 @@ Please leave reviews on our Wikipedia Preview plugin page
 = How else can I work with the Wikimedia Foundation? =
 
 If you would like to explore a collaboration opportunity beyond Wikipedia Preview, please contact partnerships@wikimedia.org
+
+= Can I customize which part of a Wikipedia article appears in the preview? =
+
+Yes, site owners have the option to choose a specific section of an article as a preview, rather than being limited to the lead section. This allows for more targeted and relevant previews.
+
+= Does Wikipedia Preview support dark mode?
+
+Yes, Wikipedia Preview supports dark mode for improved readability.
