@@ -105,15 +105,14 @@ Let us know what you think about the product as you’re using it – we love to
 
 == Screenshots ==
 
-1. Highlight a word in Gutenberg editor and access Wikipedia Preview option from dropdown menu
-2. Select a preview from the search results
-3. Preview is displayed for highlighted word
-4. Hover over cursor to view the preview
-5. Highlight a word in Classic editor for preview
-6. Insert Wikipedia article link to enable preview
-7. Preview can be discovered on mobile web by readers
-8. Tap on preview to show preview card
-9. Tap on an image within the preview card to open it in a gallery view
+1. Highlight text and select the 'W' icon to add a Wikipedia Preview in the Gutenberg editor
+2. Choose the desired Wikipedia article from the search results to create the preview
+3. Preview the Wikipedia article and customize the content using the toolbar
+4. Choose a specific section of the Wikipedia article to add as a preview
+5. Browse through the image gallery in the Wikipedia Preview with full-screen view and navigation options
+6. Add Wikipedia preview in the classic editor by inserting Wikipedia article link as usual
+7. Wikipedia Preview on a mobile device
+8. Browse through full-screen images in Wikipedia Preview on mobile devices
 
 == Frequently Asked Questions ==
 
