@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/wikimedia/wikipedia-preview
  * Description: Provide context to your readers by displaying a Wikipedia article preview when a reader clicks or hovers over a word or concept.
  * Text Domain: wikipedia-preview
- * Version: 1.14.1
+ * Version: 1.14.2
  * Requires at least: 6.1
  * Requires PHP: 5.6.39
  * Author: Wikimedia Foundation
@@ -13,7 +13,7 @@
  * License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
  */
 
-DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.14.1' );
+DEFINE( 'WIKIPEDIA_PREVIEW_PLUGIN_VERSION', '1.14.2' );
 
 function get_public_post_types() {
 	$post_types        = get_post_types( array(), 'objects' );
