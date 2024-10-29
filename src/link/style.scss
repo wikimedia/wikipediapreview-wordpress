@@ -357,7 +357,6 @@ body {
 
 		.wikipediapreview-edit-preview {
 			width: 350px;
-			min-height: 214px;
 
 			&-container {
 				display: flex;
@@ -425,6 +424,7 @@ body {
 
 			.wikipediapreview {
 				box-shadow: none;
+				min-height: 214px;
 
 				.wikipediapreview-footer {
 					position: relative;
