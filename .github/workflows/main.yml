@@ -27,6 +27,7 @@ jobs:
 
       - name: Install and Build
         run: |
+          npm cache clean --force
           npm install
           composer install
           npm run build
