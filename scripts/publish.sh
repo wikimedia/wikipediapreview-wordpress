@@ -12,6 +12,10 @@ VER=`./scripts/getversion.js`
 npm install
 npm run build
 
+# todo: try to split list of files needed in output
+# from process of copying them so it's easier to see
+# that list and maintain it
+
 cp ./wikipediapreview.php $1/trunk/
 cp ./banner.php $1/trunk/
 cp ./intro.php $1/trunk/
