@@ -28,20 +28,20 @@
   },
   "homepage": "https://github.com/wikimedia/wikipediapreview-wordpress#readme",
   "dependencies": {
-    "@wikimedia/language-data": "^1.1.5",
-    "@wordpress/block-editor": "^12.14.0",
-    "@wordpress/components": "^25.12.0",
-    "@wordpress/compose": "^6.23.0",
-    "@wordpress/data": "^9.16.0",
-    "@wordpress/edit-post": "^7.23.0",
-    "@wordpress/element": "^5.23.0",
-    "@wordpress/i18n": "^4.46.0",
-    "@wordpress/plugins": "^6.14.0",
-    "@wordpress/rich-text": "^6.23.0",
+    "@wikimedia/language-data": "^1.1.8",
+    "@wordpress/block-editor": "^14.7.0",
+    "@wordpress/components": "^28.12.0",
+    "@wordpress/compose": "^7.12.0",
+    "@wordpress/data": "^10.12.0",
+    "@wordpress/edit-post": "^8.12.0",
+    "@wordpress/element": "^6.12.0",
+    "@wordpress/i18n": "^5.12.0",
+    "@wordpress/plugins": "^7.12.0",
+    "@wordpress/rich-text": "^7.12.0",
     "wikipedia-preview": "1.12.2"
   },
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^17.3.0",
-    "@wordpress/scripts": "^18.0.1"
+    "@wordpress/eslint-plugin": "^21.5.0",
+    "@wordpress/scripts": "^30.5.1"
   }
 }
