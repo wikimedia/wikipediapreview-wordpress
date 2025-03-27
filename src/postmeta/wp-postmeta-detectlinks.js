@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { withSelect, withDispatch } from '@wordpress/data';
-import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { ToggleControl, PanelRow } from '@wordpress/components';
 
 const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
