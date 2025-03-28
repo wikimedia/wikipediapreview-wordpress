@@ -3,7 +3,7 @@ Contributors: wikimediafoundation
 Donate link: https://donate.wikimedia.org/wiki/Ways_to_Give
 Tags: wikipedia, facts, popup, card, wiki
 Stable tag: 1.14.3
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 License: MIT
 License URI: https://github.com/wikimedia/wikipedia-preview/blob/main/LICENSE
 
