@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { withSelect, withDispatch } from '@wordpress/data';
-import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { ToggleControl, PanelRow } from '@wordpress/components';
 
 const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
@@ -10,6 +9,15 @@ const WikipediaPreviewPostMetaDetectLinks = ( { postMeta, setPostMeta } ) => {
 		// without 'custom-fields' support
 		return;
 	}
+
+	// https://make.wordpress.org/core/2024/06/18/editor-unified-extensibility-apis-in-6-6/
+	const PluginDocumentSettingPanel = wp.editor?.PluginDocumentSettingPanel ??
+		( wp.editPost?.PluginDocumentSettingPanel ?? wp.editSite?.PluginDocumentSettingPanel );
+
+	if ( ! PluginDocumentSettingPanel ) {
+		return null;
+	}
+
 	return (
 		<PluginDocumentSettingPanel
 			name="wikipedia-preview"
