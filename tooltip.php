@@ -56,7 +56,7 @@ function wikipediapreview_set_rest_endpoint() {
 			'methods'             => 'POST',
 			'callback'            => 'wikipediapreview_increment_tooltip_count',
 			'permission_callback' => function () {
-				return current_user_can( 'edit_posts' );
+				return current_user_can( 'manage_options' );
 			},
 		)
 	);
@@ -67,7 +67,7 @@ function wikipediapreview_set_rest_endpoint() {
 			'methods'             => 'POST',
 			'callback'            => 'wikipediapreview_update_tooltip_duration',
 			'permission_callback' => function () {
-				return current_user_can( 'edit_posts' );
+				return current_user_can( 'manage_options' );
 			},
 		)
 	);
@@ -77,7 +77,9 @@ function wikipediapreview_set_rest_endpoint() {
 		array(
 			'methods'             => 'POST',
 			'callback'            => 'wikipediapreview_reset_tooltip_properties',
-			'permission_callback' => '__return_true',
+			'permission_callback' => function () {
+				return current_user_can( 'manage_options' );
+			},
 		)
 	);
 }
