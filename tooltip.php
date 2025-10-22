@@ -79,7 +79,7 @@ function wikipediapreview_set_rest_endpoint() {
 			'callback'            => 'wikipediapreview_reset_tooltip_properties',
 			'permission_callback' => function () {
 				return current_user_can( 'manage_options' );
-			}
+			},
 		)
 	);
 }
