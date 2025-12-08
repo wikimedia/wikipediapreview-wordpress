@@ -4,6 +4,13 @@
 		"wikipediaPreview": true,
 		"XMLHttpRequest": true
 	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [ ".js" ]
+			}
+		}
+	},
 	"rules": {
 		"click-events-have-key-events": "off",
 		"no-shadow": "off"
